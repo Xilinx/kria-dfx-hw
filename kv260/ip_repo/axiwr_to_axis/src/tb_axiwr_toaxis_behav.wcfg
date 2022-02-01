@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_axiwr_toaxis_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_axiwr_toaxis" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="697001fs"></ZoomEndTime>
+      <Cursor1Time time="320000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="198"></NameColumnWidth>
+      <ValueColumnWidth column_width="129"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="26" />
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/resetn">
+      <obj_property name="ElementShortName">resetn</obj_property>
+      <obj_property name="ObjectShortName">resetn</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/select_slot_data">
+      <obj_property name="ElementShortName">select_slot_data</obj_property>
+      <obj_property name="ObjectShortName">select_slot_data</obj_property>
+      <obj_property name="CustomSignalColor">#F0E68C</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/axis_in_TDATA">
+      <obj_property name="ElementShortName">axis_in_TDATA[127:0]</obj_property>
+      <obj_property name="ObjectShortName">axis_in_TDATA[127:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/axis_in_TVALID">
+      <obj_property name="ElementShortName">axis_in_TVALID</obj_property>
+      <obj_property name="ObjectShortName">axis_in_TVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/axis_in_TREADY">
+      <obj_property name="ElementShortName">axis_in_TREADY</obj_property>
+      <obj_property name="ObjectShortName">axis_in_TREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/axis_in_TKEEP">
+      <obj_property name="ElementShortName">axis_in_TKEEP[15:0]</obj_property>
+      <obj_property name="ObjectShortName">axis_in_TKEEP[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/axis_in_TLAST">
+      <obj_property name="ElementShortName">axis_in_TLAST[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axis_in_TLAST[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_AWVALID">
+      <obj_property name="ElementShortName">s_axi_gmem_AWVALID</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_AWVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_AWREADY">
+      <obj_property name="ElementShortName">s_axi_gmem_AWREADY</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_AWREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_AWADDR">
+      <obj_property name="ElementShortName">s_axi_gmem_AWADDR[63:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_AWADDR[63:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_AWLEN">
+      <obj_property name="ElementShortName">s_axi_gmem_AWLEN[7:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_AWLEN[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_WVALID">
+      <obj_property name="ElementShortName">s_axi_gmem_WVALID</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_WVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_WREADY">
+      <obj_property name="ElementShortName">s_axi_gmem_WREADY</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_WREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_WDATA">
+      <obj_property name="ElementShortName">s_axi_gmem_WDATA[127:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_WDATA[127:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_WSTRB">
+      <obj_property name="ElementShortName">s_axi_gmem_WSTRB[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_WSTRB[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_WLAST">
+      <obj_property name="ElementShortName">s_axi_gmem_WLAST</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_WLAST</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_WID">
+      <obj_property name="ElementShortName">s_axi_gmem_WID[0:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_WID[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_BVALID">
+      <obj_property name="ElementShortName">s_axi_gmem_BVALID</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_BVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_BREADY">
+      <obj_property name="ElementShortName">s_axi_gmem_BREADY</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_BREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/s_axi_gmem_BRESP">
+      <obj_property name="ElementShortName">s_axi_gmem_BRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_gmem_BRESP[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/axis_out_TDATA">
+      <obj_property name="ElementShortName">axis_out_TDATA[127:0]</obj_property>
+      <obj_property name="ObjectShortName">axis_out_TDATA[127:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/axis_out_TVALID">
+      <obj_property name="ElementShortName">axis_out_TVALID</obj_property>
+      <obj_property name="ObjectShortName">axis_out_TVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/axis_out_TREADY">
+      <obj_property name="ElementShortName">axis_out_TREADY</obj_property>
+      <obj_property name="ObjectShortName">axis_out_TREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/axis_out_TKEEP">
+      <obj_property name="ElementShortName">axis_out_TKEEP[15:0]</obj_property>
+      <obj_property name="ObjectShortName">axis_out_TKEEP[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axiwr_toaxis/design_1_i/axiwr_to_axis_0/axis_out_TLAST">
+      <obj_property name="ElementShortName">axis_out_TLAST[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axis_out_TLAST[0:0]</obj_property>
+   </wvobject>
+</wave_config>

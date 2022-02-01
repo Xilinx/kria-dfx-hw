@@ -1,0 +1,317 @@
+# Proc to create BD FIR_compiler
+proc cr_bd_FIR_compiler { parentCell designName} {
+
+  # CHANGE DESIGN NAME HERE
+  set design_name $designName
+
+  common::send_gid_msg -ssname BD::TCL -id 2010 -severity "INFO" "Currently there is no design <$design_name> in project, so creating one..."
+
+  create_bd_design $design_name
+
+  set bCheckIPsPassed 1
+  ##################################################################
+  # CHECK IPs
+  ##################################################################
+  set bCheckIPs 1
+  if { $bCheckIPs == 1 } {
+     set list_check_ips "\ 
+  user.org:user:AccelConfig:*\
+  xilinx.com:ip:axis_dwidth_converter:*\
+  xilinx.com:ip:fir_compiler:*\
+  user.org:user:outputbits_selector_v1_0:*\
+  xilinx.com:ip:proc_sys_reset:*\
+  user.org:user:rm_comm_box:*\
+  xilinx.com:ip:xlconstant:*\
+  xilinx.com:ip:xlconcat:*\
+  xilinx.com:ip:xlslice:*\
+  "
+
+   set list_ips_missing ""
+   common::send_gid_msg -ssname BD::TCL -id 2011 -severity "INFO" "Checking if the following IPs exist in the project's IP catalog: $list_check_ips ."
+
+   foreach ip_vlnv $list_check_ips {
+      set ip_obj [get_ipdefs -all $ip_vlnv]
+      if { $ip_obj eq "" } {
+         lappend list_ips_missing $ip_vlnv
+      }
+   }
+
+   if { $list_ips_missing ne "" } {
+      catch {common::send_gid_msg -ssname BD::TCL -id 2012 -severity "ERROR" "The following IPs are not found in the IP Catalog:\n  $list_ips_missing\n\nResolution: Please add the repository containing the IP(s) to the project." }
+      set bCheckIPsPassed 0
+   }
+
+  }
+
+  if { $bCheckIPsPassed != 1 } {
+    common::send_gid_msg -ssname BD::TCL -id 2023 -severity "WARNING" "Will not continue with creation of design due to the error(s) above."
+    return 3
+  }
+
+  
+# Hierarchical cell: tdata_instripe
+proc create_hier_cell_tdata_instripe { parentCell nameHier } {
+
+  variable script_folder
+
+  if { $parentCell eq "" || $nameHier eq "" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2092 -severity "ERROR" "create_hier_cell_tdata_instripe() - Empty argument(s)!"}
+     return
+  }
+
+  # Get object for parentCell
+  set parentObj [get_bd_cells $parentCell]
+  if { $parentObj == "" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2090 -severity "ERROR" "Unable to find parent cell <$parentCell>!"}
+     return
+  }
+
+  # Make sure parentObj is hier blk
+  set parentType [get_property TYPE $parentObj]
+  if { $parentType ne "hier" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2091 -severity "ERROR" "Parent <$parentObj> has TYPE = <$parentType>. Expected to be <hier>."}
+     return
+  }
+
+  # Save current instance; Restore later
+  set oldCurInst [current_bd_instance .]
+
+  # Set parent object as current
+  current_bd_instance $parentObj
+
+  # Create cell and set as current instance
+  set hier_obj [create_bd_cell -type hier $nameHier]
+  current_bd_instance $hier_obj
+
+  # Create interface pins
+
+  # Create pins
+  create_bd_pin -dir I -from 127 -to 0 Din
+  create_bd_pin -dir O -from 63 -to 0 dout_0
+
+  # Create instance: xlconcat_0, and set properties
+  set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat xlconcat_0 ]
+  set_property -dict [ list \
+   CONFIG.NUM_PORTS {4} \
+ ] $xlconcat_0
+
+  # Create instance: xlslice_0, and set properties
+  set xlslice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice xlslice_0 ]
+  set_property -dict [ list \
+   CONFIG.DIN_FROM {15} \
+   CONFIG.DIN_WIDTH {128} \
+   CONFIG.DOUT_WIDTH {16} \
+ ] $xlslice_0
+
+  # Create instance: xlslice_1, and set properties
+  set xlslice_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice xlslice_1 ]
+  set_property -dict [ list \
+   CONFIG.DIN_FROM {47} \
+   CONFIG.DIN_TO {32} \
+   CONFIG.DIN_WIDTH {128} \
+   CONFIG.DOUT_WIDTH {16} \
+ ] $xlslice_1
+
+  # Create instance: xlslice_2, and set properties
+  set xlslice_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice xlslice_2 ]
+  set_property -dict [ list \
+   CONFIG.DIN_FROM {79} \
+   CONFIG.DIN_TO {64} \
+   CONFIG.DIN_WIDTH {128} \
+   CONFIG.DOUT_WIDTH {16} \
+ ] $xlslice_2
+
+  # Create instance: xlslice_3, and set properties
+  set xlslice_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice xlslice_3 ]
+  set_property -dict [ list \
+   CONFIG.DIN_FROM {111} \
+   CONFIG.DIN_TO {96} \
+   CONFIG.DIN_WIDTH {128} \
+   CONFIG.DOUT_WIDTH {16} \
+ ] $xlslice_3
+
+  # Create port connections
+  connect_bd_net -net AccelConfig_0_out_v_tdata [get_bd_pins Din] [get_bd_pins xlslice_0/Din] [get_bd_pins xlslice_1/Din] [get_bd_pins xlslice_2/Din] [get_bd_pins xlslice_3/Din]
+  connect_bd_net -net xlconcat_0_dout [get_bd_pins dout_0] [get_bd_pins xlconcat_0/dout]
+  connect_bd_net -net xlslice_0_Dout [get_bd_pins xlconcat_0/In0] [get_bd_pins xlslice_0/Dout]
+  connect_bd_net -net xlslice_1_Dout [get_bd_pins xlconcat_0/In1] [get_bd_pins xlslice_1/Dout]
+  connect_bd_net -net xlslice_2_Dout [get_bd_pins xlconcat_0/In2] [get_bd_pins xlslice_2/Dout]
+  connect_bd_net -net xlslice_3_Dout [get_bd_pins xlconcat_0/In3] [get_bd_pins xlslice_3/Dout]
+
+  # Restore current instance
+  current_bd_instance $oldCurInst
+}
+  variable script_folder
+
+  if { $parentCell eq "" } {
+     set parentCell [get_bd_cells /]
+  }
+
+  # Get object for parentCell
+  set parentObj [get_bd_cells $parentCell]
+  if { $parentObj == "" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2090 -severity "ERROR" "Unable to find parent cell <$parentCell>!"}
+     return
+  }
+
+  # Make sure parentObj is hier blk
+  set parentType [get_property TYPE $parentObj]
+  if { $parentType ne "hier" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2091 -severity "ERROR" "Parent <$parentObj> has TYPE = <$parentType>. Expected to be <hier>."}
+     return
+  }
+
+  # Save current instance; Restore later
+  set oldCurInst [current_bd_instance .]
+
+  # Set parent object as current
+  current_bd_instance $parentObj
+
+
+  # Create interface ports
+  set M_AXI_GMEM [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 M_AXI_GMEM ]
+  set_property -dict [ list \
+   CONFIG.ADDR_WIDTH {64} \
+   CONFIG.DATA_WIDTH {128} \
+   CONFIG.FREQ_HZ {299997000} \
+   CONFIG.NUM_READ_OUTSTANDING {2} \
+   CONFIG.NUM_WRITE_OUTSTANDING {2} \
+   CONFIG.PROTOCOL {AXI4} \
+   ] $M_AXI_GMEM
+
+  set S_AXI_CTRL [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S_AXI_CTRL ]
+  set_property -dict [ list \
+   CONFIG.ADDR_WIDTH {40} \
+   CONFIG.ARUSER_WIDTH {0} \
+   CONFIG.AWUSER_WIDTH {0} \
+   CONFIG.BUSER_WIDTH {0} \
+   CONFIG.DATA_WIDTH {32} \
+   CONFIG.FREQ_HZ {299997000} \
+   CONFIG.HAS_BRESP {1} \
+   CONFIG.HAS_BURST {0} \
+   CONFIG.HAS_CACHE {0} \
+   CONFIG.HAS_LOCK {0} \
+   CONFIG.HAS_PROT {1} \
+   CONFIG.HAS_QOS {0} \
+   CONFIG.HAS_REGION {0} \
+   CONFIG.HAS_RRESP {1} \
+   CONFIG.HAS_WSTRB {1} \
+   CONFIG.ID_WIDTH {0} \
+   CONFIG.MAX_BURST_LENGTH {1} \
+   CONFIG.NUM_READ_OUTSTANDING {8} \
+   CONFIG.NUM_READ_THREADS {1} \
+   CONFIG.NUM_WRITE_OUTSTANDING {8} \
+   CONFIG.NUM_WRITE_THREADS {1} \
+   CONFIG.PROTOCOL {AXI4LITE} \
+   CONFIG.READ_WRITE_MODE {READ_WRITE} \
+   CONFIG.RUSER_BITS_PER_BYTE {0} \
+   CONFIG.RUSER_WIDTH {0} \
+   CONFIG.SUPPORTS_NARROW_BURST {0} \
+   CONFIG.WUSER_BITS_PER_BYTE {0} \
+   CONFIG.WUSER_WIDTH {0} \
+   ] $S_AXI_CTRL
+
+
+  # Create ports
+  set clk [ create_bd_port -dir I -type clk -freq_hz 299997000 clk ]
+  set interrupt [ create_bd_port -dir O -from 0 -to 0 -type intr interrupt ]
+  set resetn [ create_bd_port -dir I -type rst resetn ]
+
+  # Create instance: AccelConfig_0, and set properties
+  set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig AccelConfig_0 ]
+  set_property -dict [ list \
+   CONFIG.HAS_SCALAR_OUTPUT {0} \
+   CONFIG.HAS_TID1_AXIS_OUTPUT {1} \
+   CONFIG.HAS_TID2_AXIS_OUTPUT {1} \
+   CONFIG.HAS_TID3_AXIS_OUTPUT {1} \
+ ] $AccelConfig_0
+
+  # Create instance: axi_interconnect_0, and set properties
+  set axi_interconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect axi_interconnect_0 ]
+
+  # Create instance: axis_dwidth_converter_0, and set properties
+  set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_0 ]
+
+  # Create instance: fir_compiler_0, and set properties
+  set fir_compiler_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fir_compiler fir_compiler_0 ]
+  set_property -dict [ list \
+   CONFIG.Clock_Frequency {250} \
+   CONFIG.CoefficientVector {\
+-211,-102,-99,-73,-27,32,95,146,171,162,114,34,-62,-152,-208,-206,-129,26,243,492,726,894,944,840,566,135,-411,-1001,-1549,-1964,-2166,-2101,-1751,-1141,-336,563,1438,2169,2654,2823,2654,2169,1438,563,-336,-1141,-1751,-2101,-2166,-1964,-1549,-1001,-411,135,566,840,944,894,726,492,243,26,-129,-206,-208,-152,-62,34,114,162,171,146,95,32,-27,-73,-99,-102,-211} \
+   CONFIG.Coefficient_Fractional_Bits {0} \
+   CONFIG.Coefficient_Reload {true} \
+   CONFIG.Coefficient_Sets {1} \
+   CONFIG.Coefficient_Sign {Signed} \
+   CONFIG.Coefficient_Structure {Inferred} \
+   CONFIG.Coefficient_Width {16} \
+   CONFIG.ColumnConfig {40} \
+   CONFIG.DATA_Has_TLAST {Packet_Framing} \
+   CONFIG.Data_Width {16} \
+   CONFIG.Filter_Architecture {Systolic_Multiply_Accumulate} \
+   CONFIG.Has_ARESETn {true} \
+   CONFIG.M_DATA_Has_TREADY {true} \
+   CONFIG.Output_Rounding_Mode {Truncate_LSBs} \
+   CONFIG.Output_Width {33} \
+   CONFIG.Quantization {Integer_Coefficients} \
+   CONFIG.Reset_Data_Vector {false} \
+   CONFIG.S_CONFIG_Sync_Mode {On_Packet} \
+   CONFIG.Sample_Frequency {1000} \
+ ] $fir_compiler_0
+
+  # Create instance: outputbits_selector_0, and set properties
+  set outputbits_selector_0 [ create_bd_cell -type ip -vlnv user.org:user:outputbits_selector_v1_0 outputbits_selector_0 ]
+
+  # Create instance: proc_sys_reset_0, and set properties
+  set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset proc_sys_reset_0 ]
+
+  # Create instance: rm_comm_box_0, and set properties
+  set rm_comm_box_0 [ create_bd_cell -type ip -vlnv user.org:user:rm_comm_box rm_comm_box_0 ]
+
+  # Create instance: tdata_instripe
+  create_hier_cell_tdata_instripe [current_bd_instance .] tdata_instripe
+
+  # Create instance: xlconstant_0, and set properties
+  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant xlconstant_0 ]
+
+  # Create interface connections
+  connect_bd_intf_net -intf_net AccelConfig_0_out_v [get_bd_intf_pins AccelConfig_0/out_v] [get_bd_intf_pins fir_compiler_0/S_AXIS_DATA]
+  connect_bd_intf_net -intf_net AccelConfig_0_tid1_axis [get_bd_intf_pins AccelConfig_0/tid1_axis] [get_bd_intf_pins axis_dwidth_converter_0/S_AXIS]
+  connect_bd_intf_net -intf_net AccelConfig_0_tid2_axis [get_bd_intf_pins AccelConfig_0/tid2_axis] [get_bd_intf_pins fir_compiler_0/S_AXIS_CONFIG]
+  connect_bd_intf_net -intf_net AccelConfig_0_tid3_axis [get_bd_intf_pins AccelConfig_0/tid3_axis] [get_bd_intf_pins outputbits_selector_0/s00_axis]
+  connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins axi_interconnect_0/S00_AXI]
+  connect_bd_intf_net -intf_net axi_interconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi] [get_bd_intf_pins axi_interconnect_0/M00_AXI]
+  connect_bd_intf_net -intf_net axi_interconnect_0_M01_AXI [get_bd_intf_pins axi_interconnect_0/M01_AXI] [get_bd_intf_pins rm_comm_box_0/s_axi_control]
+  connect_bd_intf_net -intf_net axis_dwidth_converter_0_M_AXIS [get_bd_intf_pins axis_dwidth_converter_0/M_AXIS] [get_bd_intf_pins fir_compiler_0/S_AXIS_RELOAD]
+  connect_bd_intf_net -intf_net fir_compiler_0_M_AXIS_DATA [get_bd_intf_pins fir_compiler_0/M_AXIS_DATA] [get_bd_intf_pins outputbits_selector_0/s01_axis]
+  connect_bd_intf_net -intf_net outputbits_selector_0_m00_axis [get_bd_intf_pins outputbits_selector_0/m00_axis] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
+  connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
+  connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/in_v] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
+
+  # Create port connections
+  connect_bd_net -net AccelConfig_0_interrupt1 [get_bd_ports interrupt] [get_bd_pins AccelConfig_0/interrupt]
+  connect_bd_net -net AccelConfig_0_out_v_tdata [get_bd_pins AccelConfig_0/out_v_tdata] [get_bd_pins tdata_instripe/Din]
+  connect_bd_net -net clk_4 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/M01_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axis_dwidth_converter_0/aclk] [get_bd_pins fir_compiler_0/aclk] [get_bd_pins outputbits_selector_0/aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk]
+  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AccelConfig_0/resetn] [get_bd_pins axis_dwidth_converter_0/aresetn] [get_bd_pins fir_compiler_0/aresetn] [get_bd_pins outputbits_selector_0/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
+  connect_bd_net -net rm_comm_box_0_ap_done_mm2s [get_bd_pins AccelConfig_0/mm2sDone] [get_bd_pins rm_comm_box_0/ap_done_mm2s]
+  connect_bd_net -net rm_comm_box_0_ap_done_s2mm [get_bd_pins AccelConfig_0/s2mmDone] [get_bd_pins rm_comm_box_0/ap_done_s2mm]
+  connect_bd_net -net static_shell_rp1_resetn [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
+  connect_bd_net -net tdata_stripe_dout_0 [get_bd_pins fir_compiler_0/s_axis_data_tdata] [get_bd_pins tdata_instripe/dout_0]
+  connect_bd_net -net xlconstant_0_dout [get_bd_pins AccelConfig_0/AccelIdle] [get_bd_pins AccelConfig_0/AccelReady] [get_bd_pins xlconstant_0/dout]
+
+  # Create address segments
+  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -offset 0xB0000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi/reg0] -force
+  assign_bd_address -offset 0xB1000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
+
+  set_property USAGE memory [get_bd_addr_segs M_AXI_GMEM/Reg]
+
+
+  # Restore current instance
+  current_bd_instance $oldCurInst
+
+  validate_bd_design
+  save_bd_design
+  close_bd_design $design_name 
+}
+# End of cr_bd_FIR_compiler()

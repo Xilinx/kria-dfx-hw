@@ -1,0 +1,16 @@
+# ==============================================================
+# Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2020.2 (64-bit)
+# Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+# ==============================================================
+OPTION psf_version = 2.1;
+
+BEGIN driver pp_pipeline_accel
+
+ OPTION supported_peripherals = (pp_pipeline_accel_v1_0 );
+ OPTION driver_state = ACTIVE;
+ OPTION copyfiles = all;
+ OPTION name = pp_pipeline_accel;
+ OPTION version = 1.0;
+
+END driver
+

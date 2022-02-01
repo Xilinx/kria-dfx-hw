@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_s2mm_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="axi_bram_ctrl_funcs" />
+            <top_module name="glbl" />
+            <top_module name="tb_s2mm" />
+            <top_module name="vcomponents" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="2008001fs"></ZoomEndTime>
+      <Cursor1Time time="61500fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="230"></NameColumnWidth>
+      <ValueColumnWidth column_width="94"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="41" />
+   <wvobject type="logic" fp_name="/tb_s2mm/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/resetn_reg">
+      <obj_property name="ElementShortName">resetn_reg[15:0]</obj_property>
+      <obj_property name="ObjectShortName">resetn_reg[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/resetn">
+      <obj_property name="ElementShortName">resetn</obj_property>
+      <obj_property name="ObjectShortName">resetn</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/send_data">
+      <obj_property name="ElementShortName">send_data</obj_property>
+      <obj_property name="ObjectShortName">send_data</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/axis_in_tdata">
+      <obj_property name="ElementShortName">axis_in_tdata[127:0]</obj_property>
+      <obj_property name="ObjectShortName">axis_in_tdata[127:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/axis_in_tkeep">
+      <obj_property name="ElementShortName">axis_in_tkeep[15:0]</obj_property>
+      <obj_property name="ObjectShortName">axis_in_tkeep[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/axis_in_tlast">
+      <obj_property name="ElementShortName">axis_in_tlast</obj_property>
+      <obj_property name="ObjectShortName">axis_in_tlast</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/axis_in_tvalid">
+      <obj_property name="ElementShortName">axis_in_tvalid</obj_property>
+      <obj_property name="ObjectShortName">axis_in_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/axis_in_tready">
+      <obj_property name="ElementShortName">axis_in_tready</obj_property>
+      <obj_property name="ObjectShortName">axis_in_tready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/s_axi_araddr">
+      <obj_property name="ElementShortName">s_axi_araddr[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_araddr[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/s_axi_arready">
+      <obj_property name="ElementShortName">s_axi_arready</obj_property>
+      <obj_property name="ObjectShortName">s_axi_arready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/s_axi_arvalid">
+      <obj_property name="ElementShortName">s_axi_arvalid</obj_property>
+      <obj_property name="ObjectShortName">s_axi_arvalid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/s_axi_rdata">
+      <obj_property name="ElementShortName">s_axi_rdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_rdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/s_axi_rready">
+      <obj_property name="ElementShortName">s_axi_rready</obj_property>
+      <obj_property name="ObjectShortName">s_axi_rready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/s_axi_rresp">
+      <obj_property name="ElementShortName">s_axi_rresp[1:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_rresp[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/s_axi_rvalid">
+      <obj_property name="ElementShortName">s_axi_rvalid</obj_property>
+      <obj_property name="ObjectShortName">s_axi_rvalid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/s_axi_awaddr">
+      <obj_property name="ElementShortName">s_axi_awaddr[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_awaddr[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/s_axi_awready">
+      <obj_property name="ElementShortName">s_axi_awready</obj_property>
+      <obj_property name="ObjectShortName">s_axi_awready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/s_axi_awvalid">
+      <obj_property name="ElementShortName">s_axi_awvalid</obj_property>
+      <obj_property name="ObjectShortName">s_axi_awvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/s_axi_bready">
+      <obj_property name="ElementShortName">s_axi_bready</obj_property>
+      <obj_property name="ObjectShortName">s_axi_bready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/s_axi_bresp">
+      <obj_property name="ElementShortName">s_axi_bresp</obj_property>
+      <obj_property name="ObjectShortName">s_axi_bresp</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/s_axi_bvalid">
+      <obj_property name="ElementShortName">s_axi_bvalid</obj_property>
+      <obj_property name="ObjectShortName">s_axi_bvalid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/s_axi_wdata">
+      <obj_property name="ElementShortName">s_axi_wdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_wdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/s_axi_wready">
+      <obj_property name="ElementShortName">s_axi_wready</obj_property>
+      <obj_property name="ObjectShortName">s_axi_wready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/s_axi_wstrb">
+      <obj_property name="ElementShortName">s_axi_wstrb[3:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axi_wstrb[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/s_axi_wvalid">
+      <obj_property name="ElementShortName">s_axi_wvalid</obj_property>
+      <obj_property name="ObjectShortName">s_axi_wvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_AWVALID">
+      <obj_property name="ElementShortName">m_axi_gmem_AWVALID</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_AWVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_AWREADY">
+      <obj_property name="ElementShortName">m_axi_gmem_AWREADY</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_AWREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_AWADDR">
+      <obj_property name="ElementShortName">m_axi_gmem_AWADDR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_AWADDR[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_AWID">
+      <obj_property name="ElementShortName">m_axi_gmem_AWID[0:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_AWID[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_AWLEN">
+      <obj_property name="ElementShortName">m_axi_gmem_AWLEN[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_AWLEN[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_AWSIZE">
+      <obj_property name="ElementShortName">m_axi_gmem_AWSIZE[2:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_AWSIZE[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_AWBURST">
+      <obj_property name="ElementShortName">m_axi_gmem_AWBURST[1:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_AWBURST[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_WVALID">
+      <obj_property name="ElementShortName">m_axi_gmem_WVALID</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_WVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_WREADY">
+      <obj_property name="ElementShortName">m_axi_gmem_WREADY</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_WREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_WDATA">
+      <obj_property name="ElementShortName">m_axi_gmem_WDATA[127:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_WDATA[127:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_WSTRB">
+      <obj_property name="ElementShortName">m_axi_gmem_WSTRB[15:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_WSTRB[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_WLAST">
+      <obj_property name="ElementShortName">m_axi_gmem_WLAST</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_WLAST</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_BVALID">
+      <obj_property name="ElementShortName">m_axi_gmem_BVALID</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_BVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_BREADY">
+      <obj_property name="ElementShortName">m_axi_gmem_BREADY</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_BREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_s2mm/design_1_i/s2mm_0/m_axi_gmem_BRESP">
+      <obj_property name="ElementShortName">m_axi_gmem_BRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axi_gmem_BRESP[1:0]</obj_property>
+   </wvobject>
+</wave_config>
