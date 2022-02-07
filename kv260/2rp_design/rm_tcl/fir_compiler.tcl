@@ -21,6 +21,7 @@ proc cr_bd_FIR_compiler { parentCell designName} {
   user.org:user:outputbits_selector_v1_0:*\
   xilinx.com:ip:proc_sys_reset:*\
   user.org:user:rm_comm_box:*\
+  xilinx.com:ip:smartconnect:*\
   xilinx.com:ip:xlconstant:*\
   xilinx.com:ip:xlconcat:*\
   xilinx.com:ip:xlslice:*\
@@ -226,9 +227,6 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
    CONFIG.HAS_TID3_AXIS_OUTPUT {1} \
  ] $AccelConfig_0
 
-  # Create instance: axi_interconnect_0, and set properties
-  set axi_interconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect axi_interconnect_0 ]
-
   # Create instance: axis_dwidth_converter_0, and set properties
   set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_0 ]
 
@@ -237,19 +235,21 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   set_property -dict [ list \
    CONFIG.Clock_Frequency {250} \
    CONFIG.CoefficientVector {\
--211,-102,-99,-73,-27,32,95,146,171,162,114,34,-62,-152,-208,-206,-129,26,243,492,726,894,944,840,566,135,-411,-1001,-1549,-1964,-2166,-2101,-1751,-1141,-336,563,1438,2169,2654,2823,2654,2169,1438,563,-336,-1141,-1751,-2101,-2166,-1964,-1549,-1001,-411,135,566,840,944,894,726,492,243,26,-129,-206,-208,-152,-62,34,114,162,171,146,95,32,-27,-73,-99,-102,-211} \
+-23,-12,-11,-6,4,16,30,42,49,48,38,17,-11,-42,-72,-94,-103,-96,-71,-33,14,61,100,123,125,107,73,29,-12,-42,-52,-40,-8,36,79,107,109,75,7,-87,-193,-290,-357,-376,-339,-248,-114,39,184,296,353,347,284,183,75,-7,-32,17,141,321,517,679,752,692,473,97,-402,-959,-1491,-1905,-2118,-2070,-1738,-1142,-345,552,1430,2167,2657,2828,2657,2167,1430,552,-345,-1142,-1738,-2070,-2118,-1905,-1491,-959,-402,97,473,692,752,679,517,321,141,17,-32,-7,75,183,284,347,353,296,184,39,-114,-248,-339,-376,-357,-290,-193,-87,7,75,109,107,79,36,-8,-40,-52,-42,-12,29,73,107,125,123,100,61,14,-33,-71,-96,-103,-94,-72,-42,-11,17,38,48,49,42,30,16,4,-6,-11,-12,-23} \
    CONFIG.Coefficient_Fractional_Bits {0} \
    CONFIG.Coefficient_Reload {true} \
    CONFIG.Coefficient_Sets {1} \
    CONFIG.Coefficient_Sign {Signed} \
    CONFIG.Coefficient_Structure {Inferred} \
    CONFIG.Coefficient_Width {16} \
-   CONFIG.ColumnConfig {40} \
+   CONFIG.ColumnConfig {40,40} \
    CONFIG.DATA_Has_TLAST {Packet_Framing} \
    CONFIG.Data_Width {16} \
    CONFIG.Filter_Architecture {Systolic_Multiply_Accumulate} \
    CONFIG.Has_ARESETn {true} \
+   CONFIG.Inter_Column_Pipe_Length {1} \
    CONFIG.M_DATA_Has_TREADY {true} \
+   CONFIG.Multi_Column_Support {Custom} \
    CONFIG.Output_Rounding_Mode {Truncate_LSBs} \
    CONFIG.Output_Width {33} \
    CONFIG.Quantization {Integer_Coefficients} \
@@ -267,6 +267,13 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   # Create instance: rm_comm_box_0, and set properties
   set rm_comm_box_0 [ create_bd_cell -type ip -vlnv user.org:user:rm_comm_box rm_comm_box_0 ]
 
+  # Create instance: smartconnect_0, and set properties
+  set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect smartconnect_0 ]
+  set_property -dict [ list \
+   CONFIG.NUM_MI {2} \
+   CONFIG.NUM_SI {1} \
+ ] $smartconnect_0
+
   # Create instance: tdata_instripe
   create_hier_cell_tdata_instripe [current_bd_instance .] tdata_instripe
 
@@ -278,20 +285,19 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   connect_bd_intf_net -intf_net AccelConfig_0_tid1_axis [get_bd_intf_pins AccelConfig_0/tid1_axis] [get_bd_intf_pins axis_dwidth_converter_0/S_AXIS]
   connect_bd_intf_net -intf_net AccelConfig_0_tid2_axis [get_bd_intf_pins AccelConfig_0/tid2_axis] [get_bd_intf_pins fir_compiler_0/S_AXIS_CONFIG]
   connect_bd_intf_net -intf_net AccelConfig_0_tid3_axis [get_bd_intf_pins AccelConfig_0/tid3_axis] [get_bd_intf_pins outputbits_selector_0/s00_axis]
-  connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins axi_interconnect_0/S00_AXI]
-  connect_bd_intf_net -intf_net axi_interconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi] [get_bd_intf_pins axi_interconnect_0/M00_AXI]
-  connect_bd_intf_net -intf_net axi_interconnect_0_M01_AXI [get_bd_intf_pins axi_interconnect_0/M01_AXI] [get_bd_intf_pins rm_comm_box_0/s_axi_control]
+  connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins smartconnect_0/S00_AXI]
   connect_bd_intf_net -intf_net axis_dwidth_converter_0_M_AXIS [get_bd_intf_pins axis_dwidth_converter_0/M_AXIS] [get_bd_intf_pins fir_compiler_0/S_AXIS_RELOAD]
   connect_bd_intf_net -intf_net fir_compiler_0_M_AXIS_DATA [get_bd_intf_pins fir_compiler_0/M_AXIS_DATA] [get_bd_intf_pins outputbits_selector_0/s01_axis]
   connect_bd_intf_net -intf_net outputbits_selector_0_m00_axis [get_bd_intf_pins outputbits_selector_0/m00_axis] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
   connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/in_v] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
+  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi] [get_bd_intf_pins smartconnect_0/M00_AXI]
 
   # Create port connections
   connect_bd_net -net AccelConfig_0_interrupt1 [get_bd_ports interrupt] [get_bd_pins AccelConfig_0/interrupt]
   connect_bd_net -net AccelConfig_0_out_v_tdata [get_bd_pins AccelConfig_0/out_v_tdata] [get_bd_pins tdata_instripe/Din]
-  connect_bd_net -net clk_4 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/M01_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axis_dwidth_converter_0/aclk] [get_bd_pins fir_compiler_0/aclk] [get_bd_pins outputbits_selector_0/aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk]
-  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn]
+  connect_bd_net -net clk_4 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins axis_dwidth_converter_0/aclk] [get_bd_pins fir_compiler_0/aclk] [get_bd_pins outputbits_selector_0/aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
+  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AccelConfig_0/resetn] [get_bd_pins axis_dwidth_converter_0/aresetn] [get_bd_pins fir_compiler_0/aresetn] [get_bd_pins outputbits_selector_0/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
   connect_bd_net -net rm_comm_box_0_ap_done_mm2s [get_bd_pins AccelConfig_0/mm2sDone] [get_bd_pins rm_comm_box_0/ap_done_mm2s]
   connect_bd_net -net rm_comm_box_0_ap_done_s2mm [get_bd_pins AccelConfig_0/s2mmDone] [get_bd_pins rm_comm_box_0/ap_done_s2mm]

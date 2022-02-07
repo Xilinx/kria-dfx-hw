@@ -21,6 +21,7 @@ proc cr_bd_AES128 { parentCell designName} {
   user.org:user:axis_accel_sel:*\
   xilinx.com:ip:proc_sys_reset:*\
   user.org:user:rm_comm_box:*\
+  xilinx.com:ip:smartconnect:*\
   xilinx.com:ip:xlconstant:*\
   "
 
@@ -139,9 +140,6 @@ proc cr_bd_AES128 { parentCell designName} {
    CONFIG.SCALAR2_WIDTH {32} \
  ] $AccelConfig_0
 
-  # Create instance: axi_interconnect_0, and set properties
-  set axi_interconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect axi_interconnect_0 ]
-
   # Create instance: axis_accel_sel_0, and set properties
   set axis_accel_sel_0 [ create_bd_cell -type ip -vlnv user.org:user:axis_accel_sel axis_accel_sel_0 ]
 
@@ -150,6 +148,13 @@ proc cr_bd_AES128 { parentCell designName} {
 
   # Create instance: rm_comm_box_0, and set properties
   set rm_comm_box_0 [ create_bd_cell -type ip -vlnv user.org:user:rm_comm_box rm_comm_box_0 ]
+
+  # Create instance: smartconnect_0, and set properties
+  set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect smartconnect_0 ]
+  set_property -dict [ list \
+   CONFIG.NUM_MI {2} \
+   CONFIG.NUM_SI {1} \
+ ] $smartconnect_0
 
   # Create instance: xlconstant_0, and set properties
   set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant xlconstant_0 ]
@@ -161,14 +166,14 @@ proc cr_bd_AES128 { parentCell designName} {
   connect_bd_intf_net -intf_net AES128Dec_0_out_V [get_bd_intf_pins AES128Dec_0/out_r] [get_bd_intf_pins axis_accel_sel_0/out_V_dec]
   connect_bd_intf_net -intf_net AES128Enc_0_out_V [get_bd_intf_pins AES128Enc_0/out_r] [get_bd_intf_pins axis_accel_sel_0/out_V_enc]
   connect_bd_intf_net -intf_net AccelConfig_0_out_v [get_bd_intf_pins AccelConfig_0/out_v] [get_bd_intf_pins axis_accel_sel_0/in_V]
-  connect_bd_intf_net -intf_net S_AXI_CTRL_4 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins axi_interconnect_0/S00_AXI]
-  connect_bd_intf_net -intf_net axi_interconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi] [get_bd_intf_pins axi_interconnect_0/M00_AXI]
-  connect_bd_intf_net -intf_net axi_interconnect_0_M01_AXI [get_bd_intf_pins axi_interconnect_0/M01_AXI] [get_bd_intf_pins rm_comm_box_0/s_axi_control]
+  connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins smartconnect_0/S00_AXI]
   connect_bd_intf_net -intf_net axis_accel_sel_0_in_V_dec [get_bd_intf_pins AES128Dec_0/in_r] [get_bd_intf_pins axis_accel_sel_0/in_V_dec]
   connect_bd_intf_net -intf_net axis_accel_sel_0_in_V_enc [get_bd_intf_pins AES128Enc_0/in_r] [get_bd_intf_pins axis_accel_sel_0/in_V_enc]
   connect_bd_intf_net -intf_net axis_accel_sel_0_out_V [get_bd_intf_pins axis_accel_sel_0/out_V] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
   connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/in_v] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
+  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi] [get_bd_intf_pins smartconnect_0/M00_AXI]
+  connect_bd_intf_net -intf_net smartconnect_0_M01_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M01_AXI]
 
   # Create port connections
   connect_bd_net -net AES128Dec_0_ap_done [get_bd_pins AES128Dec_0/ap_done] [get_bd_pins axis_accel_sel_0/ap_done_dec]
@@ -180,8 +185,8 @@ proc cr_bd_AES128 { parentCell designName} {
   connect_bd_net -net axis_accel_sel_0_ap_done [get_bd_pins AccelConfig_0/AccelDone] [get_bd_pins axis_accel_sel_0/ap_done]
   connect_bd_net -net axis_accel_sel_0_ap_start_dec [get_bd_pins AES128Dec_0/ap_start] [get_bd_pins axis_accel_sel_0/ap_start_dec]
   connect_bd_net -net axis_accel_sel_0_ap_start_enc [get_bd_pins AES128Enc_0/ap_start] [get_bd_pins axis_accel_sel_0/ap_start_enc]
-  connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins AES128Dec_0/ap_clk] [get_bd_pins AES128Enc_0/ap_clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/M01_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axis_accel_sel_0/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk]
-  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn]
+  connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins AES128Dec_0/ap_clk] [get_bd_pins AES128Enc_0/ap_clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins axis_accel_sel_0/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
+  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AES128Dec_0/ap_rst_n] [get_bd_pins AES128Enc_0/ap_rst_n] [get_bd_pins AccelConfig_0/resetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
   connect_bd_net -net rm_comm_box_0_ap_done_mm2s [get_bd_pins AccelConfig_0/mm2sDone] [get_bd_pins rm_comm_box_0/ap_done_mm2s]
   connect_bd_net -net rm_comm_box_0_ap_done_s2mm [get_bd_pins AccelConfig_0/s2mmDone] [get_bd_pins rm_comm_box_0/ap_done_s2mm]

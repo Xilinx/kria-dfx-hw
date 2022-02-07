@@ -19,6 +19,7 @@ proc cr_bd_FFT_4channel { parentCell designName} {
   xilinx.com:ip:xlconstant:*\
   xilinx.com:ip:proc_sys_reset:*\
   user.org:user:rm_comm_box:*\
+  xilinx.com:ip:smartconnect:*\
   user.org:user:channelSelectLogic:*\
   xilinx:hls:gather:*\
   xilinx:hls:scatter:*\
@@ -1004,14 +1005,19 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
    CONFIG.CONST_VAL {0} \
  ] $RMHang_0
 
-  # Create instance: axi_interconnect_0, and set properties
-  set axi_interconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect axi_interconnect_0 ]
-
   # Create instance: proc_sys_reset_0, and set properties
   set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset proc_sys_reset_0 ]
 
   # Create instance: rm_comm_box_0, and set properties
   set rm_comm_box_0 [ create_bd_cell -type ip -vlnv user.org:user:rm_comm_box rm_comm_box_0 ]
+
+  # Create instance: smartconnect_0, and set properties
+  set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect smartconnect_0 ]
+  set_property -dict [ list \
+   CONFIG.NUM_CLKS {1} \
+   CONFIG.NUM_MI {2} \
+   CONFIG.NUM_SI {1} \
+ ] $smartconnect_0
 
   # Create interface connections
   connect_bd_intf_net -intf_net AccelConfig_0_out_v [get_bd_intf_pins AccelConfig_0/out_v] [get_bd_intf_pins FFTWithScatterGather/axis_din]
@@ -1019,18 +1025,18 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
   connect_bd_intf_net -intf_net AccelConfig_0_tid2_axis [get_bd_intf_pins AccelConfig_0/tid2_axis] [get_bd_intf_pins FFTWithScatterGather/axis_conf1]
   connect_bd_intf_net -intf_net AccelConfig_0_tid3_axis [get_bd_intf_pins AccelConfig_0/tid3_axis] [get_bd_intf_pins FFTWithScatterGather/axis_conf2]
   connect_bd_intf_net -intf_net FFTWithScatterGather_axis_dout [get_bd_intf_pins FFTWithScatterGather/axis_dout] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
-  connect_bd_intf_net -intf_net S00_AXI_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins axi_interconnect_0/S00_AXI]
-  connect_bd_intf_net -intf_net axi_interconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi] [get_bd_intf_pins axi_interconnect_0/M00_AXI]
-  connect_bd_intf_net -intf_net axi_interconnect_0_M01_AXI [get_bd_intf_pins axi_interconnect_0/M01_AXI] [get_bd_intf_pins rm_comm_box_0/s_axi_control]
+  connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins smartconnect_0/S00_AXI]
   connect_bd_intf_net -intf_net axis_conf3_1 [get_bd_intf_pins AccelConfig_0/tid4_axis] [get_bd_intf_pins FFTWithScatterGather/axis_conf3]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
   connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/in_v] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
+  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi] [get_bd_intf_pins smartconnect_0/M00_AXI]
+  connect_bd_intf_net -intf_net smartconnect_0_M01_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M01_AXI]
 
   # Create port connections
-  connect_bd_net -net ARESETN_1 [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn]
   connect_bd_net -net AccelConfig_0_interrupt2 [get_bd_ports interrupt] [get_bd_pins AccelConfig_0/interrupt]
   connect_bd_net -net RMHang_0_dout [get_bd_pins AccelConfig_0/RMHang] [get_bd_pins RMHang_0/dout]
-  connect_bd_net -net clk_3 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins FFTWithScatterGather/clk] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/M01_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk]
+  connect_bd_net -net clk_3 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins FFTWithScatterGather/clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
+  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AccelConfig_0/resetn] [get_bd_pins FFTWithScatterGather/resetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
   connect_bd_net -net rm_comm_box_0_ap_done_mm2s [get_bd_pins AccelConfig_0/mm2sDone] [get_bd_pins rm_comm_box_0/ap_done_mm2s]
   connect_bd_net -net rm_comm_box_0_ap_done_s2mm [get_bd_pins AccelConfig_0/s2mmDone] [get_bd_pins rm_comm_box_0/ap_done_s2mm]
