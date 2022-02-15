@@ -2,11 +2,8 @@
 
 module siha_manager
 #(
-  CONFIGRAM_DEPTH = 1024,
-  NUM_RP_SLOTS = 1,
-  NUM_REG_PER_SLOT = 4,
-  BASE_ADDR        = 16'h1000,
-  ADDRSPACE_PER_SLOT = 16'd4096
+  NUM_RP_SLOTS = 2,
+  NUM_REG_PER_SLOT = 4
 )
 (
 input                               clk,
@@ -32,9 +29,9 @@ input                               rp7_decouple_status,
 input                               rp8_decouple_status,
 //Input AXI
 input  [15:0]                       s_axi_awaddr, //64 KB address space
-input  [7:0]                        s_axi_awlen,
-input  [2:0]                        s_axi_awsize,
-input  [1:0]                        s_axi_awburst,
+//input  [7:0]                        s_axi_awlen,
+//input  [2:0]                        s_axi_awsize,
+//input  [1:0]                        s_axi_awburst,
 input                               s_axi_awvalid,
 output reg                          s_axi_awready,
 
@@ -42,22 +39,22 @@ input  [31:0]                       s_axi_wdata,
 input  [3:0]                        s_axi_wstrb,
 input                               s_axi_wvalid,
 output reg                          s_axi_wready,
-input                               s_axi_wlast,
+//input                               s_axi_wlast,
 
 output reg [1:0]                    s_axi_bresp = 2'b00,
 output reg                          s_axi_bvalid,
 input                               s_axi_bready,
 
 input  [15:0]                       s_axi_araddr, //64 KB address space
-input  [7:0]                        s_axi_arlen,
-input  [2:0]                        s_axi_arsize,
-input  [1:0]                        s_axi_arburst,
+//input  [7:0]                        s_axi_arlen,
+//input  [2:0]                        s_axi_arsize,
+//input  [1:0]                        s_axi_arburst,
 input                               s_axi_arvalid,
 output reg                          s_axi_arready,
 
 output reg [31:0]                   s_axi_rdata,
 output reg  [1:0]                   s_axi_rresp = 2'b00,
-output reg                          s_axi_rlast,
+//output reg                          s_axi_rlast,
 output reg                          s_axi_rvalid,
 input                               s_axi_rready,
 
@@ -150,18 +147,25 @@ assign AxPROT7  = AxPROTInt[23:21];
 assign AxPROT8  = AxPROTInt[26:24];
 
 localparam REG_WIDTH = 32;
-(* ram_style = "block" *)reg [REG_WIDTH-1:0] ShellConfigRam[0:CONFIGRAM_DEPTH-1];
-initial begin
-  if (NUM_RP_SLOTS == 1)
-    $readmemh("./config1x1.dat", ShellConfigRam);
+localparam CONFIGRAM_DEPTH = 1024;
+//(* ram_style = "block" *)reg [REG_WIDTH-1:0] ShellConfigRam[0:CONFIGRAM_DEPTH-1];
+//(* ram_style = "distributed" *)reg [REG_WIDTH-1:0] ShellConfigRam[0:CONFIGRAM_DEPTH-1];
+//initial begin
+//  $readmemh("./config.dat", ShellConfigRam);
+//end
+//initial begin
+//  if (NUM_RP_SLOTS == 1)
+//    $readmemh("./config1x1.dat", ShellConfigRam);
 
-  if (NUM_RP_SLOTS ==3 )
-    $readmemh("./config3x1.dat", ShellConfigRam);
-end
+//  if (NUM_RP_SLOTS ==3 )
+//    $readmemh("./config3x1.dat", ShellConfigRam);
+//end
 
 reg [REG_WIDTH-1:0] RegBits [NUM_RP_SLOTS*NUM_REG_PER_SLOT-1:0];
-reg [8:0] decouple_status_r0 = 0;
-reg [8:0] decouple_status_r1 = 0;
+//reg [8:0] decouple_status_r0 = 0;
+//reg [8:0] decouple_status_r1 = 0;
+wire [8:0] decouple_status;
+
 //Registers         Addr
 //ClkCtrlReg    -   0x0
 //ResetCtrlReg  -   0x4
@@ -198,16 +202,16 @@ begin
       aw_hs   : if (s_axi_awvalid && s_axi_awready)
                 begin
                   waddr <= s_axi_awaddr;
-                  awlen <= s_axi_awlen;
-                  WrBeatCounter <= 8'h0;
+//                  awlen <= s_axi_awlen;
+//                  WrBeatCounter <= 8'h0;
                   axi_wr_state <= w_hs;
                 end
 
       w_hs    : if (s_axi_wvalid && s_axi_wready)
                 begin
-                  waddr          <= waddr + 3'h4;
-                  WrBeatCounter <= WrBeatCounter + 1'b1;
-                  if ((WrBeatCounter == awlen) || s_axi_wlast)
+//                  waddr          <= waddr + 3'h4;
+//                  WrBeatCounter <= WrBeatCounter + 1'b1;
+//                  if ((WrBeatCounter == awlen) || s_axi_wlast)
                     axi_wr_state <= b_hs;
                 end
 
@@ -291,8 +295,8 @@ begin
       ar_hs     : if (s_axi_arvalid && s_axi_arready)
                   begin
                     raddr <= s_axi_araddr;
-                    arlen <= s_axi_arlen;
-                    RdBeatCounter <= 8'h0;
+//                    arlen <= s_axi_arlen;
+//                    RdBeatCounter <= 8'h0;
                     axi_rd_state <= dly_state;
                   end
 
@@ -300,12 +304,12 @@ begin
 
       r_hs      : if (s_axi_rvalid && s_axi_rready)
                   begin
-                    raddr <= raddr + 3'h4;
-                    RdBeatCounter <= RdBeatCounter + 1'b1;
-                    if (RdBeatCounter == arlen)
+//                    raddr <= raddr + 3'h4;
+//                    RdBeatCounter <= RdBeatCounter + 1'b1;
+//                    if (RdBeatCounter == arlen)
+//                      axi_rd_state <= ar_hs;
+//                    else
                       axi_rd_state <= ar_hs;
-                    else
-                      axi_rd_state <= dly_state;
                   end
 
       default   : axi_rd_state <= ar_hs;
@@ -317,21 +321,34 @@ always @(*)
 begin
   s_axi_arready <= 1'b0;
   s_axi_rvalid  <= 1'b0;
-  s_axi_rlast   <= 1'b0;
+//  s_axi_rlast   <= 1'b0;
   case (axi_rd_state)
     ar_hs    : s_axi_arready <= 1'b1;
      r_hs    : begin
                  s_axi_rvalid <= 1'b1;
-                 s_axi_rlast  <= (RdBeatCounter == arlen) ? 1'b1 : 1'b0;
+//                 s_axi_rlast  <= (RdBeatCounter == arlen) ? 1'b1 : 1'b0;
                end
   endcase
 end
 
-always @(posedge clk)
-begin
-  decouple_status_r0 <= {rp8_decouple_status, rp7_decouple_status, rp6_decouple_status, rp5_decouple_status, rp4_decouple_status, rp3_decouple_status, rp2_decouple_status, rp1_decouple_status, rp0_decouple_status};
-  decouple_status_r1 <= decouple_status_r0;
-end
+wire [31:0] spo;
+dist_mem_gen_0 ShellConfigRAM (
+  .a(raddr[11:2]),      // input wire [9 : 0] a
+//  .clk(clk),  // input wire clk
+  .spo(spo)  // output wire [31 : 0] spo
+);
+//initial begin
+//  $readmemh("./config.dat", ShellConfigRAM);
+//end
+
+
+//always @(posedge clk)
+//begin
+//  decouple_status_r0 <= {rp8_decouple_status, rp7_decouple_status, rp6_decouple_status, rp5_decouple_status, rp4_decouple_status, rp3_decouple_status, rp2_decouple_status, rp1_decouple_status, rp0_decouple_status};
+//  decouple_status_r1 <= decouple_status_r0;
+//end
+
+assign   decouple_status = {rp8_decouple_status, rp7_decouple_status, rp6_decouple_status, rp5_decouple_status, rp4_decouple_status, rp3_decouple_status, rp2_decouple_status, rp1_decouple_status, rp0_decouple_status};
 
 genvar kk, ll;
 wire [15:0] RdAddrRegBits;
@@ -344,9 +361,11 @@ generate
       else
       begin
         if (raddr[15:12] == 4'h0)
-          s_axi_rdata <= ShellConfigRam[raddr[11:2]];
+          s_axi_rdata <= spo;
+//          s_axi_rdata <= ShellConfigRam[raddr[11:2]];
+
         else if ((raddr[15:12] == 4'h3) && (raddr[11:2] == 10'h0))
-          s_axi_rdata <= {7'b0, decouple_status_r1, 6'b0, rp8ClkLocked, rp7ClkLocked, rp6ClkLocked, rp5ClkLocked, rp4ClkLocked, rp3ClkLocked, rp2ClkLocked, rp1ClkLocked, rp0ClkLocked, shellClkLocked};
+          s_axi_rdata <= {7'b0, decouple_status, 6'b0, rp8ClkLocked, rp7ClkLocked, rp6ClkLocked, rp5ClkLocked, rp4ClkLocked, rp3ClkLocked, rp2ClkLocked, rp1ClkLocked, rp0ClkLocked, shellClkLocked};
         else if (raddr[15:12] >= 4'd4)
           s_axi_rdata <= RegBits[RdAddrRegBits];
         else
