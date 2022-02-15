@@ -533,7 +533,7 @@ RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH\
 0}}} sig {ID 3 VLNV xilinx.com:signal:interrupt_rtl:1.0 SIGNALS {INTERRUPT\
 {PRESENT 1 WIDTH 1}}} n {ID 2 VLNV xilinx.com:signal:reset_rtl:1.0 MODE\
 slave SIGNALS {RST {PRESENT 1 WIDTH 1}}}}\
-     IPI_PROP_COUNT {1}\
+     IPI_PROP_COUNT {2}\
      ALWAYS_HAVE_AXI_CLK {1}\
    } \
    CONFIG.GUI_INTERFACE_NAME {config} \
@@ -616,7 +616,7 @@ RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH\
 0}}} sig {ID 3 VLNV xilinx.com:signal:interrupt_rtl:1.0 SIGNALS {INTERRUPT\
 {PRESENT 1 WIDTH 1}}} n {ID 2 VLNV xilinx.com:signal:reset_rtl:1.0 MODE\
 slave SIGNALS {RST {PRESENT 1 WIDTH 1}}}}\
-     IPI_PROP_COUNT {1}\
+     IPI_PROP_COUNT {2}\
      ALWAYS_HAVE_AXI_CLK {1}\
    } \
    CONFIG.GUI_INTERFACE_NAME {config} \
@@ -1026,6 +1026,7 @@ proc create_hier_cell_static_shell { parentCell nameHier } {
   # Create instance: smartconnect_0, and set properties
   set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
   set_property -dict [ list \
+   CONFIG.NUM_CLKS {2} \
    CONFIG.NUM_MI {3} \
    CONFIG.NUM_SI {1} \
  ] $smartconnect_0
@@ -1810,10 +1811,10 @@ sclk_out#miso_mo1#mo2#mo3#mosi_mi0#n_ss_out#sclk_out#gpio0[7]#gpio0[8]#n_ss_out[
    CONFIG.PSU__CRL_APB__PL0_REF_CTRL__DIVISOR1 {1} \
    CONFIG.PSU__CRL_APB__PL0_REF_CTRL__FREQMHZ {250} \
    CONFIG.PSU__CRL_APB__PL0_REF_CTRL__SRCSEL {IOPLL} \
-   CONFIG.PSU__CRL_APB__PL1_REF_CTRL__ACT_FREQMHZ {33.333000} \
-   CONFIG.PSU__CRL_APB__PL1_REF_CTRL__DIVISOR0 {45} \
+   CONFIG.PSU__CRL_APB__PL1_REF_CTRL__ACT_FREQMHZ {59.999401} \
+   CONFIG.PSU__CRL_APB__PL1_REF_CTRL__DIVISOR0 {25} \
    CONFIG.PSU__CRL_APB__PL1_REF_CTRL__DIVISOR1 {1} \
-   CONFIG.PSU__CRL_APB__PL1_REF_CTRL__FREQMHZ {33.333333} \
+   CONFIG.PSU__CRL_APB__PL1_REF_CTRL__FREQMHZ {60} \
    CONFIG.PSU__CRL_APB__PL1_REF_CTRL__SRCSEL {RPLL} \
    CONFIG.PSU__CRL_APB__PL2_REF_CTRL__ACT_FREQMHZ {249.997498} \
    CONFIG.PSU__CRL_APB__PL2_REF_CTRL__DIVISOR0 {6} \
@@ -2660,8 +2661,8 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   connect_bd_net -net siha_manager_0_slot1_clken [get_bd_pins clk_reset_gen/rp1_decouple_n] [get_bd_pins dfx_decoupler/rp1_decouple_n]
   connect_bd_net -net vcu_0_vcu_host_interrupt [get_bd_pins VCU/vcu_host_interrupt] [get_bd_pins xlconcat_0/In2]
   connect_bd_net -net xlconcat_0_dout [get_bd_pins xlconcat_0/dout] [get_bd_pins zynq_ultra_ps_e_0/pl_ps_irq0]
-  connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0 [get_bd_pins VCU/s_axi_lite_aclk] [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins clk_reset_gen/pl_clk0] [get_bd_pins sc_rm_cfg/aclk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins zynq_ultra_ps_e_0/maxihpm0_fpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/maxihpm0_lpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/pl_clk0]
-  connect_bd_net -net zynq_ultra_ps_e_0_pl_clk1 [get_bd_pins VCU/pll_ref_clk] [get_bd_pins zynq_ultra_ps_e_0/pl_clk1]
+  connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0 [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins clk_reset_gen/pl_clk0] [get_bd_pins sc_rm_cfg/aclk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins zynq_ultra_ps_e_0/maxihpm0_fpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/maxihpm0_lpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/pl_clk0]
+  connect_bd_net -net zynq_ultra_ps_e_0_pl_clk1 [get_bd_pins VCU/pll_ref_clk] [get_bd_pins VCU/s_axi_lite_aclk] [get_bd_pins smartconnect_0/aclk1] [get_bd_pins zynq_ultra_ps_e_0/pl_clk1]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_clk2 [get_bd_pins clk_reset_gen/pl_clk2] [get_bd_pins zynq_ultra_ps_e_0/pl_clk2]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_clk3 [get_bd_pins clk_reset_gen/pl_clk3] [get_bd_pins zynq_ultra_ps_e_0/pl_clk3]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_resetn0 [get_bd_pins clk_reset_gen/pl_resetn0] [get_bd_pins zynq_ultra_ps_e_0/pl_resetn0]
