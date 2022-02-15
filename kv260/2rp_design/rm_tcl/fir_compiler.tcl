@@ -15,16 +15,16 @@ proc cr_bd_FIR_compiler { parentCell designName} {
   set bCheckIPs 1
   if { $bCheckIPs == 1 } {
      set list_check_ips "\ 
-  user.org:user:AccelConfig:*\
-  xilinx.com:ip:axis_dwidth_converter:*\
-  xilinx.com:ip:fir_compiler:*\
-  user.org:user:outputbits_selector_v1_0:*\
-  xilinx.com:ip:proc_sys_reset:*\
-  user.org:user:rm_comm_box:*\
-  xilinx.com:ip:smartconnect:*\
-  xilinx.com:ip:xlconstant:*\
-  xilinx.com:ip:xlconcat:*\
-  xilinx.com:ip:xlslice:*\
+  user.org:user:AccelConfig:1.0\
+  xilinx.com:ip:axis_dwidth_converter:1.1\
+  xilinx.com:ip:fir_compiler:7.2\
+  user.org:user:outputbits_selector_v1_0:1.0\
+  xilinx.com:ip:proc_sys_reset:5.0\
+  user.org:user:rm_comm_box:1.0\
+  xilinx.com:ip:smartconnect:1.0\
+  xilinx.com:ip:xlconstant:1.1\
+  xilinx.com:ip:xlconcat:2.1\
+  xilinx.com:ip:xlslice:1.0\
   "
 
    set list_ips_missing ""
@@ -91,13 +91,13 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   create_bd_pin -dir O -from 63 -to 0 dout_0
 
   # Create instance: xlconcat_0, and set properties
-  set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat xlconcat_0 ]
+  set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
   set_property -dict [ list \
    CONFIG.NUM_PORTS {4} \
  ] $xlconcat_0
 
   # Create instance: xlslice_0, and set properties
-  set xlslice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice xlslice_0 ]
+  set xlslice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 xlslice_0 ]
   set_property -dict [ list \
    CONFIG.DIN_FROM {15} \
    CONFIG.DIN_WIDTH {128} \
@@ -105,7 +105,7 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
  ] $xlslice_0
 
   # Create instance: xlslice_1, and set properties
-  set xlslice_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice xlslice_1 ]
+  set xlslice_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 xlslice_1 ]
   set_property -dict [ list \
    CONFIG.DIN_FROM {47} \
    CONFIG.DIN_TO {32} \
@@ -114,7 +114,7 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
  ] $xlslice_1
 
   # Create instance: xlslice_2, and set properties
-  set xlslice_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice xlslice_2 ]
+  set xlslice_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 xlslice_2 ]
   set_property -dict [ list \
    CONFIG.DIN_FROM {79} \
    CONFIG.DIN_TO {64} \
@@ -123,7 +123,7 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
  ] $xlslice_2
 
   # Create instance: xlslice_3, and set properties
-  set xlslice_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice xlslice_3 ]
+  set xlslice_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 xlslice_3 ]
   set_property -dict [ list \
    CONFIG.DIN_FROM {111} \
    CONFIG.DIN_TO {96} \
@@ -219,7 +219,7 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   set resetn [ create_bd_port -dir I -type rst resetn ]
 
   # Create instance: AccelConfig_0, and set properties
-  set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig AccelConfig_0 ]
+  set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig:1.0 AccelConfig_0 ]
   set_property -dict [ list \
    CONFIG.HAS_SCALAR_OUTPUT {0} \
    CONFIG.HAS_TID1_AXIS_OUTPUT {1} \
@@ -228,28 +228,26 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
  ] $AccelConfig_0
 
   # Create instance: axis_dwidth_converter_0, and set properties
-  set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_0 ]
+  set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_0 ]
 
   # Create instance: fir_compiler_0, and set properties
-  set fir_compiler_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fir_compiler fir_compiler_0 ]
+  set fir_compiler_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fir_compiler:7.2 fir_compiler_0 ]
   set_property -dict [ list \
    CONFIG.Clock_Frequency {250} \
    CONFIG.CoefficientVector {\
--23,-12,-11,-6,4,16,30,42,49,48,38,17,-11,-42,-72,-94,-103,-96,-71,-33,14,61,100,123,125,107,73,29,-12,-42,-52,-40,-8,36,79,107,109,75,7,-87,-193,-290,-357,-376,-339,-248,-114,39,184,296,353,347,284,183,75,-7,-32,17,141,321,517,679,752,692,473,97,-402,-959,-1491,-1905,-2118,-2070,-1738,-1142,-345,552,1430,2167,2657,2828,2657,2167,1430,552,-345,-1142,-1738,-2070,-2118,-1905,-1491,-959,-402,97,473,692,752,679,517,321,141,17,-32,-7,75,183,284,347,353,296,184,39,-114,-248,-339,-376,-357,-290,-193,-87,7,75,109,107,79,36,-8,-40,-52,-42,-12,29,73,107,125,123,100,61,14,-33,-71,-96,-103,-94,-72,-42,-11,17,38,48,49,42,30,16,4,-6,-11,-12,-23} \
+-211,-102,-99,-73,-27,32,95,146,171,162,114,34,-62,-152,-208,-206,-129,26,243,492,726,894,944,840,566,135,-411,-1001,-1549,-1964,-2166,-2101,-1751,-1141,-336,563,1438,2169,2654,2823,2654,2169,1438,563,-336,-1141,-1751,-2101,-2166,-1964,-1549,-1001,-411,135,566,840,944,894,726,492,243,26,-129,-206,-208,-152,-62,34,114,162,171,146,95,32,-27,-73,-99,-102,-211} \
    CONFIG.Coefficient_Fractional_Bits {0} \
    CONFIG.Coefficient_Reload {true} \
    CONFIG.Coefficient_Sets {1} \
    CONFIG.Coefficient_Sign {Signed} \
    CONFIG.Coefficient_Structure {Inferred} \
    CONFIG.Coefficient_Width {16} \
-   CONFIG.ColumnConfig {40,40} \
+   CONFIG.ColumnConfig {40} \
    CONFIG.DATA_Has_TLAST {Packet_Framing} \
    CONFIG.Data_Width {16} \
    CONFIG.Filter_Architecture {Systolic_Multiply_Accumulate} \
    CONFIG.Has_ARESETn {true} \
-   CONFIG.Inter_Column_Pipe_Length {1} \
    CONFIG.M_DATA_Has_TREADY {true} \
-   CONFIG.Multi_Column_Support {Custom} \
    CONFIG.Output_Rounding_Mode {Truncate_LSBs} \
    CONFIG.Output_Width {33} \
    CONFIG.Quantization {Integer_Coefficients} \
@@ -259,16 +257,16 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
  ] $fir_compiler_0
 
   # Create instance: outputbits_selector_0, and set properties
-  set outputbits_selector_0 [ create_bd_cell -type ip -vlnv user.org:user:outputbits_selector_v1_0 outputbits_selector_0 ]
+  set outputbits_selector_0 [ create_bd_cell -type ip -vlnv user.org:user:outputbits_selector_v1_0:1.0 outputbits_selector_0 ]
 
   # Create instance: proc_sys_reset_0, and set properties
-  set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset proc_sys_reset_0 ]
+  set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
 
   # Create instance: rm_comm_box_0, and set properties
-  set rm_comm_box_0 [ create_bd_cell -type ip -vlnv user.org:user:rm_comm_box rm_comm_box_0 ]
+  set rm_comm_box_0 [ create_bd_cell -type ip -vlnv user.org:user:rm_comm_box:1.0 rm_comm_box_0 ]
 
   # Create instance: smartconnect_0, and set properties
-  set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect smartconnect_0 ]
+  set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
   set_property -dict [ list \
    CONFIG.NUM_MI {2} \
    CONFIG.NUM_SI {1} \
@@ -278,7 +276,7 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   create_hier_cell_tdata_instripe [current_bd_instance .] tdata_instripe
 
   # Create instance: xlconstant_0, and set properties
-  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant xlconstant_0 ]
+  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
 
   # Create interface connections
   connect_bd_intf_net -intf_net AccelConfig_0_out_v [get_bd_intf_pins AccelConfig_0/out_v] [get_bd_intf_pins fir_compiler_0/S_AXIS_DATA]
@@ -292,6 +290,7 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
   connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/in_v] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
   connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi] [get_bd_intf_pins smartconnect_0/M00_AXI]
+  connect_bd_intf_net -intf_net smartconnect_0_M01_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M01_AXI]
 
   # Create port connections
   connect_bd_net -net AccelConfig_0_interrupt1 [get_bd_ports interrupt] [get_bd_pins AccelConfig_0/interrupt]
@@ -306,9 +305,9 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   connect_bd_net -net xlconstant_0_dout [get_bd_pins AccelConfig_0/AccelIdle] [get_bd_pins AccelConfig_0/AccelReady] [get_bd_pins xlconstant_0/dout]
 
   # Create address segments
-  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -offset 0xB0000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi/reg0] -force
-  assign_bd_address -offset 0xB1000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
+  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -offset 0x80000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi/reg0] -force
+  assign_bd_address -offset 0x81000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
 
   set_property USAGE memory [get_bd_addr_segs M_AXI_GMEM/Reg]
 

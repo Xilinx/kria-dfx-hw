@@ -15,18 +15,18 @@ proc cr_bd_FFT_4channel { parentCell designName} {
   set bCheckIPs 1
   if { $bCheckIPs == 1 } {
      set list_check_ips "\ 
-  user.org:user:AccelConfig:*\
-  xilinx.com:ip:xlconstant:*\
-  xilinx.com:ip:proc_sys_reset:*\
-  user.org:user:rm_comm_box:*\
-  xilinx.com:ip:smartconnect:*\
-  user.org:user:channelSelectLogic:*\
-  xilinx:hls:gather:*\
-  xilinx:hls:scatter:*\
-  user.org:user:axisMask:*\
-  xilinx.com:ip:axis_dwidth_converter:*\
-  xilinx.com:ip:xfft:*\
-  xilinx.com:ip:axis_data_fifo:*\
+  user.org:user:AccelConfig:1.0\
+  xilinx.com:ip:xlconstant:1.1\
+  xilinx.com:ip:proc_sys_reset:5.0\
+  user.org:user:rm_comm_box:1.0\
+  xilinx.com:ip:smartconnect:1.0\
+  user.org:user:channelSelectLogic:1.0\
+  xilinx:hls:gather:1.0\
+  xilinx:hls:scatter:1.0\
+  user.org:user:axisMask:1.0\
+  xilinx.com:ip:axis_dwidth_converter:1.1\
+  xilinx.com:ip:xfft:9.1\
+  xilinx.com:ip:axis_data_fifo:2.0\
   "
 
    set list_ips_missing ""
@@ -109,28 +109,28 @@ proc create_hier_cell_Fifo1 { parentCell nameHier } {
   create_bd_pin -dir I -type rst s_axis_aresetn_0
 
   # Create instance: axis_data_fifo_0, and set properties
-  set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo axis_data_fifo_0 ]
+  set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
    CONFIG.FIFO_DEPTH {4096} \
    CONFIG.FIFO_MEMORY_TYPE {ultra} \
  ] $axis_data_fifo_0
 
   # Create instance: axis_data_fifo_1, and set properties
-  set axis_data_fifo_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo axis_data_fifo_1 ]
+  set axis_data_fifo_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_1 ]
   set_property -dict [ list \
    CONFIG.FIFO_DEPTH {4096} \
    CONFIG.FIFO_MEMORY_TYPE {ultra} \
  ] $axis_data_fifo_1
 
   # Create instance: axis_data_fifo_2, and set properties
-  set axis_data_fifo_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo axis_data_fifo_2 ]
+  set axis_data_fifo_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_2 ]
   set_property -dict [ list \
    CONFIG.FIFO_DEPTH {4096} \
    CONFIG.FIFO_MEMORY_TYPE {ultra} \
  ] $axis_data_fifo_2
 
   # Create instance: axis_data_fifo_3, and set properties
-  set axis_data_fifo_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo axis_data_fifo_3 ]
+  set axis_data_fifo_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_3 ]
   set_property -dict [ list \
    CONFIG.FIFO_DEPTH {4096} \
    CONFIG.FIFO_MEMORY_TYPE {ultra} \
@@ -211,28 +211,28 @@ proc create_hier_cell_Fifo { parentCell nameHier } {
   create_bd_pin -dir I -type rst s_axis_aresetn_0
 
   # Create instance: axis_data_fifo_0, and set properties
-  set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo axis_data_fifo_0 ]
+  set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
    CONFIG.FIFO_DEPTH {4096} \
    CONFIG.FIFO_MEMORY_TYPE {ultra} \
  ] $axis_data_fifo_0
 
   # Create instance: axis_data_fifo_1, and set properties
-  set axis_data_fifo_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo axis_data_fifo_1 ]
+  set axis_data_fifo_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_1 ]
   set_property -dict [ list \
    CONFIG.FIFO_DEPTH {4096} \
    CONFIG.FIFO_MEMORY_TYPE {ultra} \
  ] $axis_data_fifo_1
 
   # Create instance: axis_data_fifo_2, and set properties
-  set axis_data_fifo_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo axis_data_fifo_2 ]
+  set axis_data_fifo_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_2 ]
   set_property -dict [ list \
    CONFIG.FIFO_DEPTH {4096} \
    CONFIG.FIFO_MEMORY_TYPE {ultra} \
  ] $axis_data_fifo_2
 
   # Create instance: axis_data_fifo_3, and set properties
-  set axis_data_fifo_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo axis_data_fifo_3 ]
+  set axis_data_fifo_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_3 ]
   set_property -dict [ list \
    CONFIG.FIFO_DEPTH {4096} \
    CONFIG.FIFO_MEMORY_TYPE {ultra} \
@@ -309,10 +309,10 @@ proc create_hier_cell_FFTBlock3 { parentCell nameHier } {
   create_bd_pin -dir O -type intr event_tlast_unexpected
 
   # Create instance: axisMask_1, and set properties
-  set axisMask_1 [ create_bd_cell -type ip -vlnv user.org:user:axisMask axisMask_1 ]
+  set axisMask_1 [ create_bd_cell -type ip -vlnv user.org:user:axisMask:1.0 axisMask_1 ]
 
   # Create instance: axis_dwidth_converter_0, and set properties
-  set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_0 ]
+  set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_0 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {1} \
    CONFIG.HAS_TLAST {1} \
@@ -320,7 +320,7 @@ proc create_hier_cell_FFTBlock3 { parentCell nameHier } {
  ] $axis_dwidth_converter_0
 
   # Create instance: axis_dwidth_converter_1, and set properties
-  set axis_dwidth_converter_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_1 ]
+  set axis_dwidth_converter_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_1 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {0} \
    CONFIG.HAS_TLAST {1} \
@@ -329,7 +329,7 @@ proc create_hier_cell_FFTBlock3 { parentCell nameHier } {
  ] $axis_dwidth_converter_1
 
   # Create instance: axis_dwidth_converter_3, and set properties
-  set axis_dwidth_converter_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_3 ]
+  set axis_dwidth_converter_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_3 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {0} \
    CONFIG.HAS_TLAST {1} \
@@ -338,7 +338,7 @@ proc create_hier_cell_FFTBlock3 { parentCell nameHier } {
  ] $axis_dwidth_converter_3
 
   # Create instance: xfft_0, and set properties
-  set xfft_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xfft xfft_0 ]
+  set xfft_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xfft:9.1 xfft_0 ]
   set_property -dict [ list \
    CONFIG.butterfly_type {use_xtremedsp_slices} \
    CONFIG.complex_mult_type {use_mults_performance} \
@@ -426,10 +426,10 @@ proc create_hier_cell_FFTBlock2 { parentCell nameHier } {
   create_bd_pin -dir O -type intr event_tlast_unexpected
 
   # Create instance: axisMask_1, and set properties
-  set axisMask_1 [ create_bd_cell -type ip -vlnv user.org:user:axisMask axisMask_1 ]
+  set axisMask_1 [ create_bd_cell -type ip -vlnv user.org:user:axisMask:1.0 axisMask_1 ]
 
   # Create instance: axis_dwidth_converter_0, and set properties
-  set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_0 ]
+  set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_0 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {1} \
    CONFIG.HAS_TLAST {1} \
@@ -437,7 +437,7 @@ proc create_hier_cell_FFTBlock2 { parentCell nameHier } {
  ] $axis_dwidth_converter_0
 
   # Create instance: axis_dwidth_converter_1, and set properties
-  set axis_dwidth_converter_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_1 ]
+  set axis_dwidth_converter_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_1 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {0} \
    CONFIG.HAS_TLAST {1} \
@@ -446,7 +446,7 @@ proc create_hier_cell_FFTBlock2 { parentCell nameHier } {
  ] $axis_dwidth_converter_1
 
   # Create instance: axis_dwidth_converter_3, and set properties
-  set axis_dwidth_converter_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_3 ]
+  set axis_dwidth_converter_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_3 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {0} \
    CONFIG.HAS_TLAST {1} \
@@ -455,7 +455,7 @@ proc create_hier_cell_FFTBlock2 { parentCell nameHier } {
  ] $axis_dwidth_converter_3
 
   # Create instance: xfft_0, and set properties
-  set xfft_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xfft xfft_0 ]
+  set xfft_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xfft:9.1 xfft_0 ]
   set_property -dict [ list \
    CONFIG.butterfly_type {use_xtremedsp_slices} \
    CONFIG.complex_mult_type {use_mults_performance} \
@@ -543,10 +543,10 @@ proc create_hier_cell_FFTBlock1 { parentCell nameHier } {
   create_bd_pin -dir O -type intr event_tlast_unexpected
 
   # Create instance: axisMask_1, and set properties
-  set axisMask_1 [ create_bd_cell -type ip -vlnv user.org:user:axisMask axisMask_1 ]
+  set axisMask_1 [ create_bd_cell -type ip -vlnv user.org:user:axisMask:1.0 axisMask_1 ]
 
   # Create instance: axis_dwidth_converter_0, and set properties
-  set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_0 ]
+  set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_0 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {1} \
    CONFIG.HAS_TLAST {1} \
@@ -554,7 +554,7 @@ proc create_hier_cell_FFTBlock1 { parentCell nameHier } {
  ] $axis_dwidth_converter_0
 
   # Create instance: axis_dwidth_converter_1, and set properties
-  set axis_dwidth_converter_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_1 ]
+  set axis_dwidth_converter_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_1 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {0} \
    CONFIG.HAS_TLAST {1} \
@@ -563,7 +563,7 @@ proc create_hier_cell_FFTBlock1 { parentCell nameHier } {
  ] $axis_dwidth_converter_1
 
   # Create instance: axis_dwidth_converter_3, and set properties
-  set axis_dwidth_converter_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_3 ]
+  set axis_dwidth_converter_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_3 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {0} \
    CONFIG.HAS_TLAST {1} \
@@ -572,7 +572,7 @@ proc create_hier_cell_FFTBlock1 { parentCell nameHier } {
  ] $axis_dwidth_converter_3
 
   # Create instance: xfft_0, and set properties
-  set xfft_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xfft xfft_0 ]
+  set xfft_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xfft:9.1 xfft_0 ]
   set_property -dict [ list \
    CONFIG.butterfly_type {use_xtremedsp_slices} \
    CONFIG.complex_mult_type {use_mults_performance} \
@@ -660,10 +660,10 @@ proc create_hier_cell_FFTBlock { parentCell nameHier } {
   create_bd_pin -dir O -type intr event_tlast_unexpected
 
   # Create instance: axisMask_1, and set properties
-  set axisMask_1 [ create_bd_cell -type ip -vlnv user.org:user:axisMask axisMask_1 ]
+  set axisMask_1 [ create_bd_cell -type ip -vlnv user.org:user:axisMask:1.0 axisMask_1 ]
 
   # Create instance: axis_dwidth_converter_0, and set properties
-  set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_0 ]
+  set axis_dwidth_converter_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_0 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {1} \
    CONFIG.HAS_TLAST {1} \
@@ -671,7 +671,7 @@ proc create_hier_cell_FFTBlock { parentCell nameHier } {
  ] $axis_dwidth_converter_0
 
   # Create instance: axis_dwidth_converter_1, and set properties
-  set axis_dwidth_converter_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_1 ]
+  set axis_dwidth_converter_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_1 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {0} \
    CONFIG.HAS_TLAST {1} \
@@ -680,7 +680,7 @@ proc create_hier_cell_FFTBlock { parentCell nameHier } {
  ] $axis_dwidth_converter_1
 
   # Create instance: axis_dwidth_converter_3, and set properties
-  set axis_dwidth_converter_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter axis_dwidth_converter_3 ]
+  set axis_dwidth_converter_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 axis_dwidth_converter_3 ]
   set_property -dict [ list \
    CONFIG.HAS_MI_TKEEP {0} \
    CONFIG.HAS_TLAST {1} \
@@ -689,7 +689,7 @@ proc create_hier_cell_FFTBlock { parentCell nameHier } {
  ] $axis_dwidth_converter_3
 
   # Create instance: xfft_0, and set properties
-  set xfft_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xfft xfft_0 ]
+  set xfft_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xfft:9.1 xfft_0 ]
   set_property -dict [ list \
    CONFIG.butterfly_type {use_xtremedsp_slices} \
    CONFIG.complex_mult_type {use_mults_performance} \
@@ -801,7 +801,7 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
   create_hier_cell_Fifo1 $hier_obj Fifo1
 
   # Create instance: axis_interconnect_0, and set properties
-  set axis_interconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_interconnect axis_interconnect_0 ]
+  set axis_interconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_interconnect:2.1 axis_interconnect_0 ]
   set_property -dict [ list \
    CONFIG.ARB_ON_TLAST {0} \
    CONFIG.M00_FIFO_DEPTH {0} \
@@ -817,7 +817,7 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
  ] $axis_interconnect_0
 
   # Create instance: axis_interconnect_1, and set properties
-  set axis_interconnect_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_interconnect axis_interconnect_1 ]
+  set axis_interconnect_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_interconnect:2.1 axis_interconnect_1 ]
   set_property -dict [ list \
    CONFIG.ARB_ALGORITHM {3} \
    CONFIG.ARB_ON_MAX_XFERS {1024} \
@@ -836,13 +836,13 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
  ] $axis_interconnect_1
 
   # Create instance: channelSelectLogic_1, and set properties
-  set channelSelectLogic_1 [ create_bd_cell -type ip -vlnv user.org:user:channelSelectLogic channelSelectLogic_1 ]
+  set channelSelectLogic_1 [ create_bd_cell -type ip -vlnv user.org:user:channelSelectLogic:1.0 channelSelectLogic_1 ]
 
   # Create instance: gather_0, and set properties
-  set gather_0 [ create_bd_cell -type ip -vlnv xilinx:hls:gather gather_0 ]
+  set gather_0 [ create_bd_cell -type ip -vlnv xilinx:hls:gather:1.0 gather_0 ]
 
   # Create instance: scatter_0, and set properties
-  set scatter_0 [ create_bd_cell -type ip -vlnv xilinx:hls:scatter scatter_0 ]
+  set scatter_0 [ create_bd_cell -type ip -vlnv xilinx:hls:scatter:1.0 scatter_0 ]
 
   # Create interface connections
   connect_bd_intf_net -intf_net FFTBlock1_M_AXIS [get_bd_intf_pins FFTBlock1/M_AXIS] [get_bd_intf_pins Fifo/S_AXIS_1]
@@ -987,7 +987,7 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
   set resetn [ create_bd_port -dir I -type rst resetn ]
 
   # Create instance: AccelConfig_0, and set properties
-  set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig AccelConfig_0 ]
+  set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig:1.0 AccelConfig_0 ]
   set_property -dict [ list \
    CONFIG.HAS_SCALAR_OUTPUT {0} \
    CONFIG.HAS_TID1_AXIS_OUTPUT {1} \
@@ -1000,21 +1000,20 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
   create_hier_cell_FFTWithScatterGather [current_bd_instance .] FFTWithScatterGather
 
   # Create instance: RMHang_0, and set properties
-  set RMHang_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant RMHang_0 ]
+  set RMHang_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 RMHang_0 ]
   set_property -dict [ list \
    CONFIG.CONST_VAL {0} \
  ] $RMHang_0
 
   # Create instance: proc_sys_reset_0, and set properties
-  set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset proc_sys_reset_0 ]
+  set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
 
   # Create instance: rm_comm_box_0, and set properties
-  set rm_comm_box_0 [ create_bd_cell -type ip -vlnv user.org:user:rm_comm_box rm_comm_box_0 ]
+  set rm_comm_box_0 [ create_bd_cell -type ip -vlnv user.org:user:rm_comm_box:1.0 rm_comm_box_0 ]
 
   # Create instance: smartconnect_0, and set properties
-  set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect smartconnect_0 ]
+  set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
   set_property -dict [ list \
-   CONFIG.NUM_CLKS {1} \
    CONFIG.NUM_MI {2} \
    CONFIG.NUM_SI {1} \
  ] $smartconnect_0
@@ -1033,19 +1032,19 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
   connect_bd_intf_net -intf_net smartconnect_0_M01_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M01_AXI]
 
   # Create port connections
+  connect_bd_net -net ARESETN_1 [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net AccelConfig_0_interrupt2 [get_bd_ports interrupt] [get_bd_pins AccelConfig_0/interrupt]
   connect_bd_net -net RMHang_0_dout [get_bd_pins AccelConfig_0/RMHang] [get_bd_pins RMHang_0/dout]
   connect_bd_net -net clk_3 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins FFTWithScatterGather/clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
-  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AccelConfig_0/resetn] [get_bd_pins FFTWithScatterGather/resetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
   connect_bd_net -net rm_comm_box_0_ap_done_mm2s [get_bd_pins AccelConfig_0/mm2sDone] [get_bd_pins rm_comm_box_0/ap_done_mm2s]
   connect_bd_net -net rm_comm_box_0_ap_done_s2mm [get_bd_pins AccelConfig_0/s2mmDone] [get_bd_pins rm_comm_box_0/ap_done_s2mm]
   connect_bd_net -net static_shell_rp2_resetn [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
 
   # Create address segments
-  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -offset 0xB0000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi/reg0] -force
-  assign_bd_address -offset 0xB1000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
+  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -offset 0x80000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi/reg0] -force
+  assign_bd_address -offset 0x81000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
 
   set_property USAGE memory [get_bd_addr_segs M_AXI_GMEM/Reg]
 
