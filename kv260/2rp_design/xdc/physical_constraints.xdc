@@ -45,14 +45,10 @@ set_property SNAPPING_MODE ON [get_pblocks pblock_static]
 
 
 create_pblock pblock_shim_rp_0
-add_cells_to_pblock pblock_shim_rp_0 [get_cells -quiet [list opendfx_shell_i/static_shell/sc_data/axi_clock_converter_0 \
-opendfx_shell_i/static_shell/sc_rm_cfg/axi_clock_converter_0 \
-opendfx_shell_i/static_shell/dfx_decoupler/dfx_decoupler_0]]
+add_cells_to_pblock pblock_shim_rp_0 [get_cells -quiet [list opendfx_shell_i/static_shell/shim_rp0]]
 resize_pblock pblock_shim_rp_0 -add SLICE_X16Y5:SLICE_X17Y114
 
 create_pblock pblock_shim_rp_1
-add_cells_to_pblock pblock_shim_rp_1 [get_cells -quiet [list opendfx_shell_i/static_shell/sc_data/axi_clock_converter_1 \
-opendfx_shell_i/static_shell/sc_rm_cfg/axi_clock_converter_1 \
-opendfx_shell_i/static_shell/dfx_decoupler/dfx_decoupler_1]]
+add_cells_to_pblock pblock_shim_rp_1 [get_cells -quiet [list opendfx_shell_i/static_shell/shim_rp1]]
 resize_pblock pblock_shim_rp_1 -add SLICE_X16Y125:SLICE_X17Y234
 
