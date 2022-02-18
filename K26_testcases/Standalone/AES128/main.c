@@ -141,7 +141,7 @@ int main(void){
 	compare(0x200000, OUTDATAADDRESS[1], INDATAADDRESS[1]);
 
 	printf("all done \n");
-    cleanup_platform();
+        cleanup_platform();
 	return XST_SUCCESS;
 }
 
