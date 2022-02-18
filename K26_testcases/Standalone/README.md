@@ -1,16 +1,10 @@
 # Build tests
 
-first set environment for vitis. 
+First set environment for vitis. 
 
-to do this on a development server open bash prompt and run 
-
-source <repo>/zu/software/environment.sh
-
-Then 
+To do this on a development server open bash prompt and run 
 
 xsct buildAES128.tcl
-
-xsct buildAES192.tcl
 
 xsct buildFFT.tcl
 
@@ -19,11 +13,9 @@ xsct buildFIR.tcl
 # Run tests
 
 
-For running tests run following scripts in xsdb prompt.
+For running tests run following scripts in xsdb prompt on board.
 
 source testAES128.tcl
-
-source testAES192.tcl
 
 source testFFT.tcl
 
