@@ -235,19 +235,21 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   set_property -dict [ list \
    CONFIG.Clock_Frequency {250} \
    CONFIG.CoefficientVector {\
--211,-102,-99,-73,-27,32,95,146,171,162,114,34,-62,-152,-208,-206,-129,26,243,492,726,894,944,840,566,135,-411,-1001,-1549,-1964,-2166,-2101,-1751,-1141,-336,563,1438,2169,2654,2823,2654,2169,1438,563,-336,-1141,-1751,-2101,-2166,-1964,-1549,-1001,-411,135,566,840,944,894,726,492,243,26,-129,-206,-208,-152,-62,34,114,162,171,146,95,32,-27,-73,-99,-102,-211} \
+-23,-12,-11,-6,4,16,30,42,49,48,38,17,-11,-42,-72,-94,-103,-96,-71,-33,14,61,100,123,125,107,73,29,-12,-42,-52,-40,-8,36,79,107,109,75,7,-87,-193,-290,-357,-376,-339,-248,-114,39,184,296,353,347,284,183,75,-7,-32,17,141,321,517,679,752,692,473,97,-402,-959,-1491,-1905,-2118,-2070,-1738,-1142,-345,552,1430,2167,2657,2828,2657,2167,1430,552,-345,-1142,-1738,-2070,-2118,-1905,-1491,-959,-402,97,473,692,752,679,517,321,141,17,-32,-7,75,183,284,347,353,296,184,39,-114,-248,-339,-376,-357,-290,-193,-87,7,75,109,107,79,36,-8,-40,-52,-42,-12,29,73,107,125,123,100,61,14,-33,-71,-96,-103,-94,-72,-42,-11,17,38,48,49,42,30,16,4,-6,-11,-12,-23} \
    CONFIG.Coefficient_Fractional_Bits {0} \
    CONFIG.Coefficient_Reload {true} \
    CONFIG.Coefficient_Sets {1} \
    CONFIG.Coefficient_Sign {Signed} \
    CONFIG.Coefficient_Structure {Inferred} \
    CONFIG.Coefficient_Width {16} \
-   CONFIG.ColumnConfig {40} \
+   CONFIG.ColumnConfig {40,40} \
    CONFIG.DATA_Has_TLAST {Packet_Framing} \
    CONFIG.Data_Width {16} \
    CONFIG.Filter_Architecture {Systolic_Multiply_Accumulate} \
    CONFIG.Has_ARESETn {true} \
+   CONFIG.Inter_Column_Pipe_Length {8} \
    CONFIG.M_DATA_Has_TREADY {true} \
+   CONFIG.Multi_Column_Support {Custom} \
    CONFIG.Output_Rounding_Mode {Truncate_LSBs} \
    CONFIG.Output_Width {33} \
    CONFIG.Quantization {Integer_Coefficients} \
