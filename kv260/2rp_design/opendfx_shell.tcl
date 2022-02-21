@@ -2884,4 +2884,9 @@ create_run child_1_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} 
 create_run child_2_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_4
 #
 launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 -to_step write_bitstream -jobs 16 -cluster_configuration lsf_big
-
+wait_on_run impl_1
+wait_on_run child_0_impl_1
+wait_on_run child_1_impl_1
+wait_on_run child_2_impl_1
+open_run impl_1
+write_hw_platform -fixed -include_bit -force -file ./opendfx_shell_wrapper.xsa
