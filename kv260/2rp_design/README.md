@@ -4,7 +4,7 @@
 - Add the following line to /home/`user`/.Xilinx/Vivado/2022.1/Vivado_init.tcl before launching Vivado(create the file if it doesn't exist)
        	- set_param bd.gen_bda_file 1
         - set_param bitstream.enableMetaData 1
-- Clone the openacap git repository to local sandbox.
+- Clone the git repository to local sandbox.
 	Example: git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
 	
 - Navigate to the directory that you intend to build.
