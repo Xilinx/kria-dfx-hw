@@ -5,10 +5,10 @@
        	- set_param bd.gen_bda_file 1
         - set_param bitstream.enableMetaData 1
 - Clone the openacap git repository to local sandbox.
-	Example: git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git opendfx
+	Example: git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
 	
 - Navigate to the directory that you intend to build.
-	- 2P design -  opendfx/kv260/2rp_design
+	- 2P design -  kria_dfx_hw/kv260/2rp_design
 - To Build both vivado project and platform on development server
         - Open bash shell 
         - make all
