@@ -3,7 +3,7 @@ All steps are given for a development server.
 
 - Clone the opendfx git repository to local sandbox.
 
-	Example: git clone gitenterprise.xilinx.com/SOM/kria_dfx_hw kria_dfx_hw
+	Example: git clone https://gitenterprise.xilinx.com/SOM/kria_dfx_hw.git kria_dfx_hw
 
 # HW Build 
 
