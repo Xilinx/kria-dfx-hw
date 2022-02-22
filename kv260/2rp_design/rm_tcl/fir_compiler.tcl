@@ -22,7 +22,6 @@ proc cr_bd_FIR_compiler { parentCell designName} {
   xilinx.com:ip:proc_sys_reset:5.0\
   user.org:user:rm_comm_box:1.0\
   xilinx.com:ip:smartconnect:1.0\
-  xilinx.com:ip:xlconstant:1.1\
   xilinx.com:ip:xlconcat:2.1\
   xilinx.com:ip:xlslice:1.0\
   "
@@ -221,10 +220,11 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   # Create instance: AccelConfig_0, and set properties
   set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig:1.0 AccelConfig_0 ]
   set_property -dict [ list \
-   CONFIG.HAS_SCALAR_OUTPUT {0} \
-   CONFIG.HAS_TID1_AXIS_OUTPUT {1} \
-   CONFIG.HAS_TID2_AXIS_OUTPUT {1} \
-   CONFIG.HAS_TID3_AXIS_OUTPUT {1} \
+   CONFIG.HAS_AP_CTRL_HS {false} \
+   CONFIG.HAS_TID1_AXIS_OUTPUT {true} \
+   CONFIG.HAS_TID3_AXIS_OUTPUT {true} \
+   CONFIG.NUM_SCALAR_PORTS {0} \
+   CONFIG.SCALAR1_WIDTH {0} \
  ] $AccelConfig_0
 
   # Create instance: axis_dwidth_converter_0, and set properties
@@ -277,11 +277,8 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   # Create instance: tdata_instripe
   create_hier_cell_tdata_instripe [current_bd_instance .] tdata_instripe
 
-  # Create instance: xlconstant_0, and set properties
-  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
-
   # Create interface connections
-  connect_bd_intf_net -intf_net AccelConfig_0_out_v [get_bd_intf_pins AccelConfig_0/out_v] [get_bd_intf_pins fir_compiler_0/S_AXIS_DATA]
+  connect_bd_intf_net -intf_net AccelConfig_0_tid0_axis [get_bd_intf_pins AccelConfig_0/tid0_axis] [get_bd_intf_pins fir_compiler_0/S_AXIS_DATA]
   connect_bd_intf_net -intf_net AccelConfig_0_tid1_axis [get_bd_intf_pins AccelConfig_0/tid1_axis] [get_bd_intf_pins axis_dwidth_converter_0/S_AXIS]
   connect_bd_intf_net -intf_net AccelConfig_0_tid2_axis [get_bd_intf_pins AccelConfig_0/tid2_axis] [get_bd_intf_pins fir_compiler_0/S_AXIS_CONFIG]
   connect_bd_intf_net -intf_net AccelConfig_0_tid3_axis [get_bd_intf_pins AccelConfig_0/tid3_axis] [get_bd_intf_pins outputbits_selector_0/s00_axis]
@@ -290,25 +287,24 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   connect_bd_intf_net -intf_net fir_compiler_0_M_AXIS_DATA [get_bd_intf_pins fir_compiler_0/M_AXIS_DATA] [get_bd_intf_pins outputbits_selector_0/s01_axis]
   connect_bd_intf_net -intf_net outputbits_selector_0_m00_axis [get_bd_intf_pins outputbits_selector_0/m00_axis] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
-  connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/in_v] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
-  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi] [get_bd_intf_pins smartconnect_0/M00_AXI]
+  connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/axis_in] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
+  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi_ctrl] [get_bd_intf_pins smartconnect_0/M00_AXI]
   connect_bd_intf_net -intf_net smartconnect_0_M01_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M01_AXI]
 
   # Create port connections
-  connect_bd_net -net AccelConfig_0_interrupt1 [get_bd_ports interrupt] [get_bd_pins AccelConfig_0/interrupt]
-  connect_bd_net -net AccelConfig_0_out_v_tdata [get_bd_pins AccelConfig_0/out_v_tdata] [get_bd_pins tdata_instripe/Din]
+  connect_bd_net -net AccelConfig_0_interrupt [get_bd_ports interrupt] [get_bd_pins AccelConfig_0/interrupt]
+  connect_bd_net -net AccelConfig_0_tid0_axis_tdata [get_bd_pins AccelConfig_0/tid0_axis_tdata] [get_bd_pins tdata_instripe/Din]
   connect_bd_net -net clk_4 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins axis_dwidth_converter_0/aclk] [get_bd_pins fir_compiler_0/aclk] [get_bd_pins outputbits_selector_0/aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AccelConfig_0/resetn] [get_bd_pins axis_dwidth_converter_0/aresetn] [get_bd_pins fir_compiler_0/aresetn] [get_bd_pins outputbits_selector_0/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
-  connect_bd_net -net rm_comm_box_0_ap_done_mm2s [get_bd_pins AccelConfig_0/mm2sDone] [get_bd_pins rm_comm_box_0/ap_done_mm2s]
-  connect_bd_net -net rm_comm_box_0_ap_done_s2mm [get_bd_pins AccelConfig_0/s2mmDone] [get_bd_pins rm_comm_box_0/ap_done_s2mm]
+  connect_bd_net -net rm_comm_box_0_interrupt_mm2s [get_bd_pins AccelConfig_0/mm2sDone] [get_bd_pins rm_comm_box_0/interrupt_mm2s]
+  connect_bd_net -net rm_comm_box_0_interrupt_s2mm [get_bd_pins AccelConfig_0/s2mmDone] [get_bd_pins rm_comm_box_0/interrupt_s2mm]
   connect_bd_net -net static_shell_rp1_resetn [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
   connect_bd_net -net tdata_stripe_dout_0 [get_bd_pins fir_compiler_0/s_axis_data_tdata] [get_bd_pins tdata_instripe/dout_0]
-  connect_bd_net -net xlconstant_0_dout [get_bd_pins AccelConfig_0/AccelIdle] [get_bd_pins AccelConfig_0/AccelReady] [get_bd_pins xlconstant_0/dout]
 
   # Create address segments
   assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -offset 0x80000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi/reg0] -force
+  assign_bd_address -offset 0x80000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi_ctrl/reg0] -force
   assign_bd_address -offset 0x81000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
 
   set_property USAGE memory [get_bd_addr_segs M_AXI_GMEM/Reg]
