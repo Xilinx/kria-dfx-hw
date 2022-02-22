@@ -121,10 +121,10 @@ output                s_axi_accel_rlast,
 output [7:0]          s_axi_accel_rid,
 output [1:0]          s_axi_accel_rresp,
 
-output                ap_done_s2mm,
-output                ap_done_mm2s
-//output                interrupt_s2mm,
-//output                interrupt_mm2s
+//output                ap_done_s2mm,
+//output                ap_done_mm2s
+output wire           interrupt_s2mm,
+output wire           interrupt_mm2s
 );
 
 wire                s_axi_dma_awvalid;
@@ -249,10 +249,10 @@ dma_wrapper i_dma_wrapper(
 .s_axi_control_BREADY       (s_axi_control_BREADY  ),
 .s_axi_control_BRESP        (s_axi_control_BRESP   ),
 
-.ap_done_s2mm               (ap_done_s2mm),
-.ap_done_mm2s               (ap_done_mm2s),
-.interrupt_s2mm             (), //interrupt_s2mm),
-.interrupt_mm2s             () //interrupt_mm2s)
+.ap_done_s2mm               (), //ap_done_s2mm),
+.ap_done_mm2s               (), //ap_done_mm2s),
+.interrupt_s2mm             (interrupt_s2mm),
+.interrupt_mm2s             (interrupt_mm2s)
 );
 end
 else
