@@ -1,5 +1,5 @@
 set XSA "opendfx_shell_wrapper"
-set PATH "./bitFiles/"
+set PATH "../../kv260/2rp_design/project_1/"
 set SRC "./AES128"
 set SRCM "./src"
 set WS "workspace"
