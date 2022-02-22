@@ -1,5 +1,5 @@
 set XSA "opendfx_shell_wrapper"
-set PATH "./bitFiles/"
+set PATH "../../kv260/2rp_design/project_1/"
 set SRC "./FIR"
 set SRCM "./src"
 set WS "workspace"
@@ -30,12 +30,10 @@ repo -libs
 if {![file exists ${WS}/${APP}]} {
 	puts "Creating APP ....."
 	app create -name ${APP} -domain ${DOMAIN} -template "Empty Application(C)"
-	importsources -name ${APP} -linker-script -path ${SRC}
 	importsources -name ${APP} -linker-script -path ${SRCM}
+	importsources -name ${APP} -path ${SRC}
 } else {
 	puts "APP exists."
 
 }
 app build ${APP} 
-
-
