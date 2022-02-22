@@ -31,12 +31,10 @@ repo -libs
 if {![file exists ${WS}/${APP}]} {
 	puts "Creating APP ....."
 	app create -name ${APP} -domain ${DOMAIN} -template "Empty Application(C)"
-	importsources -name ${APP} -linker-script -path ${SRC}
 	importsources -name ${APP} -linker-script -path ${SRCM}
+	importsources -name ${APP} -path ${SRC}
 } else {
 	puts "APP exists."
 
 }
 app build ${APP} 
-
-
