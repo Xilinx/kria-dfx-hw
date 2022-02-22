@@ -1,8 +1,9 @@
 # Build tests
 
-First set environment for vitis. 
+Set the environment for vitis 2022.1 tool.
+Update the xsa path in the build tcl files. 
 
-To do this on a development server open bash prompt and run 
+On a development server open bash prompt and run 
 
 xsct buildAES128.tcl
 
@@ -12,11 +13,7 @@ xsct buildFIR.tcl
 
 # Run tests
 
-
+Update the bit files, data and elf path for the required RM in the test.tcl. 
 For running tests run following scripts in xsdb prompt on board.
 
-source testAES128.tcl
-
-source testFFT.tcl
-
-source testFIR.tcl
+source test.tcl
