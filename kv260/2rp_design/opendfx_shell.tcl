@@ -2874,9 +2874,9 @@ update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
 
 #Create DFX Configurations
-create_pr_configuration -name config_1 -partitions [list opendfx_shell_i/RP_0:AES128_inst_0 opendfx_shell_i/RP_1:AES128_inst_1 ]
-create_pr_configuration -name config_2 -partitions [list opendfx_shell_i/RP_0:FFT_4channel_inst_1 opendfx_shell_i/RP_1:FFT_4channel_inst_0 ]
-create_pr_configuration -name config_3 -partitions [list opendfx_shell_i/RP_0:FIR_compiler_inst_1 opendfx_shell_i/RP_1:FIR_compiler_inst_0 ]
+create_pr_configuration -name config_1 -partitions [list opendfx_shell_i/RP_0:FIR_compiler_inst_1 opendfx_shell_i/RP_1:FIR_compiler_inst_0 ]
+create_pr_configuration -name config_2 -partitions [list opendfx_shell_i/RP_0:AES128_inst_0 opendfx_shell_i/RP_1:AES128_inst_1 ]
+create_pr_configuration -name config_3 -partitions [list opendfx_shell_i/RP_0:FFT_4channel_inst_1 opendfx_shell_i/RP_1:FFT_4channel_inst_0 ]
 create_pr_configuration -name config_4 -partitions { }  -greyboxes [list opendfx_shell_i/RP_0 opendfx_shell_i/RP_1 ]
 set_property PR_CONFIGURATION config_1 [get_runs impl_1]
 create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_2
