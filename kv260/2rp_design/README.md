@@ -27,7 +27,6 @@ make platform
 
 ## Project build steps for vivado
 
-### bsub 
 ```
 Launch vivado 
 source ./opendfx_shell.tcl 
