@@ -1,6 +1,5 @@
 ## Build Instructions 
-All steps are given for a development server. 
-
+Given design uses 2022.1 Vivado tool.
 - Clone the opendfx git repository to local sandbox.
 
 	Example:  git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
