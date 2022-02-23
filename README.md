@@ -22,4 +22,4 @@ The repository structure is outlined below.
 		* data - Standalone test cases input data
 		* src - Source code
 		* build_RM.tcl - Creates vitis project, source the code, and build elf. 
-
+		* test.tcl - Tcl to test the RM on the board 
