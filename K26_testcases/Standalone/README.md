@@ -1,6 +1,6 @@
 # Build tests
 
-Set the environment for vitis 2022.1 tool.
+Set the environment for 2022.1 Vitis™ unified software platform.
 
 Update the xsa path in the build tcl files. 
 
