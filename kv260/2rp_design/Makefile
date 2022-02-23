@@ -27,11 +27,11 @@ platform_out= ./platform/
 all:	xsa platform
 
 xsa:	$(tcl_file) 
-	/proj/xbuilds/2022.1_daily_latest/installs/lin64/Vivado/2022.1/bin/vivado -mode batch -notrace -source $(tcl_file)	
+	vivado -mode batch -notrace -source $(tcl_file)	
 	@echo 'Project build complete'
 
 platform:	
-	/proj/xbuilds/2022.1_daily_latest/installs/lin64/Vitis/2022.1/bin/xsct -nodisp -sdx ${platformtcl_file} HW_XSA "${HW_XSA}" platform_out "${platform_out}"
+	xsct -nodisp -sdx ${platformtcl_file} HW_XSA "${HW_XSA}" platform_out "${platform_out}"
 	@echo 'Platform build complete'
 
 clean:
