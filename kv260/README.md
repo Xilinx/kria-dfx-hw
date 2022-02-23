@@ -9,7 +9,7 @@ All steps are given for a development server.
 
 1. Go to 2rp_design directory
 ```bash
-bash$: > cd <repo dir>/kv260/2rp_design
+bash$: > cd <repo_dir>/kv260/2rp_design
 ```
 
 2. Launch vivado. 
