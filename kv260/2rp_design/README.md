@@ -1,7 +1,7 @@
 ## Steps to build Vivado project and platform 
 ```
 - Edit the $PATH variable to include vivado 2022.1 tool
-- Add the following line to /home/`user`/.Xilinx/Vivado/2022.1/Vivado_init.tcl before launching Vivado(create the file if it doesn't exist)
+- Add the following line to Vivado_init.tcl before launching Vivado.
        	- set_param bd.gen_bda_file 1
         - set_param bitstream.enableMetaData 1
 - Clone the git repository to local sandbox.
@@ -13,7 +13,6 @@
         - Open bash shell 
         - make all
 ```
-
 ## Vivado Project build
 
 ```bash
