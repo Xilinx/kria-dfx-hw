@@ -1,6 +1,6 @@
 #Update the path for bit and elf files. Given tcl has example of AES128
 connect
-source /proj/xbuilds/2022.1_weekly_latest/installs/lin64/Vitis/2022.1/scripts/vitis/util/zynqmp_utils.tcl
+source <vitis_path>/vitis/util/zynqmp_utils.tcl
 targets -set -nocase -filter {name =~"APU*"}
 rst -system
 after 3000
