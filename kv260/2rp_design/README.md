@@ -26,17 +26,10 @@ make xsa
 make platform
 ```
 
-## Project build steps for vnc
+## Project build steps for vivado
 
 ### bsub 
-
-```bash
-bsub -q long -R "select[type=X86_64&&osver=ws7]" -R "rusage[mem=131072]" -M 262144000 make all
 ```
-OR 
-
-```bash
 Launch vivado 
-bsub -q long -R "select[type=X86_64&&osver=ws7]" -R "rusage[mem=131072]" -M 262144000 /proj/xbuilds/2022.1_daily_latest/installs/lin64/Vivado/2022.1/bin/vivado
 source ./opendfx_shell.tcl 
 ```
