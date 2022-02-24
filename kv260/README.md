@@ -13,8 +13,7 @@ bash$: > cd <repo_dir>/kv260/2rp_design
 
 2. Launch vivado. 
 
-Add the following line to installdir/Vivado/VivadoVersion/scripts/
-Vivado_init.tcl
+Add the following line to installdir/Vivado/VivadoVersion/scripts/Vivado_init.tcl
 
 - set_param bd.gen_bda_file 1
 - set_param bitstream.enableMetaData 1
