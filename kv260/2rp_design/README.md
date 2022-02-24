@@ -18,16 +18,14 @@
 ```bash
 make xsa
 ```
-
-## Platform build
-
-```bash
-make platform
-```
-
 ## Project build steps for vivado
 
 ```
 Launch vivado 
 source ./opendfx_shell.tcl 
+```
+## Platform build
+
+```bash
+make platform
 ```
