@@ -67,7 +67,7 @@ source ./rm_tcl/aes192encdec.tcl
 cr_bd_AES128 "" AES128
 cr_bd_FFT_4channel "" FFT_4channel
 cr_bd_FIR_compiler "" FIR_compiler
-cr_bd_AES128 "" AES192
+cr_bd_AES192 "" AES192
 
 # CHANGE DESIGN NAME HERE
 variable design_name
