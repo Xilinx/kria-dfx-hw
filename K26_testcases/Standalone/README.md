@@ -12,6 +12,8 @@ xsct buildFFT.tcl
 
 xsct buildFIR.tcl
 
+xsct buildAES192.tcl
+
 # Run tests
 
 Update the bit files, data and elf path for the required RM in the test.tcl. 
