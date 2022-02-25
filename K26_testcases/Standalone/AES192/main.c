@@ -147,6 +147,6 @@ int main(void){
 	printBuff(0x100, OUTDATAADDRESS[1]);
 
 	printf("all done \n");
-    cleanup_platform();
+        cleanup_platform();
 	return XST_SUCCESS;
 }
