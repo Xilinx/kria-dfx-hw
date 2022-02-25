@@ -15,14 +15,14 @@ proc cr_bd_AES192 { parentCell designName} {
   set bCheckIPs 1
   if { $bCheckIPs == 1 } {
      set list_check_ips "\ 
-  user.org:user:AES192_Dec:*\
-  user.org:user:AES192_Enc:*\
-  user.org:user:AccelConfig:*\
-  user.org:user:axis_accel_sel:*\
-  xilinx.com:ip:proc_sys_reset:*\
-  user.org:user:rm_comm_box:*\
-  xilinx.com:ip:smartconnect:*\
-  xilinx.com:ip:xlconstant:*\
+  user.org:user:AES192_Dec:1.0\
+  user.org:user:AES192_Enc:1.0\
+  user.org:user:AccelConfig:1.0\
+  user.org:user:axis_accel_sel:1.0\
+  xilinx.com:ip:proc_sys_reset:5.0\
+  user.org:user:rm_comm_box:1.0\
+  xilinx.com:ip:smartconnect:1.0\
+  xilinx.com:ip:xlconstant:1.1\
   "
 
    set list_ips_missing ""
@@ -127,37 +127,43 @@ proc cr_bd_AES192 { parentCell designName} {
   set resetn [ create_bd_port -dir I -type rst resetn ]
 
   # Create instance: AES192_Dec_0, and set properties
-  set AES192_Dec_0 [ create_bd_cell -type ip -vlnv user.org:user:AES192_Dec AES192_Dec_0 ]
+  set AES192_Dec_0 [ create_bd_cell -type ip -vlnv user.org:user:AES192_Dec:1.0 AES192_Dec_0 ]
 
   # Create instance: AES192_Enc_0, and set properties
-  set AES192_Enc_0 [ create_bd_cell -type ip -vlnv user.org:user:AES192_Enc AES192_Enc_0 ]
+  set AES192_Enc_0 [ create_bd_cell -type ip -vlnv user.org:user:AES192_Enc:1.0 AES192_Enc_0 ]
 
   # Create instance: AccelConfig_0, and set properties
-  set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig AccelConfig_0 ]
+  set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig:1.0 AccelConfig_0 ]
   set_property -dict [ list \
+   CONFIG.HAS_TID2_AXIS_OUTPUT {false} \
+   CONFIG.HAS_TID3_AXIS_OUTPUT {false} \
+   CONFIG.HAS_TID4_AXIS_OUTPUT {false} \
+   CONFIG.HAS_TID5_AXIS_OUTPUT {false} \
+   CONFIG.HAS_TID6_AXIS_OUTPUT {false} \
+   CONFIG.HAS_TID7_AXIS_OUTPUT {false} \
    CONFIG.NUM_SCALAR_PORTS {2} \
    CONFIG.SCALAR1_WIDTH {192} \
    CONFIG.SCALAR2_WIDTH {32} \
  ] $AccelConfig_0
 
   # Create instance: axis_accel_sel_0, and set properties
-  set axis_accel_sel_0 [ create_bd_cell -type ip -vlnv user.org:user:axis_accel_sel axis_accel_sel_0 ]
+  set axis_accel_sel_0 [ create_bd_cell -type ip -vlnv user.org:user:axis_accel_sel:1.0 axis_accel_sel_0 ]
 
   # Create instance: proc_sys_reset_0, and set properties
-  set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset proc_sys_reset_0 ]
+  set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
 
   # Create instance: rm_comm_box_0, and set properties
-  set rm_comm_box_0 [ create_bd_cell -type ip -vlnv user.org:user:rm_comm_box rm_comm_box_0 ]
+  set rm_comm_box_0 [ create_bd_cell -type ip -vlnv user.org:user:rm_comm_box:1.0 rm_comm_box_0 ]
 
   # Create instance: smartconnect_0, and set properties
-  set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect smartconnect_0 ]
+  set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
   set_property -dict [ list \
    CONFIG.NUM_MI {2} \
    CONFIG.NUM_SI {1} \
  ] $smartconnect_0
 
   # Create instance: xlconstant_0, and set properties
-  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant xlconstant_0 ]
+  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
   set_property -dict [ list \
    CONFIG.CONST_VAL {0} \
  ] $xlconstant_0
@@ -165,14 +171,11 @@ proc cr_bd_AES192 { parentCell designName} {
   # Create interface connections
   connect_bd_intf_net -intf_net AES192_Dec_0_out_r [get_bd_intf_pins AES192_Dec_0/out_r] [get_bd_intf_pins axis_accel_sel_0/out_V_enc]
   connect_bd_intf_net -intf_net AES192_Enc_0_out_r [get_bd_intf_pins AES192_Enc_0/out_r] [get_bd_intf_pins axis_accel_sel_0/out_V_dec]
-  connect_bd_intf_net -intf_net AccelConfig_0_out_v [get_bd_intf_pins AccelConfig_0/out_v] [get_bd_intf_pins axis_accel_sel_0/in_V]
   connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins smartconnect_0/S00_AXI]
   connect_bd_intf_net -intf_net axis_accel_sel_0_in_V_dec [get_bd_intf_pins AES192_Enc_0/in_r] [get_bd_intf_pins axis_accel_sel_0/in_V_dec]
   connect_bd_intf_net -intf_net axis_accel_sel_0_in_V_enc [get_bd_intf_pins AES192_Dec_0/in_r] [get_bd_intf_pins axis_accel_sel_0/in_V_enc]
   connect_bd_intf_net -intf_net axis_accel_sel_0_out_V [get_bd_intf_pins axis_accel_sel_0/out_V] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
-  connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/in_v] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
-  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi] [get_bd_intf_pins smartconnect_0/M00_AXI]
   connect_bd_intf_net -intf_net smartconnect_0_M01_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M01_AXI]
 
   # Create port connections
@@ -188,14 +191,13 @@ proc cr_bd_AES192 { parentCell designName} {
   connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins AES192_Dec_0/ap_clk] [get_bd_pins AES192_Enc_0/ap_clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins axis_accel_sel_0/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AES192_Dec_0/ap_rst_n] [get_bd_pins AES192_Enc_0/ap_rst_n] [get_bd_pins AccelConfig_0/resetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
-  connect_bd_net -net rm_comm_box_0_ap_done_mm2s [get_bd_pins AccelConfig_0/mm2sDone] [get_bd_pins rm_comm_box_0/ap_done_mm2s]
-  connect_bd_net -net rm_comm_box_0_ap_done_s2mm [get_bd_pins AccelConfig_0/s2mmDone] [get_bd_pins rm_comm_box_0/ap_done_s2mm]
+  connect_bd_net -net rm_comm_box_0_ap_done_mm2s [get_bd_pins AccelConfig_0/mm2sDone]
+  connect_bd_net -net rm_comm_box_0_ap_done_s2mm [get_bd_pins AccelConfig_0/s2mmDone]
   connect_bd_net -net static_shell_rp0_resetn [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
-  connect_bd_net -net xlconstant_0_dout [get_bd_pins AccelConfig_0/AccelIdle] [get_bd_pins AccelConfig_0/AccelReady] [get_bd_pins AccelConfig_0/RMHang] [get_bd_pins xlconstant_0/dout]
+  connect_bd_net -net xlconstant_0_dout [get_bd_pins AccelConfig_0/AccelIdle] [get_bd_pins AccelConfig_0/AccelReady] [get_bd_pins xlconstant_0/dout]
 
   # Create address segments
   assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -offset 0xB0000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi/reg0] -force
   assign_bd_address -offset 0xB1000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
 
   set_property USAGE memory [get_bd_addr_segs M_AXI_GMEM/Reg]
