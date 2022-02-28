@@ -16,7 +16,6 @@ bash$: > cd <repo_dir>/kv260/2rp_design
 Add the following line to installdir/Vivado/VivadoVersion/scripts/Vivado_init.tcl
 
 - set_param bd.gen_bda_file 1
-- set_param bitstream.enableMetaData 1
 
 3. Build Vivado project and platform
 ```bash
