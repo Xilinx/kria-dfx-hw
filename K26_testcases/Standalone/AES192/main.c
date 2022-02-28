@@ -116,18 +116,17 @@ int main(void){
 
 	printf("Slots enabled !!\n");
 
-	writeBuff(decryptedkeybuff, 0x20, CONFIGADDRESS[0]);
-	writeBuff(encryptedkeybuff, 0x20, CONFIGADDRESS[1]);
-	printBuff(0x20,CONFIGADDRESS[0]);
+	writeBuff(encryptedkeybuff, 0x20, CONFIGADDRESS[0]);
+	writeBuff(decryptedkeybuff, 0x20, CONFIGADDRESS[1]);
 
-	configAES(0, CONFIGADDRESS[0]);
+	configAES(0, CONFIGADDRESS[1]);
 	configAES(1, CONFIGADDRESS[0]);
 
 	printf("Config done!!\n");
 	trigger_DMA(0, INDATAADDRESS[0],0x200000,OUTDATAADDRESS[0],0x200000);
 	wait_DMA(0);
 	printf("slot 0 done !!\n");
-	trigger_DMA(1, INDATAADDRESS[0],0x200000,OUTDATAADDRESS[1],0x200000);
+	trigger_DMA(1, INDATAADDRESS[1],0x200000,OUTDATAADDRESS[1],0x200000);
 	wait_DMA(1);
 	printf("slot 1 done !!\n");
 
@@ -135,16 +134,16 @@ int main(void){
 	compare(0x200000, OUTDATAADDRESS[0], INDATAADDRESS[1]);
 
 	printf("comparing slot 1 output with reference ...\n");
-	compare(0x200000, OUTDATAADDRESS[1], INDATAADDRESS[1]);
+	compare(0x200000, OUTDATAADDRESS[1], INDATAADDRESS[0]);
 
-	printf("Input Data ...\n");
-	printBuff(0x100, INDATAADDRESS[0]);
-	printf("Decrypted Reference Data ...\n");
-	printBuff(0x100, INDATAADDRESS[1]);
-	printf(" output Data from Slot 0\n");
-	printBuff(0x100, OUTDATAADDRESS[0]);
-	printf("output Data from Slot 1\n");
-	printBuff(0x100, OUTDATAADDRESS[1]);
+	//printf("Input Data ...\n");
+	//printBuff(0x100, INDATAADDRESS[0]);
+	//printf("Decrypted Reference Data ...\n");
+	//printBuff(0x100, INDATAADDRESS[1]);
+	//printf(" output Data from Slot 0\n");
+	//printBuff(0x100, OUTDATAADDRESS[0]);
+	//printf("output Data from Slot 1\n");
+	//printBuff(0x100, OUTDATAADDRESS[1]);
 
 	printf("all done \n");
         cleanup_platform();
