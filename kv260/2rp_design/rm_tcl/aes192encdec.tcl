@@ -171,11 +171,14 @@ proc cr_bd_AES192 { parentCell designName} {
   # Create interface connections
   connect_bd_intf_net -intf_net AES192_Dec_0_out_r [get_bd_intf_pins AES192_Dec_0/out_r] [get_bd_intf_pins axis_accel_sel_0/out_V_enc]
   connect_bd_intf_net -intf_net AES192_Enc_0_out_r [get_bd_intf_pins AES192_Enc_0/out_r] [get_bd_intf_pins axis_accel_sel_0/out_V_dec]
+  connect_bd_intf_net -intf_net AccelConfig_0_tid0_axis [get_bd_intf_pins AccelConfig_0/tid0_axis] [get_bd_intf_pins axis_accel_sel_0/in_V]
   connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins smartconnect_0/S00_AXI]
   connect_bd_intf_net -intf_net axis_accel_sel_0_in_V_dec [get_bd_intf_pins AES192_Enc_0/in_r] [get_bd_intf_pins axis_accel_sel_0/in_V_dec]
   connect_bd_intf_net -intf_net axis_accel_sel_0_in_V_enc [get_bd_intf_pins AES192_Dec_0/in_r] [get_bd_intf_pins axis_accel_sel_0/in_V_enc]
   connect_bd_intf_net -intf_net axis_accel_sel_0_out_V [get_bd_intf_pins axis_accel_sel_0/out_V] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
+  connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/axis_in] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
+  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi_ctrl] [get_bd_intf_pins smartconnect_0/M00_AXI]
   connect_bd_intf_net -intf_net smartconnect_0_M01_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M01_AXI]
 
   # Create port connections
@@ -191,14 +194,15 @@ proc cr_bd_AES192 { parentCell designName} {
   connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins AES192_Dec_0/ap_clk] [get_bd_pins AES192_Enc_0/ap_clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins axis_accel_sel_0/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AES192_Dec_0/ap_rst_n] [get_bd_pins AES192_Enc_0/ap_rst_n] [get_bd_pins AccelConfig_0/resetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
-  connect_bd_net -net rm_comm_box_0_ap_done_mm2s [get_bd_pins AccelConfig_0/mm2sDone]
-  connect_bd_net -net rm_comm_box_0_ap_done_s2mm [get_bd_pins AccelConfig_0/s2mmDone]
+  connect_bd_net -net rm_comm_box_0_ap_done_mm2s [get_bd_pins AccelConfig_0/mm2sDone] [get_bd_pins rm_comm_box_0/interrupt_mm2s]
+  connect_bd_net -net rm_comm_box_0_ap_done_s2mm [get_bd_pins AccelConfig_0/s2mmDone] [get_bd_pins rm_comm_box_0/interrupt_s2mm]
   connect_bd_net -net static_shell_rp0_resetn [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins AccelConfig_0/AccelIdle] [get_bd_pins AccelConfig_0/AccelReady] [get_bd_pins xlconstant_0/dout]
 
   # Create address segments
-  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -offset 0xB1000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
+  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -offset 0x80000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi_ctrl/reg0] -force
+  assign_bd_address -offset 0x81000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
 
   set_property USAGE memory [get_bd_addr_segs M_AXI_GMEM/Reg]
 
