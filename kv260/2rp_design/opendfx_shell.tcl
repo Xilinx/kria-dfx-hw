@@ -182,8 +182,8 @@ xilinx.com:ip:util_vector_logic:2.0\
 # CHECK Block Design Container Sources
 ##################################################################
 set bCheckSources 1
-set list_bdc_active "AES128"
-set list_bdc_dfx "FFT_4channel, FIR_compiler, AES192"
+set list_bdc_active "FIR_compiler"
+set list_bdc_dfx "AES128, FFT_4channel, AES192"
 
 array set map_bdc_missing {}
 set map_bdc_missing(ACTIVE) ""
@@ -2765,10 +2765,10 @@ proc create_root_design { parentCell } {
   # Create ports
 
   # Create instance: RP_0, and set properties
-  set RP_0 [ create_bd_cell -type container -reference AES128 RP_0 ]
+  set RP_0 [ create_bd_cell -type container -reference FIR_compiler RP_0 ]
   set_property -dict [ list \
-   CONFIG.ACTIVE_SIM_BD {AES128.bd} \
-   CONFIG.ACTIVE_SYNTH_BD {AES128.bd} \
+   CONFIG.ACTIVE_SIM_BD {FIR_compiler.bd} \
+   CONFIG.ACTIVE_SYNTH_BD {FIR_compiler.bd} \
    CONFIG.ENABLE_DFX {true} \
    CONFIG.LIST_SIM_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
    CONFIG.LIST_SYNTH_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
@@ -2778,10 +2778,10 @@ proc create_root_design { parentCell } {
   set_property APERTURES {{0x8000_0000 32M}} [get_bd_intf_pins /RP_0/S_AXI_CTRL]
 
   # Create instance: RP_1, and set properties
-  set RP_1 [ create_bd_cell -type container -reference AES128 RP_1 ]
+  set RP_1 [ create_bd_cell -type container -reference FIR_compiler RP_1 ]
   set_property -dict [ list \
-   CONFIG.ACTIVE_SIM_BD {AES128.bd} \
-   CONFIG.ACTIVE_SYNTH_BD {AES128.bd} \
+   CONFIG.ACTIVE_SIM_BD {FIR_compiler.bd} \
+   CONFIG.ACTIVE_SYNTH_BD {FIR_compiler.bd} \
    CONFIG.ENABLE_DFX {true} \
    CONFIG.LIST_SIM_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
    CONFIG.LIST_SYNTH_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
@@ -2877,16 +2877,17 @@ update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
 
 #Create DFX Configurations
-create_pr_configuration -name config_1 -partitions [list opendfx_shell_i/RP_0:FIR_compiler_inst_0 opendfx_shell_i/RP_1:FIR_compiler_inst_1 ]
-create_pr_configuration -name config_2 -partitions [list opendfx_shell_i/RP_0:AES128_inst_0 opendfx_shell_i/RP_1:AES128_inst_1 ]
-create_pr_configuration -name config_3 -partitions [list opendfx_shell_i/RP_0:FFT_4channel_inst_0 opendfx_shell_i/RP_1:FFT_4channel_inst_1 ]
-create_pr_configuration -name config_4 -partitions [list opendfx_shell_i/RP_0:AES192_inst_0 opendfx_shell_i/RP_1:AES192_inst_1 ]
+#create_pr_configuration -name config_1 -partitions [list opendfx_shell_i/RP_0:FIR_compiler_inst_0 opendfx_shell_i/RP_1:FIR_compiler_inst_1 ]
+#create_pr_configuration -name config_2 -partitions [list opendfx_shell_i/RP_0:AES128_inst_0 opendfx_shell_i/RP_1:AES128_inst_1 ]
+#create_pr_configuration -name config_3 -partitions [list opendfx_shell_i/RP_0:FFT_4channel_inst_0 opendfx_shell_i/RP_1:FFT_4channel_inst_1 ]
+#create_pr_configuration -name config_4 -partitions [list opendfx_shell_i/RP_0:AES192_inst_0 opendfx_shell_i/RP_1:AES192_inst_1 ]
+setup_pr_configurations
 create_pr_configuration -name config_5 -partitions { }  -greyboxes [list opendfx_shell_i/RP_0 opendfx_shell_i/RP_1 ]
-set_property PR_CONFIGURATION config_1 [get_runs impl_1]
-create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_2
-create_run child_1_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_3
-create_run child_2_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_4
-create_run child_3_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_5
+#set_property PR_CONFIGURATION config_1 [get_runs impl_1]
+#create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_2
+#create_run child_1_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_3
+#create_run child_2_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_4
+create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_5
 #
 launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16 -cluster_configuration lsf_big
 wait_on_run impl_1
