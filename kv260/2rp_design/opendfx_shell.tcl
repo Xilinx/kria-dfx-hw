@@ -2889,7 +2889,7 @@ create_pr_configuration -name config_5 -partitions { }  -greyboxes [list opendfx
 #create_run child_2_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_4
 create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_5
 #
-launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16 -cluster_configuration lsf_big
+launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16
 wait_on_run impl_1
 wait_on_run child_0_impl_1
 wait_on_run child_1_impl_1
