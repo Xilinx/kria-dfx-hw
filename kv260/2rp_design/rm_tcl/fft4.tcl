@@ -16,7 +16,6 @@ proc cr_bd_FFT_4channel { parentCell designName} {
   if { $bCheckIPs == 1 } {
      set list_check_ips "\ 
   user.org:user:AccelConfig:1.0\
-  xilinx.com:ip:xlconstant:1.1\
   xilinx.com:ip:proc_sys_reset:5.0\
   user.org:user:rm_comm_box:1.0\
   xilinx.com:ip:smartconnect:1.0\
@@ -999,12 +998,6 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
 
   # Create instance: FFTWithScatterGather
   create_hier_cell_FFTWithScatterGather [current_bd_instance .] FFTWithScatterGather
-
-  # Create instance: RMHang_0, and set properties
-  set RMHang_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 RMHang_0 ]
-  set_property -dict [ list \
-   CONFIG.CONST_VAL {0} \
- ] $RMHang_0
 
   # Create instance: proc_sys_reset_0, and set properties
   set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
