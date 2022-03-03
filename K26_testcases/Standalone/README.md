@@ -19,5 +19,6 @@ xsct buildAES192.tcl
 Update the bit files, data and elf path for the required RM in the test.tcl. 
 
 For running tests run following scripts in xsdb prompt on board.
+BOOT Mode should be JTAG. 
 
 source test.tcl
