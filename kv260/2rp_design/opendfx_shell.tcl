@@ -46,7 +46,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # If there is no project opened, this script will create a
 # project, but make sure you do not have an existing project
-# <./myproj/project_1.xpr> in the current working folder.
+# <./project_1/project_1.xpr> in the current working folder.
 
 set list_projs [get_projects -quiet]
 if { $list_projs eq "" } {
@@ -2877,18 +2877,10 @@ update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
 
 #Create DFX Configurations
-#create_pr_configuration -name config_1 -partitions [list opendfx_shell_i/RP_0:FIR_compiler_inst_0 opendfx_shell_i/RP_1:FIR_compiler_inst_1 ]
-#create_pr_configuration -name config_2 -partitions [list opendfx_shell_i/RP_0:AES128_inst_0 opendfx_shell_i/RP_1:AES128_inst_1 ]
-#create_pr_configuration -name config_3 -partitions [list opendfx_shell_i/RP_0:FFT_4channel_inst_0 opendfx_shell_i/RP_1:FFT_4channel_inst_1 ]
-#create_pr_configuration -name config_4 -partitions [list opendfx_shell_i/RP_0:AES192_inst_0 opendfx_shell_i/RP_1:AES192_inst_1 ]
 setup_pr_configurations
 create_pr_configuration -name config_5 -partitions { }  -greyboxes [list opendfx_shell_i/RP_0 opendfx_shell_i/RP_1 ]
-#set_property PR_CONFIGURATION config_1 [get_runs impl_1]
-#create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_2
-#create_run child_1_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_3
-#create_run child_2_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_4
 create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_5
-#
+
 launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16
 wait_on_run impl_1
 wait_on_run child_0_impl_1
