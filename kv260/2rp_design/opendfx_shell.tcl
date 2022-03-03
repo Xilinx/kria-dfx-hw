@@ -2888,4 +2888,4 @@ wait_on_run child_1_impl_1
 wait_on_run child_2_impl_1
 wait_on_run child_3_impl_1
 open_run impl_1
-write_hw_platform -fixed -include_bit -force -file ./opendfx_shell_wrapper.xsa
+write_hw_platform -fixed -include_bit -force -file ./project_1/opendfx_shell_wrapper.xsa
