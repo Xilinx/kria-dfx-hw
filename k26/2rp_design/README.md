@@ -7,7 +7,7 @@
 	Example: git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
 	
 - Go to the 2rp design directory.
-	- 2P design -  kria_dfx_hw/kv260/2rp_design
+	- 2P design -  kria_dfx_hw/k26/2rp_design
 - To Build both vivado project and platform on development server
         - Open bash shell 
         - make all
