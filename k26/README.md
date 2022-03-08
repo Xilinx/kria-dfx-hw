@@ -8,7 +8,7 @@ Given design uses 2022.1 Vivado tool.
 
 1. Go to 2rp_design directory
 ```bash
-bash$: > cd <repo_dir>/kv260/2rp_design
+bash$: > cd <repo_dir>/k26/2rp_design
 ```
 
 2. Launch vivado. 
