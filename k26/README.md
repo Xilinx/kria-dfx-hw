@@ -1,23 +1,14 @@
-## Build Instructions 
+## Details
+```
 Given design uses 2022.1 Vivado tool.
+
+The 2rp design is a two slot based DFX design. 
+
+ip_repo folder contains all the user IP's required to build the design. 
 - Clone the opendfx git repository to local sandbox.
 
 	Example:  git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
-
+```
 # HW Build 
 
-1. Go to 2rp_design directory
-```bash
-bash$: > cd <repo_dir>/k26/2rp_design
-```
-
-2. Launch vivado. 
-
-Add the following line to installdir/Vivado/VivadoVersion/scripts/Vivado_init.tcl
-
-- set_param bd.gen_bda_file 1
-
-3. Build Vivado project and platform
-```bash
-bash$: > make all 
-```
+Please find the detailed steps- https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/edit/main/k26/2rp_design/README.md 
