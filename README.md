@@ -3,7 +3,7 @@ Kria DFX Reference Designs
 
 The repository structure is outlined below. 
 
-* kv260 - KRIA based platform
+* k26 - KRIA based platform
 	* 2rp_design
 		* rm_tcl - Directory contains tcl files for the accelerator module designs ("RMs") built against the base shell.
 		* xdc - Directory contains design constraints
@@ -17,7 +17,7 @@ The repository structure is outlined below.
 
 	* ip_repo - Source code of accelerators packaged in IP-XACT format.
 
-* K26_testcases - Test cases
+* k26_testcases - Test cases
 	* Standalone
 		* data - Standalone test cases input data
 		* src - Source code
