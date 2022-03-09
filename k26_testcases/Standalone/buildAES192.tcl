@@ -1,6 +1,6 @@
 set XSA "opendfx_shell_wrapper"
 #Add the XSA path 
-set PATH "../../kv260/2rp_design/project_1/"
+set PATH "../../k26/2rp_design/project_1/"
 set SRC "./AES192"
 set SRCM "./src"
 set WS "workspace_AES192"
