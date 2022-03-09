@@ -8,24 +8,17 @@
 	Example: git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
 	
 - Go to the 2rp design directory.
-	- 2P design -  kria_dfx_hw/k26/2rp_design
-- To Build both vivado project and platform on development server
-        - Open bash shell 
-        - make all
+	- 2rp_design -  kria_dfx_hw/k26/2rp_design
 ```
-## Vivado Project build
+
+Two ways to build -
+## 1. Vivado Project & Platform build
 
 ```bash
-make xsa
+make all
 ```
-## Project build steps for vivado
-
+## 2. GUI build steps for vivado
 ```
 Launch vivado 
 source ./opendfx_shell.tcl 
-```
-## Platform build
-
-```bash
-make platform
 ```
