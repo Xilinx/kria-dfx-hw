@@ -1,10 +1,12 @@
 Standalone Test cases-
 
 The k26 dfx design have the four RM's added- AES192, AES128, FFT and FIR.
-Each of the RM folder contains the main.c file to be used for the vitis application.
-Directory structure of k26_testcases
 
-* Standalone- 
+Each of the RM folder contains the main.c file to be used for the vitis application.
+
+Directory structure of k26_testcases-
+
+* Standalone
 	* AES128- RM code
 	* AES192- RM code
 	* FFT- RM code
