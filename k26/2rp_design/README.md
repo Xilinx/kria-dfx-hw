@@ -17,6 +17,8 @@ Two ways to build -
 ```bash
 make all
 ```
+After the build is finished, the terminal will have "Platform build complete" print. 
+
 ## 2. GUI build steps for vivado
 ```
 Launch vivado 
