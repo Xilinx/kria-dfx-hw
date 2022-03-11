@@ -1,3 +1,5 @@
+variable VITIS_PATH "Add vitis tools path" 
+
 variable ROOT      "."
 variable IMPLDIR   "${ROOT}/../../k26/2rp_design/project_1/project_1.runs/"
 variable WORKSPACE_AES128 "${ROOT}/workspace_AES128"
