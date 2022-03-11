@@ -1,5 +1,5 @@
 set XSA "opendfx_shell_wrapper"
-set PATH "../../k26/2rp_design/project_1/"
+set PATH "../../k26/2rp_design/project_1"
 set SRC "./FFT"
 set SRCM "./src"
 set WS "workspace_FFT"
@@ -37,5 +37,3 @@ if {![file exists ${WS}/${APP}]} {
 
 }
 app build ${APP} 
-
-
