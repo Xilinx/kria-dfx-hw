@@ -16,11 +16,17 @@ xsct buildAES192.tcl
 ```
 # Run tests
 
-Update the bit files, data and elf path for the required RM in the test.tcl. 
+Update the bit Vitis path in the environment.tcl. 
 
-For running tests run following scripts in xsdb prompt on board.
+For testing RM, run the corresponding tcl in xsdb prompt on board.
 
 BOOT Mode should be JTAG. 
 ```
-source test.tcl
+source testAES128.tcl
+
+source testAES192.tcl
+
+source testFIR.tcl
+
+source testFFT.tcl
 ```
