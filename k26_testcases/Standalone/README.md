@@ -22,6 +22,10 @@ For testing RM, run the corresponding tcl in xsdb prompt on board.
 
 BOOT Mode should be JTAG. 
 ```
+source environment.tcl
+```
+
+```
 source testAES128.tcl
 
 source testAES192.tcl
