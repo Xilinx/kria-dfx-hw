@@ -34,3 +34,14 @@ source testFIR.tcl
 
 source testFFT.tcl
 ```
+
+Output seen on uart terminal-
+
+```
+comparing slot 0 output with reference ...
+Success: Matched with the reference !!!!
+comparing slot 1 output with reference ...
+Success: Matched with the reference !!!!
+all done
+```
+
