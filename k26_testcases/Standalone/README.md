@@ -35,7 +35,7 @@ source testFIR.tcl
 source testFFT.tcl
 ```
 
-Output seen on uart terminal-
+Last prints on uart terminal will match the following-
 
 ```
 comparing slot 0 output with reference ...
