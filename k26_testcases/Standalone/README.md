@@ -16,7 +16,7 @@ xsct buildAES192.tcl
 ```
 # Run tests
 
-Update the bit Vitis path in the environment.tcl. 
+Update the Vitis path in the environment.tcl. 
 
 For testing RM, run the corresponding tcl in xsdb prompt on board.
 
