@@ -6,7 +6,7 @@
 [plImages]$ vim bingen.sh
 ```
 
-### Import bit files and gen bin files
+### Import bit files and generate bin files
 
 ```bash
 [plImages]$ ./bingen.sh
@@ -25,4 +25,3 @@ plImages]$ cd ..
 
 [software]$ ./scripts/genPkg2RP.py
 ```
-
