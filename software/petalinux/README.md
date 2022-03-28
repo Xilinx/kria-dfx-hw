@@ -25,7 +25,7 @@ git clone https://gitenterprise.xilinx.com/SOM/kria_dfx_hw.git
 ## Configure the build environment
 
 ```bash
-[petalinux]$  source /proj/petalinux/2022.1/petalinux-v2022.1_03231148/tool/petalinux-v2022.1-final/settings.sh
+[petalinux]$ source /proj/petalinux/2022.1/petalinux-v2022.1_03231148/tool/petalinux-v2022.1-final/settings.sh
 ```
 ## Create Petalinux Project
 
