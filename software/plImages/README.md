@@ -21,7 +21,5 @@
 ### Generate packages
 
 ```bash
-plImages]$ cd ..
-
-[software]$ ./scripts/genPkg2RP.py
+plImages]$ ./genPkg.py
 ```
