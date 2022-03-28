@@ -1,6 +1,6 @@
 CPU_ARCH=a53
 all: refresh_hw linux bootimage sysroot gendtb
-XSA_DIR ?= ../../k26/2rp_design/project_1/
+XSA_DIR ?= ../../../k26/2rp_design/project_1/
 
 refresh_hw:
 	petalinux-config --get-hw-description=${XSA_DIR} --silentconfig
