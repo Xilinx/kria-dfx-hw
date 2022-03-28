@@ -36,7 +36,7 @@ git clone https://gitenterprise.xilinx.com/SOM/kria_dfx_hw.git
 ## Build Petalinux Project
 
 ```bash
-[xilinx-k26-starterkit-20221.]$ make all
+[xilinx-k26-starterkit-2022.1]$ make all
 ```
 
 
