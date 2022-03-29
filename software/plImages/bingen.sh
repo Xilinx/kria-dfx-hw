@@ -4,7 +4,7 @@ Bootgen=<Vitis_path>/2022.1/bin/bootgen
 
 shell=opendfx_shell_wrapper
 
-rms=   (opendfx_shell_i_RP_0_AES128_inst_0_partial 
+rms=(opendfx_shell_i_RP_0_AES128_inst_0_partial 
 	opendfx_shell_i_RP_0_AES192_inst_0_partial 
 	opendfx_shell_i_RP_0_FFT_4channel_inst_0_partial 
 	opendfx_shell_i_RP_0_FIR_compiler_inst_0_partial 
