@@ -176,7 +176,7 @@ def parse(data):
 def package(accel, releasedir = RELEASE, tmpdir = TMP):
 	createAccelJson(accel)
 	createDTBO(accel)
-	res = os.system(' '.join(['cp', BASE3RP + accel['bin'], TMP + accel['bin']]))
+	res = os.system(' '.join(['cp', BASE2RP + accel['bin'], TMP + accel['bin']]))
 	DIR = accel['name'] + '/' + accel['name'] + '_slot' + str(accel['id'])
 	print(DIR)
 	res = os.system(' '.join(['mkdir', '-p', RELEASE + DIR]))
@@ -189,10 +189,10 @@ def package(accel, releasedir = RELEASE, tmpdir = TMP):
 res = os.system(' '.join(['rm', '-rf', TMP]))
 res = os.system(' '.join(['mkdir', '-p', RELEASE]))
 res = os.system(' '.join(['mkdir', '-p', TMP]))
-res = os.system(' '.join(['cp', BASE3RP + 'opendfx_shell_wrapper.bit.bin', RELEASE]))
-res = os.system(' '.join(['cp', BASE3RP + 'pl.dtbo', RELEASE]))
-res = os.system(' '.join(['cp', BASE3RP + 'pl.dtsi', RELEASE]))
-res = os.system(' '.join(['cp', BASE3RP + 'shell.json', RELEASE]))
+res = os.system(' '.join(['cp', BASE2RP + 'opendfx_shell_wrapper.bit.bin', RELEASE]))
+res = os.system(' '.join(['cp', BASE2RP + 'pl.dtbo', RELEASE]))
+res = os.system(' '.join(['cp', BASE2RP + 'pl.dtsi', RELEASE]))
+res = os.system(' '.join(['cp', BASE2RP + 'shell.json', RELEASE]))
 accels = parse(data)
 for accel in accels:
 	package(accel)
