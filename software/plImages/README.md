@@ -1,6 +1,6 @@
 # Firmware Generation Flow
 
-### Modify bootgen path and partial names in bingen.sh script
+### Modify bootgen path in bingen.sh script
 
 ```bash
 [plImages]$ vim bingen.sh
