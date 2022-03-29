@@ -31,7 +31,8 @@ data = [
 RELEASE="./firmware/"
 TMP="./tmp/"
 BASE2RP="./"
-DTC="../petalinux/xilinx-k26-starterkit-2022.1/images/linux/sdk/sysroots/x86_64-petalinux-linux/usr/bin/dtc"
+#Update DTC path"
+DTC="$PETALINUX/components/yocto/buildtools/sysroots/x86_64-petalinux-linux/usr/bin/dtc"
 
 def createAccelJson(accel, path=TMP):
 	FILEPATH = path + "accel.json"
