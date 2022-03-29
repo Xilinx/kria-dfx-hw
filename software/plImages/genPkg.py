@@ -27,7 +27,7 @@ data = [
            'bin': 'opendfx_shell_i_RP_1_FIR_compiler_inst_1_partial.bit.bin'}
          ]},
        ]
-mkdir firmware
+
 RELEASE="./firmware/"
 TMP="./tmp/"
 BASE2RP="./"
