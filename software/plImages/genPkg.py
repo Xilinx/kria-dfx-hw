@@ -2,6 +2,12 @@
 import os
 import json
 
+#Update DTC path"
+DTC="$PETALINUX/components/yocto/buildtools/sysroots/x86_64-petalinux-linux/usr/bin/dtc"
+RELEASE="./firmware/"
+TMP="./tmp/"
+BASE2RP="./"
+
 data = [
 	{'id': 0, 'accelConfig': '0080000000', 'dm': '0081000000',
 	 'slots':
@@ -27,12 +33,6 @@ data = [
            'bin': 'opendfx_shell_i_RP_1_FIR_compiler_inst_1_partial.bit.bin'}
          ]},
        ]
-
-RELEASE="./firmware/"
-TMP="./tmp/"
-BASE2RP="./"
-#Update DTC path"
-DTC="$PETALINUX/components/yocto/buildtools/sysroots/x86_64-petalinux-linux/usr/bin/dtc"
 
 def createAccelJson(accel, path=TMP):
 	FILEPATH = path + "accel.json"
