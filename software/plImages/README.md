@@ -1,10 +1,12 @@
 # Firmware Generation Flow
 
 ### Use bash shell
-### Modify bootgen path in bingen.sh script
+### Modify bootgen and dtc path in bingen.sh, genOverlay.sh and genPkg.py 
 
 ```bash
 [plImages]$ vim bingen.sh
+[plImages]$ vim genOverlay.sh
+[plImages]$ vim genPkg.py
 ```
 
 ### Import bit files and generate bin files
