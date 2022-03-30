@@ -11,7 +11,7 @@ variable WORKSPACE_FFT "${ROOT}/workspace_FFT"
 variable DATA      "${ROOT}/data"
 variable BOOT      "/opendfx_shell_wrapper_platform_0/export/opendfx_shell_wrapper_platform_0/sw/opendfx_shell_wrapper_platform_0/boot"
 variable PMUFW     "${WORKSPACE_AES128}/${BOOT}/pmufw.elf"
-variable FSBL      "${WORKSPACE_AES192}/${BOOT}/fsbl.elf"
+variable FSBL      "${WORKSPACE_AES128}/${BOOT}/fsbl.elf"
 
 variable SHELLBASE  "${IMPLDIR}/impl_1/opendfx_shell_wrapper.bit"
 
