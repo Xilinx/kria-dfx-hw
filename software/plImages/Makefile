@@ -10,4 +10,4 @@ firmware:
 	./genPkg.py
 
 clean:
-	rm -rf *.bin *.bit *.bif *.dtbo
+	rm -rf *.bin *.bit *.bif *.dtbo *.xsa
