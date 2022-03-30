@@ -1,6 +1,6 @@
 # Firmware Generation Flow
 
-# Use bash shell
+### Use bash shell
 ### Modify bootgen path in bingen.sh script
 
 ```bash
