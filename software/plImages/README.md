@@ -22,10 +22,10 @@
 ### Generate packages
 
 ```bash
-plImages]$ make firmware 
+[plImages]$ make firmware 
 ```
 ### Clean
 
 ```bash
-plImages]$ make clean
+[plImages]$ make clean
 ```
