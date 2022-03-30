@@ -10,17 +10,22 @@
 ### Import bit files and generate bin files
 
 ```bash
-[plImages]$ ./bingen.sh
+[plImages]$ make bin
 ```
 
 ### Generate Overlay
 
 ```bash
-[plImages]$ ./genOverlay.sh
+[plImages]$ make dtbo
 ```
 
 ### Generate packages
 
 ```bash
-plImages]$ ./genPkg.py
+plImages]$ make firmware 
+```
+### Clean
+
+```bash
+plImages]$ make clean
 ```
