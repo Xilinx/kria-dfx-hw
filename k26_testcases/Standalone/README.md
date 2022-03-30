@@ -17,6 +17,7 @@ xsct buildAES192.tcl
 # Run tests
 
 Update the Vitis path in the environment.tcl line 2. 
+
 Also Update the RM name for test in line 8 & 9 for PMUFW and FSBL ELF path. 
 ```
 vim environment.tcl
