@@ -147,6 +147,7 @@ if { $bCheckIPs == 1 } {
    set list_check_ips "\ 
 xilinx.com:ip:smartconnect:1.0\
 xilinx.com:ip:xlconcat:2.1\
+xilinx.com:ip:xlslice:1.0\
 xilinx.com:ip:zynq_ultra_ps_e:3.4\
 xilinx.com:ip:vcu:1.2\
 xilinx.com:ip:axi_gpio:2.0\
@@ -183,7 +184,7 @@ xilinx.com:ip:util_vector_logic:2.0\
 ##################################################################
 set bCheckSources 1
 set list_bdc_active "FIR_compiler"
-set list_bdc_dfx "AES128, FFT_4channel, AES192"
+set list_bdc_dfx "AES128, AES192, FFT_4channel"
 
 array set map_bdc_missing {}
 set map_bdc_missing(ACTIVE) ""
@@ -193,9 +194,9 @@ set map_bdc_missing(BDC) ""
 if { $bCheckSources == 1 } {
    set list_check_srcs "\ 
 AES128 \
+AES192 \
 FFT_4channel \
 FIR_compiler \
-AES192 \
 "
 
    common::send_gid_msg -ssname BD::TCL -id 2056 -severity "INFO" "Checking if the following sources for block design container exist in the project: $list_check_srcs .\n\n"
@@ -344,12 +345,12 @@ RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH\
 0}}} sig {ID 3 VLNV xilinx.com:signal:interrupt_rtl:1.0 SIGNALS {INTERRUPT\
 {PRESENT 1 WIDTH 1}}} n {ID 2 VLNV xilinx.com:signal:reset_rtl:1.0 MODE\
 slave SIGNALS {RST {PRESENT 1 WIDTH 1}}}}\
-     IPI_PROP_COUNT {4}\
+     IPI_PROP_COUNT {5}\
      ALWAYS_HAVE_AXI_CLK {1}\
    } \
    CONFIG.GUI_INTERFACE_NAME {config} \
    CONFIG.GUI_INTERFACE_PROTOCOL {axi4lite} \
-   CONFIG.GUI_INTERFACE_REGISTER {false} \
+   CONFIG.GUI_INTERFACE_REGISTER {0} \
    CONFIG.GUI_SELECT_INTERFACE {0} \
    CONFIG.GUI_SELECT_MODE {slave} \
    CONFIG.GUI_SELECT_VLNV {xilinx.com:interface:aximm_rtl:1.0} \
@@ -523,12 +524,12 @@ RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH\
 0}}} sig {ID 3 VLNV xilinx.com:signal:interrupt_rtl:1.0 SIGNALS {INTERRUPT\
 {PRESENT 1 WIDTH 1}}} n {ID 2 VLNV xilinx.com:signal:reset_rtl:1.0 MODE\
 slave SIGNALS {RST {PRESENT 1 WIDTH 1}}}}\
-     IPI_PROP_COUNT {4}\
+     IPI_PROP_COUNT {5}\
      ALWAYS_HAVE_AXI_CLK {1}\
    } \
    CONFIG.GUI_INTERFACE_NAME {config} \
    CONFIG.GUI_INTERFACE_PROTOCOL {axi4lite} \
-   CONFIG.GUI_INTERFACE_REGISTER {false} \
+   CONFIG.GUI_INTERFACE_REGISTER {0} \
    CONFIG.GUI_SELECT_INTERFACE {0} \
    CONFIG.GUI_SELECT_MODE {slave} \
    CONFIG.GUI_SELECT_VLNV {xilinx.com:interface:aximm_rtl:1.0} \
@@ -830,9 +831,6 @@ proc create_hier_cell_clk_reset_gen { parentCell nameHier } {
   # Create instance: proc_sys_reset_static_clk, and set properties
   set proc_sys_reset_static_clk [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_static_clk ]
 
-  # Create instance: proc_sys_reset_vcu_clk, and set properties
-  set proc_sys_reset_vcu_clk [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_vcu_clk ]
-
   # Create instance: rp0_clk_bufgce, and set properties
   set rp0_clk_bufgce [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.2 rp0_clk_bufgce ]
   set_property -dict [ list \
@@ -858,19 +856,18 @@ proc create_hier_cell_clk_reset_gen { parentCell nameHier } {
   connect_bd_intf_net -intf_net Conn1 [get_bd_intf_pins S_AXI] [get_bd_intf_pins axi_gpio_vcu_reset/S_AXI]
 
   # Create port connections
-  connect_bd_net -net axi_gpio_vcu_reset_gpio_io_o [get_bd_pins axi_gpio_vcu_reset/gpio_io_o] [get_bd_pins proc_sys_reset_vcu_clk/ext_reset_in]
+  connect_bd_net -net axi_gpio_vcu_reset_gpio_io_o [get_bd_pins vcu_resetn] [get_bd_pins axi_gpio_vcu_reset/gpio_io_o]
   connect_bd_net -net clk_wiz_rp0_rp0_clk [get_bd_pins pl_clk2] [get_bd_pins proc_sys_reset_rp0_clk/slowest_sync_clk] [get_bd_pins rp0_clk_bufgce/BUFGCE_I] [get_bd_pins rp0_clken_sync/clk]
   connect_bd_net -net clk_wiz_rp1_rp1_clk [get_bd_pins pl_clk3] [get_bd_pins proc_sys_reset_rp1_clk/slowest_sync_clk] [get_bd_pins rp1_clk_bufgce/BUFGCE_I] [get_bd_pins rp1_clken_sync/clk]
   connect_bd_net -net data_in_1 [get_bd_pins slot0_clken] [get_bd_pins rp0_clken_sync/data_in]
   connect_bd_net -net ext_reset_in1_1 [get_bd_pins slot0_resetn] [get_bd_pins proc_sys_reset_rp0_clk/ext_reset_in]
   connect_bd_net -net ext_reset_in_1 [get_bd_pins pl_resetn0] [get_bd_pins proc_sys_reset_static_clk/ext_reset_in]
   connect_bd_net -net ext_reset_in_2 [get_bd_pins slot1_resetn] [get_bd_pins proc_sys_reset_rp1_clk/ext_reset_in]
-  connect_bd_net -net pl_clk1_1 [get_bd_pins pl_clk1] [get_bd_pins vcu_clk] [get_bd_pins proc_sys_reset_vcu_clk/slowest_sync_clk]
+  connect_bd_net -net pl_clk1_1 [get_bd_pins pl_clk1] [get_bd_pins vcu_clk]
   connect_bd_net -net proc_sys_reset_rp0_clk_interconnect_aresetn [get_bd_pins rp0_interconnect_aresetn] [get_bd_pins proc_sys_reset_rp0_clk/interconnect_aresetn]
   connect_bd_net -net proc_sys_reset_rp1_clk_interconnect_aresetn [get_bd_pins rp1_interconnect_aresetn] [get_bd_pins proc_sys_reset_rp1_clk/interconnect_aresetn]
   connect_bd_net -net proc_sys_reset_static_clk_interconnect_aresetn [get_bd_pins shell_interconnect_aresetn] [get_bd_pins proc_sys_reset_static_clk/interconnect_aresetn]
   connect_bd_net -net proc_sys_reset_static_clk_peripheral_aresetn [get_bd_pins shell_peripheral_aresetn] [get_bd_pins axi_gpio_vcu_reset/s_axi_aresetn] [get_bd_pins proc_sys_reset_static_clk/peripheral_aresetn]
-  connect_bd_net -net proc_sys_reset_vcu_clk_peripheral_aresetn [get_bd_pins vcu_resetn] [get_bd_pins proc_sys_reset_vcu_clk/peripheral_aresetn]
   connect_bd_net -net rp0_clk_bufgce_BUFGCE_O [get_bd_pins rp0_gated_clk] [get_bd_pins rp0_clk_bufgce/BUFGCE_O]
   connect_bd_net -net rp0_clken_sync_data_out [get_bd_pins rp0_decouple_n] [get_bd_pins rp0_clk_bufgce/BUFGCE_CE] [get_bd_pins rp0_clken_sync/data_out]
   connect_bd_net -net rp1_clk_bufgce_BUFGCE_O [get_bd_pins rp1_gated_clk] [get_bd_pins rp1_clk_bufgce/BUFGCE_O]
@@ -1083,6 +1080,12 @@ proc create_hier_cell_static_shell { parentCell nameHier } {
   set_property -dict [ list \
    CONFIG.NUM_PORTS {3} \
  ] $xlconcat_interrupt
+
+  # Create instance: xlslice_0, and set properties
+  set xlslice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 xlslice_0 ]
+  set_property -dict [ list \
+   CONFIG.DIN_WIDTH {92} \
+ ] $xlslice_0
 
   # Create instance: zynq_ultra_ps_e_0, and set properties
   set zynq_ultra_ps_e_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:zynq_ultra_ps_e:3.4 zynq_ultra_ps_e_0 ]
@@ -2154,9 +2157,9 @@ sclk_out#miso_mo1#mo2#mo3#mosi_mi0#n_ss_out#sclk_out#gpio0[7]#gpio0[8]#n_ss_out[
    CONFIG.PSU__GPIO1_MIO__IO {MIO 26 .. 51} \
    CONFIG.PSU__GPIO1_MIO__PERIPHERAL__ENABLE {1} \
    CONFIG.PSU__GPIO2_MIO__PERIPHERAL__ENABLE {0} \
-   CONFIG.PSU__GPIO_EMIO_WIDTH {95} \
+   CONFIG.PSU__GPIO_EMIO_WIDTH {92} \
    CONFIG.PSU__GPIO_EMIO__PERIPHERAL__ENABLE {1} \
-   CONFIG.PSU__GPIO_EMIO__PERIPHERAL__IO {95} \
+   CONFIG.PSU__GPIO_EMIO__PERIPHERAL__IO {92} \
    CONFIG.PSU__GPIO_EMIO__WIDTH {[94:0]} \
    CONFIG.PSU__GPU_PP0__POWER__ON {1} \
    CONFIG.PSU__GPU_PP1__POWER__ON {1} \
@@ -2715,8 +2718,9 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   connect_bd_net -net siha_manager_0_slot1_clken [get_bd_pins clk_reset_gen/slot1_clken] [get_bd_pins dfx_slot_manager/slot1_clken]
   connect_bd_net -net siha_manager_0_slot1_resetn [get_bd_pins clk_reset_gen/slot1_resetn] [get_bd_pins dfx_slot_manager/slot1_resetn]
   connect_bd_net -net vcu_0_vcu_host_interrupt [get_bd_pins VCU/vcu_host_interrupt] [get_bd_pins xlconcat_interrupt/In2]
-  connect_bd_net -net vcu_resetn_1 [get_bd_pins VCU/vcu_resetn] [get_bd_pins clk_reset_gen/vcu_resetn]
   connect_bd_net -net xlconcat_0_dout [get_bd_pins xlconcat_interrupt/dout] [get_bd_pins zynq_ultra_ps_e_0/pl_ps_irq0]
+  connect_bd_net -net xlslice_0_Dout [get_bd_pins VCU/vcu_resetn] [get_bd_pins xlslice_0/Dout]
+  connect_bd_net -net zynq_ultra_ps_e_0_emio_gpio_o [get_bd_pins xlslice_0/Din] [get_bd_pins zynq_ultra_ps_e_0/emio_gpio_o]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0 [get_bd_pins clk_reset_gen/pl_clk0] [get_bd_pins zynq_ultra_ps_e_0/pl_clk0]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_clk1 [get_bd_pins VCU/pll_ref_clk] [get_bd_pins VCU/s_axi_lite_aclk] [get_bd_pins clk_reset_gen/vcu_clk] [get_bd_pins smartconnect_config/aclk1]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_clk2 [get_bd_pins clk_reset_gen/pl_clk2] [get_bd_pins zynq_ultra_ps_e_0/pl_clk2]
