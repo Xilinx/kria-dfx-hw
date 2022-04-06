@@ -1,5 +1,5 @@
 {
-    "shell_type" : "SLOTTED",
+    "shell_type" : "SIHA_PL_DFX",
     "num_slots" : 2,
     "device_name" : "a0100000.SIHA_Manager",
     "isolation_slots": [
