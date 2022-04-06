@@ -11,25 +11,25 @@ BASE2RP="./"
 data = [
 	{'id': 0, 'accelConfig': '0080000000', 'dm': '0081000000',
 	 'slots':
-         [{'name': 'aes128encdec_2RP',
+         [{'name': 'aes128encdec',
            'bin': 'opendfx_shell_i_RP_0_AES128_inst_0_partial.bit.bin'},
-         {'name': 'aes192encdec_2RP',
+         {'name': 'aes192encdec',
            'bin': 'opendfx_shell_i_RP_0_AES192_inst_0_partial.bit.bin'}, 
-         {'name': 'FFT4_2RP',
+         {'name': 'FFT4',
            'bin': 'opendfx_shell_i_RP_0_FFT_4channel_inst_0_partial.bit.bin'}, 
-         {'name': 'FIR_compiler_2RP',
+         {'name': 'FIR_compiler',
            'bin': 'opendfx_shell_i_RP_0_FIR_compiler_inst_0_partial.bit.bin'}
          ]},
 
 	{'id': 1, 'accelConfig': '0082000000', 'dm': '0083000000',
 	 'slots':
-         [{'name': 'aes128encdec_2RP',
+         [{'name': 'aes128encdec',
            'bin': 'opendfx_shell_i_RP_1_AES128_inst_1_partial.bit.bin'},
-         {'name': 'aes192encdec_2RP',
+         {'name': 'aes192encdec',
            'bin': 'opendfx_shell_i_RP_1_AES192_inst_1_partial.bit.bin'},  
-         {'name': 'FFT4_2RP',
+         {'name': 'FFT4',
            'bin': 'opendfx_shell_i_RP_1_FFT_4channel_inst_1_partial.bit.bin'},
-         {'name': 'FIR_compiler_2RP',
+         {'name': 'FIR_compiler',
            'bin': 'opendfx_shell_i_RP_1_FIR_compiler_inst_1_partial.bit.bin'}
          ]},
        ]
@@ -60,7 +60,7 @@ def createAccelJson(accel, path=TMP):
 		"accel_metadata":{
     		}
 	}
-	if accel['name'] == 'aes128encdec_2RP':
+	if accel['name'] == 'aes128encdec':
 		accelData["accel_metadata"] = {
 						"fallback": {
 							"Behaviour" : "FUN",
@@ -81,7 +81,7 @@ def createAccelJson(accel, path=TMP):
  				       		"DMA_type":"HLS_MULTICHANNEL_DMA",
 			        		"Accel_Handshake_Type": "streamDataFromTrg"
     					}
-	elif accel['name'] == 'aes192encdec_2RP':
+	elif accel['name'] == 'aes192encdec':
 		accelData["accel_metadata"] = {
 						"fallback": {
 							"Behaviour" : "FUN",
@@ -102,7 +102,7 @@ def createAccelJson(accel, path=TMP):
  				       		"DMA_type":"HLS_MULTICHANNEL_DMA",
 			        		"Accel_Handshake_Type": "streamDataFromTrg"
     					}
-	elif accel['name'] == 'FFT4_2RP':
+	elif accel['name'] == 'FFT4':
 		accelData["accel_metadata"] = {
 						"fallback": {
 							"Behaviour" : "FUN",
@@ -123,7 +123,7 @@ def createAccelJson(accel, path=TMP):
  				       		"DMA_type":"HLS_MULTICHANNEL_DMA",
 			        		"Accel_Handshake_Type": "streamDataFromTrg"
     					}
-	elif accel['name'] == 'FIR_compiler_2RP':
+	elif accel['name'] == 'FIR_compiler':
 		accelData["accel_metadata"] = {
 						"fallback": {
 							"Behaviour" : "FUN",
