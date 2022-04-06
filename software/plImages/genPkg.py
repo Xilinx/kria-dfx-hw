@@ -165,7 +165,7 @@ def createDTBO(accel, path=TMP):
 		target = <&fpga_PR{0}>;
     	overlay0RP_0_: __overlay__ {{
 			firmware-name = "{1}";
-			fpga-bridges = <&static_shell_dfx_decoupler_dfx_decoupler_1>;
+			fpga-bridges = <&static_shell_shim_rp1_dfx_decoupler>;
 			partial-fpga-config ;
 		}};
 	}};
