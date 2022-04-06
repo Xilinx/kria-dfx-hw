@@ -169,32 +169,7 @@ def createDTBO(accel, path=TMP):
 			partial-fpga-config ;
 		}};
 	}};
-	/*fragment@2 {{
-		target = <&amba>;
-		overlay2_RP_0_: __overlay__ {{
-			#address-cells = <2>;
-			#size-cells = <2>;
-			RP_0_AccelConfig_0: AccelConfig@80000000 {{
-				/* This is a place holder node for a custom IP, user may need to update the entries */
-				clock-names = "clk";
-				clocks = <&misc_clk_RP_0_0>;
-				compatible = "xlnx,AccelConfig-1.0";
-				reg = <0x0 0x80000000 0x0 0x1000000>;
-			}};
-			misc_clk_RP_0_0: misc_clk_0 {{
-				#clock-cells = <0>;
-				clock-frequency = <249997498>;
-				compatible = "fixed-clock";
-			}};
-			RP_0_rm_comm_box_0: rm_comm_box@81000000 {{
-				/* This is a place holder node for a custom IP, user may need to update the entries */
-				clock-names = "clk";
-				clocks = <&misc_clk_RP_0_0>;
-				compatible = "xlnx,rm-comm-box-1.0";
-				reg = <0x0 0x81000000 0x0 0x1000000>;
-			}};
-		}};
-	}};*/
+
 
 }};
 '''.format(accel['id'], accel['bin'], accel['accelConfig'], accel['dm'])
