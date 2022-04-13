@@ -9,8 +9,8 @@
 	
 - Go to the 2rp design directory.
 	- 2rp_design -  kria_dfx_hw/k26/2rp_design
-	Please update the jobs number according to your machine in the file opendfx_shell.tcl
-        Line 2888- launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16
+- Please update the jobs number according to your machine in the file opendfx_shell.tcl
+  Line 2888- launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16
 
 ```
 
