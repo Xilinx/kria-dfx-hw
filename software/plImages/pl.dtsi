@@ -159,7 +159,7 @@
 				/* This is a place holder node for a custom IP, user may need to update the entries */
 				clock-names = "clk";
 				clocks = <&zynqmp_clk 71>;
-				compatible = "xlnx,SIHA-Manager-1.1";
+				compatible = "xlnx,SIHA-Manager-1.1","generic-uio";
 				reg = <0x0 0xa0100000 0x0 0x10000>;
 			};
 		};
