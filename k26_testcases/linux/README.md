@@ -20,7 +20,7 @@ For testing RM linux application, boot the board with linux image.
 Load xmutil loadapp <ACCELERATOR_NAME>
 
 ```
-xilinx-k26-starterkit-20221:#./aes128.elf
+xilinx-k26-starterkit-20221:#./AES128.elf
 ```
 
 
