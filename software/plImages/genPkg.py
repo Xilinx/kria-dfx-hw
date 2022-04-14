@@ -163,9 +163,8 @@ def createDTBO(accel, path=TMP):
 / {{
 	fragment@0 {{
 		target = <&fpga_PR{0}>;
-    	overlay0RP_0_: __overlay__ {{
+    	__overlay__ {{
 			firmware-name = "{1}";
-			fpga-bridges = <&static_shell_shim_rp1_dfx_decoupler>;
 			partial-fpga-config ;
 		}};
 	}};
@@ -179,10 +178,6 @@ def createDTBO(accel, path=TMP):
 	res = os.system(' '.join([DTC, '-I dts -O dtb', 
 			'-o', TMP + accel['bin'] + '_i.dtbo', 
 			'-@', TMP + accel['bin'] + '_i.dtsi']))
-	res = os.system(' '.join([DTC, '-I dtb -O dts', 
-			'-o', TMP + accel['bin'] + '_i.dtso', 
-			'-@', TMP + accel['bin'] + '_i.dtbo']))
-
 def parse(data):
 	accels = []
 	for slot in data:
