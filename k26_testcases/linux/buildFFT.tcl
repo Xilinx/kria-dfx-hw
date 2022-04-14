@@ -18,7 +18,7 @@ platform report
 domain list
 if {![file exists ${WS}/${XSA}_platform_0/psu_cortexa53_0/${DOMAIN}]} {
 	puts "Creating Domain ....."
-	domain create -name ${DOMAIN} -os linux -proc psu_cortexa53_0
+	domain create -name ${DOMAIN} -os linux -proc psu_cortexa53
 	platform generate
 } else {
 	puts "Domain exists."
