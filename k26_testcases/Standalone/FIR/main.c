@@ -1,7 +1,7 @@
 /******************************************************************************
-* Copyright (C) 2010 - 2020 Xilinx, Inc.  All rights reserved.
-* SPDX-License-Identifier: MIT
-******************************************************************************/
+ * Copyright (C) 2010 - 2020 Xilinx, Inc.  All rights reserved.
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include "xil_io.h"
@@ -27,16 +27,16 @@ int16_t reload[] = {142,-266,-59,32,66,70,61,44,23,1,-21,-40,-54,-59,-56,-43,-22
 
 void configFIR(int slot,u64 addr){
 	MM2SData(slot, addr, 0xA0, 0x01);
-    while(1){
-    	if(MM2SDone(slot)){
-    		xil_printf("MM2S Done !\n");
-    		break;
-    	}
-    }
+	while(1){
+		if(MM2SDone(slot)){
+			xil_printf("MM2S Done !\n");
+			break;
+		}
+	}
 	xil_printf("Reload coeff data \n");
 	//Transaction on Config port
 	MM2SData(slot,  addr+0xA0, 0x10, 0x02);
-    while(1){
+	while(1){
 		if(MM2SDone(slot)){
 			xil_printf("FIR Config Done !\n");
 			break;
@@ -97,7 +97,7 @@ int main(void){
 	//printBuff(0x100, OUTDATAADDRESS[1]);
 
 	printf("all done \n");
-    cleanup_platform();
+	cleanup_platform();
 	return XST_SUCCESS;
 }
 
