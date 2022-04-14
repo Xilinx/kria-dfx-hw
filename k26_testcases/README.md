@@ -22,3 +22,13 @@ Directory structure of k26_testcases-
 	* testAES192.tcl - xsdb commands to run the AES192 RM on the k26 board. 
 	* testFFT.tcl - xsdb commands to run the FFT RM on the k26 board. 
 	* testFIR.tcl - xsdb commands to run the FIR RM on the k26 board. 
+* Linux
+	* AES128- RM code
+	* AES192- RM code
+	* FFT- RM code
+	* FIR- RM code
+	* README.md- Instructions to build and test the elf
+	* buildAES128.tcl - Build vitis project for AES128 RM
+	* buildAES192.tcl - Build vitis project for AES192 RM
+	* buildFFT.tcl - Build vitis project for FFT RM
+	* buildFIR.tcl - Build vitis project for FIR RM
