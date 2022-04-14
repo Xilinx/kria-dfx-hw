@@ -28,7 +28,7 @@ repo -libs
 
 if {![file exists ${WS}/${APP}]} {
 	puts "Creating APP ....."
-	app create -name ${APP} -domain ${DOMAIN} -template "Empty Application(C++)"
+	app create -name ${APP} -domain ${DOMAIN} -template "Linux Empty Application"
 	importsources -name ${APP} -path ${SRC}
 } else {
 	puts "APP exists."
