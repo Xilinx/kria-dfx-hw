@@ -14,6 +14,11 @@ xsct buildFIR.tcl
 
 xsct buildAES192.tcl
 ```
+
+Clean build
+```
+make clean
+```
 # Run tests
 
 Update the Vitis path in the environment.tcl line 2. 
