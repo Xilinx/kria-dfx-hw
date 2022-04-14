@@ -1,7 +1,7 @@
 /******************************************************************************
-* Copyright (C) 2010 - 2020 Xilinx, Inc.  All rights reserved.
-* SPDX-License-Identifier: MIT
-******************************************************************************/
+ * Copyright (C) 2010 - 2020 Xilinx, Inc.  All rights reserved.
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include "xil_io.h"
@@ -105,7 +105,7 @@ int main(void){
 	//printBuff(0x100, OUTDATAADDRESS[1]);
 
 	printf("all done \n");
-        cleanup_platform();
+	cleanup_platform();
 	return XST_SUCCESS;
 }
 
