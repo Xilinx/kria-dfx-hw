@@ -77,7 +77,6 @@ uint32_t encryptedkeybuff[] = {
 	0x00000000, 0x00000000, 0x00000000, 0x00000000
 };
 
-#define BUFFSIZE 0x400000
 int main(int argc, char *argv[])
 {
 	int fd1,fd2,fd3;
