@@ -8,6 +8,11 @@
 [plImages]$ vim genOverlay.sh
 [plImages]$ vim genPkg.py
 ```
+### Generate bin files, overlay and firmware package
+
+```bash
+[plImages]$ make all
+```
 
 ### Import bit files and generate bin files
 
