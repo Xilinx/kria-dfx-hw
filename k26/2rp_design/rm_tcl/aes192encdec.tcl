@@ -169,12 +169,12 @@ proc cr_bd_AES192 { parentCell designName} {
  ] $xlconstant_0
 
   # Create interface connections
-  connect_bd_intf_net -intf_net AES192_Dec_0_out_r [get_bd_intf_pins AES192_Dec_0/out_r] [get_bd_intf_pins axis_accel_sel_0/out_V_enc]
-  connect_bd_intf_net -intf_net AES192_Enc_0_out_r [get_bd_intf_pins AES192_Enc_0/out_r] [get_bd_intf_pins axis_accel_sel_0/out_V_dec]
+  connect_bd_intf_net -intf_net AES192_Dec_0_out_r [get_bd_intf_pins AES192_Dec_0/out_r] [get_bd_intf_pins axis_accel_sel_0/out_V_dec]
+  connect_bd_intf_net -intf_net AES192_Enc_0_out_r [get_bd_intf_pins AES192_Enc_0/out_r] [get_bd_intf_pins axis_accel_sel_0/out_V_enc]
   connect_bd_intf_net -intf_net AccelConfig_0_tid0_axis [get_bd_intf_pins AccelConfig_0/tid0_axis] [get_bd_intf_pins axis_accel_sel_0/in_V]
   connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins smartconnect_0/S00_AXI]
-  connect_bd_intf_net -intf_net axis_accel_sel_0_in_V_dec [get_bd_intf_pins AES192_Enc_0/in_r] [get_bd_intf_pins axis_accel_sel_0/in_V_dec]
-  connect_bd_intf_net -intf_net axis_accel_sel_0_in_V_enc [get_bd_intf_pins AES192_Dec_0/in_r] [get_bd_intf_pins axis_accel_sel_0/in_V_enc]
+  connect_bd_intf_net -intf_net axis_accel_sel_0_in_V_dec [get_bd_intf_pins AES192_Dec_0/in_r] [get_bd_intf_pins axis_accel_sel_0/in_V_dec]
+  connect_bd_intf_net -intf_net axis_accel_sel_0_in_V_enc [get_bd_intf_pins AES192_Enc_0/in_r] [get_bd_intf_pins axis_accel_sel_0/in_V_enc]
   connect_bd_intf_net -intf_net axis_accel_sel_0_out_V [get_bd_intf_pins axis_accel_sel_0/out_V] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
   connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/axis_in] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
