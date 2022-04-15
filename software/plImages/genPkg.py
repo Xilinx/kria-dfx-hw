@@ -60,90 +60,6 @@ def createAccelJson(accel, path=TMP):
 		"accel_metadata":{
     		}
 	}
-	if accel['name'] == 'aes128encdec':
-		accelData["accel_metadata"] = {
-						"fallback": {
-							"Behaviour" : "FUN",
-				           		"fallback_Lib" : "NONE"
-        					},
-        					"Input_Data_Block_Size" : "0x1000000",
-        					"Output_Data_Block_Size":"0x1000000",
-        					"Input_Channel_Count" : 2,
-        					"Output_Channel_Count" : 1,
-        					"Inter_RM":{
-            						"Compatible" : "True",
-            						"Address" : "0x10000000"
-         					},
-       						"Config_Buffer_Size" : "0x4000",
-     				   		"Input_Buffer_Size" : "0x1000000",
-   				     		"Output_Buffer_Size":"0x1000000",
-   				     		"Throughput" : 10,
- 				       		"DMA_type":"HLS_MULTICHANNEL_DMA",
-			        		"Accel_Handshake_Type": "streamDataFromTrg"
-    					}
-	elif accel['name'] == 'aes192encdec':
-		accelData["accel_metadata"] = {
-						"fallback": {
-							"Behaviour" : "FUN",
-				           		"fallback_Lib" : "NONE"
-        					},
-        					"Input_Data_Block_Size" : "0x1000000",
-        					"Output_Data_Block_Size": "0x1000000",
-        					"Input_Channel_Count" : 2,
-        					"Output_Channel_Count" : 1,
-        					"Inter_RM":{
-            						"Compatible" : "True",
-            						"Address" : "0x10000000"
-         					},
-       						"Config_Buffer_Size" : "0x4000",
-     				   		"Input_Buffer_Size" : "0x1000000",
-   				     		"Output_Buffer_Size": "0x1000000",
-   				     		"Throughput" : 10,
- 				       		"DMA_type":"HLS_MULTICHANNEL_DMA",
-			        		"Accel_Handshake_Type": "streamDataFromTrg"
-    					}
-	elif accel['name'] == 'FFT4':
-		accelData["accel_metadata"] = {
-						"fallback": {
-							"Behaviour" : "FUN",
-				           		"fallback_Lib" : "NONE"
-        					},
-        					"Input_Data_Block_Size" : "0x1000000",
-        					"Output_Data_Block_Size":"0x1000000",
-        					"Input_Channel_Count" : 6,
-        					"Output_Channel_Count" : 1,
-        					"Inter_RM":{
-            						"Compatible" : "True",
-            						"Address" : "0x10000000"
-         					},
-       						"Config_Buffer_Size" : "0x4000",
-     				   		"Input_Buffer_Size" : "0x1000000",
-   				     		"Output_Buffer_Size":"0x1000000",
-   				     		"Throughput" : 10,
- 				       		"DMA_type":"HLS_MULTICHANNEL_DMA",
-			        		"Accel_Handshake_Type": "streamDataFromTrg"
-    					}
-	elif accel['name'] == 'FIR_compiler':
-		accelData["accel_metadata"] = {
-						"fallback": {
-							"Behaviour" : "FUN",
-				           		"fallback_Lib" : "NONE"
-        					},
-        					"Input_Data_Block_Size" : "0x1000000",
-        					"Output_Data_Block_Size":"0x1000000",
-        					"Input_Channel_Count" : 5,
-        					"Output_Channel_Count" : 1,
-        					"Inter_RM":{
-            						"Compatible" : "True",
-            						"Address" : "0x10000000"
-         					},
-       						"Config_Buffer_Size" : "0x4000",
-     				   		"Input_Buffer_Size" : "0x1000000",
-   				     		"Output_Buffer_Size":"0x1000000",
-   				     		"Throughput" : 10,
- 				       		"DMA_type":"HLS_MULTICHANNEL_DMA",
-			        		"Accel_Handshake_Type": "streamDataFromTrg"
-    					}
 	filehandle = open(FILEPATH, 'w')
 	filehandle.write(json.dumps(accelData, indent=2, sort_keys=True))
 	filehandle.close()
@@ -164,8 +80,8 @@ def createDTBO(accel, path=TMP):
 	fragment@0 {{
 		target = <&fpga_PR{0}>;
     	__overlay__ {{
-			firmware-name = "{1}";
-			partial-fpga-config ;
+		firmware-name = "{1}";
+		partial-fpga-config ;
 		}};
 	}};
 
