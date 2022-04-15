@@ -12,7 +12,7 @@ if [file exists ${WS}/${XSA}_platform_0] {
 	platform active ${XSA}_platform_0
 } else {
 	puts "Creating Platform ....."
-	platform create -name ${XSA}_platform_0 -hw ${PATH}/${XSA}.xsa
+	platform create -name ${XSA}_platform_0 -hw ${XSA_PATH}/${XSA}.xsa
 }
 platform report
 domain list
