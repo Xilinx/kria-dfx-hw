@@ -4,7 +4,7 @@ import json
 
 #Update DTC path"
 DTC="$PETALINUX/components/yocto/buildtools/sysroots/x86_64-petalinux-linux/usr/bin/dtc"
-RELEASE="./firmware/"
+RELEASE="./k26_2rp/"
 TMP="./tmp/"
 BASE2RP="./"
 
@@ -198,7 +198,6 @@ def package(accel, releasedir = RELEASE, tmpdir = TMP):
 	res = os.system(' '.join(['mkdir', '-p', RELEASE + DIR]))
 	res = os.system(' '.join(['cp', TMP + accel['bin'], RELEASE + DIR + '/' + accel['bin']]))
 	res = os.system(' '.join(['cp', TMP + accel['bin'] + '_i.dtbo', RELEASE + DIR ]))
-	res = os.system(' '.join(['cp', TMP + accel['bin'] + '_i.dtso', RELEASE + DIR ]))
 	res = os.system(' '.join(['cp', TMP + 'accel.json', RELEASE + DIR]))
 	pass
 
