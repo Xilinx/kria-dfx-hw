@@ -1,5 +1,5 @@
 set XSA "opendfx_shell_wrapper"
-set PATH "../../k26/2rp_design/project_1"
+set XSA_PATH "../../k26/2rp_design/project_1"
 set SRC "./FFT"
 set WS "workspace_FFT"
 set SYSCFG "app_sysconfig"
