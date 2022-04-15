@@ -1,5 +1,5 @@
 set XSA "opendfx_shell_wrapper"
-set PATH "../../k26/2rp_design/project_1"
+set XSA_PATH "../../k26/2rp_design/project_1"
 set SRC "./FFT"
 set SRCM "./src"
 set WS "workspace_FFT"
@@ -13,7 +13,7 @@ if [file exists ${WS}/${XSA}_platform_0] {
 	platform active ${XSA}_platform_0
 } else {
 	puts "Creating Platform ....."
-	platform create -name ${XSA}_platform_0 -hw ${PATH}/${XSA}.xsa
+	platform create -name ${XSA}_platform_0 -hw ${XSA_PATH}/${XSA}.xsa
 }
 platform report
 domain list
