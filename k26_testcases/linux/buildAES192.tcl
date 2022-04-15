@@ -1,6 +1,6 @@
 set XSA "opendfx_shell_wrapper"
 #Add the XSA path 
-set PATH "../../k26/2rp_design/project_1"
+set XSA_PATH "../../k26/2rp_design/project_1"
 set SRC "./AES192"
 set WS "workspace_AES192"
 set SYSCFG "app_sysconfig"
@@ -13,7 +13,7 @@ if [file exists ${WS}/${XSA}_platform_0] {
 	platform active ${XSA}_platform_0
 } else {
 	puts "Creating Platform ....."
-	platform create -name ${XSA}_platform_0 -hw ${PATH}/${XSA}.xsa
+	platform create -name ${XSA}_platform_0 -hw ${XSA_PATH}/${XSA}.xsa
 }
 platform report
 domain list
