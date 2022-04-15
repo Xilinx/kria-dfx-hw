@@ -23,3 +23,6 @@ The repository structure is outlined below.
 		* src - Source code
 		* build_<RM_name>.tcl - Creates vitis project, source the code, and build elf. 
 		* test_<RM_name>.tcl - Tcl to test the RM on the board 
+	* Linux	
+		* RM_code
+		* build_<RM_name>.tcl - Creates vitis linux project, source the code, and build elf. 
