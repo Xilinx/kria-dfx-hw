@@ -34,4 +34,4 @@ firmware:
 	./genPkg.py
 
 clean:
-	rm -rf *.bin *.bit *.bif *.dtbo *.xsa
+	rm -rf *.bin *.bit *.bif *.dtbo *.xsa k26_2rp
