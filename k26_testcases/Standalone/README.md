@@ -32,17 +32,21 @@ For testing RM, run the corresponding tcl in xsdb prompt on board.
 
 BOOT Mode should be JTAG. 
 ```
-source environment.tcl
+xsdb% source environment.tcl
 ```
-
 ```
-source testAES128.tcl
+xsdb% source som_bootmode.tcl
+xsdb% connect
+xsdb% boot_jtag
+```
+```
+xsdb% source testAES128.tcl
 
-source testAES192.tcl
+xsdb% source testAES192.tcl
 
-source testFIR.tcl
+xsdb% source testFIR.tcl
 
-source testFFT.tcl
+xsdb% source testFFT.tcl
 ```
 
 Last prints on uart terminal will match the outputs given below-
