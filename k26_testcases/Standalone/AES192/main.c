@@ -119,22 +119,22 @@ int main(void){
 	writeBuff(encryptedkeybuff, 0x20, CONFIGADDRESS[0]);
 	writeBuff(decryptedkeybuff, 0x20, CONFIGADDRESS[1]);
 
-	configAES(0, CONFIGADDRESS[0]);
-	configAES(1, CONFIGADDRESS[1]);
+	configAES(0, CONFIGADDRESS[1]);
+	configAES(1, CONFIGADDRESS[0]);
 
 	printf("Config done!!\n");
-	trigger_DMA(0, INDATAADDRESS[0],0x200000,OUTDATAADDRESS[0],0x200000);
+	trigger_DMA(0, INDATAADDRESS[1],0x200000,OUTDATAADDRESS[0],0x200000);
 	wait_DMA(0);
 	printf("slot 0 done !!\n");
-	trigger_DMA(1, INDATAADDRESS[1],0x200000,OUTDATAADDRESS[1],0x200000);
+	trigger_DMA(1, INDATAADDRESS[0],0x200000,OUTDATAADDRESS[1],0x200000);
 	wait_DMA(1);
 	printf("slot 1 done !!\n");
 
 	printf("comparing slot 0 output with reference ...\n");
-	compare(0x200000, OUTDATAADDRESS[0], INDATAADDRESS[1]);
+	compare(0x200000, OUTDATAADDRESS[0], INDATAADDRESS[0]);
 
 	printf("comparing slot 1 output with reference ...\n");
-	compare(0x200000, OUTDATAADDRESS[1], INDATAADDRESS[0]);
+	compare(0x200000, OUTDATAADDRESS[1], INDATAADDRESS[1]);
 
 	//printf("Input Data ...\n");
 	//printBuff(0x100, INDATAADDRESS[0]);
