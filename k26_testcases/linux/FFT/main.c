@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Xilinx, Inc.  All rights reserved.
+ * Copyright (c) 2022 Xilinx, Inc.  All rights reserved.
  *
  * Xilinx, Inc.
  * XILINX IS PROVIDING THIS DESIGN, CODE, OR INFORMATION "AS IS" AS A
@@ -27,64 +27,30 @@
 #define S2MM      0x0000
 #define MM2S      0x10000
 
-uint32_t decryptedbuff[] = {
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233
-};
+uint32_t config[] = {0x0000000c,0x0000000c,0x0000000c,0x0000000c};
 
-uint32_t encryptedbuff[] = {
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
+uint32_t fft_data_in[] = {
 	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7
 };
-
-uint32_t decryptedkeybuff[] = {
-	0x0c0d0e0f, 0x08090a0b, 0x04050607, 0x00010203,
-	0x00000001, 0x00000000, 0x00000000, 0x00000000
+uint32_t fft_data_out[] = {
+	0x88009C00, 0x5C006800, 0x5800E400, 0x1400A800
 };
 
-uint32_t encryptedkeybuff[] = {
-	0x0c0d0e0f, 0x08090a0b, 0x04050607, 0x00010203,
+uint32_t resultbuff[] = {
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
 	0x00000000, 0x00000000, 0x00000000, 0x00000000
 };
 
-#define BUFFSIZE 0x400000
+
 int main(int argc, char *argv[])
 {
 	int fd1,fd2,fd3;
 	void *accel_ptr,*siha_ptr,*rmcomm_ptr;
 	char *uiod1 = "/dev/uio4";//Siha_manager
-	char *uiod2 = "/dev/uio5";//Accelconfig
-	char *uiod3 = "/dev/uio6";//rmcomm_box
+	char *uiod2 = "/dev/uio7";//Accelconfig
+	char *uiod3 = "/dev/uio8";//rmcomm_box
 	//Application code for slot0. UID are of slot0
 
 	/* Open the UIO device file to allow access to the device in user space*/
@@ -115,7 +81,7 @@ int main(int argc, char *argv[])
 		printf("Failed to map memory %s [%d]: %s(): \n", __FILE__, __LINE__, __FUNCTION__);
 		return -1;}
 
-	unsigned int ddr_size = 0x8000;
+	unsigned int ddr_size = 0x80000;
 	off_t ddr_pbase = 0x60000000; // physical base address
 	int *vptr;int fd;
 	// Map the ddr physical address into user space getting a virtual address for it
@@ -123,53 +89,104 @@ int main(int argc, char *argv[])
 		vptr = (int *)mmap(NULL, ddr_size, PROT_READ|PROT_WRITE, MAP_SHARED, fd, ddr_pbase);
 		// Write to the memory that was mapped, use devmem from the command line of Linux to verify it worked
 		int i=0;
-		for (i=0;i<8;i++)
+		for (i=0;i<4;i++)
 		{
-			vptr[i]=encryptedkeybuff[i];
+			vptr[i]=config[i];
 		}
-		for (i=0; i< 64; i++)
+
+		for (i=0;i<16384;i++)
 		{
-			vptr[i+64]=encryptedbuff[i];
+			vptr[1024+i]=fft_data_in[i%4];
 		}
-		//close(fd);
 	}
 
-	//Initialize AES128
-	*((volatile unsigned *)(accel_ptr))=0x81; // Enable Accelerator in RP 0
-	printf("Slot enabled !!\n");
-
-	//Program key to Accelerator
-	//Config key DM with TID 1
-	// DM Seq 0x010, 0x14, 0x1c, 0x24, 0x0 memaddr_low, mem_high, size, tid, ctrl
-	*((volatile unsigned *)(rmcomm_ptr+0x10+MM2S))= 0x60000000; //memaddr_low
+	printf("FFT TEST :\n");
+    //Configure FFT Ch0
+    *((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x60000000; //memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
-	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x2; //size
+	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x1;//size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x1; //tid
-	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;        //Ctrl
-	printf("Config done !!\n");
+	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;	       //Ctrl
 
-	//Config MM2S	TID 0
-	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x60000100; //memaddr_low
+	int status = *((volatile unsigned *)(rmcomm_ptr +MM2S));
+	while (! ((status) & 0x1))
+		status =*((volatile unsigned *)(rmcomm_ptr +MM2S));
+
+    //Configure FFT Ch1
+    *((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x60000000; //memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
-	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x10;//size
+	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x1;//size
+	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x2; //tid
+	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;	       //Ctrl
+
+	status = *((volatile unsigned *)(rmcomm_ptr +MM2S));
+	while (! ((status) & 0x1))
+		status =*((volatile unsigned *)(rmcomm_ptr +MM2S));
+
+        //Configure FFT Ch2
+    *((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x60000000; //memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
+	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x1;//size
+	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x3; //tid
+	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;	       //Ctrl
+
+	status = *((volatile unsigned *)(rmcomm_ptr +MM2S));
+	while (! ((status) & 0x1))
+		status =*((volatile unsigned *)(rmcomm_ptr +MM2S));
+
+        //Configure FFT Ch3
+    *((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x60000000; //memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
+	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x1;//size
+	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x4; //tid
+	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;	       //Ctrl
+
+	status = *((volatile unsigned *)(rmcomm_ptr +MM2S));
+	while (! ((status) & 0x1))
+		status =*((volatile unsigned *)(rmcomm_ptr +MM2S));
+
+	//Config MM2S data
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x60001000; //memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
+	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x1000;//size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x0; //tid
 	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;	       //Ctrl
-	int statusd1;
-	statusd1 = *((volatile unsigned *)(rmcomm_ptr +MM2S));
-	while (! ((statusd1) & 0x1))
-		statusd1 =*((volatile unsigned *)(rmcomm_ptr +MM2S));
+	status = *((volatile unsigned *)(rmcomm_ptr +MM2S));
+	while (! ((status) & 0x1))
+		status =*((volatile unsigned *)(rmcomm_ptr +MM2S));
 
-	//Config S2MM
-	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x60000200;//memaddr_low
+	//Config S2MM data
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x60011000;//memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +S2MM))=0x0; //memaddr_high
-	*((volatile unsigned *)(rmcomm_ptr + 0x1c +S2MM))=0x10;//size
+	*((volatile unsigned *)(rmcomm_ptr + 0x1c +S2MM))=0x1000;//size
 	*((volatile unsigned *)(rmcomm_ptr +S2MM))=0x1;	       //Ctrl
-	int statusb3;
-	statusb3 = *((volatile unsigned *)(rmcomm_ptr));
-	while (! ((statusb3) & 0x1))
-		statusb3 =*((volatile unsigned *)(rmcomm_ptr ));
-	printf("slot 0 done !!\n");
+	status = *((volatile unsigned *)(rmcomm_ptr));
+	while (! ((status) & 0x1))
+		status =*((volatile unsigned *)(rmcomm_ptr ));
 
+	sleep(2);									//Time added for completion of FFT before reading the out data
+
+	for (int i=0; i < 16; i++)					//Copying out data to resultbuff for comparision with golden data
+	  	resultbuff[i] = vptr[(i*1024)+17408];
+
+	int same_flag = 1;
+		for (int i=0; i< 16; i++)
+		{
+			if(fft_data_out[i%4] != resultbuff[i])
+			{
+				same_flag=0;
+				break;
+			}
+		}
+
+		if(same_flag)
+			printf("\t === TEST PASSED ===\n");
+		else
+			printf("\t === TEST FAILED ===\n");
+
+	close(fd1);
+	close(fd2);
+	close(fd3);
 	return 0;
 
 }
