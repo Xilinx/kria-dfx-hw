@@ -43,7 +43,6 @@ uint32_t decryptedbuff[] = {
 	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
 	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
 	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
-	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233,
 	0xccddeeff, 0x8899aabb, 0x44556677, 0x00112233
 };
 
@@ -63,17 +62,35 @@ uint32_t encryptedbuff[] = {
 	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
 	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
 	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
-	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7,
 	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7
 };
 
-uint32_t decryptedkeybuff[] = {
+uint32_t encryptionkeybuff[] = {
 	0x0c0d0e0f, 0x08090a0b, 0x04050607, 0x00010203,
 	0x00000001, 0x00000000, 0x00000000, 0x00000000
 };
 
-uint32_t encryptedkeybuff[] = {
+uint32_t decryptionkeybuff[] = {
 	0x0c0d0e0f, 0x08090a0b, 0x04050607, 0x00010203,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000
+};
+
+uint32_t resultbuff[] = {
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
 	0x00000000, 0x00000000, 0x00000000, 0x00000000
 };
 
@@ -122,20 +139,28 @@ int main(int argc, char *argv[])
 		vptr = (int *)mmap(NULL, ddr_size, PROT_READ|PROT_WRITE, MAP_SHARED, fd, ddr_pbase);
 		// Write to the memory that was mapped, use devmem from the command line of Linux to verify it worked
 		int i=0;
-		for (i=0;i<8;i++)
+		for (i=0;i<8;i++)						//0x60000000 to 0x6000001C
 		{
-			vptr[i]=encryptedkeybuff[i];
+			vptr[i]=decryptionkeybuff[i];
 		}
-		for (i=0; i< 64; i++)
+		for (i=0;i<8;i++)						//0x60000020 to 0x6000003C
+		{
+			vptr[i+8]=encryptionkeybuff[i];
+		}
+		for (i=0; i< 64; i++)					//0x60000100 to 0x600001FC
 		{
 			vptr[i+64]=encryptedbuff[i];
 		}
-		//close(fd);
+		for (i=0; i< 64; i++)					//0x60000200 to 0x600002FC
+		{
+			vptr[i+128]=decryptedbuff[i];
 	}
+	}
+
 
 	//Initialize AES128
 	*((volatile unsigned *)(accel_ptr))=0x81; // Enable Accelerator in RP 0
-	printf("Slot enabled !!\n");
+	printf("DECRYPTION TEST :\n");
 
 	//Program key to Accelerator
 	//Config key DM with TID 1
@@ -145,7 +170,7 @@ int main(int argc, char *argv[])
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x2; //size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x1; //tid
 	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;        //Ctrl
-	printf("Config done !!\n");
+	printf("\t Slot congifured for DECRYPTION.\n");
 
 	//Config MM2S	TID 0
 	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x60000100; //memaddr_low
@@ -153,24 +178,94 @@ int main(int argc, char *argv[])
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x10;//size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x0; //tid
 	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;	       //Ctrl
-	int statusd1;
-	statusd1 = *((volatile unsigned *)(rmcomm_ptr +MM2S));
-	while (! ((statusd1) & 0x1))
-		statusd1 =*((volatile unsigned *)(rmcomm_ptr +MM2S));
+	int status;
+	status = *((volatile unsigned *)(rmcomm_ptr +MM2S));
+	while (! ((status) & 0x1))
+		status =*((volatile unsigned *)(rmcomm_ptr +MM2S));
 
 	//Config S2MM
-	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x60000200;//memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x60000600;//memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +S2MM))=0x0; //memaddr_high
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +S2MM))=0x10;//size
 	*((volatile unsigned *)(rmcomm_ptr +S2MM))=0x1;	       //Ctrl
-	int statusb3;
-	statusb3 = *((volatile unsigned *)(rmcomm_ptr));
-	while (! ((statusb3) & 0x1))
-		statusb3 =*((volatile unsigned *)(rmcomm_ptr ));
-	printf("slot 0 done !!\n");
+	
+	status = *((volatile unsigned *)(rmcomm_ptr));
+	while (! ((status) & 0x1))
+		status =*((volatile unsigned *)(rmcomm_ptr ));
+	printf("\t DECRYPTION done.\n");
+
+	for (int i=0; i< 64; i++)					//Copying decrypted data to resultbuff for comparision with golden data
+    resultbuff[i] = vptr[i+384];
+
+	int same_flag = 1;
+	for (int i=0; i< 64; i++)
+	{
+		if(decryptedbuff[i] != resultbuff[i])
+		{
+			same_flag=0;
+			break;
+		}
+	}
+
+	if(same_flag)
+		printf("\t === TEST PASSED ===\n");
+	else
+		printf("\t === TEST FAILED ===\n");
+
+	//Initialize AES128
+	*((volatile unsigned *)(accel_ptr))=0x81; // Enable Accelerator in RP 0
+	printf("ENCRYPTION TEST :\n");
+
+	//Program key to Accelerator
+	//Config key DM with TID 1
+	// DM Seq 0x010, 0x14, 0x1c, 0x24, 0x0 memaddr_low, mem_high, size, tid, ctrl
+	*((volatile unsigned *)(rmcomm_ptr+0x10+MM2S))= 0x60000020; //memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
+	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x2; //size
+	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x1; //tid
+	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;        //Ctrl
+	printf("\t Slot congifured for ENCRYPTION.\n");
+
+	//Config MM2S	TID 0
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x60000200; //memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
+	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x10;//size
+	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x0; //tid
+	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;	       //Ctrl
+
+	status = *((volatile unsigned *)(rmcomm_ptr +MM2S));
+	while (! ((status) & 0x1))
+		status =*((volatile unsigned *)(rmcomm_ptr +MM2S));
+
+	//Config S2MM
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x60000600;//memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x14 +S2MM))=0x0; //memaddr_high
+	*((volatile unsigned *)(rmcomm_ptr + 0x1c +S2MM))=0x10;//size
+	*((volatile unsigned *)(rmcomm_ptr +S2MM))=0x1;	       //Ctrl
+
+	status = *((volatile unsigned *)(rmcomm_ptr));
+	while (! ((status) & 0x1))
+		status =*((volatile unsigned *)(rmcomm_ptr ));
+	printf("\t ENCRYPTION done.\n");
+
+	for (int i=0; i< 64; i++)					//Copying encrypted data to resultbuff for comparision with golden data
+  	resultbuff[i] = vptr[i+384];
+	
+	same_flag = 1;
+	for (int i=0; i< 64; i++)
+	{
+		if(encryptedbuff[i] != resultbuff[i])
+		{
+			same_flag=0;
+			break;
+}
+	}
+
+	if(same_flag)
+		printf("\t === TEST PASSED ===\n");
+	else
+		printf("\t === TEST FAILED ===\n");
 
 	return 0;
 
 }
-
-
