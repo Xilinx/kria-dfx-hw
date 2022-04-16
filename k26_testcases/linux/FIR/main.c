@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 	printf("test");
 	int fd1,fd2,fd3;
 	void *accel_ptr,*siha_ptr,*rmcomm_ptr;
-	
+
 	//Application code for slot1. UID are of slot1
 	char *uiod1 = "/dev/uio4";//Siha_manager
 	char *uiod2 = "/dev/uio7";//Accelconfig
@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 	}
 
 	printf("FIR RM !!\n");
-	
+
 	//Config reload data with TID 1
 	*((volatile unsigned *)(rmcomm_ptr+0x10+MM2S))= 0x70000000; //memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
 	statusd2 = *((volatile unsigned *)(rmcomm_ptr +MM2S));
 	while (! ((statusd2) & 0x1))
 		statusd2 =*((volatile unsigned *)(rmcomm_ptr +MM2S));
-	
+
 	//Config S2MM output data
 	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x70008000;//memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +S2MM))=0x0; //memaddr_high
@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
 	statusd3 = *((volatile unsigned *)(rmcomm_ptr));
 	while (! ((statusd3) & 0x1))
 		statusd3 =*((volatile unsigned *)(rmcomm_ptr ));
-	
+
 	printf("Done !!\n");
 	return 0;
 }
