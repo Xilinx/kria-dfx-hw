@@ -11,25 +11,25 @@ BASE2RP="./"
 data = [
 	{'id': 0, 'accelConfig': '0080000000', 'dm': '0081000000',
 	 'slots':
-         [{'name': 'aes128encdec',
+         [{'name': 'AES128',
            'bin': 'opendfx_shell_i_RP_0_AES128_inst_0_partial.bit.bin'},
-         {'name': 'aes192encdec',
+         {'name': 'AES192',
            'bin': 'opendfx_shell_i_RP_0_AES192_inst_0_partial.bit.bin'}, 
          {'name': 'FFT4',
            'bin': 'opendfx_shell_i_RP_0_FFT_4channel_inst_0_partial.bit.bin'}, 
-         {'name': 'FIR_compiler',
+         {'name': 'FIR',
            'bin': 'opendfx_shell_i_RP_0_FIR_compiler_inst_0_partial.bit.bin'}
          ]},
 
 	{'id': 1, 'accelConfig': '0082000000', 'dm': '0083000000',
 	 'slots':
-         [{'name': 'aes128encdec',
+         [{'name': 'AES128',
            'bin': 'opendfx_shell_i_RP_1_AES128_inst_1_partial.bit.bin'},
-         {'name': 'aes192encdec',
+         {'name': 'AES192',
            'bin': 'opendfx_shell_i_RP_1_AES192_inst_1_partial.bit.bin'},  
          {'name': 'FFT4',
            'bin': 'opendfx_shell_i_RP_1_FFT_4channel_inst_1_partial.bit.bin'},
-         {'name': 'FIR_compiler',
+         {'name': 'FIR',
            'bin': 'opendfx_shell_i_RP_1_FIR_compiler_inst_1_partial.bit.bin'}
          ]},
        ]
