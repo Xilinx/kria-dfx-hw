@@ -15,10 +15,10 @@ Please find the detailed steps- https://gitenterprise.xilinx.com/SOM/kria_dfx_hw
 
 Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/software/plImages/README.md 
 
-# HW Standalone Build & Test 
-
-Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/k26_testcases/Standalone/README.md 
-
 # Linux Build & Test
 
 Please find the detailed steps- https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/k26_testcases/linux/README.md
+
+# HW Standalone Build & Test 
+
+Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/k26_testcases/Standalone/README.md 
