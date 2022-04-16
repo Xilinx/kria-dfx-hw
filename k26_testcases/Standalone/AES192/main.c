@@ -119,8 +119,8 @@ int main(void){
 	writeBuff(encryptedkeybuff, 0x20, CONFIGADDRESS[0]);
 	writeBuff(decryptedkeybuff, 0x20, CONFIGADDRESS[1]);
 
-	configAES(0, CONFIGADDRESS[1]);
-	configAES(1, CONFIGADDRESS[0]);
+	configAES(0, CONFIGADDRESS[0]);
+	configAES(1, CONFIGADDRESS[1]);
 
 	printf("Config done!!\n");
 	trigger_DMA(0, INDATAADDRESS[0],0x200000,OUTDATAADDRESS[0],0x200000);
