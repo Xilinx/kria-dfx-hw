@@ -15,9 +15,9 @@ xsct buildFIR.tcl
 xsct buildAES192.tcl
 ```
 # Run tests
-For testing RM linux application, boot the board with linux image. 
+1. For testing RM linux application, boot the board with linux image. 
 
-Mount the board and transfer k26_2rp folder & elf file. 
+2. Mount the board and transfer k26_2rp folder & elf file. 
 
 Path for k26_2rp firmware- /software/plImages/k26_2rp 
 
