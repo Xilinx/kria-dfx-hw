@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
 		return -1;}
 
 	unsigned int ddr_size = 0x8000;
-	off_t ddr_pbase = 0x60000000; // physical base address
+	off_t ddr_pbase = 0x40000000; // physical base address
 	int *vptr;int fd;
 	// Map the ddr physical address into user space getting a virtual address for it
 	if ((fd = open("/dev/mem", O_RDWR | O_SYNC)) != -1) {
@@ -154,7 +154,7 @@ int main(int argc, char *argv[])
 		for (i=0; i< 64; i++)					//0x60000200 to 0x600002FC
 		{
 			vptr[i+128]=decryptedbuff[i];
-	}
+		}
 	}
 
 
@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
 	//Program key to Accelerator
 	//Config key DM with TID 1
 	// DM Seq 0x010, 0x14, 0x1c, 0x24, 0x0 memaddr_low, mem_high, size, tid, ctrl
-	*((volatile unsigned *)(rmcomm_ptr+0x10+MM2S))= 0x60000000; //memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))= 0x40000000; //memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x2; //size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x1; //tid
@@ -173,7 +173,7 @@ int main(int argc, char *argv[])
 	printf("\t Slot congifured for DECRYPTION.\n");
 
 	//Config MM2S	TID 0
-	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x60000100; //memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x40000100; //memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x10;//size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x0; //tid
@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
 		status =*((volatile unsigned *)(rmcomm_ptr +MM2S));
 
 	//Config S2MM
-	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x60000600;//memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x40000600;//memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +S2MM))=0x0; //memaddr_high
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +S2MM))=0x10;//size
 	*((volatile unsigned *)(rmcomm_ptr +S2MM))=0x1;	       //Ctrl
@@ -219,7 +219,7 @@ int main(int argc, char *argv[])
 	//Program key to Accelerator
 	//Config key DM with TID 1
 	// DM Seq 0x010, 0x14, 0x1c, 0x24, 0x0 memaddr_low, mem_high, size, tid, ctrl
-	*((volatile unsigned *)(rmcomm_ptr+0x10+MM2S))= 0x60000020; //memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))= 0x40000020; //memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x2; //size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x1; //tid
@@ -227,7 +227,7 @@ int main(int argc, char *argv[])
 	printf("\t Slot congifured for ENCRYPTION.\n");
 
 	//Config MM2S	TID 0
-	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x60000200; //memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x40000200; //memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x10;//size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x0; //tid
@@ -238,7 +238,7 @@ int main(int argc, char *argv[])
 		status =*((volatile unsigned *)(rmcomm_ptr +MM2S));
 
 	//Config S2MM
-	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x60000600;//memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x40000600;//memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +S2MM))=0x0; //memaddr_high
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +S2MM))=0x10;//size
 	*((volatile unsigned *)(rmcomm_ptr +S2MM))=0x1;	       //Ctrl
@@ -258,7 +258,7 @@ int main(int argc, char *argv[])
 		{
 			same_flag=0;
 			break;
-}
+		}
 	}
 
 	if(same_flag)
@@ -266,6 +266,9 @@ int main(int argc, char *argv[])
 	else
 		printf("\t === TEST FAILED ===\n");
 
+	close(fd1);
+	close(fd2);
+	close(fd3);
 	return 0;
 
 }
