@@ -30,7 +30,7 @@ xilinx-k26-starterkit-20221:/home/petalinux# mkdir /mnt_nfsroot
 xilinx-k26-starterkit-20221:/home/petalinux# mount -o port=2049,nolock,proto=tcp,vers=3 10.10.70.101:/exports/root /mnt_nfsroot
 xilinx-k26-starterkit-20221:/home/petalinux# cp -r /mnt_nfsroot/k26_2rp /lib/firmware/xilinx/ 
 xilinx-k26-starterkit-20221:/home/petalinux# xmutil listapps
-xilinx-k26-starterkit-20221:/home/petalinux# xmutil loadapp aes128encdec
+xilinx-k26-starterkit-20221:/home/petalinux# xmutil loadapp AES128
 xilinx-k26-starterkit-20221:/home/petalinux# cp -r /mnt_nfsroot/AES128.elf .
 xilinx-k26-starterkit-20221:/home/petalinux# ./AES128.elf 
 ```
