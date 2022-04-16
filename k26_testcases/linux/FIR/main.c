@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
 	char *uiod2 = "/dev/uio7";//Accelconfig
 	char *uiod3 = "/dev/uio8";//rmcomm_box
 
-	printf("uid opened");
 	/* Open the UIO device file to allow access to the device in user space*/
 	fd1 = open(uiod1, O_RDWR | O_SYNC);
 	if (fd1 < 1) {
@@ -40,7 +39,7 @@ int main(int argc, char *argv[])
 	if (fd3 < 1) {
 		printf("Failed to open %s device\n", uiod3);
 		return -1;}
-	printf("uid done");
+
 	/* Memory map */
 	siha_ptr = mmap(NULL, 0x4000, PROT_READ | PROT_WRITE, MAP_SHARED, fd1, 0);
 	if (siha_ptr == MAP_FAILED) {
@@ -103,8 +102,7 @@ int main(int argc, char *argv[])
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x1000;//size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x0; //tid
 	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;	       //Ctrl
-	printf("Config done !!\n");
-
+	
 	int statusd2;
 	statusd2 = *((volatile unsigned *)(rmcomm_ptr +MM2S));
 	while (! ((statusd2) & 0x1))
