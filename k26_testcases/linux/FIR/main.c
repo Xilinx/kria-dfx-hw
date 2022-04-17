@@ -17,7 +17,7 @@ uint32_t fir_data_in[] = {
 
 int main(int argc, char *argv[])
 {
-	printf("test");
+	printf("FIR TEST :");
 	int fd1,fd2,fd3;
 	void *accel_ptr,*siha_ptr,*rmcomm_ptr;
 
@@ -78,15 +78,13 @@ int main(int argc, char *argv[])
 		//close(fd);
 	}
 
-	printf("FIR RM !!\n");
-
 	//Config reload data with TID 1
 	*((volatile unsigned *)(rmcomm_ptr+0x10+MM2S))= 0x70000000; //memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +MM2S))=0x0; //mem_high
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0xA; //size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x1; //tid
 	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;        //Ctrl
-	printf("Reload done !!\n");
+	//printf("Reload done !!\n");
 
 	//Config Data MM2S with TID 0 
 	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x70000200; //memaddr_low
@@ -94,7 +92,7 @@ int main(int argc, char *argv[])
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x1;//size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x2; //tid
 	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;	       //Ctrl
-	printf("Config done !!\n");
+	//printf("Config done !!\n");
 
 	//Config MM2S fir input data
 	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x70000400; //memaddr_low
@@ -118,6 +116,9 @@ int main(int argc, char *argv[])
 	while (! ((statusd3) & 0x1))
 		statusd3 =*((volatile unsigned *)(rmcomm_ptr ));
 
-	printf("Done !!\n");
+	//printf("Done !!\n");
+	close(fd1);
+	close(fd2);
+	close(fd3);
 	return 0;
 }
