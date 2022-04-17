@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x2; //size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x1; //tid
 	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;        //Ctrl
-	printf("\t Slot congifured for DECRYPTION.\n");
+	printf("\t Slot configured for DECRYPTION.\n");
 
 	//Config MM2S	TID 0
 	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x40000100; //memaddr_low
@@ -224,7 +224,7 @@ int main(int argc, char *argv[])
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +MM2S))=0x2; //size
 	*((volatile unsigned *)(rmcomm_ptr + 0x24 +MM2S))=0x1; //tid
 	*((volatile unsigned *)(rmcomm_ptr +MM2S))=0x1;        //Ctrl
-	printf("\t Slot congifured for ENCRYPTION.\n");
+	printf("\t Slot configured for ENCRYPTION.\n");
 
 	//Config MM2S	TID 0
 	*((volatile unsigned *)(rmcomm_ptr + 0x10 +MM2S))=0x40000200; //memaddr_low
