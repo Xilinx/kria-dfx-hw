@@ -26,7 +26,7 @@ uint32_t resultbuff[] = {
 
 int main(int argc, char *argv[])
 {
-	printf("FIR TEST :");
+	printf("FIR TEST :\n");
 	int fd1,fd2,fd3;
 	void *accel_ptr,*siha_ptr,*rmcomm_ptr;
 
@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 		statusd2 =*((volatile unsigned *)(rmcomm_ptr +MM2S));
 
 	//Config S2MM output data
-	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x70008000;//memaddr_low
+	*((volatile unsigned *)(rmcomm_ptr + 0x10 +S2MM))=0x70011000;//memaddr_low
 	*((volatile unsigned *)(rmcomm_ptr + 0x14 +S2MM))=0x0; //memaddr_high
 	*((volatile unsigned *)(rmcomm_ptr + 0x1c +S2MM))=0x1000;//size
 	*((volatile unsigned *)(rmcomm_ptr +S2MM))=0x1;	       //Ctrl
