@@ -14,6 +14,15 @@ int16_t reload[] = {142,-266,-59,32,66,70,61,44,23,1,-21,-40,-54,-59,-56,-43,-22
 uint32_t fir_data_in[] = {
 	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7
 };
+uint32_t fir_data_out[] = {
+	0x00000cf4, 0x000082e5, 0x0000eef3, 0x00008163
+};
+uint32_t resultbuff[] = {
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
+	0x00000000, 0x00000000, 0x00000000, 0x00000000
+};
 
 int main(int argc, char *argv[])
 {
@@ -116,7 +125,24 @@ int main(int argc, char *argv[])
 	while (! ((statusd3) & 0x1))
 		statusd3 =*((volatile unsigned *)(rmcomm_ptr ));
 
-	//printf("Done !!\n");
+	sleep(2);							//Time added for completion of FFT before reading the out data
+
+	for (int i=0; i < 16; i++)					//Copying out data to resultbuff for comparison with golden data
+	  	resultbuff[i] = vptr[(i*1024)+2070];
+
+	int same_flag = 1;
+		for (int i=0; i< 16; i++)
+		{
+			if(fir_data_out[i%4] != resultbuff[i])
+			{
+				same_flag=0;
+				break;
+			}
+		}
+		if(same_flag)
+			printf("\t === TEST PASSED ===\n");
+		else
+			printf("\t === TEST FAILED ===\n");
 	close(fd1);
 	close(fd2);
 	close(fd3);
