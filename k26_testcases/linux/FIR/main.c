@@ -15,7 +15,7 @@ uint32_t fir_data_in[] = {
 	0xcca5a729, 0x4b276e90, 0x9a57a7e7, 0xd0bfe1c7
 };
 uint32_t fir_data_out[] = {
-	0xcf482e5, 0xeef38163,0xcf482e5, 0xeef38163
+	0x0000cf4, 0x000082e5, 0x0000eef3, 0x00008163
 };
 uint32_t resultbuff[] = {
 	0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -128,12 +128,12 @@ int main(int argc, char *argv[])
 	sleep(2);							//Time added for completion of FFT before reading the out data
 
 	for (int i=0; i < 16; i++)					//Copying out data to resultbuff for comparison with golden data
-	  	resultbuff[i] = vptr[i+17800];
+	  	resultbuff[i] = vptr[i+17820];
 
 	int same_flag = 1;
 		for (int i=0; i< 16; i++)
 		{
-			if(fir_data_out[i] != resultbuff[i])
+			if(fir_data_out[i%4] != resultbuff[i])
 			{
 				same_flag=0;
 				break;
