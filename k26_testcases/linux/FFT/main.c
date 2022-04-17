@@ -164,9 +164,9 @@ int main(int argc, char *argv[])
 	while (! ((status) & 0x1))
 		status =*((volatile unsigned *)(rmcomm_ptr ));
 
-	sleep(2);									//Time added for completion of FFT before reading the out data
+	sleep(2);							//Time added for completion of FFT before reading the out data
 
-	for (int i=0; i < 16; i++)					//Copying out data to resultbuff for comparision with golden data
+	for (int i=0; i < 16; i++)					//Copying out data to resultbuff for comparison with golden data
 	  	resultbuff[i] = vptr[(i*1024)+17408];
 
 	int same_flag = 1;
@@ -178,17 +178,13 @@ int main(int argc, char *argv[])
 				break;
 			}
 		}
-
 		if(same_flag)
 			printf("\t === TEST PASSED ===\n");
 		else
 			printf("\t === TEST FAILED ===\n");
-
 	close(fd1);
 	close(fd2);
 	close(fd3);
 	return 0;
 
 }
-
-
