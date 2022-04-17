@@ -30,10 +30,10 @@ int main(int argc, char *argv[])
 	int fd1,fd2,fd3;
 	void *accel_ptr,*siha_ptr,*rmcomm_ptr;
 
-	//Application code for slot1. UID are of slot1
+	//Application code for slot1. UID are of slot0
 	char *uiod1 = "/dev/uio4";//Siha_manager
-	char *uiod2 = "/dev/uio7";//Accelconfig
-	char *uiod3 = "/dev/uio8";//rmcomm_box
+	char *uiod2 = "/dev/uio5";//Accelconfig
+	char *uiod3 = "/dev/uio6";//rmcomm_box
 
 	/* Open the UIO device file to allow access to the device in user space*/
 	fd1 = open(uiod1, O_RDWR | O_SYNC);
