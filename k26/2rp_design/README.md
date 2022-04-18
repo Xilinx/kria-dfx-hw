@@ -19,15 +19,18 @@ launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -
 
 User can build the hardware files either in CLI mode or GUI mode
 
-##1 CLI:
+## 1. CLI:
+Navigate to the directory 2rp_design and run the Makefile in a bash shell.
 
 ```bash
+cd kria_dfx_hw/k26/2rp_design
 make all
 ```
 After the build is finished, the terminal will have "Platform build complete" print. 
 
 ## 2. GUI:
+Navigate to the directory 2rp_design, launch vivado, in vivado's tcl console source opendfx_shell.tcl
 ```
 Launch vivado 
-source ./opendfx_shell.tcl in the tcl console.
+source ./opendfx_shell.tcl
 ```
