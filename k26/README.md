@@ -13,7 +13,7 @@ Please find the detailed steps- https://gitenterprise.xilinx.com/SOM/kria_dfx_hw
 
 # 2. K26 2RP Firmware Build for dfx-mgr
 
-Execute step 2 before running step 1. 
+Execute step 1 before running step 2. 
 
 Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/software/plImages/README.md 
 
