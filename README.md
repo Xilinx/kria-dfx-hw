@@ -1,28 +1,31 @@
 # kria_dfx_hw
 Kria DFX Reference Designs
+This repository shows how to run OpenDFX accelerators on SOM platforms.
 
 The repository structure is outlined below. 
 
-* k26 - KRIA based platform
-	* 2rp_design
-		* rm_tcl - Directory contains tcl files for the accelerator module designs ("RMs") built against the base shell.
+* k26 - KRIA hardware platform
+	* 2rp_design - Top level directory containing Vivado HW design
+		* rm_tcl - Directory contains tcl files for the accelerator modules("RMs") built against the base shell.
 		* xdc - Directory contains design constraints
 			* physical_constraints.xdc
 			* timing_constraints.xdc
 		* opendfx_shell.tcl - Top-level script which 
 			* Sources the RMs in rm_tcl directory and creates RM Block Designs(BDs)
-			* Creates Block Design containers (BDCs)
+			* Creates base shell containing Block Design containers(BDCs)
 			* Adds RM BDs to BDCs
 			* Creates DFx configurations.
 
 	* ip_repo - Source code of accelerators packaged in IP-XACT format.
 
-* k26_testcases - Test cases
+* k26_testcases - Contains test-cases to run accelerators in Linux or Standalone environment.
 	* Standalone
-		* data - Standalone test cases input data
-		* src - Source code
-		* build_<RM_name>.tcl - Creates vitis project, source the code, and build elf. 
-		* test_<RM_name>.tcl - Tcl to test the RM on the board 
+		* data - Directory to store input data and golden data for the accelerators.
+		* src - Directory containing common platform files.
+		* build_<RM_name>.tcl - Script to build a RM application. It creates application elf files by creating a vitis project
+		* test_<RM_name>.tcl - Script to test the RM on the board.
+		* Directories with accelerator name. Contains the application code specific to the accelerator.
 	* Linux	
-		* RM_code
-		* build_<RM_name>.tcl - Creates vitis linux project, source the code, and build elf. 
+		* Directories with accelerator name. Contains the application code specific to the accelerator.
+		* build_<RM_name>.tcl - Script to build a RM application.
+		* Makefile - Makefile to build RM applications.  It creates application elf files by creating a vitis project
