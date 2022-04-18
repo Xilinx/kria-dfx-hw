@@ -4,7 +4,9 @@ Set the environment for 2022.1 Vitis™ unified software platform.
 
 Update the xsa path in the build tcl files. 
 
-On a development server open bash prompt and run 
+On a development server, open bash prompt and run the following commands
+
+To build individual applications.
 ```
 make AES128
 
@@ -14,6 +16,16 @@ make FFT
 
 make FIR
 ```
+This will create a directory named workspace_<ACCELERATOR_NAME> and generate output files inside it.
+
+
+To build all applications.
+```
+make all
+```
+
+
+
 # Run tests
 1. For testing RM linux application, boot the board with linux image. 
 
@@ -36,7 +48,7 @@ xilinx-k26-starterkit-20221:/home/petalinux# cp -r /mnt_nfsroot/AES128.elf .
 xilinx-k26-starterkit-20221:/home/petalinux# ./AES128.elf 
 ```
 
-Last prints on uart terminal will match the outputs given below-
+On successful application completion, you should see the following output on UART terminal.
 
 ```
 === TEST PASSED ===
