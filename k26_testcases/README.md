@@ -7,28 +7,21 @@ Each of the RM folder contains the main.c file to be used for the vitis applicat
 Directory structure of k26_testcases-
 
 * Standalone
-	* AES128- RM code
-	* AES192- RM code
-	* FFT- RM code
-	* FIR- RM code
+	* AES128- Application code to run AES128 accelerator.
+	* AES192- Application code to run AES192 accelerator.
+	* FFT- Application code to run FFT accelerator.
+	* FIR- Application code to run FIR accelerator.
 	* data- Input and output data reference files for all the RM's
-	* src - Contains file required for the opendfx_shell
+	* src - Directory containing common platform files.
 	* README.md- Instructions to build and test the elf
-	* buildAES128.tcl - Build vitis project for AES128 RM
-	* buildAES192.tcl - Build vitis project for AES192 RM
-	* buildFFT.tcl - Build vitis project for FFT RM
-	* buildFIR.tcl - Build vitis project for FIR RM
-	* testAES128.tcl - xsdb commands to run the AES128 RM on the k26 board. 
-	* testAES192.tcl - xsdb commands to run the AES192 RM on the k26 board. 
-	* testFFT.tcl - xsdb commands to run the FFT RM on the k26 board. 
-	* testFIR.tcl - xsdb commands to run the FIR RM on the k26 board. 
+        * build<RM_NAME>.tcl - Vitis script to build RM_NAME application elf.
+ 	* test<RM_NAME> - Script containing xsdb commands to run the RM_NAME application on the target board. 
+
 * Linux
-	* AES128- RM code
-	* AES192- RM code
-	* FFT- RM code
-	* FIR- RM code
+	* AES128- Application code to run AES128 accelerator.
+	* AES192- Application code to run AES192 accelerator.
+	* FFT- Application code to run FFT accelerator.
+	* FIR- Application code to run FIR accelerator.
 	* README.md- Instructions to build and test the elf
-	* buildAES128.tcl - Build vitis project for AES128 RM
-	* buildAES192.tcl - Build vitis project for AES192 RM
-	* buildFFT.tcl - Build vitis project for FFT RM
-	* buildFIR.tcl - Build vitis project for FIR RM
+	* build<RM_NAME>.tcl - Vitis script to build RM_NAME application elf.
+	
