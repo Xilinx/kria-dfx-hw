@@ -4,7 +4,8 @@ Set the environment for 2022.1 Vitis™ unified software platform.
 
 Update the xsa path in the build tcl files. 
 
-On a development server, open bash prompt and run the following commands
+On a development server open bash prompt and navigate to the directory kria_dfx_hw/k26_testcases/linux
+Run the following commands:
 
 To build individual applications.
 ```
