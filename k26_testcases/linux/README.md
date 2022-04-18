@@ -39,6 +39,8 @@ cp -rf <path to git dir>/kria_dfx_hw/k26_testcases/linux/workspace_*/*/Debug/*.e
 
 3. Board steps  
 
+login id of som board: petalinux, password: root
+
 ```
 Systest# nfsroot3 "<path to the directory where the elf and k26_2rp are copied."
 ```
