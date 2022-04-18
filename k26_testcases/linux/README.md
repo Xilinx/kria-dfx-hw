@@ -47,6 +47,8 @@ Systest# nfsroot3 "<path to the directory where the elf and k26_2rp are copied."
 ```
 
 ```
+xilinx-k26-starterkit-20221:~$sudo su
+Password: root
 xilinx-k26-starterkit-20221:/home/petalinux# mkdir /mnt_nfsroot
 xilinx-k26-starterkit-20221:/home/petalinux# mount -o port=2049,nolock,proto=tcp,vers=3 10.10.70.101:/exports/root /mnt_nfsroot
 xilinx-k26-starterkit-20221:/home/petalinux# cp -r /mnt_nfsroot/k26_2rp /lib/firmware/xilinx/ 
