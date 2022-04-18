@@ -1,6 +1,6 @@
 # kria_dfx_hw
-Kria DFX Reference Designs
-This repository shows how to run OpenDFX accelerators on SOM platforms.
+
+This repository contains Kria DFX Reference Designs. It shows how to run OpenDFX accelerators on SOM platforms.
 
 The repository structure is outlined below. 
 
@@ -15,6 +15,7 @@ The repository structure is outlined below.
 			* Creates base shell containing Block Design containers(BDCs)
 			* Adds RM BDs to BDCs
 			* Creates DFx configurations.
+			* Generates bitfiles for the base shell and the accelerators.
 
 	* ip_repo - Source code of accelerators packaged in IP-XACT format.
 
