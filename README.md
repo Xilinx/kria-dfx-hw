@@ -23,10 +23,10 @@ The repository structure is outlined below.
 	* Standalone
 		* data - Directory to store input data and golden data for the accelerators.
 		* src - Directory containing common platform files.
-		* build_<RM_name>.tcl - Script to build a RM application. It creates application elf files by creating a vitis project
-		* test_<RM_name>.tcl - Script to test the RM on the board.
+		* build_<RM_NAME>.tcl - Vitis script to build a RM application elf.
+		* test_<RM_NAME>.tcl - Script to test the RM_NAME application on the target board.
 		* Directories with accelerator name. Contains the application code specific to the accelerator.
 	* Linux	
 		* Directories with accelerator name. Contains the application code specific to the accelerator.
-		* build_<RM_name>.tcl - Script to build a RM application.
+		* build_<RM_NAME>.tcl - Script to build a RM_NAME application.
 		* Makefile - Makefile to build RM applications.  It creates application elf files by creating a vitis project
