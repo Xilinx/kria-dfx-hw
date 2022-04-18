@@ -6,13 +6,13 @@ Update the xsa path in the build tcl files.
 
 On a development server open bash prompt and run 
 ```
-xsct buildAES128.tcl
+make AES128
 
-xsct buildFFT.tcl
+make AES192 
 
-xsct buildFIR.tcl
+make FFT 
 
-xsct buildAES192.tcl
+make FIR 
 ```
 
 Clean build
@@ -58,4 +58,3 @@ comparing slot 1 output with reference ...
 Success: Matched with the reference !!!!
 all done
 ```
-
