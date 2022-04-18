@@ -7,18 +7,24 @@ The 2rp design is a two slot based DFX design.
 ip_repo folder contains all the user IP's required to build the design. 
 
 ```
-# HW Build 
+# 1. HW Build 
 
 Please find the detailed steps- https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/edit/main/k26/2rp_design/README.md 
 
-# K26 2RP Firmware Build for dfx-mgr
+# 2. K26 2RP Firmware Build for dfx-mgr
+
+Execute step 2 before running step 1. 
 
 Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/software/plImages/README.md 
 
-# Linux App Build & Test
+# 3. Linux App Build & Test
+
+Execute step 1 and 2 before running step 3. 
 
 Please find the detailed steps- https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/k26_testcases/linux/README.md
 
-# HW Standalone App Build & Test 
+# 4. HW Standalone App Build & Test 
+
+Execute step 1 before running step 4. 
 
 Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/k26_testcases/Standalone/README.md 
