@@ -30,15 +30,14 @@ make all
 # Run tests
 1. For testing RM linux application, boot the board with linux image. 
 
-2. Mount the board and transfer k26_2rp folder & elf file. 
+2. Copy k26_2rp folder & elf files to a directory
 
-Path for k26_2rp firmware- /software/plImages/k26_2rp 
+```
+cp -rf <path to git dir>/kria_dfx_hw/software/plImages/k26_2rp/ .
+cp -rf <path to git dir>/kria_dfx_hw/k26_testcases/linux/workspace_*/*/Debug/*.elf .
+```
 
-Path for elfs- ./workspace_<ACCELERATOR_NAME>/<ACCELERATOR_NAME>/Debug/<ACCELERATOR_NAME>.elf
-
-For example- Path for AES128 elf- ./workspace_AES128/AES128/Debug/AES128.elf 
-
-Copy the elfs and k26_2rp folder to a directory. 
+3. Board steps  
 
 ```
 Systest# nfsroot3 "<path to the directory where the elf and k26_2rp are copied."
