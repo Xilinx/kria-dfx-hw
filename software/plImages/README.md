@@ -3,30 +3,32 @@
 ### Use bash shell
 ### Modify bootgen and dtc path in bingen.sh, genOverlay.sh and genPkg.py 
 
+### Use either step 1 or step 2,3 and 4. 
+
 ```bash
 [plImages]$ vim bingen.sh
 [plImages]$ vim genOverlay.sh
 [plImages]$ vim genPkg.py
 ```
-### Generate bin files, overlay and firmware package
+### 1. Generate bin files, overlay and firmware package
 
 ```bash
 [plImages]$ make all
 ```
 
-### Import bit files and generate bin files
+### 2. Import bit files and generate bin files
 
 ```bash
 [plImages]$ make bin
 ```
 
-### Generate Overlay
+### 3. Generate Overlay
 
 ```bash
 [plImages]$ make dtbo
 ```
 
-### Generate packages
+### 4. Generate packages
 
 ```bash
 [plImages]$ make firmware 
