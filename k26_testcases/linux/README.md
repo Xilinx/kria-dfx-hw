@@ -37,6 +37,11 @@ Path for k26_2rp firmware- /software/plImages/k26_2rp
 Path for elfs- ./workspace_<ACCELERATOR_NAME>/<ACCELERATOR_NAME>/Debug/<ACCELERATOR_NAME>.elf
 
 For example- Path for AES128 elf- ./workspace_AES128/AES128/Debug/AES128.elf 
+Copy the elfs and k26_2rp folder to a directory. 
+
+```
+Systest# nfsroot3 "<path to the directory where the elf and k26_2rp are copied."
+```
 
 ```
 xilinx-k26-starterkit-20221:/home/petalinux# mkdir /mnt_nfsroot
