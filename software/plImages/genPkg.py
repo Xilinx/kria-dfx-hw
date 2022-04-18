@@ -15,7 +15,7 @@ data = [
            'bin': 'opendfx_shell_i_RP_0_AES128_inst_0_partial.bit.bin'},
          {'name': 'AES192',
            'bin': 'opendfx_shell_i_RP_0_AES192_inst_0_partial.bit.bin'}, 
-         {'name': 'FFT4',
+         {'name': 'FFT',
            'bin': 'opendfx_shell_i_RP_0_FFT_4channel_inst_0_partial.bit.bin'}, 
          {'name': 'FIR',
            'bin': 'opendfx_shell_i_RP_0_FIR_compiler_inst_0_partial.bit.bin'}
