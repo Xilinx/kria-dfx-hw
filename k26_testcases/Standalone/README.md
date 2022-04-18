@@ -4,21 +4,27 @@ Set the environment for 2022.1 Vitis™ unified software platform.
 
 Update the xsa path in the build tcl files. 
 
-On a development server open bash prompt and run 
+On a development server open bash prompt and navigate to the directory kria_dfx_hw/k26_testcases/linux
+Run the following commands:
+
+To build individual applications.
 ```
 make AES128
 
-make AES192 
+make AES192
 
-make FFT 
+make FFT
 
-make FIR 
+make FIR
+```
+This will create a directory named workspace_<ACCELERATOR_NAME> and generate output files inside it.
+
+
+To build all applications.
+```
+make all
 ```
 
-Clean build
-```
-make clean
-```
 # Run tests
 
 Update the Vitis path in the environment.tcl line 2. 
