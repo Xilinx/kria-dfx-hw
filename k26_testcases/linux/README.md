@@ -34,8 +34,8 @@ make all
 2. Copy k26_2rp folder & elf files to a directory
 
 ```
-cp -rf <path to git dir>/kria_dfx_hw/software/plImages/k26_2rp/ .
-cp -rf <path to git dir>/kria_dfx_hw/k26_testcases/linux/workspace_*/*/Debug/*.elf .
+cp -rf <path to git dir>/kria_dfx_hw/software/plImages/k26_2rp/ <Path to local Directory eg: /home/saikira/copy_dir>
+cp -rf <path to git dir>/kria_dfx_hw/k26_testcases/linux/workspace_*/*/Debug/*.elf <Path to local Directory eg: /home/saikira/copy_dir>
 ```
 
 3. Board steps  
@@ -43,7 +43,8 @@ cp -rf <path to git dir>/kria_dfx_hw/k26_testcases/linux/workspace_*/*/Debug/*.e
 login id of som board: petalinux, password: root or petalinux
 
 ```
-Systest# nfsroot3 "<path to the directory where the elf and k26_2rp are copied."
+Systest# nfsroot3 <path to the directory where the elf and k26_2rp are copied in Step 2>
+eg: Systest# nfsroot3 "/home/saikira/copy_dir"
 ```
 
 ```
