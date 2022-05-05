@@ -941,7 +941,7 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
   set_property -dict [ list \
    CONFIG.ADDR_WIDTH {64} \
    CONFIG.DATA_WIDTH {128} \
-   CONFIG.FREQ_HZ {300000000} \
+   CONFIG.FREQ_HZ {249997498} \
    CONFIG.NUM_READ_OUTSTANDING {2} \
    CONFIG.NUM_WRITE_OUTSTANDING {2} \
    CONFIG.PROTOCOL {AXI4} \
@@ -954,7 +954,7 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
    CONFIG.AWUSER_WIDTH {0} \
    CONFIG.BUSER_WIDTH {0} \
    CONFIG.DATA_WIDTH {32} \
-   CONFIG.FREQ_HZ {300000000} \
+   CONFIG.FREQ_HZ {249997498} \
    CONFIG.HAS_BRESP {1} \
    CONFIG.HAS_BURST {0} \
    CONFIG.HAS_CACHE {0} \
@@ -981,7 +981,7 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
 
 
   # Create ports
-  set clk [ create_bd_port -dir I -type clk -freq_hz 300000000 clk ]
+  set clk [ create_bd_port -dir I -type clk -freq_hz 249997498 clk ]
   set interrupt [ create_bd_port -dir O -from 0 -to 0 -type intr interrupt ]
   set resetn [ create_bd_port -dir I -type rst resetn ]
 
