@@ -2776,7 +2776,7 @@ proc create_root_design { parentCell } {
    CONFIG.ENABLE_DFX {true} \
    CONFIG.LIST_SIM_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
    CONFIG.LIST_SYNTH_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
-   CONFIG.LOCK_PROPAGATE {0} \
+   CONFIG.LOCK_PROPAGATE {true} \
  ] $RP_0
   set_property APERTURES {{0x0 2G} {0xC000_0000 512M} {0xFF00_0000 16M} {0x2_0000_0000 1G} {0x2_8000_0000 1G} {0x8_0000_0000 32G}} [get_bd_intf_pins /RP_0/M_AXI_GMEM]
   set_property APERTURES {{0x8000_0000 32M}} [get_bd_intf_pins /RP_0/S_AXI_CTRL]
@@ -2789,7 +2789,7 @@ proc create_root_design { parentCell } {
    CONFIG.ENABLE_DFX {true} \
    CONFIG.LIST_SIM_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
    CONFIG.LIST_SYNTH_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
-   CONFIG.LOCK_PROPAGATE {0} \
+   CONFIG.LOCK_PROPAGATE {true} \
  ] $RP_1
   set_property APERTURES {{0x0 2G} {0xC000_0000 512M} {0xFF00_0000 16M} {0x2_0000_0000 1G} {0x2_8000_0000 1G} {0x8_0000_0000 32G}} [get_bd_intf_pins /RP_1/M_AXI_GMEM]
   set_property APERTURES {{0x8200_0000 32M}} [get_bd_intf_pins /RP_1/S_AXI_CTRL]
