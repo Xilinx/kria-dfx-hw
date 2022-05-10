@@ -439,8 +439,8 @@
         },
         "address_space_ref": "S_AXI_CTRL",
         "base_address": {
-          "minimum": "0x82000000",
-          "maximum": "0x83FFFFFF",
+          "minimum": "0x81000000",
+          "maximum": "0x81FFFFFF",
           "width": "40"
         },
         "hdl_attributes": {
@@ -1017,54 +1017,11 @@
                 "S_AXI_CTRL:APERTURE_0": {
                   "name": "S_AXI_CTRL:APERTURE_0",
                   "display_name": "APERTURE_0",
-                  "base_address": "0x82000000",
+                  "base_address": "0x80000000",
                   "range": "32M",
                   "width": "32",
                   "usage": "all"
                 }
-              }
-            },
-            "segments": {
-              "SEG_M_AXI_GMEM_Reg": {
-                "address_block": "/M_AXI_GMEM/Reg",
-                "offset": "0x0082000000",
-                "range": "1",
-                "is_excluded": "TRUE"
-              },
-              "SEG_M_AXI_GMEM_Reg_1": {
-                "address_block": "/M_AXI_GMEM/Reg_1",
-                "offset": "0x0082000000",
-                "range": "1",
-                "is_excluded": "TRUE"
-              },
-              "SEG_M_AXI_GMEM_Reg_2": {
-                "address_block": "/M_AXI_GMEM/Reg_2",
-                "offset": "0x0082000000",
-                "range": "1",
-                "is_excluded": "TRUE"
-              },
-              "SEG_M_AXI_GMEM_Reg_3": {
-                "address_block": "/M_AXI_GMEM/Reg_3",
-                "offset": "0x0082000000",
-                "range": "1",
-                "is_excluded": "TRUE"
-              },
-              "SEG_M_AXI_GMEM_Reg_4": {
-                "address_block": "/M_AXI_GMEM/Reg_4",
-                "offset": "0x0082000000",
-                "range": "1",
-                "is_excluded": "TRUE"
-              },
-              "SEG_M_AXI_GMEM_Reg_5": {
-                "address_block": "/M_AXI_GMEM/Reg_5",
-                "offset": "0x0082000000",
-                "range": "1",
-                "is_excluded": "TRUE"
-              },
-              "SEG_rm_comm_box_0_reg0": {
-                "address_block": "/rm_comm_box_0/s_axi_accel/reg0",
-                "offset": "0x0082000000",
-                "range": "32M"
               }
             }
           }
