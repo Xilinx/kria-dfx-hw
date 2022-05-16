@@ -1042,10 +1042,10 @@ proc create_hier_cell_FFTWithScatterGather { parentCell nameHier } {
   # Create port connections
   connect_bd_net -net ARESETN_1 [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net AccelConfig_0_interrupt [get_bd_pins AccelConfig_0/interrupt] [get_bd_pins xlconcat_0/In0]
-  connect_bd_net -net Net [get_bd_pins AccelConfig_0/s2mmDone] [get_bd_pins xlconcat_0/In1]
-  connect_bd_net -net Net1 [get_bd_pins AccelConfig_0/mm2sDone] [get_bd_pins xlconcat_0/In2]
   connect_bd_net -net clk_3 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins FFTWithScatterGather/clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AccelConfig_0/resetn] [get_bd_pins FFTWithScatterGather/resetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
+  connect_bd_net -net rm_comm_box_0_interrupt_mm2s [get_bd_pins rm_comm_box_0/interrupt_mm2s] [get_bd_pins xlconcat_0/In2]
+  connect_bd_net -net rm_comm_box_0_interrupt_s2mm [get_bd_pins rm_comm_box_0/interrupt_s2mm] [get_bd_pins xlconcat_0/In1]
   connect_bd_net -net static_shell_rp2_resetn [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
   connect_bd_net -net xlconcat_0_dout [get_bd_ports interrupt] [get_bd_pins xlconcat_0/dout]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_0/dout]
