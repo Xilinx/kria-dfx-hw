@@ -18,6 +18,7 @@ proc cr_bd_template_aximm { parentCell designName} {
   xilinx.com:ip:proc_sys_reset:5.0\
   user.org:user:rm_comm_box:1.0\
   xilinx.com:ip:smartconnect:1.0\
+  xilinx.com:ip:xlconcat:2.1\
   xilinx.com:ip:xlconstant:1.1\
   "
 
@@ -216,11 +217,7 @@ proc cr_bd_template_aximm { parentCell designName} {
    CONFIG.INSERT_VIP {0} \
    CONFIG.PHASE {0.0} \
  ] $clk
-  set interrupt [ create_bd_port -dir O -from 0 -to 0 -type intr interrupt ]
-  set_property -dict [ list \
-   CONFIG.PortWidth {1} \
-   CONFIG.SENSITIVITY {LEVEL_HIGH} \
- ] $interrupt
+  set interrupt [ create_bd_port -dir O -from 3 -to 0 -type intr interrupt ]
   set resetn [ create_bd_port -dir I -type rst resetn ]
   set_property -dict [ list \
    CONFIG.INSERT_VIP {0} \
@@ -243,6 +240,12 @@ proc cr_bd_template_aximm { parentCell designName} {
    CONFIG.NUM_SI {1} \
  ] $smartconnect_0
 
+  # Create instance: xlconcat_0, and set properties
+  set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
+  set_property -dict [ list \
+   CONFIG.NUM_PORTS {4} \
+ ] $xlconcat_0
+
   # Create instance: xlconstant_0, and set properties
   set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
   set_property -dict [ list \
@@ -259,7 +262,8 @@ proc cr_bd_template_aximm { parentCell designName} {
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
   connect_bd_net -net resetn_1 [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
-  connect_bd_net -net xlconstant_0_dout [get_bd_ports interrupt] [get_bd_pins xlconstant_0/dout]
+  connect_bd_net -net xlconcat_0_dout [get_bd_ports interrupt] [get_bd_pins xlconcat_0/dout]
+  connect_bd_net -net xlconstant_0_dout [get_bd_pins xlconcat_0/In0] [get_bd_pins xlconcat_0/In1] [get_bd_pins xlconcat_0/In2] [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_0/dout]
 
   # Create address segments
   assign_bd_address -offset 0x80000000 -range 0x02000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0] -force
