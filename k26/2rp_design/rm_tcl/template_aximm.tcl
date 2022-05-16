@@ -1,8 +1,8 @@
 # Proc to create BD template_aximm
-proc cr_bd_template_aximm { parentCell } {
+proc cr_bd_template_aximm { parentCell designName} {
 
   # CHANGE DESIGN NAME HERE
-  set design_name template_aximm
+  set design_name $designName
 
   common::send_gid_msg -ssname BD::TCL -id 2010 -severity "INFO" "Currently there is no design <$design_name> in project, so creating one..."
 
