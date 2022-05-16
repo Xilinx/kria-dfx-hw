@@ -288,8 +288,8 @@ proc create_hier_cell_shim_rp1 { parentCell nameHier } {
   create_bd_pin -dir O decouple_status
   create_bd_pin -dir O -type rst rp1_resetn
   create_bd_pin -dir I -type clk rp_clk
-  create_bd_pin -dir I rp_sig_interrupt
-  create_bd_pin -dir O -type intr s_sig_INTERRUPT
+  create_bd_pin -dir I -from 3 -to 0 rp_sig_interrupt
+  create_bd_pin -dir O -from 3 -to 0 -type intr s_sig_INTERRUPT
   create_bd_pin -dir I -type clk shell_clk
   create_bd_pin -dir I -type rst shell_resetn
   create_bd_pin -dir I -type rst slot_resetn
@@ -342,10 +342,11 @@ ARLOCK {PRESENT 1 WIDTH 1} ARCACHE {PRESENT 1 WIDTH 4} ARPROT {PRESENT 1\
 WIDTH 3} ARREGION {PRESENT 1 WIDTH 4} ARQOS {PRESENT 1 WIDTH 4} ARUSER\
 {PRESENT 0 WIDTH 0} RID {PRESENT 1 WIDTH 8} RDATA {PRESENT 1 WIDTH 128}\
 RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH\
-0}}} sig {ID 3 VLNV xilinx.com:signal:interrupt_rtl:1.0 SIGNALS {INTERRUPT\
-{PRESENT 1 WIDTH 1}}} n {ID 2 VLNV xilinx.com:signal:reset_rtl:1.0 MODE\
-slave SIGNALS {RST {PRESENT 1 WIDTH 1}}}}\
-     IPI_PROP_COUNT {5}\
+0}} PROTOCOL AXI4} sig {ID 3 VLNV xilinx.com:signal:interrupt_rtl:1.0\
+SIGNALS {INTERRUPT {PRESENT 1 WIDTH 4}}} n {ID 2 VLNV\
+xilinx.com:signal:reset_rtl:1.0 MODE slave SIGNALS {RST {PRESENT 1 WIDTH\
+1}}}}\
+     IPI_PROP_COUNT {7}\
      ALWAYS_HAVE_AXI_CLK {1}\
    } \
    CONFIG.GUI_INTERFACE_NAME {config} \
@@ -467,8 +468,8 @@ proc create_hier_cell_shim_rp0 { parentCell nameHier } {
   create_bd_pin -dir O decouple_status
   create_bd_pin -dir I -type clk rp_clk
   create_bd_pin -dir O -type rst rp_resetn
-  create_bd_pin -dir I rp_sig_interrupt
-  create_bd_pin -dir O -type intr s_sig_INTERRUPT
+  create_bd_pin -dir I -from 3 -to 0 rp_sig_interrupt
+  create_bd_pin -dir O -from 3 -to 0 -type intr s_sig_INTERRUPT
   create_bd_pin -dir I -type clk shell_clk
   create_bd_pin -dir I -type rst shell_resetn
   create_bd_pin -dir I -type rst slot_resetn
@@ -521,10 +522,11 @@ ARLOCK {PRESENT 1 WIDTH 1} ARCACHE {PRESENT 1 WIDTH 4} ARPROT {PRESENT 1\
 WIDTH 3} ARREGION {PRESENT 1 WIDTH 4} ARQOS {PRESENT 1 WIDTH 4} ARUSER\
 {PRESENT 0 WIDTH 0} RID {PRESENT 1 WIDTH 8} RDATA {PRESENT 1 WIDTH 128}\
 RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH\
-0}}} sig {ID 3 VLNV xilinx.com:signal:interrupt_rtl:1.0 SIGNALS {INTERRUPT\
-{PRESENT 1 WIDTH 1}}} n {ID 2 VLNV xilinx.com:signal:reset_rtl:1.0 MODE\
-slave SIGNALS {RST {PRESENT 1 WIDTH 1}}}}\
-     IPI_PROP_COUNT {5}\
+0}} PROTOCOL AXI4} sig {ID 3 VLNV xilinx.com:signal:interrupt_rtl:1.0\
+SIGNALS {INTERRUPT {PRESENT 1 WIDTH 4}}} n {ID 2 VLNV\
+xilinx.com:signal:reset_rtl:1.0 MODE slave SIGNALS {RST {PRESENT 1 WIDTH\
+1}}}}\
+     IPI_PROP_COUNT {7}\
      ALWAYS_HAVE_AXI_CLK {1}\
    } \
    CONFIG.GUI_INTERFACE_NAME {config} \
@@ -1029,10 +1031,10 @@ proc create_hier_cell_static_shell { parentCell nameHier } {
 
   # Create pins
   create_bd_pin -dir O -from 0 -to 0 -type clk rp0_clk
-  create_bd_pin -dir I -from 0 -to 0 rp0_interrupt
+  create_bd_pin -dir I -from 3 -to 0 rp0_interrupt
   create_bd_pin -dir O -from 0 -to 0 rp0_resetn
   create_bd_pin -dir O -from 0 -to 0 -type clk rp1_clk
-  create_bd_pin -dir I -from 0 -to 0 rp1_interrupt
+  create_bd_pin -dir I -from 3 -to 0 rp1_interrupt
   create_bd_pin -dir O -from 0 -to 0 rp1_resetn
 
   # Create instance: VCU
@@ -1078,7 +1080,7 @@ proc create_hier_cell_static_shell { parentCell nameHier } {
   # Create instance: xlconcat_interrupt, and set properties
   set xlconcat_interrupt [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_interrupt ]
   set_property -dict [ list \
-   CONFIG.NUM_PORTS {3} \
+   CONFIG.NUM_PORTS {2} \
  ] $xlconcat_interrupt
 
   # Create instance: xlslice_0, and set properties
