@@ -22,6 +22,7 @@ proc cr_bd_AES128 { parentCell designName} {
   xilinx.com:ip:proc_sys_reset:5.0\
   user.org:user:rm_comm_box:1.0\
   xilinx.com:ip:smartconnect:1.0\
+  xilinx.com:ip:xlconcat:2.1\
   xilinx.com:ip:xlconstant:1.1\
   "
 
@@ -123,7 +124,7 @@ proc cr_bd_AES128 { parentCell designName} {
   set_property -dict [ list \
    CONFIG.ASSOCIATED_BUSIF {S_AXI_CTRL:M_AXI_GMEM} \
  ] $clk
-  set interrupt [ create_bd_port -dir O -from 0 -to 0 -type intr interrupt ]
+  set interrupt [ create_bd_port -dir O -from 3 -to 0 -type intr interrupt ]
   set resetn [ create_bd_port -dir I -type rst resetn ]
 
   # Create instance: AES128Dec_0, and set properties
@@ -157,11 +158,23 @@ proc cr_bd_AES128 { parentCell designName} {
    CONFIG.NUM_SI {1} \
  ] $smartconnect_0
 
+  # Create instance: xlconcat_0, and set properties
+  set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
+  set_property -dict [ list \
+   CONFIG.NUM_PORTS {4} \
+ ] $xlconcat_0
+
   # Create instance: xlconstant_0, and set properties
   set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
   set_property -dict [ list \
    CONFIG.CONST_VAL {0} \
  ] $xlconstant_0
+
+  # Create instance: xlconstant_1, and set properties
+  set xlconstant_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_1 ]
+  set_property -dict [ list \
+   CONFIG.CONST_VAL {0} \
+ ] $xlconstant_1
 
   # Create interface connections
   connect_bd_intf_net -intf_net AES128Dec_0_out_V [get_bd_intf_pins AES128Dec_0/out_r] [get_bd_intf_pins axis_accel_sel_0/out_V_dec]
@@ -181,7 +194,7 @@ proc cr_bd_AES128 { parentCell designName} {
   connect_bd_net -net AES128Enc_0_ap_done [get_bd_pins AES128Enc_0/ap_done] [get_bd_pins axis_accel_sel_0/ap_done_enc]
   connect_bd_net -net AccelConfig_0_AccelStart [get_bd_pins AccelConfig_0/AccelStart] [get_bd_pins axis_accel_sel_0/ap_start]
   connect_bd_net -net AccelConfig_0_config_port1_tdata [get_bd_pins AES128Dec_0/key] [get_bd_pins AES128Enc_0/key] [get_bd_pins AccelConfig_0/scalar1]
-  connect_bd_net -net AccelConfig_0_interrupt [get_bd_ports interrupt] [get_bd_pins AccelConfig_0/interrupt]
+  connect_bd_net -net AccelConfig_0_interrupt [get_bd_pins AccelConfig_0/interrupt] [get_bd_pins xlconcat_0/In0]
   connect_bd_net -net AccelConfig_0_scalar2 [get_bd_pins AccelConfig_0/scalar2] [get_bd_pins axis_accel_sel_0/USE_ENC]
   connect_bd_net -net axis_accel_sel_0_ap_done [get_bd_pins AccelConfig_0/AccelDone] [get_bd_pins axis_accel_sel_0/ap_done]
   connect_bd_net -net axis_accel_sel_0_ap_start_dec [get_bd_pins AES128Dec_0/ap_start] [get_bd_pins axis_accel_sel_0/ap_start_dec]
@@ -189,10 +202,12 @@ proc cr_bd_AES128 { parentCell designName} {
   connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins AES128Dec_0/ap_clk] [get_bd_pins AES128Enc_0/ap_clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins axis_accel_sel_0/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AES128Dec_0/ap_rst_n] [get_bd_pins AES128Enc_0/ap_rst_n] [get_bd_pins AccelConfig_0/resetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
-  connect_bd_net -net rm_comm_box_0_interrupt_mm2s [get_bd_pins AccelConfig_0/mm2sDone] [get_bd_pins rm_comm_box_0/interrupt_mm2s]
-  connect_bd_net -net rm_comm_box_0_interrupt_s2mm [get_bd_pins AccelConfig_0/s2mmDone] [get_bd_pins rm_comm_box_0/interrupt_s2mm]
+  connect_bd_net -net rm_comm_box_0_interrupt_mm2s [get_bd_pins rm_comm_box_0/interrupt_mm2s] [get_bd_pins xlconcat_0/In2]
+  connect_bd_net -net rm_comm_box_0_interrupt_s2mm [get_bd_pins rm_comm_box_0/interrupt_s2mm] [get_bd_pins xlconcat_0/In1]
   connect_bd_net -net static_shell_rp0_resetn [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
+  connect_bd_net -net xlconcat_0_dout [get_bd_ports interrupt] [get_bd_pins xlconcat_0/dout]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins AccelConfig_0/AccelIdle] [get_bd_pins AccelConfig_0/AccelReady] [get_bd_pins xlconstant_0/dout]
+  connect_bd_net -net xlconstant_1_dout [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_1/dout]
 
   # Create address segments
   assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
