@@ -35,4 +35,4 @@ platform:
 	@echo 'Platform build complete'
 
 clean:
-	$(RM) -r vivado* project* .Xil *.log *.jou *.xsa ./platform/opendfx_kv260
+	$(RM) -r vivado* project* .Xil *.log *.jou *.xsa ./platform/opendfx_shell_wrapper_platform_0
