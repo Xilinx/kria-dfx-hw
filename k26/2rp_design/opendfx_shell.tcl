@@ -56,7 +56,7 @@ if { $list_projs eq "" } {
    set_property ip_repo_paths $repoPath  [current_project]
    update_ip_catalog
    set_param bd.enableDFX 1
-   set_property BOARD_PART xilinx.com:kv260_som:part0:1.2 [current_project]
+   set_property board_part xilinx.com:k26c:part0:1.3 [current_project]
 }
 
 source ./rm_tcl/fft4.tcl
