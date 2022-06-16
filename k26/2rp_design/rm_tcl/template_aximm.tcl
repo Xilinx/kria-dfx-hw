@@ -15,6 +15,7 @@ proc cr_bd_template_aximm { parentCell designName} {
   set bCheckIPs 1
   if { $bCheckIPs == 1 } {
      set list_check_ips "\ 
+  xilinx.com:ip:v_warp_filter:1.1\
   xilinx.com:ip:proc_sys_reset:5.0\
   user.org:user:rm_comm_box:1.0\
   xilinx.com:ip:smartconnect:1.0\
@@ -116,9 +117,6 @@ proc cr_bd_template_aximm { parentCell designName} {
   M_AXI_GMEM ]
   set_property -dict [ list \
    CONFIG.ADDR_WIDTH {49} \
-   CONFIG.ARUSER_WIDTH {0} \
-   CONFIG.AWUSER_WIDTH {0} \
-   CONFIG.BUSER_WIDTH {0} \
    CONFIG.DATA_WIDTH {128} \
    CONFIG.FREQ_HZ {249997498} \
    CONFIG.HAS_BRESP {1} \
@@ -130,21 +128,12 @@ proc cr_bd_template_aximm { parentCell designName} {
    CONFIG.HAS_REGION {1} \
    CONFIG.HAS_RRESP {1} \
    CONFIG.HAS_WSTRB {1} \
-   CONFIG.ID_WIDTH {8} \
    CONFIG.INSERT_VIP {0} \
-   CONFIG.MAX_BURST_LENGTH {256} \
    CONFIG.NUM_READ_OUTSTANDING {2} \
-   CONFIG.NUM_READ_THREADS {1} \
    CONFIG.NUM_WRITE_OUTSTANDING {2} \
-   CONFIG.NUM_WRITE_THREADS {1} \
    CONFIG.PHASE {0.0} \
    CONFIG.PROTOCOL {AXI4} \
    CONFIG.READ_WRITE_MODE {READ_WRITE} \
-   CONFIG.RUSER_BITS_PER_BYTE {0} \
-   CONFIG.RUSER_WIDTH {0} \
-   CONFIG.SUPPORTS_NARROW_BURST {1} \
-   CONFIG.WUSER_BITS_PER_BYTE {0} \
-   CONFIG.WUSER_WIDTH {0} \
    ] $M_AXI_GMEM
   set_property APERTURES {{0x0 2G} {0xC000_0000 512M} {0xFF00_0000 16M} {0x2_0000_0000 1G} {0x2_8000_0000 1G} {0x8_0000_0000 32G}} [get_bd_intf_ports M_AXI_GMEM]
   set_property HDL_ATTRIBUTE.LOCKED {TRUE} [get_bd_intf_ports M_AXI_GMEM]
@@ -224,6 +213,9 @@ proc cr_bd_template_aximm { parentCell designName} {
    CONFIG.POLARITY {ACTIVE_LOW} \
  ] $resetn
 
+  # Create instance: Accel_placeholder, and set properties
+  set Accel_placeholder [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_warp_filter:1.1 Accel_placeholder ]
+
   # Create instance: proc_sys_reset_0, and set properties
   set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
 
@@ -240,6 +232,9 @@ proc cr_bd_template_aximm { parentCell designName} {
    CONFIG.NUM_SI {1} \
  ] $smartconnect_0
 
+  # Create instance: smartconnect_1, and set properties
+  set smartconnect_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_1 ]
+
   # Create instance: xlconcat_0, and set properties
   set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
   set_property -dict [ list \
@@ -255,26 +250,38 @@ proc cr_bd_template_aximm { parentCell designName} {
   # Create interface connections
   connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins smartconnect_0/S00_AXI]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
-  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_accel] [get_bd_intf_pins smartconnect_0/M00_AXI]
+  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins Accel_placeholder/s_axi_CTRL] [get_bd_intf_pins smartconnect_0/M00_AXI]
+  connect_bd_intf_net -intf_net smartconnect_1_M00_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_accel] [get_bd_intf_pins smartconnect_1/M00_AXI]
+  connect_bd_intf_net -intf_net v_warp_filter_0_m_axi_mm_video_read [get_bd_intf_pins Accel_placeholder/m_axi_mm_video_read] [get_bd_intf_pins smartconnect_1/S00_AXI]
+  connect_bd_intf_net -intf_net v_warp_filter_0_m_axi_mm_video_write [get_bd_intf_pins Accel_placeholder/m_axi_mm_video_write] [get_bd_intf_pins smartconnect_1/S01_AXI]
 
   # Create port connections
-  connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
-  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
+  connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins Accel_placeholder/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins smartconnect_1/aclk]
+  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn] [get_bd_pins smartconnect_1/aresetn]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins Accel_placeholder/ap_rst_n] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
   connect_bd_net -net resetn_1 [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
+  connect_bd_net -net v_warp_filter_0_interrupt [get_bd_pins Accel_placeholder/interrupt] [get_bd_pins xlconcat_0/In0]
   connect_bd_net -net xlconcat_0_dout [get_bd_ports interrupt] [get_bd_pins xlconcat_0/dout]
-  connect_bd_net -net xlconstant_0_dout [get_bd_pins xlconcat_0/In0] [get_bd_pins xlconcat_0/In1] [get_bd_pins xlconcat_0/In2] [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_0/dout]
+  connect_bd_net -net xlconstant_0_dout [get_bd_pins xlconcat_0/In1] [get_bd_pins xlconcat_0/In2] [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_0/dout]
 
   # Create address segments
-  assign_bd_address -offset 0x80000000 -range 0x02000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_read] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_read] [get_bd_addr_segs M_AXI_GMEM/Reg_1] -force
+  assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_read] [get_bd_addr_segs M_AXI_GMEM/Reg_2] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_write] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_write] [get_bd_addr_segs M_AXI_GMEM/Reg_1] -force
+  assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_write] [get_bd_addr_segs M_AXI_GMEM/Reg_2] -force
+  assign_bd_address -offset 0x80000000 -range 0x00020000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs Accel_placeholder/s_axi_CTRL/Reg] -force
 
   # Exclude Address Segments
-  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs M_AXI_GMEM/Reg]
-  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs M_AXI_GMEM/Reg_1]
-  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs M_AXI_GMEM/Reg_2]
-  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs M_AXI_GMEM/Reg_3]
-  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs M_AXI_GMEM/Reg_4]
-  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs M_AXI_GMEM/Reg_5]
+  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_read] [get_bd_addr_segs M_AXI_GMEM/Reg_3]
+  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_read] [get_bd_addr_segs M_AXI_GMEM/Reg_4]
+  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_read] [get_bd_addr_segs M_AXI_GMEM/Reg_5]
+  exclude_bd_addr_seg -offset 0x80000000 -range 0x40000000 -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_read] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0]
+  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_write] [get_bd_addr_segs M_AXI_GMEM/Reg_3]
+  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_write] [get_bd_addr_segs M_AXI_GMEM/Reg_4]
+  exclude_bd_addr_seg -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_write] [get_bd_addr_segs M_AXI_GMEM/Reg_5]
+  exclude_bd_addr_seg -offset 0x80000000 -range 0x40000000 -target_address_space [get_bd_addr_spaces Accel_placeholder/Data_m_axi_mm_video_write] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0]
 
 
   # Restore current instance
