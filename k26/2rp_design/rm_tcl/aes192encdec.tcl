@@ -80,7 +80,7 @@ proc cr_bd_AES192 { parentCell designName} {
   set_property -dict [ list \
    CONFIG.ADDR_WIDTH {49} \
    CONFIG.DATA_WIDTH {128} \
-   CONFIG.FREQ_HZ {299997498} \
+   CONFIG.FREQ_HZ {249997498} \
    CONFIG.NUM_READ_OUTSTANDING {2} \
    CONFIG.NUM_WRITE_OUTSTANDING {2} \
    CONFIG.PROTOCOL {AXI4} \
@@ -93,7 +93,7 @@ proc cr_bd_AES192 { parentCell designName} {
    CONFIG.AWUSER_WIDTH {0} \
    CONFIG.BUSER_WIDTH {0} \
    CONFIG.DATA_WIDTH {32} \
-   CONFIG.FREQ_HZ {299997498} \
+   CONFIG.FREQ_HZ {249997498} \
    CONFIG.HAS_BRESP {1} \
    CONFIG.HAS_BURST {0} \
    CONFIG.HAS_CACHE {0} \
@@ -120,7 +120,7 @@ proc cr_bd_AES192 { parentCell designName} {
 
 
   # Create ports
-  set clk [ create_bd_port -dir I -type clk -freq_hz 299997498 clk ]
+  set clk [ create_bd_port -dir I -type clk -freq_hz 249997498 clk ]
   set_property -dict [ list \
    CONFIG.ASSOCIATED_BUSIF {S_AXI_CTRL:M_AXI_GMEM} \
  ] $clk
