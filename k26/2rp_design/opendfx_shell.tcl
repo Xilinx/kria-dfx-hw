@@ -63,11 +63,13 @@ source ./rm_tcl/fft4.tcl
 source ./rm_tcl/fir_compiler.tcl
 source ./rm_tcl/aes128encdec.tcl
 source ./rm_tcl/aes192encdec.tcl
+source ./rm_tcl/dpu_512.tcl
 
 cr_bd_AES128 "" AES128
 cr_bd_FFT_4channel "" FFT_4channel
 cr_bd_FIR_compiler "" FIR_compiler
 cr_bd_AES192 "" AES192
+cr_bd_DPU_512 "" DPU_512
 
 # CHANGE DESIGN NAME HERE
 variable design_name
@@ -184,7 +186,7 @@ xilinx.com:ip:util_vector_logic:2.0\
 ##################################################################
 set bCheckSources 1
 set list_bdc_active "FIR_compiler"
-set list_bdc_dfx "AES128, AES192, FFT_4channel"
+set list_bdc_dfx "AES128, AES192, FFT_4channel, DPU_512"
 
 array set map_bdc_missing {}
 set map_bdc_missing(ACTIVE) ""
@@ -197,6 +199,7 @@ AES128 \
 AES192 \
 FFT_4channel \
 FIR_compiler \
+DPU_512 \
 "
 
    common::send_gid_msg -ssname BD::TCL -id 2056 -severity "INFO" "Checking if the following sources for block design container exist in the project: $list_check_srcs .\n\n"
@@ -2776,8 +2779,8 @@ proc create_root_design { parentCell } {
    CONFIG.ACTIVE_SIM_BD {FIR_compiler.bd} \
    CONFIG.ACTIVE_SYNTH_BD {FIR_compiler.bd} \
    CONFIG.ENABLE_DFX {true} \
-   CONFIG.LIST_SIM_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
-   CONFIG.LIST_SYNTH_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
+   CONFIG.LIST_SIM_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd:DPU_512.bd} \
+   CONFIG.LIST_SYNTH_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd:DPU_512.bd} \
    CONFIG.LOCK_PROPAGATE {true} \
  ] $RP_0
   set_property APERTURES {{0x0 2G} {0xC000_0000 512M} {0xFF00_0000 16M} {0x2_0000_0000 1G} {0x2_8000_0000 1G} {0x8_0000_0000 32G}} [get_bd_intf_pins /RP_0/M_AXI_GMEM]
@@ -2789,8 +2792,8 @@ proc create_root_design { parentCell } {
    CONFIG.ACTIVE_SIM_BD {FIR_compiler.bd} \
    CONFIG.ACTIVE_SYNTH_BD {FIR_compiler.bd} \
    CONFIG.ENABLE_DFX {true} \
-   CONFIG.LIST_SIM_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
-   CONFIG.LIST_SYNTH_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd} \
+   CONFIG.LIST_SIM_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd:DPU_512.bd} \
+   CONFIG.LIST_SYNTH_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd:DPU_512.bd} \
    CONFIG.LOCK_PROPAGATE {true} \
  ] $RP_1
   set_property APERTURES {{0x0 2G} {0xC000_0000 512M} {0xFF00_0000 16M} {0x2_0000_0000 1G} {0x2_8000_0000 1G} {0x8_0000_0000 32G}} [get_bd_intf_pins /RP_1/M_AXI_GMEM]
@@ -2884,10 +2887,10 @@ update_compile_order -fileset sim_1
 
 #Create DFX Configurations
 setup_pr_configurations
-create_pr_configuration -name config_5 -partitions { }  -greyboxes [list opendfx_shell_i/RP_0 opendfx_shell_i/RP_1 ]
-create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_5
+create_pr_configuration -name config_6 -partitions { }  -greyboxes [list opendfx_shell_i/RP_0 opendfx_shell_i/RP_1 ]
+create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_6
 
-launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16
+launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 child_4_impl_1 -to_step write_bitstream -jobs 16
 wait_on_run impl_1
 wait_on_run child_0_impl_1
 wait_on_run child_1_impl_1
