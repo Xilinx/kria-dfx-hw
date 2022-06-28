@@ -135,7 +135,6 @@ proc cr_bd_template_aximm { parentCell designName} {
    CONFIG.PROTOCOL {AXI4} \
    CONFIG.READ_WRITE_MODE {READ_WRITE} \
    ] $M_AXI_GMEM
-  set_property APERTURES {{0x0 2G} {0xC000_0000 512M} {0xFF00_0000 16M} {0x2_0000_0000 1G} {0x2_8000_0000 1G} {0x8_0000_0000 32G}} [get_bd_intf_ports M_AXI_GMEM]
   set_property HDL_ATTRIBUTE.LOCKED {TRUE} [get_bd_intf_ports M_AXI_GMEM]
 
   set S_AXI_CTRL [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 -portmaps { \
@@ -192,7 +191,6 @@ proc cr_bd_template_aximm { parentCell designName} {
    CONFIG.WUSER_BITS_PER_BYTE {0} \
    CONFIG.WUSER_WIDTH {0} \
    ] $S_AXI_CTRL
-  set_property APERTURES {{0x8000_0000 32M}} [get_bd_intf_ports S_AXI_CTRL]
   set_property HDL_ATTRIBUTE.LOCKED {TRUE} [get_bd_intf_ports S_AXI_CTRL]
 
 
