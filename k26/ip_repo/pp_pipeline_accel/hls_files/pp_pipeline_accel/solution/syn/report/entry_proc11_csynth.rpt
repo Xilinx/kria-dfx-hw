@@ -1,0 +1,138 @@
+
+
+================================================================
+== Vitis HLS Report for 'entry_proc11'
+================================================================
+* Date:           Mon Jun 27 00:45:02 2022
+
+* Version:        2022.1 (Build 3526262 on Mon Apr 18 15:47:01 MDT 2022)
+* Project:        pp_pipeline_accel
+* Solution:       solution (Vitis Kernel Flow Target)
+* Product family: zynquplus
+* Target device:  xck26-sfvc784-2LVI-i
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  1.908 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |        0|        0|      0 ns|      0 ns|    0|    0|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+--------+--------+-----+
+|       Name      | BRAM_18K|  DSP |   FF   |   LUT  | URAM|
++-----------------+---------+------+--------+--------+-----+
+|DSP              |        -|     -|       -|       -|    -|
+|Expression       |        -|     -|       0|       2|    -|
+|FIFO             |        -|     -|       -|       -|    -|
+|Instance         |        -|     -|       -|       -|    -|
+|Memory           |        -|     -|       -|       -|    -|
+|Multiplexer      |        -|     -|       -|      27|    -|
+|Register         |        -|     -|       2|       -|    -|
++-----------------+---------+------+--------+--------+-----+
+|Total            |        0|     0|       2|      29|    0|
++-----------------+---------+------+--------+--------+-----+
+|Available        |      288|  1248|  234240|  117120|   64|
++-----------------+---------+------+--------+--------+-----+
+|Utilization (%)  |        0|     0|      ~0|      ~0|    0|
++-----------------+---------+------+--------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------+----------+----+---+----+------------+------------+
+    |  Variable Name  | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------+----------+----+---+----+------------+------------+
+    |ap_block_state1  |        or|   0|  0|   2|           1|           1|
+    +-----------------+----------+----+---+----+------------+------------+
+    |Total            |          |   0|  0|   2|           1|           1|
+    +-----------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------------+----+-----------+-----+-----------+
+    |            Name            | LUT| Input Size| Bits| Total Bits|
+    +----------------------------+----+-----------+-----+-----------+
+    |ap_done                     |   9|          2|    1|          2|
+    |img_out_c_blk_n             |   9|          2|    1|          2|
+    |out_img_linestride_c_blk_n  |   9|          2|    1|          2|
+    +----------------------------+----+-----------+-----+-----------+
+    |Total                       |  27|          6|    3|          6|
+    +----------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------+---+----+-----+-----------+
+    |     Name    | FF| LUT| Bits| Const Bits|
+    +-------------+---+----+-----+-----------+
+    |ap_CS_fsm    |  1|   0|    1|          0|
+    |ap_done_reg  |  1|   0|    1|          0|
+    +-------------+---+----+-----+-----------+
+    |Total        |  2|   0|    2|          0|
+    +-------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-------------------------------------+-----+-----+------------+----------------------+--------------+
+|              RTL Ports              | Dir | Bits|  Protocol  |     Source Object    |    C Type    |
++-------------------------------------+-----+-----+------------+----------------------+--------------+
+|ap_clk                               |   in|    1|  ap_ctrl_hs|          entry_proc11|  return value|
+|ap_rst                               |   in|    1|  ap_ctrl_hs|          entry_proc11|  return value|
+|ap_start                             |   in|    1|  ap_ctrl_hs|          entry_proc11|  return value|
+|ap_done                              |  out|    1|  ap_ctrl_hs|          entry_proc11|  return value|
+|ap_continue                          |   in|    1|  ap_ctrl_hs|          entry_proc11|  return value|
+|ap_idle                              |  out|    1|  ap_ctrl_hs|          entry_proc11|  return value|
+|ap_ready                             |  out|    1|  ap_ctrl_hs|          entry_proc11|  return value|
+|img_out                              |   in|   64|     ap_none|               img_out|        scalar|
+|img_out_c_din                        |  out|   64|     ap_fifo|             img_out_c|       pointer|
+|img_out_c_num_data_valid             |   in|    4|     ap_fifo|             img_out_c|       pointer|
+|img_out_c_fifo_cap                   |   in|    4|     ap_fifo|             img_out_c|       pointer|
+|img_out_c_full_n                     |   in|    1|     ap_fifo|             img_out_c|       pointer|
+|img_out_c_write                      |  out|    1|     ap_fifo|             img_out_c|       pointer|
+|out_img_linestride                   |   in|   32|     ap_none|    out_img_linestride|        scalar|
+|out_img_linestride_c_din             |  out|   32|     ap_fifo|  out_img_linestride_c|       pointer|
+|out_img_linestride_c_num_data_valid  |   in|    4|     ap_fifo|  out_img_linestride_c|       pointer|
+|out_img_linestride_c_fifo_cap        |   in|    4|     ap_fifo|  out_img_linestride_c|       pointer|
+|out_img_linestride_c_full_n          |   in|    1|     ap_fifo|  out_img_linestride_c|       pointer|
+|out_img_linestride_c_write           |  out|    1|     ap_fifo|  out_img_linestride_c|       pointer|
++-------------------------------------+-----+-----+------------+----------------------+--------------+
+
