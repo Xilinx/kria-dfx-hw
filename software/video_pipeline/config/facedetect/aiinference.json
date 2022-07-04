@@ -1,0 +1,19 @@
+{
+  "xclbin-location":"/lib/firmware/xilinx/k26dfx-smartcam/k26dfx-smartcam.xclbin",
+  "vvas-library-repo": "/usr/lib/",
+  "element-mode":"inplace",
+  "kernels" :[
+    {
+      "library-name":"libvvas_xdpuinfer.so",
+      "config": {
+	"model-name" : "densebox_640_360",
+	"model-class" : "FACEDETECT",
+	"model-path" : "/opt/xilinx/share/vitis_ai_library/models/k26-smartcam",
+	"run_time_model" : false,
+	"need_preprocess" : false,
+	"performance_test" : false,
+	"debug_level" : 0
+      }
+    }
+  ]
+}

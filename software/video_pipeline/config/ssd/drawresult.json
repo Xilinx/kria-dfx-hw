@@ -1,0 +1,38 @@
+{
+  "xclbin-location":"/usr/lib/dpu.xclbin",
+  "vvas-library-repo": "/opt/xilinx/lib",
+  "element-mode":"inplace",
+  "kernels" :[
+    {
+      "library-name":"libvvas_airender.so",
+      "config": {
+        "fps_interval" : 10,
+        "font_size" : 2,
+        "font" : 3,
+        "thickness" : 2,
+        "debug_level" : 0,
+        "label_color" : { "blue" : 0, "green" : 0, "red" : 255 },
+        "label_filter" : [ "class", "probability" ],
+        "classes" : [
+                {
+                "name" : "car",
+                "blue" : 255,
+                "green" : 0,
+                "red" : 0
+                },
+                {
+                "name" : "person",
+                "blue" : 0,
+                "green" : 255,
+                "red" : 0
+                },
+                {
+                "name" : "bicycle",
+                "blue" : 0,
+                "green" : 0,
+                "red" : 255
+                }]
+      }
+    }
+  ]
+}
