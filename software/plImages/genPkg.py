@@ -34,35 +34,42 @@ data = [
          ]},
        ]
 
-def createAccelJson(accel, path=TMP):
-	FILEPATH = path + "accel.json"
-	print(FILEPATH)
-
-	accelData = {"accel_type": "SIHA_PL_DFX",
-		"accel_devices":[{
-			"dev_name":"80000000.AccelConfig",
-			"reg_base":"",
-			"reg_size":"65536"
-			},{
-			"dev_name":"81000000.rm_comm_box",
-			"reg_base":"",
-			"reg_size":""
-			},{
-			"dev_name":"82000000.AccelConfig",
-			"reg_base":"",
-			"reg_size":"65536"
-			},{
-			"dev_name":"83000000.rm_comm_box",
-			"reg_base":"",
-			"reg_size":""
-			}],
-		"AccelHandshakeType": "streamDataFromTrg",
-		"accel_metadata":{
-    		}
-	}
-	filehandle = open(FILEPATH, 'w')
-	filehandle.write(json.dumps(accelData, indent=2, sort_keys=True))
-	filehandle.close()
+def createAccelJson(accel, slot, path=TMP):
+    FILEPATH = path + "accel.json"
+    print(FILEPATH)
+    if slot == 0 :
+        accelData = {"accel_type": "SIHA_PL_DFX",
+            "accel_devices":[{
+                "dev_name":"80000000.AccelConfig",
+                "reg_base":"",
+                "reg_size":"65536"
+                },{
+                "dev_name":"81000000.rm_comm_box",
+                "reg_base":"",
+                "reg_size":""
+                }],
+            "AccelHandshakeType": "streamDataFromTrg",
+            "accel_metadata":{
+                }
+        }
+    elif slot == 1 :
+        accelData = {"accel_type": "SIHA_PL_DFX",
+            "accel_devices":[{
+                "dev_name":"82000000.AccelConfig",
+                "reg_base":"",
+                "reg_size":"65536"
+                },{
+                "dev_name":"83000000.rm_comm_box",
+                "reg_base":"",
+                "reg_size":""
+                }],
+            "AccelHandshakeType": "streamDataFromTrg",
+            "accel_metadata":{
+                }
+        }
+    filehandle = open(FILEPATH, 'w')
+    filehandle.write(json.dumps(accelData, indent=2, sort_keys=True))
+    filehandle.close()
 
 def createDTBO(accel, path=TMP):
 	FILEPATH = path + accel['bin'] + '_i.dtsi'
@@ -105,8 +112,8 @@ def parse(data):
 			accels.append(acc)
 	return accels
 
-def package(accel, releasedir = RELEASE, tmpdir = TMP):
-	createAccelJson(accel)
+def package(accel, slot, releasedir = RELEASE, tmpdir = TMP):
+	createAccelJson(accel,slot)
 	createDTBO(accel)
 	res = os.system(' '.join(['cp', BASE2RP + accel['bin'], TMP + accel['bin']]))
 	DIR = accel['name'] + '/' + accel['name'] + '_slot' + str(accel['id'])
@@ -127,4 +134,4 @@ res = os.system(' '.join(['cp', BASE2RP + 'pl.dtsi', RELEASE]))
 res = os.system(' '.join(['cp', BASE2RP + 'shell.json', RELEASE]))
 accels = parse(data)
 for accel in accels:
-	package(accel)
+	package(accel,accel['id'])
