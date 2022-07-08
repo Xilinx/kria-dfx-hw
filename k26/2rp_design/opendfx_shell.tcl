@@ -1086,7 +1086,7 @@ proc create_hier_cell_static_shell { parentCell nameHier } {
   # Create instance: xlconcat_interrupt, and set properties
   set xlconcat_interrupt [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_interrupt ]
   set_property -dict [ list \
-   CONFIG.NUM_PORTS {2} \
+   CONFIG.NUM_PORTS {3} \
  ] $xlconcat_interrupt
 
   # Create instance: xlslice_0, and set properties
