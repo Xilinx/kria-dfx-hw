@@ -85,8 +85,9 @@ module pp_pipeline_accel_Array2xfMat_64_0_2160_3840_1_s (
         imgInput_y_cols_c_write
 );
 
-parameter    ap_ST_fsm_state1 = 2'd1;
-parameter    ap_ST_fsm_state2 = 2'd2;
+parameter    ap_ST_fsm_state1 = 3'd1;
+parameter    ap_ST_fsm_state2 = 3'd2;
+parameter    ap_ST_fsm_state3 = 3'd4;
 
 input   ap_clk;
 input   ap_rst;
@@ -176,11 +177,12 @@ reg imgInput_y_cols_c_write;
 reg    real_start;
 reg    start_once_reg;
 reg    ap_done_reg;
-(* fsm_encoding = "none" *) reg   [1:0] ap_CS_fsm;
+(* fsm_encoding = "none" *) reg   [2:0] ap_CS_fsm;
 wire    ap_CS_fsm_state1;
 reg    internal_ap_ready;
 reg    imgInput_y_rows_c_blk_n;
 reg    imgInput_y_cols_c_blk_n;
+wire    ap_CS_fsm_state2;
 wire    grp_Axi2Mat_1_fu_92_m_axi_gmem1_AWVALID;
 wire   [63:0] grp_Axi2Mat_1_fu_92_m_axi_gmem1_AWADDR;
 wire   [0:0] grp_Axi2Mat_1_fu_92_m_axi_gmem1_AWID;
@@ -221,24 +223,24 @@ wire    grp_Axi2Mat_1_fu_92_ap_ready;
 wire    grp_Axi2Mat_1_fu_92_ap_idle;
 reg    grp_Axi2Mat_1_fu_92_ap_continue;
 reg    grp_Axi2Mat_1_fu_92_ap_start_reg;
-reg    ap_block_state1_ignore_call10;
-wire    ap_CS_fsm_state2;
+wire    ap_CS_fsm_state3;
 wire    ap_sync_grp_Axi2Mat_1_fu_92_ap_ready;
 wire    ap_sync_grp_Axi2Mat_1_fu_92_ap_done;
-reg    ap_block_state2_on_subcall_done;
+reg    ap_block_state3_on_subcall_done;
 reg    ap_sync_reg_grp_Axi2Mat_1_fu_92_ap_ready;
 reg    ap_sync_reg_grp_Axi2Mat_1_fu_92_ap_done;
 reg    ap_block_state1;
-reg   [1:0] ap_NS_fsm;
+reg   [2:0] ap_NS_fsm;
 reg    ap_ST_fsm_state1_blk;
-reg    ap_ST_fsm_state2_blk;
+wire    ap_ST_fsm_state2_blk;
+reg    ap_ST_fsm_state3_blk;
 wire    ap_ce_reg;
 
 // power-on initialization
 initial begin
 #0 start_once_reg = 1'b0;
 #0 ap_done_reg = 1'b0;
-#0 ap_CS_fsm = 2'd1;
+#0 ap_CS_fsm = 3'd1;
 #0 grp_Axi2Mat_1_fu_92_ap_start_reg = 1'b0;
 #0 ap_sync_reg_grp_Axi2Mat_1_fu_92_ap_ready = 1'b0;
 #0 ap_sync_reg_grp_Axi2Mat_1_fu_92_ap_done = 1'b0;
@@ -325,7 +327,7 @@ always @ (posedge ap_clk) begin
     end else begin
         if ((ap_continue == 1'b1)) begin
             ap_done_reg <= 1'b0;
-        end else if (((1'b0 == ap_block_state2_on_subcall_done) & (1'b1 == ap_CS_fsm_state2))) begin
+        end else if (((1'b0 == ap_block_state3_on_subcall_done) & (1'b1 == ap_CS_fsm_state3))) begin
             ap_done_reg <= 1'b1;
         end
     end
@@ -335,7 +337,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         ap_sync_reg_grp_Axi2Mat_1_fu_92_ap_done <= 1'b0;
     end else begin
-        if (((1'b0 == ap_block_state2_on_subcall_done) & (1'b1 == ap_CS_fsm_state2))) begin
+        if (((1'b0 == ap_block_state3_on_subcall_done) & (1'b1 == ap_CS_fsm_state3))) begin
             ap_sync_reg_grp_Axi2Mat_1_fu_92_ap_done <= 1'b0;
         end else if ((grp_Axi2Mat_1_fu_92_ap_done == 1'b1)) begin
             ap_sync_reg_grp_Axi2Mat_1_fu_92_ap_done <= 1'b1;
@@ -347,7 +349,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         ap_sync_reg_grp_Axi2Mat_1_fu_92_ap_ready <= 1'b0;
     end else begin
-        if (((1'b0 == ap_block_state2_on_subcall_done) & (1'b1 == ap_CS_fsm_state2))) begin
+        if (((1'b0 == ap_block_state3_on_subcall_done) & (1'b1 == ap_CS_fsm_state3))) begin
             ap_sync_reg_grp_Axi2Mat_1_fu_92_ap_ready <= 1'b0;
         end else if ((grp_Axi2Mat_1_fu_92_ap_ready == 1'b1)) begin
             ap_sync_reg_grp_Axi2Mat_1_fu_92_ap_ready <= 1'b1;
@@ -359,7 +361,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         grp_Axi2Mat_1_fu_92_ap_start_reg <= 1'b0;
     end else begin
-        if ((((ap_sync_grp_Axi2Mat_1_fu_92_ap_ready == 1'b0) & (1'b1 == ap_CS_fsm_state2)) | (~((real_start == 1'b0) | (ap_done_reg == 1'b1) | (imgInput_y_cols_c_full_n == 1'b0) | (imgInput_y_rows_c_full_n == 1'b0)) & (1'b1 == ap_CS_fsm_state1)))) begin
+        if (((1'b1 == ap_CS_fsm_state2) | ((ap_sync_grp_Axi2Mat_1_fu_92_ap_ready == 1'b0) & (1'b1 == ap_CS_fsm_state3)))) begin
             grp_Axi2Mat_1_fu_92_ap_start_reg <= 1'b1;
         end else if ((grp_Axi2Mat_1_fu_92_ap_ready == 1'b1)) begin
             grp_Axi2Mat_1_fu_92_ap_start_reg <= 1'b0;
@@ -387,16 +389,18 @@ always @ (*) begin
     end
 end
 
+assign ap_ST_fsm_state2_blk = 1'b0;
+
 always @ (*) begin
-    if ((1'b1 == ap_block_state2_on_subcall_done)) begin
-        ap_ST_fsm_state2_blk = 1'b1;
+    if ((1'b1 == ap_block_state3_on_subcall_done)) begin
+        ap_ST_fsm_state3_blk = 1'b1;
     end else begin
-        ap_ST_fsm_state2_blk = 1'b0;
+        ap_ST_fsm_state3_blk = 1'b0;
     end
 end
 
 always @ (*) begin
-    if (((1'b0 == ap_block_state2_on_subcall_done) & (1'b1 == ap_CS_fsm_state2))) begin
+    if (((1'b0 == ap_block_state3_on_subcall_done) & (1'b1 == ap_CS_fsm_state3))) begin
         ap_done = 1'b1;
     end else begin
         ap_done = ap_done_reg;
@@ -412,7 +416,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b0 == ap_block_state2_on_subcall_done) & (1'b1 == ap_CS_fsm_state2))) begin
+    if (((1'b0 == ap_block_state3_on_subcall_done) & (1'b1 == ap_CS_fsm_state3))) begin
         grp_Axi2Mat_1_fu_92_ap_continue = 1'b1;
     end else begin
         grp_Axi2Mat_1_fu_92_ap_continue = 1'b0;
@@ -436,7 +440,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state2)) begin
+    if ((1'b1 == ap_CS_fsm_state3)) begin
         imgInput_y_data81_write = grp_Axi2Mat_1_fu_92_imgInput_y_data81_write;
     end else begin
         imgInput_y_data81_write = 1'b0;
@@ -460,7 +464,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b0 == ap_block_state2_on_subcall_done) & (1'b1 == ap_CS_fsm_state2))) begin
+    if (((1'b0 == ap_block_state3_on_subcall_done) & (1'b1 == ap_CS_fsm_state3))) begin
         internal_ap_ready = 1'b1;
     end else begin
         internal_ap_ready = 1'b0;
@@ -468,7 +472,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state1) | (1'b1 == ap_CS_fsm_state2))) begin
+    if (((1'b1 == ap_CS_fsm_state3) | (1'b1 == ap_CS_fsm_state2))) begin
         m_axi_gmem1_ARVALID = grp_Axi2Mat_1_fu_92_m_axi_gmem1_ARVALID;
     end else begin
         m_axi_gmem1_ARVALID = 1'b0;
@@ -476,7 +480,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state1) | (1'b1 == ap_CS_fsm_state2))) begin
+    if (((1'b1 == ap_CS_fsm_state3) | (1'b1 == ap_CS_fsm_state2))) begin
         m_axi_gmem1_RREADY = grp_Axi2Mat_1_fu_92_m_axi_gmem1_RREADY;
     end else begin
         m_axi_gmem1_RREADY = 1'b0;
@@ -484,7 +488,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((start_full_n == 1'b0) & (start_once_reg == 1'b0))) begin
+    if (((start_once_reg == 1'b0) & (start_full_n == 1'b0))) begin
         real_start = 1'b0;
     end else begin
         real_start = ap_start;
@@ -509,10 +513,13 @@ always @ (*) begin
             end
         end
         ap_ST_fsm_state2 : begin
-            if (((1'b0 == ap_block_state2_on_subcall_done) & (1'b1 == ap_CS_fsm_state2))) begin
+            ap_NS_fsm = ap_ST_fsm_state3;
+        end
+        ap_ST_fsm_state3 : begin
+            if (((1'b0 == ap_block_state3_on_subcall_done) & (1'b1 == ap_CS_fsm_state3))) begin
                 ap_NS_fsm = ap_ST_fsm_state1;
             end else begin
-                ap_NS_fsm = ap_ST_fsm_state2;
+                ap_NS_fsm = ap_ST_fsm_state3;
             end
         end
         default : begin
@@ -525,16 +532,14 @@ assign ap_CS_fsm_state1 = ap_CS_fsm[32'd0];
 
 assign ap_CS_fsm_state2 = ap_CS_fsm[32'd1];
 
+assign ap_CS_fsm_state3 = ap_CS_fsm[32'd2];
+
 always @ (*) begin
     ap_block_state1 = ((real_start == 1'b0) | (ap_done_reg == 1'b1) | (imgInput_y_cols_c_full_n == 1'b0) | (imgInput_y_rows_c_full_n == 1'b0));
 end
 
 always @ (*) begin
-    ap_block_state1_ignore_call10 = ((real_start == 1'b0) | (ap_done_reg == 1'b1) | (imgInput_y_cols_c_full_n == 1'b0) | (imgInput_y_rows_c_full_n == 1'b0));
-end
-
-always @ (*) begin
-    ap_block_state2_on_subcall_done = ((ap_sync_grp_Axi2Mat_1_fu_92_ap_ready & ap_sync_grp_Axi2Mat_1_fu_92_ap_done) == 1'b0);
+    ap_block_state3_on_subcall_done = ((ap_sync_grp_Axi2Mat_1_fu_92_ap_ready & ap_sync_grp_Axi2Mat_1_fu_92_ap_done) == 1'b0);
 end
 
 assign ap_ready = internal_ap_ready;

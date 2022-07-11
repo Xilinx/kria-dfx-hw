@@ -87,8 +87,9 @@ end;
 architecture behav of pp_pipeline_accel_xfMat2Array_64_9_720_720_1_1_s is 
     constant ap_const_logic_1 : STD_LOGIC := '1';
     constant ap_const_logic_0 : STD_LOGIC := '0';
-    constant ap_ST_fsm_state1 : STD_LOGIC_VECTOR (1 downto 0) := "01";
-    constant ap_ST_fsm_state2 : STD_LOGIC_VECTOR (1 downto 0) := "10";
+    constant ap_ST_fsm_state1 : STD_LOGIC_VECTOR (2 downto 0) := "001";
+    constant ap_ST_fsm_state2 : STD_LOGIC_VECTOR (2 downto 0) := "010";
+    constant ap_ST_fsm_state3 : STD_LOGIC_VECTOR (2 downto 0) := "100";
     constant ap_const_lv32_0 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000000";
     constant ap_const_boolean_1 : BOOLEAN := true;
     constant ap_const_lv64_0 : STD_LOGIC_VECTOR (63 downto 0) := "0000000000000000000000000000000000000000000000000000000000000000";
@@ -97,22 +98,23 @@ architecture behav of pp_pipeline_accel_xfMat2Array_64_9_720_720_1_1_s is
     constant ap_const_lv2_0 : STD_LOGIC_VECTOR (1 downto 0) := "00";
     constant ap_const_lv4_0 : STD_LOGIC_VECTOR (3 downto 0) := "0000";
     constant ap_const_lv32_1 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000001";
+    constant ap_const_lv32_2 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000010";
     constant ap_const_boolean_0 : BOOLEAN := false;
     constant ap_const_lv9_0 : STD_LOGIC_VECTOR (8 downto 0) := "000000000";
 
 attribute shreg_extract : string;
     signal ap_done_reg : STD_LOGIC := '0';
-    signal ap_CS_fsm : STD_LOGIC_VECTOR (1 downto 0) := "01";
+    signal ap_CS_fsm : STD_LOGIC_VECTOR (2 downto 0) := "001";
     attribute fsm_encoding : string;
     attribute fsm_encoding of ap_CS_fsm : signal is "none";
     signal ap_CS_fsm_state1 : STD_LOGIC;
     attribute fsm_encoding of ap_CS_fsm_state1 : signal is "none";
     signal dstPtr_blk_n : STD_LOGIC;
     signal stride_blk_n : STD_LOGIC;
-    signal stride_read_reg_97 : STD_LOGIC_VECTOR (31 downto 0);
-    signal dstPtr_read_reg_102 : STD_LOGIC_VECTOR (63 downto 0);
-    signal trunc_ln1565_fu_87_p1 : STD_LOGIC_VECTOR (15 downto 0);
-    signal trunc_ln1565_reg_107 : STD_LOGIC_VECTOR (15 downto 0);
+    signal stride_read_reg_93 : STD_LOGIC_VECTOR (31 downto 0);
+    signal dstPtr_read_reg_98 : STD_LOGIC_VECTOR (63 downto 0);
+    signal trunc_ln1565_fu_84_p1 : STD_LOGIC_VECTOR (15 downto 0);
+    signal trunc_ln1565_reg_103 : STD_LOGIC_VECTOR (15 downto 0);
     signal grp_Mat2Axi_fu_72_out_mat_data85_read : STD_LOGIC;
     signal grp_Mat2Axi_fu_72_m_axi_gmem3_AWVALID : STD_LOGIC;
     signal grp_Mat2Axi_fu_72_m_axi_gmem3_AWADDR : STD_LOGIC_VECTOR (63 downto 0);
@@ -152,18 +154,20 @@ attribute shreg_extract : string;
     signal grp_Mat2Axi_fu_72_ap_idle : STD_LOGIC;
     signal grp_Mat2Axi_fu_72_ap_continue : STD_LOGIC;
     signal grp_Mat2Axi_fu_72_ap_start_reg : STD_LOGIC := '0';
-    signal ap_block_state1_ignore_call9 : BOOLEAN;
     signal ap_CS_fsm_state2 : STD_LOGIC;
     attribute fsm_encoding of ap_CS_fsm_state2 : signal is "none";
+    signal ap_CS_fsm_state3 : STD_LOGIC;
+    attribute fsm_encoding of ap_CS_fsm_state3 : signal is "none";
     signal ap_sync_grp_Mat2Axi_fu_72_ap_ready : STD_LOGIC;
     signal ap_sync_grp_Mat2Axi_fu_72_ap_done : STD_LOGIC;
-    signal ap_block_state2_on_subcall_done : BOOLEAN;
+    signal ap_block_state3_on_subcall_done : BOOLEAN;
     signal ap_sync_reg_grp_Mat2Axi_fu_72_ap_ready : STD_LOGIC := '0';
     signal ap_sync_reg_grp_Mat2Axi_fu_72_ap_done : STD_LOGIC := '0';
     signal ap_block_state1 : BOOLEAN;
-    signal ap_NS_fsm : STD_LOGIC_VECTOR (1 downto 0);
+    signal ap_NS_fsm : STD_LOGIC_VECTOR (2 downto 0);
     signal ap_ST_fsm_state1_blk : STD_LOGIC;
     signal ap_ST_fsm_state2_blk : STD_LOGIC;
+    signal ap_ST_fsm_state3_blk : STD_LOGIC;
     signal ap_ce_reg : STD_LOGIC;
 
     component pp_pipeline_accel_Mat2Axi IS
@@ -288,10 +292,10 @@ begin
         m_axi_gmem3_BRESP => m_axi_gmem3_BRESP,
         m_axi_gmem3_BID => m_axi_gmem3_BID,
         m_axi_gmem3_BUSER => m_axi_gmem3_BUSER,
-        dout => dstPtr_read_reg_102,
-        rows => trunc_ln1565_reg_107,
+        dout => dstPtr_read_reg_98,
+        rows => trunc_ln1565_reg_103,
         cols => p_read1,
-        stride => stride_read_reg_97,
+        stride => stride_read_reg_93,
         ap_clk => ap_clk,
         ap_rst => ap_rst,
         dout_ap_vld => ap_const_logic_1,
@@ -328,7 +332,7 @@ begin
             else
                 if ((ap_continue = ap_const_logic_1)) then 
                     ap_done_reg <= ap_const_logic_0;
-                elsif (((ap_const_logic_1 = ap_CS_fsm_state2) and (ap_const_boolean_0 = ap_block_state2_on_subcall_done))) then 
+                elsif (((ap_const_logic_1 = ap_CS_fsm_state3) and (ap_const_boolean_0 = ap_block_state3_on_subcall_done))) then 
                     ap_done_reg <= ap_const_logic_1;
                 end if; 
             end if;
@@ -342,7 +346,7 @@ begin
             if (ap_rst = '1') then
                 ap_sync_reg_grp_Mat2Axi_fu_72_ap_done <= ap_const_logic_0;
             else
-                if (((ap_const_logic_1 = ap_CS_fsm_state2) and (ap_const_boolean_0 = ap_block_state2_on_subcall_done))) then 
+                if (((ap_const_logic_1 = ap_CS_fsm_state3) and (ap_const_boolean_0 = ap_block_state3_on_subcall_done))) then 
                     ap_sync_reg_grp_Mat2Axi_fu_72_ap_done <= ap_const_logic_0;
                 elsif ((grp_Mat2Axi_fu_72_ap_done = ap_const_logic_1)) then 
                     ap_sync_reg_grp_Mat2Axi_fu_72_ap_done <= ap_const_logic_1;
@@ -358,7 +362,7 @@ begin
             if (ap_rst = '1') then
                 ap_sync_reg_grp_Mat2Axi_fu_72_ap_ready <= ap_const_logic_0;
             else
-                if (((ap_const_logic_1 = ap_CS_fsm_state2) and (ap_const_boolean_0 = ap_block_state2_on_subcall_done))) then 
+                if (((ap_const_logic_1 = ap_CS_fsm_state3) and (ap_const_boolean_0 = ap_block_state3_on_subcall_done))) then 
                     ap_sync_reg_grp_Mat2Axi_fu_72_ap_ready <= ap_const_logic_0;
                 elsif ((grp_Mat2Axi_fu_72_ap_ready = ap_const_logic_1)) then 
                     ap_sync_reg_grp_Mat2Axi_fu_72_ap_ready <= ap_const_logic_1;
@@ -374,7 +378,7 @@ begin
             if (ap_rst = '1') then
                 grp_Mat2Axi_fu_72_ap_start_reg <= ap_const_logic_0;
             else
-                if ((((ap_const_logic_1 = ap_CS_fsm_state2) and (ap_sync_grp_Mat2Axi_fu_72_ap_ready = ap_const_logic_0)) or (not(((stride_empty_n = ap_const_logic_0) or (dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1))) and (ap_const_logic_1 = ap_CS_fsm_state1)))) then 
+                if (((ap_const_logic_1 = ap_CS_fsm_state2) or ((ap_const_logic_1 = ap_CS_fsm_state3) and (ap_sync_grp_Mat2Axi_fu_72_ap_ready = ap_const_logic_0)))) then 
                     grp_Mat2Axi_fu_72_ap_start_reg <= ap_const_logic_1;
                 elsif ((grp_Mat2Axi_fu_72_ap_ready = ap_const_logic_1)) then 
                     grp_Mat2Axi_fu_72_ap_start_reg <= ap_const_logic_0;
@@ -387,76 +391,74 @@ begin
     begin
         if (ap_clk'event and ap_clk = '1') then
             if ((ap_const_logic_1 = ap_CS_fsm_state1)) then
-                dstPtr_read_reg_102 <= dstPtr_dout;
-                stride_read_reg_97 <= stride_dout;
-                trunc_ln1565_reg_107 <= trunc_ln1565_fu_87_p1;
+                dstPtr_read_reg_98 <= dstPtr_dout;
+                stride_read_reg_93 <= stride_dout;
+                trunc_ln1565_reg_103 <= trunc_ln1565_fu_84_p1;
             end if;
         end if;
     end process;
 
-    ap_NS_fsm_assign_proc : process (ap_start, ap_done_reg, ap_CS_fsm, ap_CS_fsm_state1, dstPtr_empty_n, stride_empty_n, ap_CS_fsm_state2, ap_block_state2_on_subcall_done)
+    ap_NS_fsm_assign_proc : process (ap_start, ap_done_reg, ap_CS_fsm, ap_CS_fsm_state1, dstPtr_empty_n, stride_empty_n, ap_CS_fsm_state3, ap_block_state3_on_subcall_done)
     begin
         case ap_CS_fsm is
             when ap_ST_fsm_state1 => 
-                if ((not(((stride_empty_n = ap_const_logic_0) or (dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1))) and (ap_const_logic_1 = ap_CS_fsm_state1))) then
+                if ((not(((dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1) or (stride_empty_n = ap_const_logic_0))) and (ap_const_logic_1 = ap_CS_fsm_state1))) then
                     ap_NS_fsm <= ap_ST_fsm_state2;
                 else
                     ap_NS_fsm <= ap_ST_fsm_state1;
                 end if;
             when ap_ST_fsm_state2 => 
-                if (((ap_const_logic_1 = ap_CS_fsm_state2) and (ap_const_boolean_0 = ap_block_state2_on_subcall_done))) then
+                ap_NS_fsm <= ap_ST_fsm_state3;
+            when ap_ST_fsm_state3 => 
+                if (((ap_const_logic_1 = ap_CS_fsm_state3) and (ap_const_boolean_0 = ap_block_state3_on_subcall_done))) then
                     ap_NS_fsm <= ap_ST_fsm_state1;
                 else
-                    ap_NS_fsm <= ap_ST_fsm_state2;
+                    ap_NS_fsm <= ap_ST_fsm_state3;
                 end if;
             when others =>  
-                ap_NS_fsm <= "XX";
+                ap_NS_fsm <= "XXX";
         end case;
     end process;
     ap_CS_fsm_state1 <= ap_CS_fsm(0);
     ap_CS_fsm_state2 <= ap_CS_fsm(1);
+    ap_CS_fsm_state3 <= ap_CS_fsm(2);
 
     ap_ST_fsm_state1_blk_assign_proc : process(ap_start, ap_done_reg, dstPtr_empty_n, stride_empty_n)
     begin
-        if (((stride_empty_n = ap_const_logic_0) or (dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1))) then 
+        if (((dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1) or (stride_empty_n = ap_const_logic_0))) then 
             ap_ST_fsm_state1_blk <= ap_const_logic_1;
         else 
             ap_ST_fsm_state1_blk <= ap_const_logic_0;
         end if; 
     end process;
 
+    ap_ST_fsm_state2_blk <= ap_const_logic_0;
 
-    ap_ST_fsm_state2_blk_assign_proc : process(ap_block_state2_on_subcall_done)
+    ap_ST_fsm_state3_blk_assign_proc : process(ap_block_state3_on_subcall_done)
     begin
-        if ((ap_const_boolean_1 = ap_block_state2_on_subcall_done)) then 
-            ap_ST_fsm_state2_blk <= ap_const_logic_1;
+        if ((ap_const_boolean_1 = ap_block_state3_on_subcall_done)) then 
+            ap_ST_fsm_state3_blk <= ap_const_logic_1;
         else 
-            ap_ST_fsm_state2_blk <= ap_const_logic_0;
+            ap_ST_fsm_state3_blk <= ap_const_logic_0;
         end if; 
     end process;
 
 
     ap_block_state1_assign_proc : process(ap_start, ap_done_reg, dstPtr_empty_n, stride_empty_n)
     begin
-                ap_block_state1 <= ((stride_empty_n = ap_const_logic_0) or (dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1));
+                ap_block_state1 <= ((dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1) or (stride_empty_n = ap_const_logic_0));
     end process;
 
 
-    ap_block_state1_ignore_call9_assign_proc : process(ap_start, ap_done_reg, dstPtr_empty_n, stride_empty_n)
+    ap_block_state3_on_subcall_done_assign_proc : process(ap_sync_grp_Mat2Axi_fu_72_ap_ready, ap_sync_grp_Mat2Axi_fu_72_ap_done)
     begin
-                ap_block_state1_ignore_call9 <= ((stride_empty_n = ap_const_logic_0) or (dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1));
+                ap_block_state3_on_subcall_done <= ((ap_sync_grp_Mat2Axi_fu_72_ap_ready and ap_sync_grp_Mat2Axi_fu_72_ap_done) = ap_const_logic_0);
     end process;
 
 
-    ap_block_state2_on_subcall_done_assign_proc : process(ap_sync_grp_Mat2Axi_fu_72_ap_ready, ap_sync_grp_Mat2Axi_fu_72_ap_done)
+    ap_done_assign_proc : process(ap_done_reg, ap_CS_fsm_state3, ap_block_state3_on_subcall_done)
     begin
-                ap_block_state2_on_subcall_done <= ((ap_sync_grp_Mat2Axi_fu_72_ap_ready and ap_sync_grp_Mat2Axi_fu_72_ap_done) = ap_const_logic_0);
-    end process;
-
-
-    ap_done_assign_proc : process(ap_done_reg, ap_CS_fsm_state2, ap_block_state2_on_subcall_done)
-    begin
-        if (((ap_const_logic_1 = ap_CS_fsm_state2) and (ap_const_boolean_0 = ap_block_state2_on_subcall_done))) then 
+        if (((ap_const_logic_1 = ap_CS_fsm_state3) and (ap_const_boolean_0 = ap_block_state3_on_subcall_done))) then 
             ap_done <= ap_const_logic_1;
         else 
             ap_done <= ap_done_reg;
@@ -474,9 +476,9 @@ begin
     end process;
 
 
-    ap_ready_assign_proc : process(ap_CS_fsm_state2, ap_block_state2_on_subcall_done)
+    ap_ready_assign_proc : process(ap_CS_fsm_state3, ap_block_state3_on_subcall_done)
     begin
-        if (((ap_const_logic_1 = ap_CS_fsm_state2) and (ap_const_boolean_0 = ap_block_state2_on_subcall_done))) then 
+        if (((ap_const_logic_1 = ap_CS_fsm_state3) and (ap_const_boolean_0 = ap_block_state3_on_subcall_done))) then 
             ap_ready <= ap_const_logic_1;
         else 
             ap_ready <= ap_const_logic_0;
@@ -498,7 +500,7 @@ begin
 
     dstPtr_read_assign_proc : process(ap_start, ap_done_reg, ap_CS_fsm_state1, dstPtr_empty_n, stride_empty_n)
     begin
-        if ((not(((stride_empty_n = ap_const_logic_0) or (dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1))) and (ap_const_logic_1 = ap_CS_fsm_state1))) then 
+        if ((not(((dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1) or (stride_empty_n = ap_const_logic_0))) and (ap_const_logic_1 = ap_CS_fsm_state1))) then 
             dstPtr_read <= ap_const_logic_1;
         else 
             dstPtr_read <= ap_const_logic_0;
@@ -506,9 +508,9 @@ begin
     end process;
 
 
-    grp_Mat2Axi_fu_72_ap_continue_assign_proc : process(ap_CS_fsm_state2, ap_block_state2_on_subcall_done)
+    grp_Mat2Axi_fu_72_ap_continue_assign_proc : process(ap_CS_fsm_state3, ap_block_state3_on_subcall_done)
     begin
-        if (((ap_const_logic_1 = ap_CS_fsm_state2) and (ap_const_boolean_0 = ap_block_state2_on_subcall_done))) then 
+        if (((ap_const_logic_1 = ap_CS_fsm_state3) and (ap_const_boolean_0 = ap_block_state3_on_subcall_done))) then 
             grp_Mat2Axi_fu_72_ap_continue <= ap_const_logic_1;
         else 
             grp_Mat2Axi_fu_72_ap_continue <= ap_const_logic_0;
@@ -540,9 +542,9 @@ begin
     m_axi_gmem3_AWSIZE <= grp_Mat2Axi_fu_72_m_axi_gmem3_AWSIZE;
     m_axi_gmem3_AWUSER <= grp_Mat2Axi_fu_72_m_axi_gmem3_AWUSER;
 
-    m_axi_gmem3_AWVALID_assign_proc : process(ap_CS_fsm_state1, grp_Mat2Axi_fu_72_m_axi_gmem3_AWVALID, ap_CS_fsm_state2)
+    m_axi_gmem3_AWVALID_assign_proc : process(grp_Mat2Axi_fu_72_m_axi_gmem3_AWVALID, ap_CS_fsm_state2, ap_CS_fsm_state3)
     begin
-        if (((ap_const_logic_1 = ap_CS_fsm_state2) or (ap_const_logic_1 = ap_CS_fsm_state1))) then 
+        if (((ap_const_logic_1 = ap_CS_fsm_state3) or (ap_const_logic_1 = ap_CS_fsm_state2))) then 
             m_axi_gmem3_AWVALID <= grp_Mat2Axi_fu_72_m_axi_gmem3_AWVALID;
         else 
             m_axi_gmem3_AWVALID <= ap_const_logic_0;
@@ -550,9 +552,9 @@ begin
     end process;
 
 
-    m_axi_gmem3_BREADY_assign_proc : process(ap_CS_fsm_state1, grp_Mat2Axi_fu_72_m_axi_gmem3_BREADY, ap_CS_fsm_state2)
+    m_axi_gmem3_BREADY_assign_proc : process(grp_Mat2Axi_fu_72_m_axi_gmem3_BREADY, ap_CS_fsm_state2, ap_CS_fsm_state3)
     begin
-        if (((ap_const_logic_1 = ap_CS_fsm_state2) or (ap_const_logic_1 = ap_CS_fsm_state1))) then 
+        if (((ap_const_logic_1 = ap_CS_fsm_state3) or (ap_const_logic_1 = ap_CS_fsm_state2))) then 
             m_axi_gmem3_BREADY <= grp_Mat2Axi_fu_72_m_axi_gmem3_BREADY;
         else 
             m_axi_gmem3_BREADY <= ap_const_logic_0;
@@ -566,9 +568,9 @@ begin
     m_axi_gmem3_WSTRB <= grp_Mat2Axi_fu_72_m_axi_gmem3_WSTRB;
     m_axi_gmem3_WUSER <= grp_Mat2Axi_fu_72_m_axi_gmem3_WUSER;
 
-    m_axi_gmem3_WVALID_assign_proc : process(ap_CS_fsm_state1, grp_Mat2Axi_fu_72_m_axi_gmem3_WVALID, ap_CS_fsm_state2)
+    m_axi_gmem3_WVALID_assign_proc : process(grp_Mat2Axi_fu_72_m_axi_gmem3_WVALID, ap_CS_fsm_state2, ap_CS_fsm_state3)
     begin
-        if (((ap_const_logic_1 = ap_CS_fsm_state2) or (ap_const_logic_1 = ap_CS_fsm_state1))) then 
+        if (((ap_const_logic_1 = ap_CS_fsm_state3) or (ap_const_logic_1 = ap_CS_fsm_state2))) then 
             m_axi_gmem3_WVALID <= grp_Mat2Axi_fu_72_m_axi_gmem3_WVALID;
         else 
             m_axi_gmem3_WVALID <= ap_const_logic_0;
@@ -576,9 +578,9 @@ begin
     end process;
 
 
-    out_mat_data85_read_assign_proc : process(grp_Mat2Axi_fu_72_out_mat_data85_read, ap_CS_fsm_state2)
+    out_mat_data85_read_assign_proc : process(grp_Mat2Axi_fu_72_out_mat_data85_read, ap_CS_fsm_state3)
     begin
-        if ((ap_const_logic_1 = ap_CS_fsm_state2)) then 
+        if ((ap_const_logic_1 = ap_CS_fsm_state3)) then 
             out_mat_data85_read <= grp_Mat2Axi_fu_72_out_mat_data85_read;
         else 
             out_mat_data85_read <= ap_const_logic_0;
@@ -598,12 +600,12 @@ begin
 
     stride_read_assign_proc : process(ap_start, ap_done_reg, ap_CS_fsm_state1, dstPtr_empty_n, stride_empty_n)
     begin
-        if ((not(((stride_empty_n = ap_const_logic_0) or (dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1))) and (ap_const_logic_1 = ap_CS_fsm_state1))) then 
+        if ((not(((dstPtr_empty_n = ap_const_logic_0) or (ap_start = ap_const_logic_0) or (ap_done_reg = ap_const_logic_1) or (stride_empty_n = ap_const_logic_0))) and (ap_const_logic_1 = ap_CS_fsm_state1))) then 
             stride_read <= ap_const_logic_1;
         else 
             stride_read <= ap_const_logic_0;
         end if; 
     end process;
 
-    trunc_ln1565_fu_87_p1 <= p_read(16 - 1 downto 0);
+    trunc_ln1565_fu_84_p1 <= p_read(16 - 1 downto 0);
 end behav;

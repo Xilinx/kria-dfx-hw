@@ -34,7 +34,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>778960088</coreId>
+              <coreId>448</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>32</bitwidth>
@@ -70,7 +70,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>448</coreId>
+              <coreId>0</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>48</bitwidth>
@@ -93,7 +93,7 @@
               <type>0</type>
               <id>3</id>
               <name>inscale_read</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>189</lineNumber>
               <contextFuncName>scaleCompute&amp;lt;17, 42, 20, 48, 16, 1&amp;gt;</contextFuncName>
@@ -102,13 +102,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item class_id="10" tracking_level="0" version="0">
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second class_id="11" tracking_level="0" version="0">
                     <count>1</count>
                     <item_version>0</item_version>
                     <item class_id="12" tracking_level="0" version="0">
                       <first class_id="13" tracking_level="0" version="0">
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
                         <second>scaleCompute&amp;lt;17, 42, 20, 48, 16, 1&amp;gt;</second>
                       </first>
                       <second>189</second>
@@ -150,7 +150,7 @@
               <type>0</type>
               <id>4</id>
               <name>currindex_read</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>189</lineNumber>
               <contextFuncName>scaleCompute&amp;lt;17, 42, 20, 48, 16, 1&amp;gt;</contextFuncName>
@@ -159,13 +159,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
                     <item>
                       <first>
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
                         <second>scaleCompute&amp;lt;17, 42, 20, 48, 16, 1&amp;gt;</second>
                       </first>
                       <second>189</second>
@@ -181,7 +181,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>384</coreId>
+              <coreId>3355443320</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>32</bitwidth>
@@ -216,7 +216,7 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
@@ -238,7 +238,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>778712960</coreId>
+              <coreId>643222600</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>20</bitwidth>
@@ -272,7 +272,7 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
@@ -294,7 +294,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>0</coreId>
+              <coreId>539107901</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>42</bitwidth>
@@ -330,7 +330,7 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
@@ -352,7 +352,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>1769414756</coreId>
+              <coreId>1835627552</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>42</bitwidth>
@@ -387,7 +387,7 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
@@ -409,7 +409,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>2818572408</coreId>
+              <coreId>1702258035</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>74</bitwidth>
@@ -443,7 +443,7 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
@@ -458,14 +458,14 @@
                 </item>
               </inlineStackInfo>
               <originalName/>
-              <rtlName>r_V_1_fu_60_p00</rtlName>
+              <rtlName>grp_fu_60_p00</rtlName>
               <control/>
               <opType/>
               <implIndex/>
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>0</coreId>
+              <coreId>644699968</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>74</bitwidth>
@@ -499,7 +499,7 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
@@ -514,7 +514,7 @@
                 </item>
               </inlineStackInfo>
               <originalName>r.V</originalName>
-              <rtlName>mul_48ns_42s_74_1_1_U187</rtlName>
+              <rtlName>mul_48ns_42s_74_5_0_U187</rtlName>
               <control>auto</control>
               <opType>mul</opType>
               <implIndex>auto</implIndex>
@@ -537,7 +537,7 @@
           <m_isOnCriticalPath>0</m_isOnCriticalPath>
           <m_isLCDNode>0</m_isLCDNode>
           <m_isStartOfPath>0</m_isStartOfPath>
-          <m_delay>3.90</m_delay>
+          <m_delay>2.16</m_delay>
           <m_topoIndex>8</m_topoIndex>
           <m_clusterGroupNumber>-1</m_clusterGroupNumber>
         </item>
@@ -556,7 +556,7 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
@@ -613,7 +613,7 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
@@ -628,14 +628,14 @@
                 </item>
               </inlineStackInfo>
               <originalName>ind_pre.V</originalName>
-              <rtlName>ap_return</rtlName>
+              <rtlName>ap_return_int_reg</rtlName>
               <control/>
               <opType/>
               <implIndex/>
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>808464928</coreId>
+              <coreId>0</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>42</bitwidth>
@@ -663,7 +663,7 @@
               <type>0</type>
               <id>13</id>
               <name>_ln202</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>202</lineNumber>
               <contextFuncName>scaleCompute&amp;lt;17, 42, 20, 48, 16, 1&amp;gt;</contextFuncName>
@@ -672,13 +672,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
                     <item>
                       <first>
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
                         <second>scaleCompute&amp;lt;17, 42, 20, 48, 16, 1&amp;gt;</second>
                       </first>
                       <second>202</second>
@@ -694,7 +694,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>0</coreId>
+              <coreId>1031365995</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>0</bitwidth>
@@ -740,7 +740,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>1768711536</coreId>
+              <coreId>644906720</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>22</bitwidth>
@@ -771,7 +771,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>778973312</coreId>
+              <coreId>825701421</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>42</bitwidth>
@@ -802,7 +802,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>1952541808</coreId>
+              <coreId>1701143599</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>74</bitwidth>
@@ -833,7 +833,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>1869635878</coreId>
+              <coreId>644082720</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>32</bitwidth>
@@ -864,7 +864,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>0</coreId>
+              <coreId>644084832</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>32</bitwidth>
@@ -898,7 +898,7 @@
             <coreName/>
             <isStorage>0</isStorage>
             <storageDepth>0</storageDepth>
-            <coreId>10</coreId>
+            <coreId>0</coreId>
             <rtlModuleName/>
           </Obj>
           <node_objs>
@@ -1060,23 +1060,23 @@
           <item>14</item>
         </basic_blocks>
         <mII>1</mII>
-        <mDepth>1</mDepth>
+        <mDepth>6</mDepth>
         <mMinTripCount>-1</mMinTripCount>
         <mMaxTripCount>-1</mMaxTripCount>
-        <mMinLatency>0</mMinLatency>
-        <mMaxLatency>0</mMaxLatency>
+        <mMinLatency>5</mMinLatency>
+        <mMaxLatency>5</mMaxLatency>
         <mIsDfPipe>0</mIsDfPipe>
         <mDfPipe class_id="-1"/>
       </item>
     </cdfg_regions>
     <fsm class_id="24" tracking_level="1" version="0" object_id="_38">
       <states class_id="25" tracking_level="0" version="0">
-        <count>1</count>
+        <count>6</count>
         <item_version>0</item_version>
         <item class_id="26" tracking_level="1" version="0" object_id="_39">
           <id>1</id>
           <operations class_id="27" tracking_level="0" version="0">
-            <count>11</count>
+            <count>8</count>
             <item_version>0</item_version>
             <item class_id="28" tracking_level="1" version="0" object_id="_40">
               <id>3</id>
@@ -1115,20 +1115,75 @@
             </item>
             <item class_id_reference="28" object_id="_47">
               <id>10</id>
-              <stage>1</stage>
-              <latency>1</latency>
+              <stage>5</stage>
+              <latency>5</latency>
             </item>
-            <item class_id_reference="28" object_id="_48">
+          </operations>
+        </item>
+        <item class_id_reference="26" object_id="_48">
+          <id>2</id>
+          <operations>
+            <count>1</count>
+            <item_version>0</item_version>
+            <item class_id_reference="28" object_id="_49">
+              <id>10</id>
+              <stage>4</stage>
+              <latency>5</latency>
+            </item>
+          </operations>
+        </item>
+        <item class_id_reference="26" object_id="_50">
+          <id>3</id>
+          <operations>
+            <count>1</count>
+            <item_version>0</item_version>
+            <item class_id_reference="28" object_id="_51">
+              <id>10</id>
+              <stage>3</stage>
+              <latency>5</latency>
+            </item>
+          </operations>
+        </item>
+        <item class_id_reference="26" object_id="_52">
+          <id>4</id>
+          <operations>
+            <count>1</count>
+            <item_version>0</item_version>
+            <item class_id_reference="28" object_id="_53">
+              <id>10</id>
+              <stage>2</stage>
+              <latency>5</latency>
+            </item>
+          </operations>
+        </item>
+        <item class_id_reference="26" object_id="_54">
+          <id>5</id>
+          <operations>
+            <count>1</count>
+            <item_version>0</item_version>
+            <item class_id_reference="28" object_id="_55">
+              <id>10</id>
+              <stage>1</stage>
+              <latency>5</latency>
+            </item>
+          </operations>
+        </item>
+        <item class_id_reference="26" object_id="_56">
+          <id>6</id>
+          <operations>
+            <count>3</count>
+            <item_version>0</item_version>
+            <item class_id_reference="28" object_id="_57">
               <id>11</id>
               <stage>1</stage>
               <latency>1</latency>
             </item>
-            <item class_id_reference="28" object_id="_49">
+            <item class_id_reference="28" object_id="_58">
               <id>12</id>
               <stage>1</stage>
               <latency>1</latency>
             </item>
-            <item class_id_reference="28" object_id="_50">
+            <item class_id_reference="28" object_id="_59">
               <id>13</id>
               <stage>1</stage>
               <latency>1</latency>
@@ -1137,30 +1192,105 @@
         </item>
       </states>
       <transitions class_id="29" tracking_level="0" version="0">
-        <count>0</count>
+        <count>5</count>
         <item_version>0</item_version>
+        <item class_id="30" tracking_level="1" version="0" object_id="_60">
+          <inState>1</inState>
+          <outState>2</outState>
+          <condition class_id="31" tracking_level="0" version="0">
+            <id>-1</id>
+            <sop class_id="32" tracking_level="0" version="0">
+              <count>1</count>
+              <item_version>0</item_version>
+              <item class_id="33" tracking_level="0" version="0">
+                <count>0</count>
+                <item_version>0</item_version>
+              </item>
+            </sop>
+          </condition>
+        </item>
+        <item class_id_reference="30" object_id="_61">
+          <inState>2</inState>
+          <outState>3</outState>
+          <condition>
+            <id>-1</id>
+            <sop>
+              <count>1</count>
+              <item_version>0</item_version>
+              <item>
+                <count>0</count>
+                <item_version>0</item_version>
+              </item>
+            </sop>
+          </condition>
+        </item>
+        <item class_id_reference="30" object_id="_62">
+          <inState>3</inState>
+          <outState>4</outState>
+          <condition>
+            <id>-1</id>
+            <sop>
+              <count>1</count>
+              <item_version>0</item_version>
+              <item>
+                <count>0</count>
+                <item_version>0</item_version>
+              </item>
+            </sop>
+          </condition>
+        </item>
+        <item class_id_reference="30" object_id="_63">
+          <inState>4</inState>
+          <outState>5</outState>
+          <condition>
+            <id>-1</id>
+            <sop>
+              <count>1</count>
+              <item_version>0</item_version>
+              <item>
+                <count>0</count>
+                <item_version>0</item_version>
+              </item>
+            </sop>
+          </condition>
+        </item>
+        <item class_id_reference="30" object_id="_64">
+          <inState>5</inState>
+          <outState>6</outState>
+          <condition>
+            <id>-1</id>
+            <sop>
+              <count>1</count>
+              <item_version>0</item_version>
+              <item>
+                <count>0</count>
+                <item_version>0</item_version>
+              </item>
+            </sop>
+          </condition>
+        </item>
       </transitions>
     </fsm>
-    <res class_id="30" tracking_level="1" version="0" object_id="_51">
-      <dp_component_resource class_id="31" tracking_level="0" version="0">
+    <res class_id="34" tracking_level="1" version="0" object_id="_65">
+      <dp_component_resource class_id="35" tracking_level="0" version="0">
         <count>1</count>
         <item_version>0</item_version>
-        <item class_id="32" tracking_level="0" version="0">
-          <first>mul_48ns_42s_74_1_1_U187 (mul_48ns_42s_74_1_1)</first>
-          <second class_id="33" tracking_level="0" version="0">
+        <item class_id="36" tracking_level="0" version="0">
+          <first>mul_48ns_42s_74_5_0_U187 (mul_48ns_42s_74_5_0)</first>
+          <second class_id="37" tracking_level="0" version="0">
             <count>3</count>
             <item_version>0</item_version>
-            <item class_id="34" tracking_level="0" version="0">
+            <item class_id="38" tracking_level="0" version="0">
               <first>DSP</first>
               <second>6</second>
             </item>
             <item>
               <first>FF</first>
-              <second>0</second>
+              <second>328</second>
             </item>
             <item>
               <first>LUT</first>
-              <second>19</second>
+              <second>82</second>
             </item>
           </second>
         </item>
@@ -1224,29 +1354,147 @@
         <item_version>0</item_version>
       </dp_memory_resource>
       <dp_multiplexer_resource>
-        <count>0</count>
+        <count>1</count>
         <item_version>0</item_version>
+        <item>
+          <first>ap_return</first>
+          <second>
+            <count>4</count>
+            <item_version>0</item_version>
+            <item>
+              <first>(0Size)</first>
+              <second>3</second>
+            </item>
+            <item>
+              <first>(1Bits)</first>
+              <second>42</second>
+            </item>
+            <item>
+              <first>(2Count)</first>
+              <second>126</second>
+            </item>
+            <item>
+              <first>LUT</first>
+              <second>14</second>
+            </item>
+          </second>
+        </item>
       </dp_multiplexer_resource>
       <dp_register_resource>
-        <count>0</count>
+        <count>5</count>
         <item_version>0</item_version>
+        <item>
+          <first>ap_ce_reg</first>
+          <second>
+            <count>3</count>
+            <item_version>0</item_version>
+            <item>
+              <first>(Bits)</first>
+              <second>1</second>
+            </item>
+            <item>
+              <first>(Consts)</first>
+              <second>0</second>
+            </item>
+            <item>
+              <first>FF</first>
+              <second>1</second>
+            </item>
+          </second>
+        </item>
+        <item>
+          <first>ap_return_int_reg</first>
+          <second>
+            <count>3</count>
+            <item_version>0</item_version>
+            <item>
+              <first>(Bits)</first>
+              <second>42</second>
+            </item>
+            <item>
+              <first>(Consts)</first>
+              <second>0</second>
+            </item>
+            <item>
+              <first>FF</first>
+              <second>42</second>
+            </item>
+          </second>
+        </item>
+        <item>
+          <first>currindex_int_reg</first>
+          <second>
+            <count>3</count>
+            <item_version>0</item_version>
+            <item>
+              <first>(Bits)</first>
+              <second>32</second>
+            </item>
+            <item>
+              <first>(Consts)</first>
+              <second>0</second>
+            </item>
+            <item>
+              <first>FF</first>
+              <second>32</second>
+            </item>
+          </second>
+        </item>
+        <item>
+          <first>inscale_int_reg</first>
+          <second>
+            <count>3</count>
+            <item_version>0</item_version>
+            <item>
+              <first>(Bits)</first>
+              <second>48</second>
+            </item>
+            <item>
+              <first>(Consts)</first>
+              <second>0</second>
+            </item>
+            <item>
+              <first>FF</first>
+              <second>48</second>
+            </item>
+          </second>
+        </item>
+        <item>
+          <first>r_V_1_reg_91</first>
+          <second>
+            <count>3</count>
+            <item_version>0</item_version>
+            <item>
+              <first>(Bits)</first>
+              <second>74</second>
+            </item>
+            <item>
+              <first>(Consts)</first>
+              <second>0</second>
+            </item>
+            <item>
+              <first>FF</first>
+              <second>74</second>
+            </item>
+          </second>
+        </item>
       </dp_register_resource>
       <dp_dsp_resource>
         <count>1</count>
         <item_version>0</item_version>
         <item>
-          <first>mul_48ns_42s_74_1_1_U187</first>
+          <first>mul_48ns_42s_74_5_0_U187</first>
           <second>
             <count>0</count>
             <item_version>0</item_version>
           </second>
         </item>
       </dp_dsp_resource>
-      <dp_component_map class_id="35" tracking_level="0" version="0">
+      <dp_component_map class_id="39" tracking_level="0" version="0">
         <count>1</count>
         <item_version>0</item_version>
-        <item class_id="36" tracking_level="0" version="0">
-          <first>mul_48ns_42s_74_1_1_U187 (mul_48ns_42s_74_1_1)</first>
+        <item class_id="40" tracking_level="0" version="0">
+          <first>mul_48ns_42s_74_5_0_U187 (mul_48ns_42s_74_5_0)</first>
           <second>
             <count>1</count>
             <item_version>0</item_version>
@@ -1283,12 +1531,12 @@
         <item_version>0</item_version>
       </dp_memory_map>
     </res>
-    <node_label_latency class_id="37" tracking_level="0" version="0">
+    <node_label_latency class_id="41" tracking_level="0" version="0">
       <count>11</count>
       <item_version>0</item_version>
-      <item class_id="38" tracking_level="0" version="0">
+      <item class_id="42" tracking_level="0" version="0">
         <first>3</first>
-        <second class_id="39" tracking_level="0" version="0">
+        <second class_id="43" tracking_level="0" version="0">
           <first>0</first>
           <second>0</second>
         </second>
@@ -1339,46 +1587,46 @@
         <first>10</first>
         <second>
           <first>0</first>
-          <second>0</second>
+          <second>4</second>
         </second>
       </item>
       <item>
         <first>11</first>
         <second>
-          <first>0</first>
+          <first>5</first>
           <second>0</second>
         </second>
       </item>
       <item>
         <first>12</first>
         <second>
-          <first>0</first>
+          <first>5</first>
           <second>0</second>
         </second>
       </item>
       <item>
         <first>13</first>
         <second>
-          <first>0</first>
+          <first>5</first>
           <second>0</second>
         </second>
       </item>
     </node_label_latency>
-    <bblk_ent_exit class_id="40" tracking_level="0" version="0">
+    <bblk_ent_exit class_id="44" tracking_level="0" version="0">
       <count>1</count>
       <item_version>0</item_version>
-      <item class_id="41" tracking_level="0" version="0">
+      <item class_id="45" tracking_level="0" version="0">
         <first>14</first>
-        <second class_id="42" tracking_level="0" version="0">
+        <second class_id="46" tracking_level="0" version="0">
           <first>0</first>
-          <second>0</second>
+          <second>5</second>
         </second>
       </item>
     </bblk_ent_exit>
-    <regions class_id="43" tracking_level="0" version="0">
+    <regions class_id="47" tracking_level="0" version="0">
       <count>1</count>
       <item_version>0</item_version>
-      <item class_id="44" tracking_level="1" version="0" object_id="_52">
+      <item class_id="48" tracking_level="1" version="0" object_id="_66">
         <region_name>scaleCompute&lt;17, 42, 20, 48, 16, 1&gt;</region_name>
         <basic_blocks>
           <count>1</count>
@@ -1392,17 +1640,17 @@
         <anchor_node>-1</anchor_node>
         <region_type>8</region_type>
         <interval>1</interval>
-        <pipe_depth>1</pipe_depth>
-        <mDBIIViolationVec class_id="45" tracking_level="0" version="0">
+        <pipe_depth>6</pipe_depth>
+        <mDBIIViolationVec class_id="49" tracking_level="0" version="0">
           <count>0</count>
           <item_version>0</item_version>
         </mDBIIViolationVec>
       </item>
     </regions>
-    <dp_fu_nodes class_id="46" tracking_level="0" version="0">
+    <dp_fu_nodes class_id="50" tracking_level="0" version="0">
       <count>10</count>
       <item_version>0</item_version>
-      <item class_id="47" tracking_level="0" version="0">
+      <item class_id="51" tracking_level="0" version="0">
         <first>22</first>
         <second>
           <count>1</count>
@@ -1461,8 +1709,12 @@
       <item>
         <first>60</first>
         <second>
-          <count>1</count>
+          <count>5</count>
           <item_version>0</item_version>
+          <item>10</item>
+          <item>10</item>
+          <item>10</item>
+          <item>10</item>
           <item>10</item>
         </second>
       </item>
@@ -1475,7 +1727,7 @@
         </second>
       </item>
       <item>
-        <first>72</first>
+        <first>71</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1483,11 +1735,11 @@
         </second>
       </item>
     </dp_fu_nodes>
-    <dp_fu_nodes_expression class_id="49" tracking_level="0" version="0">
-      <count>8</count>
+    <dp_fu_nodes_expression class_id="53" tracking_level="0" version="0">
+      <count>7</count>
       <item_version>0</item_version>
-      <item class_id="50" tracking_level="0" version="0">
-        <first>ind_pre_V_write_assign_fu_72</first>
+      <item class_id="54" tracking_level="0" version="0">
+        <first>ind_pre_V_write_assign_fu_71</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1500,14 +1752,6 @@
           <count>1</count>
           <item_version>0</item_version>
           <item>6</item>
-        </second>
-      </item>
-      <item>
-        <first>r_V_1_fu_60</first>
-        <second>
-          <count>1</count>
-          <item_version>0</item_version>
-          <item>10</item>
         </second>
       </item>
       <item>
@@ -1552,8 +1796,20 @@
       </item>
     </dp_fu_nodes_expression>
     <dp_fu_nodes_module>
-      <count>0</count>
+      <count>1</count>
       <item_version>0</item_version>
+      <item>
+        <first>grp_fu_60</first>
+        <second>
+          <count>5</count>
+          <item_version>0</item_version>
+          <item>10</item>
+          <item>10</item>
+          <item>10</item>
+          <item>10</item>
+          <item>10</item>
+        </second>
+      </item>
     </dp_fu_nodes_module>
     <dp_fu_nodes_io>
       <count>2</count>
@@ -1587,17 +1843,65 @@
         </second>
       </item>
     </return_ports>
-    <dp_mem_port_nodes class_id="51" tracking_level="0" version="0">
+    <dp_mem_port_nodes class_id="55" tracking_level="0" version="0">
       <count>0</count>
       <item_version>0</item_version>
     </dp_mem_port_nodes>
     <dp_reg_nodes>
-      <count>0</count>
+      <count>3</count>
       <item_version>0</item_version>
+      <item>
+        <first>81</first>
+        <second>
+          <count>1</count>
+          <item_version>0</item_version>
+          <item>8</item>
+        </second>
+      </item>
+      <item>
+        <first>86</first>
+        <second>
+          <count>1</count>
+          <item_version>0</item_version>
+          <item>9</item>
+        </second>
+      </item>
+      <item>
+        <first>91</first>
+        <second>
+          <count>1</count>
+          <item_version>0</item_version>
+          <item>10</item>
+        </second>
+      </item>
     </dp_reg_nodes>
     <dp_regname_nodes>
-      <count>0</count>
+      <count>3</count>
       <item_version>0</item_version>
+      <item>
+        <first>r_V_1_reg_91</first>
+        <second>
+          <count>1</count>
+          <item_version>0</item_version>
+          <item>10</item>
+        </second>
+      </item>
+      <item>
+        <first>sext_ln1316_reg_81</first>
+        <second>
+          <count>1</count>
+          <item_version>0</item_version>
+          <item>8</item>
+        </second>
+      </item>
+      <item>
+        <first>zext_ln1319_reg_86</first>
+        <second>
+          <count>1</count>
+          <item_version>0</item_version>
+          <item>9</item>
+        </second>
+      </item>
     </dp_regname_nodes>
     <dp_reg_phi>
       <count>0</count>
@@ -1607,10 +1911,10 @@
       <count>0</count>
       <item_version>0</item_version>
     </dp_regname_phi>
-    <dp_port_io_nodes class_id="52" tracking_level="0" version="0">
+    <dp_port_io_nodes class_id="56" tracking_level="0" version="0">
       <count>2</count>
       <item_version>0</item_version>
-      <item class_id="53" tracking_level="0" version="0">
+      <item class_id="57" tracking_level="0" version="0">
         <first>currindex</first>
         <second>
           <count>1</count>

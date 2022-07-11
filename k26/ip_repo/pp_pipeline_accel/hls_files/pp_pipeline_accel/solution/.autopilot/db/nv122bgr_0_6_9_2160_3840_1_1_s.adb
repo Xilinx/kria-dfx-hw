@@ -34,7 +34,7 @@
               <coreName>FIFO_SRL</coreName>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>778619320</coreId>
+              <coreId>4294967292</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>32</bitwidth>
@@ -70,7 +70,7 @@
               <coreName>FIFO_SRL</coreName>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>778619456</coreId>
+              <coreId>4294967292</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>32</bitwidth>
@@ -106,7 +106,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>2576</coreId>
+              <coreId>1536</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>8</bitwidth>
@@ -142,7 +142,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>448</coreId>
+              <coreId>0</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>16</bitwidth>
@@ -178,7 +178,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>976</coreId>
+              <coreId>641311520</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>24</bitwidth>
@@ -234,7 +234,7 @@
           <m_isOnCriticalPath>0</m_isOnCriticalPath>
           <m_isLCDNode>0</m_isLCDNode>
           <m_isStartOfPath>0</m_isStartOfPath>
-          <m_delay>1.83</m_delay>
+          <m_delay>1.21</m_delay>
           <m_topoIndex>1</m_topoIndex>
           <m_clusterGroupNumber>-1</m_clusterGroupNumber>
         </item>
@@ -277,7 +277,7 @@
           <m_isOnCriticalPath>0</m_isOnCriticalPath>
           <m_isLCDNode>0</m_isLCDNode>
           <m_isStartOfPath>0</m_isStartOfPath>
-          <m_delay>1.83</m_delay>
+          <m_delay>1.21</m_delay>
           <m_topoIndex>2</m_topoIndex>
           <m_clusterGroupNumber>-1</m_clusterGroupNumber>
         </item>
@@ -287,7 +287,7 @@
               <type>0</type>
               <id>13</id>
               <name>height</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_cvt_color.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_cvt_color.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>4303</lineNumber>
               <contextFuncName>nv122bgr&amp;lt;0, 6, 9, 2160, 3840, 1, 1&amp;gt;</contextFuncName>
@@ -296,13 +296,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item class_id="11" tracking_level="0" version="0">
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second class_id="12" tracking_level="0" version="0">
                     <count>1</count>
                     <item_version>0</item_version>
                     <item class_id="13" tracking_level="0" version="0">
                       <first class_id="14" tracking_level="0" version="0">
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_cvt_color.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_cvt_color.hpp</first>
                         <second>nv122bgr&amp;lt;0, 6, 9, 2160, 3840, 1, 1&amp;gt;</second>
                       </first>
                       <second>4303</second>
@@ -318,7 +318,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>1920226153</coreId>
+              <coreId>644832240</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>16</bitwidth>
@@ -343,7 +343,7 @@
               <type>0</type>
               <id>14</id>
               <name>width</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_cvt_color.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_cvt_color.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>4303</lineNumber>
               <contextFuncName>nv122bgr&amp;lt;0, 6, 9, 2160, 3840, 1, 1&amp;gt;</contextFuncName>
@@ -352,13 +352,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
                     <item>
                       <first>
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_cvt_color.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_cvt_color.hpp</first>
                         <second>nv122bgr&amp;lt;0, 6, 9, 2160, 3840, 1, 1&amp;gt;</second>
                       </first>
                       <second>4303</second>
@@ -374,7 +374,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>778731408</coreId>
+              <coreId>1600417385</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>16</bitwidth>
@@ -399,7 +399,7 @@
               <type>0</type>
               <id>15</id>
               <name>_ln4269</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_cvt_color.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_cvt_color.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>4269</lineNumber>
               <contextFuncName>xFNv122bgr&amp;lt;0, 6, 9, 2160, 3840, 1, 1, 1, 5, 9&amp;gt;</contextFuncName>
@@ -408,13 +408,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
                     <item>
                       <first>
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_cvt_color.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_cvt_color.hpp</first>
                         <second>xFNv122bgr&amp;lt;0, 6, 9, 2160, 3840, 1, 1, 1, 5, 9&amp;gt;</second>
                       </first>
                       <second>4269</second>
@@ -430,7 +430,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>1885415009</coreId>
+              <coreId>1663067136</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>0</bitwidth>
@@ -460,7 +460,7 @@
               <type>0</type>
               <id>16</id>
               <name>_ln4304</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_cvt_color.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_cvt_color.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>4304</lineNumber>
               <contextFuncName>nv122bgr&amp;lt;0, 6, 9, 2160, 3840, 1, 1&amp;gt;</contextFuncName>
@@ -469,13 +469,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
                     <item>
                       <first>
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_cvt_color.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_cvt_color.hpp</first>
                         <second>nv122bgr&amp;lt;0, 6, 9, 2160, 3840, 1, 1&amp;gt;</second>
                       </first>
                       <second>4304</second>
@@ -491,7 +491,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>2818572408</coreId>
+              <coreId>0</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>0</bitwidth>
@@ -536,7 +536,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>778307296</coreId>
+              <coreId>0</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>0</bitwidth>
@@ -570,7 +570,7 @@
             <coreName/>
             <isStorage>0</isStorage>
             <storageDepth>0</storageDepth>
-            <coreId>778617680</coreId>
+            <coreId>1869833586</coreId>
             <rtlModuleName/>
           </Obj>
           <node_objs>
@@ -681,8 +681,8 @@
         <mDepth>-1</mDepth>
         <mMinTripCount>-1</mMinTripCount>
         <mMaxTripCount>-1</mMaxTripCount>
-        <mMinLatency>8313843</mMinLatency>
-        <mMaxLatency>8317685</mMaxLatency>
+        <mMinLatency>8320323</mMinLatency>
+        <mMaxLatency>8324166</mMaxLatency>
         <mIsDfPipe>0</mIsDfPipe>
         <mDfPipe class_id="-1"/>
       </item>
@@ -805,11 +805,11 @@
             </item>
             <item>
               <first>FF</first>
-              <second>562</second>
+              <second>626</second>
             </item>
             <item>
               <first>LUT</first>
-              <second>880</second>
+              <second>893</second>
             </item>
           </second>
         </item>

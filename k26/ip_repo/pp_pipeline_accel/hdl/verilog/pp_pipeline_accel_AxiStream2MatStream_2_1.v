@@ -38,9 +38,10 @@ module pp_pipeline_accel_AxiStream2MatStream_2_1 (
         last_blk_width
 );
 
-parameter    ap_ST_fsm_state1 = 3'd1;
-parameter    ap_ST_fsm_state2 = 3'd2;
-parameter    ap_ST_fsm_state3 = 3'd4;
+parameter    ap_ST_fsm_state1 = 4'd1;
+parameter    ap_ST_fsm_state2 = 4'd2;
+parameter    ap_ST_fsm_state3 = 4'd4;
+parameter    ap_ST_fsm_state4 = 4'd8;
 
 input   ap_clk;
 input   ap_rst;
@@ -80,16 +81,17 @@ reg rows_read;
 reg cols_bound_per_npc_read;
 
 reg    ap_done_reg;
-(* fsm_encoding = "none" *) reg   [2:0] ap_CS_fsm;
+(* fsm_encoding = "none" *) reg   [3:0] ap_CS_fsm;
 wire    ap_CS_fsm_state1;
 reg    rows_blk_n;
 reg    cols_bound_per_npc_blk_n;
-reg   [3:0] last_blk_width_read_reg_115;
-reg   [31:0] cols_bound_per_npc_read_reg_122;
-reg  signed [31:0] rows_read_reg_129;
-wire   [31:0] bound_fu_83_p2;
-reg   [31:0] bound_reg_134;
+reg   [31:0] cols_bound_per_npc_read_reg_115;
+reg  signed [31:0] rows_read_reg_122;
+reg   [3:0] last_blk_width_read_reg_127;
 wire    ap_CS_fsm_state2;
+wire   [31:0] grp_fu_77_p2;
+reg   [31:0] bound_reg_134;
+wire    ap_CS_fsm_state3;
 wire   [31:0] sub_fu_88_p2;
 reg   [31:0] sub_reg_139;
 wire   [6:0] sub3_fu_94_p2;
@@ -106,20 +108,21 @@ wire    grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ldata1_read;
 wire   [7:0] grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_imgInput_y_data81_din;
 wire    grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_imgInput_y_data81_write;
 reg    grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_start_reg;
-wire    ap_CS_fsm_state3;
+wire    ap_CS_fsm_state4;
 reg    ap_block_state1;
-wire   [6:0] last_blk_width_cast2_fu_77_p1;
-wire   [4:0] last_blk_width_cast5_fu_80_p1;
-reg   [2:0] ap_NS_fsm;
+wire   [6:0] last_blk_width_cast2_fu_82_p1;
+wire   [4:0] last_blk_width_cast5_fu_85_p1;
+reg   [3:0] ap_NS_fsm;
 reg    ap_ST_fsm_state1_blk;
 wire    ap_ST_fsm_state2_blk;
-reg    ap_ST_fsm_state3_blk;
+wire    ap_ST_fsm_state3_blk;
+reg    ap_ST_fsm_state4_blk;
 wire    ap_ce_reg;
 
 // power-on initialization
 initial begin
 #0 ap_done_reg = 1'b0;
-#0 ap_CS_fsm = 3'd1;
+#0 ap_CS_fsm = 4'd1;
 #0 grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_start_reg = 1'b0;
 end
 
@@ -142,23 +145,26 @@ pp_pipeline_accel_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow grp_AxiStream
     .imgInput_y_data81_write(grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_imgInput_y_data81_write),
     .bound(bound_reg_134),
     .sext_ln1082(sub38_reg_149),
-    .cols_bound_per_npc_load(cols_bound_per_npc_read_reg_122),
+    .cols_bound_per_npc_load(cols_bound_per_npc_read_reg_115),
     .sub(sub_reg_139),
-    .last_blk_width_load(last_blk_width_read_reg_115),
+    .last_blk_width_load(last_blk_width_read_reg_127),
     .sub3(sub3_reg_144),
     .add_ln1082(add_ln1082_reg_154)
 );
 
-pp_pipeline_accel_mul_32s_32s_32_1_1 #(
+pp_pipeline_accel_mul_32s_32s_32_2_1 #(
     .ID( 1 ),
-    .NUM_STAGE( 1 ),
+    .NUM_STAGE( 2 ),
     .din0_WIDTH( 32 ),
     .din1_WIDTH( 32 ),
     .dout_WIDTH( 32 ))
-mul_32s_32s_32_1_1_U44(
-    .din0(cols_bound_per_npc_read_reg_122),
-    .din1(rows_read_reg_129),
-    .dout(bound_fu_83_p2)
+mul_32s_32s_32_2_1_U44(
+    .clk(ap_clk),
+    .reset(ap_rst),
+    .din0(cols_bound_per_npc_read_reg_115),
+    .din1(rows_read_reg_122),
+    .ce(1'b1),
+    .dout(grp_fu_77_p2)
 );
 
 always @ (posedge ap_clk) begin
@@ -175,7 +181,7 @@ always @ (posedge ap_clk) begin
     end else begin
         if ((ap_continue == 1'b1)) begin
             ap_done_reg <= 1'b0;
-        end else if (((grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state3))) begin
+        end else if (((grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state4))) begin
             ap_done_reg <= 1'b1;
         end
     end
@@ -185,7 +191,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_start_reg <= 1'b0;
     end else begin
-        if ((1'b1 == ap_CS_fsm_state2)) begin
+        if ((1'b1 == ap_CS_fsm_state3)) begin
             grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_start_reg <= 1'b1;
         end else if ((grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_ready == 1'b1)) begin
             grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_start_reg <= 1'b0;
@@ -194,9 +200,9 @@ always @ (posedge ap_clk) begin
 end
 
 always @ (posedge ap_clk) begin
-    if ((1'b1 == ap_CS_fsm_state2)) begin
+    if ((1'b1 == ap_CS_fsm_state3)) begin
         add_ln1082_reg_154 <= add_ln1082_fu_108_p2;
-        bound_reg_134 <= bound_fu_83_p2;
+        bound_reg_134 <= grp_fu_77_p2;
         sub38_reg_149 <= sub38_fu_101_p2;
         sub3_reg_144 <= sub3_fu_94_p2;
         sub_reg_139 <= sub_fu_88_p2;
@@ -205,9 +211,14 @@ end
 
 always @ (posedge ap_clk) begin
     if ((1'b1 == ap_CS_fsm_state1)) begin
-        cols_bound_per_npc_read_reg_122 <= cols_bound_per_npc_dout;
-        last_blk_width_read_reg_115 <= last_blk_width;
-        rows_read_reg_129 <= rows_dout;
+        cols_bound_per_npc_read_reg_115 <= cols_bound_per_npc_dout;
+        rows_read_reg_122 <= rows_dout;
+    end
+end
+
+always @ (posedge ap_clk) begin
+    if ((1'b1 == ap_CS_fsm_state2)) begin
+        last_blk_width_read_reg_127 <= last_blk_width;
     end
 end
 
@@ -221,16 +232,18 @@ end
 
 assign ap_ST_fsm_state2_blk = 1'b0;
 
+assign ap_ST_fsm_state3_blk = 1'b0;
+
 always @ (*) begin
     if ((grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_done == 1'b0)) begin
-        ap_ST_fsm_state3_blk = 1'b1;
+        ap_ST_fsm_state4_blk = 1'b1;
     end else begin
-        ap_ST_fsm_state3_blk = 1'b0;
+        ap_ST_fsm_state4_blk = 1'b0;
     end
 end
 
 always @ (*) begin
-    if (((grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state3))) begin
+    if (((grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state4))) begin
         ap_done = 1'b1;
     end else begin
         ap_done = ap_done_reg;
@@ -246,7 +259,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state3))) begin
+    if (((grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state4))) begin
         ap_ready = 1'b1;
     end else begin
         ap_ready = 1'b0;
@@ -270,7 +283,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state3)) begin
+    if ((1'b1 == ap_CS_fsm_state4)) begin
         imgInput_y_data81_write = grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_imgInput_y_data81_write;
     end else begin
         imgInput_y_data81_write = 1'b0;
@@ -278,7 +291,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state3)) begin
+    if ((1'b1 == ap_CS_fsm_state4)) begin
         ldata1_read = grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ldata1_read;
     end else begin
         ldata1_read = 1'b0;
@@ -314,10 +327,13 @@ always @ (*) begin
             ap_NS_fsm = ap_ST_fsm_state3;
         end
         ap_ST_fsm_state3 : begin
-            if (((grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state3))) begin
+            ap_NS_fsm = ap_ST_fsm_state4;
+        end
+        ap_ST_fsm_state4 : begin
+            if (((grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state4))) begin
                 ap_NS_fsm = ap_ST_fsm_state1;
             end else begin
-                ap_NS_fsm = ap_ST_fsm_state3;
+                ap_NS_fsm = ap_ST_fsm_state4;
             end
         end
         default : begin
@@ -326,13 +342,15 @@ always @ (*) begin
     endcase
 end
 
-assign add_ln1082_fu_108_p2 = (last_blk_width_cast2_fu_77_p1 + 7'd63);
+assign add_ln1082_fu_108_p2 = (last_blk_width_cast2_fu_82_p1 + 7'd63);
 
 assign ap_CS_fsm_state1 = ap_CS_fsm[32'd0];
 
 assign ap_CS_fsm_state2 = ap_CS_fsm[32'd1];
 
 assign ap_CS_fsm_state3 = ap_CS_fsm[32'd2];
+
+assign ap_CS_fsm_state4 = ap_CS_fsm[32'd3];
 
 always @ (*) begin
     ap_block_state1 = ((ap_start == 1'b0) | (cols_bound_per_npc_empty_n == 1'b0) | (rows_empty_n == 1'b0) | (ap_done_reg == 1'b1));
@@ -342,14 +360,14 @@ assign grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_ap_start = grp
 
 assign imgInput_y_data81_din = grp_AxiStream2MatStream_2_1_Pipeline_MMIterInLoopRow_fu_62_imgInput_y_data81_din;
 
-assign last_blk_width_cast2_fu_77_p1 = last_blk_width_read_reg_115;
+assign last_blk_width_cast2_fu_82_p1 = last_blk_width_read_reg_127;
 
-assign last_blk_width_cast5_fu_80_p1 = last_blk_width_read_reg_115;
+assign last_blk_width_cast5_fu_85_p1 = last_blk_width_read_reg_127;
 
-assign sub38_fu_101_p2 = ($signed(last_blk_width_cast5_fu_80_p1) + $signed(5'd31));
+assign sub38_fu_101_p2 = ($signed(last_blk_width_cast5_fu_85_p1) + $signed(5'd31));
 
-assign sub3_fu_94_p2 = ($signed(7'd64) - $signed(last_blk_width_cast2_fu_77_p1));
+assign sub3_fu_94_p2 = ($signed(7'd64) - $signed(last_blk_width_cast2_fu_82_p1));
 
-assign sub_fu_88_p2 = ($signed(cols_bound_per_npc_read_reg_122) + $signed(32'd4294967295));
+assign sub_fu_88_p2 = ($signed(cols_bound_per_npc_read_reg_115) + $signed(32'd4294967295));
 
 endmodule //pp_pipeline_accel_AxiStream2MatStream_2_1

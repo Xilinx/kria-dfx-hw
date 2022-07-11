@@ -80,8 +80,9 @@ module pp_pipeline_accel_xfMat2Array_64_9_720_720_1_1_s (
         stride_read
 );
 
-parameter    ap_ST_fsm_state1 = 2'd1;
-parameter    ap_ST_fsm_state2 = 2'd2;
+parameter    ap_ST_fsm_state1 = 3'd1;
+parameter    ap_ST_fsm_state2 = 3'd2;
+parameter    ap_ST_fsm_state3 = 3'd4;
 
 input   ap_clk;
 input   ap_rst;
@@ -165,14 +166,14 @@ reg dstPtr_read;
 reg stride_read;
 
 reg    ap_done_reg;
-(* fsm_encoding = "none" *) reg   [1:0] ap_CS_fsm;
+(* fsm_encoding = "none" *) reg   [2:0] ap_CS_fsm;
 wire    ap_CS_fsm_state1;
 reg    dstPtr_blk_n;
 reg    stride_blk_n;
-reg   [31:0] stride_read_reg_97;
-reg   [63:0] dstPtr_read_reg_102;
-wire   [15:0] trunc_ln1565_fu_87_p1;
-reg   [15:0] trunc_ln1565_reg_107;
+reg   [31:0] stride_read_reg_93;
+reg   [63:0] dstPtr_read_reg_98;
+wire   [15:0] trunc_ln1565_fu_84_p1;
+reg   [15:0] trunc_ln1565_reg_103;
 wire    grp_Mat2Axi_fu_72_out_mat_data85_read;
 wire    grp_Mat2Axi_fu_72_m_axi_gmem3_AWVALID;
 wire   [63:0] grp_Mat2Axi_fu_72_m_axi_gmem3_AWADDR;
@@ -212,23 +213,24 @@ wire    grp_Mat2Axi_fu_72_ap_ready;
 wire    grp_Mat2Axi_fu_72_ap_idle;
 reg    grp_Mat2Axi_fu_72_ap_continue;
 reg    grp_Mat2Axi_fu_72_ap_start_reg;
-reg    ap_block_state1_ignore_call9;
 wire    ap_CS_fsm_state2;
+wire    ap_CS_fsm_state3;
 wire    ap_sync_grp_Mat2Axi_fu_72_ap_ready;
 wire    ap_sync_grp_Mat2Axi_fu_72_ap_done;
-reg    ap_block_state2_on_subcall_done;
+reg    ap_block_state3_on_subcall_done;
 reg    ap_sync_reg_grp_Mat2Axi_fu_72_ap_ready;
 reg    ap_sync_reg_grp_Mat2Axi_fu_72_ap_done;
 reg    ap_block_state1;
-reg   [1:0] ap_NS_fsm;
+reg   [2:0] ap_NS_fsm;
 reg    ap_ST_fsm_state1_blk;
-reg    ap_ST_fsm_state2_blk;
+wire    ap_ST_fsm_state2_blk;
+reg    ap_ST_fsm_state3_blk;
 wire    ap_ce_reg;
 
 // power-on initialization
 initial begin
 #0 ap_done_reg = 1'b0;
-#0 ap_CS_fsm = 2'd1;
+#0 ap_CS_fsm = 3'd1;
 #0 grp_Mat2Axi_fu_72_ap_start_reg = 1'b0;
 #0 ap_sync_reg_grp_Mat2Axi_fu_72_ap_ready = 1'b0;
 #0 ap_sync_reg_grp_Mat2Axi_fu_72_ap_done = 1'b0;
@@ -284,10 +286,10 @@ pp_pipeline_accel_Mat2Axi grp_Mat2Axi_fu_72(
     .m_axi_gmem3_BRESP(m_axi_gmem3_BRESP),
     .m_axi_gmem3_BID(m_axi_gmem3_BID),
     .m_axi_gmem3_BUSER(m_axi_gmem3_BUSER),
-    .dout(dstPtr_read_reg_102),
-    .rows(trunc_ln1565_reg_107),
+    .dout(dstPtr_read_reg_98),
+    .rows(trunc_ln1565_reg_103),
     .cols(p_read1),
-    .stride(stride_read_reg_97),
+    .stride(stride_read_reg_93),
     .ap_clk(ap_clk),
     .ap_rst(ap_rst),
     .dout_ap_vld(1'b1),
@@ -315,7 +317,7 @@ always @ (posedge ap_clk) begin
     end else begin
         if ((ap_continue == 1'b1)) begin
             ap_done_reg <= 1'b0;
-        end else if (((1'b1 == ap_CS_fsm_state2) & (1'b0 == ap_block_state2_on_subcall_done))) begin
+        end else if (((1'b1 == ap_CS_fsm_state3) & (1'b0 == ap_block_state3_on_subcall_done))) begin
             ap_done_reg <= 1'b1;
         end
     end
@@ -325,7 +327,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         ap_sync_reg_grp_Mat2Axi_fu_72_ap_done <= 1'b0;
     end else begin
-        if (((1'b1 == ap_CS_fsm_state2) & (1'b0 == ap_block_state2_on_subcall_done))) begin
+        if (((1'b1 == ap_CS_fsm_state3) & (1'b0 == ap_block_state3_on_subcall_done))) begin
             ap_sync_reg_grp_Mat2Axi_fu_72_ap_done <= 1'b0;
         end else if ((grp_Mat2Axi_fu_72_ap_done == 1'b1)) begin
             ap_sync_reg_grp_Mat2Axi_fu_72_ap_done <= 1'b1;
@@ -337,7 +339,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         ap_sync_reg_grp_Mat2Axi_fu_72_ap_ready <= 1'b0;
     end else begin
-        if (((1'b1 == ap_CS_fsm_state2) & (1'b0 == ap_block_state2_on_subcall_done))) begin
+        if (((1'b1 == ap_CS_fsm_state3) & (1'b0 == ap_block_state3_on_subcall_done))) begin
             ap_sync_reg_grp_Mat2Axi_fu_72_ap_ready <= 1'b0;
         end else if ((grp_Mat2Axi_fu_72_ap_ready == 1'b1)) begin
             ap_sync_reg_grp_Mat2Axi_fu_72_ap_ready <= 1'b1;
@@ -349,7 +351,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         grp_Mat2Axi_fu_72_ap_start_reg <= 1'b0;
     end else begin
-        if ((((1'b1 == ap_CS_fsm_state2) & (ap_sync_grp_Mat2Axi_fu_72_ap_ready == 1'b0)) | (~((stride_empty_n == 1'b0) | (dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1)) & (1'b1 == ap_CS_fsm_state1)))) begin
+        if (((1'b1 == ap_CS_fsm_state2) | ((1'b1 == ap_CS_fsm_state3) & (ap_sync_grp_Mat2Axi_fu_72_ap_ready == 1'b0)))) begin
             grp_Mat2Axi_fu_72_ap_start_reg <= 1'b1;
         end else if ((grp_Mat2Axi_fu_72_ap_ready == 1'b1)) begin
             grp_Mat2Axi_fu_72_ap_start_reg <= 1'b0;
@@ -359,30 +361,32 @@ end
 
 always @ (posedge ap_clk) begin
     if ((1'b1 == ap_CS_fsm_state1)) begin
-        dstPtr_read_reg_102 <= dstPtr_dout;
-        stride_read_reg_97 <= stride_dout;
-        trunc_ln1565_reg_107 <= trunc_ln1565_fu_87_p1;
+        dstPtr_read_reg_98 <= dstPtr_dout;
+        stride_read_reg_93 <= stride_dout;
+        trunc_ln1565_reg_103 <= trunc_ln1565_fu_84_p1;
     end
 end
 
 always @ (*) begin
-    if (((stride_empty_n == 1'b0) | (dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1))) begin
+    if (((dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1) | (stride_empty_n == 1'b0))) begin
         ap_ST_fsm_state1_blk = 1'b1;
     end else begin
         ap_ST_fsm_state1_blk = 1'b0;
     end
 end
 
+assign ap_ST_fsm_state2_blk = 1'b0;
+
 always @ (*) begin
-    if ((1'b1 == ap_block_state2_on_subcall_done)) begin
-        ap_ST_fsm_state2_blk = 1'b1;
+    if ((1'b1 == ap_block_state3_on_subcall_done)) begin
+        ap_ST_fsm_state3_blk = 1'b1;
     end else begin
-        ap_ST_fsm_state2_blk = 1'b0;
+        ap_ST_fsm_state3_blk = 1'b0;
     end
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state2) & (1'b0 == ap_block_state2_on_subcall_done))) begin
+    if (((1'b1 == ap_CS_fsm_state3) & (1'b0 == ap_block_state3_on_subcall_done))) begin
         ap_done = 1'b1;
     end else begin
         ap_done = ap_done_reg;
@@ -398,7 +402,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state2) & (1'b0 == ap_block_state2_on_subcall_done))) begin
+    if (((1'b1 == ap_CS_fsm_state3) & (1'b0 == ap_block_state3_on_subcall_done))) begin
         ap_ready = 1'b1;
     end else begin
         ap_ready = 1'b0;
@@ -414,7 +418,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((~((stride_empty_n == 1'b0) | (dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1)) & (1'b1 == ap_CS_fsm_state1))) begin
+    if ((~((dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1) | (stride_empty_n == 1'b0)) & (1'b1 == ap_CS_fsm_state1))) begin
         dstPtr_read = 1'b1;
     end else begin
         dstPtr_read = 1'b0;
@@ -422,7 +426,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state2) & (1'b0 == ap_block_state2_on_subcall_done))) begin
+    if (((1'b1 == ap_CS_fsm_state3) & (1'b0 == ap_block_state3_on_subcall_done))) begin
         grp_Mat2Axi_fu_72_ap_continue = 1'b1;
     end else begin
         grp_Mat2Axi_fu_72_ap_continue = 1'b0;
@@ -430,7 +434,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state2) | (1'b1 == ap_CS_fsm_state1))) begin
+    if (((1'b1 == ap_CS_fsm_state3) | (1'b1 == ap_CS_fsm_state2))) begin
         m_axi_gmem3_AWVALID = grp_Mat2Axi_fu_72_m_axi_gmem3_AWVALID;
     end else begin
         m_axi_gmem3_AWVALID = 1'b0;
@@ -438,7 +442,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state2) | (1'b1 == ap_CS_fsm_state1))) begin
+    if (((1'b1 == ap_CS_fsm_state3) | (1'b1 == ap_CS_fsm_state2))) begin
         m_axi_gmem3_BREADY = grp_Mat2Axi_fu_72_m_axi_gmem3_BREADY;
     end else begin
         m_axi_gmem3_BREADY = 1'b0;
@@ -446,7 +450,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state2) | (1'b1 == ap_CS_fsm_state1))) begin
+    if (((1'b1 == ap_CS_fsm_state3) | (1'b1 == ap_CS_fsm_state2))) begin
         m_axi_gmem3_WVALID = grp_Mat2Axi_fu_72_m_axi_gmem3_WVALID;
     end else begin
         m_axi_gmem3_WVALID = 1'b0;
@@ -454,7 +458,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state2)) begin
+    if ((1'b1 == ap_CS_fsm_state3)) begin
         out_mat_data85_read = grp_Mat2Axi_fu_72_out_mat_data85_read;
     end else begin
         out_mat_data85_read = 1'b0;
@@ -470,7 +474,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((~((stride_empty_n == 1'b0) | (dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1)) & (1'b1 == ap_CS_fsm_state1))) begin
+    if ((~((dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1) | (stride_empty_n == 1'b0)) & (1'b1 == ap_CS_fsm_state1))) begin
         stride_read = 1'b1;
     end else begin
         stride_read = 1'b0;
@@ -480,17 +484,20 @@ end
 always @ (*) begin
     case (ap_CS_fsm)
         ap_ST_fsm_state1 : begin
-            if ((~((stride_empty_n == 1'b0) | (dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1)) & (1'b1 == ap_CS_fsm_state1))) begin
+            if ((~((dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1) | (stride_empty_n == 1'b0)) & (1'b1 == ap_CS_fsm_state1))) begin
                 ap_NS_fsm = ap_ST_fsm_state2;
             end else begin
                 ap_NS_fsm = ap_ST_fsm_state1;
             end
         end
         ap_ST_fsm_state2 : begin
-            if (((1'b1 == ap_CS_fsm_state2) & (1'b0 == ap_block_state2_on_subcall_done))) begin
+            ap_NS_fsm = ap_ST_fsm_state3;
+        end
+        ap_ST_fsm_state3 : begin
+            if (((1'b1 == ap_CS_fsm_state3) & (1'b0 == ap_block_state3_on_subcall_done))) begin
                 ap_NS_fsm = ap_ST_fsm_state1;
             end else begin
-                ap_NS_fsm = ap_ST_fsm_state2;
+                ap_NS_fsm = ap_ST_fsm_state3;
             end
         end
         default : begin
@@ -503,16 +510,14 @@ assign ap_CS_fsm_state1 = ap_CS_fsm[32'd0];
 
 assign ap_CS_fsm_state2 = ap_CS_fsm[32'd1];
 
+assign ap_CS_fsm_state3 = ap_CS_fsm[32'd2];
+
 always @ (*) begin
-    ap_block_state1 = ((stride_empty_n == 1'b0) | (dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1));
+    ap_block_state1 = ((dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1) | (stride_empty_n == 1'b0));
 end
 
 always @ (*) begin
-    ap_block_state1_ignore_call9 = ((stride_empty_n == 1'b0) | (dstPtr_empty_n == 1'b0) | (ap_start == 1'b0) | (ap_done_reg == 1'b1));
-end
-
-always @ (*) begin
-    ap_block_state2_on_subcall_done = ((ap_sync_grp_Mat2Axi_fu_72_ap_ready & ap_sync_grp_Mat2Axi_fu_72_ap_done) == 1'b0);
+    ap_block_state3_on_subcall_done = ((ap_sync_grp_Mat2Axi_fu_72_ap_ready & ap_sync_grp_Mat2Axi_fu_72_ap_done) == 1'b0);
 end
 
 assign ap_sync_grp_Mat2Axi_fu_72_ap_done = (grp_Mat2Axi_fu_72_ap_done | ap_sync_reg_grp_Mat2Axi_fu_72_ap_done);
@@ -579,6 +584,6 @@ assign m_axi_gmem3_WSTRB = grp_Mat2Axi_fu_72_m_axi_gmem3_WSTRB;
 
 assign m_axi_gmem3_WUSER = grp_Mat2Axi_fu_72_m_axi_gmem3_WUSER;
 
-assign trunc_ln1565_fu_87_p1 = p_read[15:0];
+assign trunc_ln1565_fu_84_p1 = p_read[15:0];
 
 endmodule //pp_pipeline_accel_xfMat2Array_64_9_720_720_1_1_s

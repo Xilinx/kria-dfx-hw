@@ -34,7 +34,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>780856032</coreId>
+              <coreId>448</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>19</bitwidth>
@@ -66,7 +66,7 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item class_id="10" tracking_level="0" version="0">
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second class_id="11" tracking_level="0" version="0">
                     <count>1</count>
                     <item_version>0</item_version>
@@ -104,7 +104,7 @@
           <m_isOnCriticalPath>0</m_isOnCriticalPath>
           <m_isLCDNode>0</m_isLCDNode>
           <m_isStartOfPath>0</m_isStartOfPath>
-          <m_delay>1.83</m_delay>
+          <m_delay>1.21</m_delay>
           <m_topoIndex>1</m_topoIndex>
           <m_clusterGroupNumber>-1</m_clusterGroupNumber>
         </item>
@@ -123,7 +123,7 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
@@ -145,7 +145,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>785866648</coreId>
+              <coreId>652797440</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>0</bitwidth>
@@ -194,7 +194,7 @@
             <coreName/>
             <isStorage>0</isStorage>
             <storageDepth>0</storageDepth>
-            <coreId>976</coreId>
+            <coreId>506512708</coreId>
             <rtlModuleName/>
           </Obj>
           <node_objs>

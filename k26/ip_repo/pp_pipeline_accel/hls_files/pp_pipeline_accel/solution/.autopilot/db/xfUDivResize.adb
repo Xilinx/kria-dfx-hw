@@ -34,7 +34,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>1397508187</coreId>
+              <coreId>645370576</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>64</bitwidth>
@@ -70,7 +70,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>779028784</coreId>
+              <coreId>0</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>16</bitwidth>
@@ -93,7 +93,7 @@
               <type>0</type>
               <id>3</id>
               <name>in_d_read</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>161</lineNumber>
               <contextFuncName>xfUDivResize</contextFuncName>
@@ -102,13 +102,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item class_id="10" tracking_level="0" version="0">
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second class_id="11" tracking_level="0" version="0">
                     <count>1</count>
                     <item_version>0</item_version>
                     <item class_id="12" tracking_level="0" version="0">
                       <first class_id="13" tracking_level="0" version="0">
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
                         <second>xfUDivResize</second>
                       </first>
                       <second>161</second>
@@ -150,7 +150,7 @@
               <type>0</type>
               <id>4</id>
               <name>in_n_read</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>161</lineNumber>
               <contextFuncName>xfUDivResize</contextFuncName>
@@ -159,13 +159,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
                     <item>
                       <first>
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
                         <second>xfUDivResize</second>
                       </first>
                       <second>161</second>
@@ -207,7 +207,7 @@
               <type>0</type>
               <id>5</id>
               <name>zext_ln165</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>165</lineNumber>
               <contextFuncName>xfUDivResize</contextFuncName>
@@ -216,13 +216,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
                     <item>
                       <first>
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
                         <second>xfUDivResize</second>
                       </first>
                       <second>165</second>
@@ -263,7 +263,7 @@
               <type>0</type>
               <id>6</id>
               <name>out_res</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>165</lineNumber>
               <contextFuncName>xfUDivResize</contextFuncName>
@@ -272,13 +272,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
                     <item>
                       <first>
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
                         <second>xfUDivResize</second>
                       </first>
                       <second>165</second>
@@ -320,7 +320,7 @@
               <type>0</type>
               <id>7</id>
               <name>_ln166</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>166</lineNumber>
               <contextFuncName>xfUDivResize</contextFuncName>
@@ -329,13 +329,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
                     <item>
                       <first>
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/imgproc/xf_resize_nn_bilinear.hpp</first>
                         <second>xfUDivResize</second>
                       </first>
                       <second>166</second>
@@ -400,7 +400,7 @@
             <coreName/>
             <isStorage>0</isStorage>
             <storageDepth>0</storageDepth>
-            <coreId>0</coreId>
+            <coreId>644012128</coreId>
             <rtlModuleName/>
           </Obj>
           <node_objs>

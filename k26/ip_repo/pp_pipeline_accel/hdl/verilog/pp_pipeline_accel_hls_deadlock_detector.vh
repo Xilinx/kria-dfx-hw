@@ -2316,7 +2316,7 @@ end
     assign proc_18_input_sync_blk[0] = 1'b0;
     assign proc_18_output_sync_blk[0] = 1'b0;
     assign proc_dep_vld_vec_18[0] = dl_detect_out ? proc_dep_vld_vec_18_reg[0] : (proc_18_data_FIFO_blk[0] | proc_18_data_PIPO_blk[0] | proc_18_start_FIFO_blk[0] | proc_18_TLF_FIFO_blk[0] | proc_18_input_sync_blk[0] | proc_18_output_sync_blk[0]);
-    assign proc_18_data_FIFO_blk[1] = 1'b0 | (~resize_1_9_2160_3840_720_720_1_9_U0.grp_resizeNNBilinear_9_2160_3840_1_720_720_1_9_s_fu_82.grp_resizeNNBilinear_Pipeline_VITIS_LOOP_337_1_VITIS_LOOP_342_2_fu_206.rgb_mat_data83_blk_n);
+    assign proc_18_data_FIFO_blk[1] = 1'b0 | (~resize_1_9_2160_3840_720_720_1_9_U0.grp_resizeNNBilinear_9_2160_3840_1_720_720_1_9_s_fu_82.grp_resizeNNBilinear_9_2160_3840_1_720_720_1_9_Pipeline_VITIS_LOOP_394_5_fu_216.rgb_mat_data83_blk_n);
     assign proc_18_data_PIPO_blk[1] = 1'b0;
     assign proc_18_start_FIFO_blk[1] = 1'b0;
     assign proc_18_TLF_FIFO_blk[1] = 1'b0;

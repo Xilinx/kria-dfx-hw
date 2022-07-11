@@ -34,7 +34,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>0</coreId>
+              <coreId>448</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>32</bitwidth>
@@ -106,7 +106,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>789433824</coreId>
+              <coreId>976</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>24</bitwidth>
@@ -142,7 +142,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>789434176</coreId>
+              <coreId>0</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>64</bitwidth>
@@ -178,7 +178,7 @@
               <coreName>FIFO_SRL</coreName>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>8</coreId>
+              <coreId>0</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>64</bitwidth>
@@ -214,7 +214,7 @@
               <coreName>FIFO_SRL</coreName>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>0</coreId>
+              <coreId>1936024608</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>32</bitwidth>
@@ -270,7 +270,7 @@
           <m_isOnCriticalPath>0</m_isOnCriticalPath>
           <m_isLCDNode>0</m_isLCDNode>
           <m_isStartOfPath>0</m_isStartOfPath>
-          <m_delay>1.83</m_delay>
+          <m_delay>1.21</m_delay>
           <m_topoIndex>1</m_topoIndex>
           <m_clusterGroupNumber>-1</m_clusterGroupNumber>
         </item>
@@ -313,7 +313,7 @@
           <m_isOnCriticalPath>0</m_isOnCriticalPath>
           <m_isLCDNode>0</m_isLCDNode>
           <m_isStartOfPath>0</m_isStartOfPath>
-          <m_delay>1.83</m_delay>
+          <m_delay>1.21</m_delay>
           <m_topoIndex>2</m_topoIndex>
           <m_clusterGroupNumber>-1</m_clusterGroupNumber>
         </item>
@@ -356,7 +356,7 @@
           <m_isOnCriticalPath>0</m_isOnCriticalPath>
           <m_isLCDNode>0</m_isLCDNode>
           <m_isStartOfPath>0</m_isStartOfPath>
-          <m_delay>1.90</m_delay>
+          <m_delay>1.21</m_delay>
           <m_topoIndex>3</m_topoIndex>
           <m_clusterGroupNumber>-1</m_clusterGroupNumber>
         </item>
@@ -399,7 +399,7 @@
           <m_isOnCriticalPath>0</m_isOnCriticalPath>
           <m_isLCDNode>0</m_isLCDNode>
           <m_isStartOfPath>0</m_isStartOfPath>
-          <m_delay>1.90</m_delay>
+          <m_delay>1.21</m_delay>
           <m_topoIndex>4</m_topoIndex>
           <m_clusterGroupNumber>-1</m_clusterGroupNumber>
         </item>
@@ -409,7 +409,7 @@
               <type>0</type>
               <id>15</id>
               <name>trunc_ln1565</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/common/xf_structs.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/common/xf_structs.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>1565</lineNumber>
               <contextFuncName>xfMat2Array</contextFuncName>
@@ -418,13 +418,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item class_id="11" tracking_level="0" version="0">
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second class_id="12" tracking_level="0" version="0">
                     <count>1</count>
                     <item_version>0</item_version>
                     <item class_id="13" tracking_level="0" version="0">
                       <first class_id="14" tracking_level="0" version="0">
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/common/xf_structs.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/common/xf_structs.hpp</first>
                         <second>xfMat2Array</second>
                       </first>
                       <second>1565</second>
@@ -433,7 +433,7 @@
                 </item>
               </inlineStackInfo>
               <originalName/>
-              <rtlName>trunc_ln1565_fu_87_p1</rtlName>
+              <rtlName>trunc_ln1565_fu_84_p1</rtlName>
               <control/>
               <opType/>
               <implIndex/>
@@ -465,7 +465,7 @@
               <type>0</type>
               <id>16</id>
               <name>_ln1565</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/common/xf_structs.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/common/xf_structs.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>1565</lineNumber>
               <contextFuncName>xfMat2Array</contextFuncName>
@@ -474,13 +474,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
                     <item>
                       <first>
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/common/xf_structs.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/common/xf_structs.hpp</first>
                         <second>xfMat2Array</second>
                       </first>
                       <second>1565</second>
@@ -496,7 +496,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>0</coreId>
+              <coreId>655890736</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>0</bitwidth>
@@ -517,7 +517,7 @@
           <m_isOnCriticalPath>0</m_isOnCriticalPath>
           <m_isLCDNode>0</m_isLCDNode>
           <m_isStartOfPath>0</m_isStartOfPath>
-          <m_delay>5.27</m_delay>
+          <m_delay>1.57</m_delay>
           <m_topoIndex>6</m_topoIndex>
           <m_clusterGroupNumber>-1</m_clusterGroupNumber>
         </item>
@@ -527,7 +527,7 @@
               <type>0</type>
               <id>17</id>
               <name>_ln783</name>
-              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/common/xf_utility.hpp</fileName>
+              <fileName>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/common/xf_utility.hpp</fileName>
               <fileDirectory>..</fileDirectory>
               <lineNumber>783</lineNumber>
               <contextFuncName>xfMat2Array&amp;lt;64, 9, 720, 720, 1, 1&amp;gt;</contextFuncName>
@@ -536,13 +536,13 @@
                 <count>1</count>
                 <item_version>0</item_version>
                 <item>
-                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
+                  <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/examples/smartcam/_x/pp_pipeline_accel/pp_pipeline_accel</first>
                   <second>
                     <count>1</count>
                     <item_version>0</item_version>
                     <item>
                       <first>
-                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/kria-vitis-platforms/kv260/overlays/Vitis_Libraries/L1/include/common/xf_utility.hpp</first>
+                        <first>/everest/siv_bkup/deekshad/pp_pipelineip/k3/kv260/overlays/Vitis_Libraries/vision/L1/include/common/xf_utility.hpp</first>
                         <second>xfMat2Array&amp;lt;64, 9, 720, 720, 1, 1&amp;gt;</second>
                       </first>
                       <second>783</second>
@@ -558,7 +558,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>789423632</coreId>
+              <coreId>0</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>0</bitwidth>
@@ -603,7 +603,7 @@
               <coreName/>
               <isStorage>0</isStorage>
               <storageDepth>0</storageDepth>
-              <coreId>0</coreId>
+              <coreId>1935961711</coreId>
               <rtlModuleName/>
             </Obj>
             <bitwidth>0</bitwidth>
@@ -637,7 +637,7 @@
             <coreName/>
             <isStorage>0</isStorage>
             <storageDepth>0</storageDepth>
-            <coreId>789434576</coreId>
+            <coreId>1210203513</coreId>
             <rtlModuleName/>
           </Obj>
           <node_objs>
@@ -763,20 +763,20 @@
         <mDepth>-1</mDepth>
         <mMinTripCount>-1</mMinTripCount>
         <mMaxTripCount>-1</mMaxTripCount>
-        <mMinLatency>10</mMinLatency>
-        <mMaxLatency>518409</mMaxLatency>
+        <mMinLatency>13</mMinLatency>
+        <mMaxLatency>518412</mMaxLatency>
         <mIsDfPipe>0</mIsDfPipe>
         <mDfPipe class_id="-1"/>
       </item>
     </cdfg_regions>
     <fsm class_id="24" tracking_level="1" version="0" object_id="_29">
       <states class_id="25" tracking_level="0" version="0">
-        <count>2</count>
+        <count>3</count>
         <item_version>0</item_version>
         <item class_id="26" tracking_level="1" version="0" object_id="_30">
           <id>1</id>
           <operations class_id="27" tracking_level="0" version="0">
-            <count>6</count>
+            <count>5</count>
             <item_version>0</item_version>
             <item class_id="28" tracking_level="1" version="0" object_id="_31">
               <id>8</id>
@@ -803,44 +803,51 @@
               <stage>1</stage>
               <latency>1</latency>
             </item>
-            <item class_id_reference="28" object_id="_36">
+          </operations>
+        </item>
+        <item class_id_reference="26" object_id="_36">
+          <id>2</id>
+          <operations>
+            <count>1</count>
+            <item_version>0</item_version>
+            <item class_id_reference="28" object_id="_37">
               <id>16</id>
               <stage>2</stage>
               <latency>2</latency>
             </item>
           </operations>
         </item>
-        <item class_id_reference="26" object_id="_37">
-          <id>2</id>
+        <item class_id_reference="26" object_id="_38">
+          <id>3</id>
           <operations>
             <count>6</count>
             <item_version>0</item_version>
-            <item class_id_reference="28" object_id="_38">
+            <item class_id_reference="28" object_id="_39">
               <id>7</id>
               <stage>1</stage>
               <latency>1</latency>
             </item>
-            <item class_id_reference="28" object_id="_39">
+            <item class_id_reference="28" object_id="_40">
               <id>11</id>
               <stage>1</stage>
               <latency>1</latency>
             </item>
-            <item class_id_reference="28" object_id="_40">
+            <item class_id_reference="28" object_id="_41">
               <id>13</id>
               <stage>1</stage>
               <latency>1</latency>
             </item>
-            <item class_id_reference="28" object_id="_41">
+            <item class_id_reference="28" object_id="_42">
               <id>14</id>
               <stage>1</stage>
               <latency>1</latency>
             </item>
-            <item class_id_reference="28" object_id="_42">
+            <item class_id_reference="28" object_id="_43">
               <id>16</id>
               <stage>1</stage>
               <latency>2</latency>
             </item>
-            <item class_id_reference="28" object_id="_43">
+            <item class_id_reference="28" object_id="_44">
               <id>17</id>
               <stage>1</stage>
               <latency>1</latency>
@@ -849,9 +856,9 @@
         </item>
       </states>
       <transitions class_id="29" tracking_level="0" version="0">
-        <count>1</count>
+        <count>2</count>
         <item_version>0</item_version>
-        <item class_id="30" tracking_level="1" version="0" object_id="_44">
+        <item class_id="30" tracking_level="1" version="0" object_id="_45">
           <inState>1</inState>
           <outState>2</outState>
           <condition class_id="31" tracking_level="0" version="0">
@@ -866,9 +873,24 @@
             </sop>
           </condition>
         </item>
+        <item class_id_reference="30" object_id="_46">
+          <inState>2</inState>
+          <outState>3</outState>
+          <condition>
+            <id>-1</id>
+            <sop>
+              <count>1</count>
+              <item_version>0</item_version>
+              <item>
+                <count>0</count>
+                <item_version>0</item_version>
+              </item>
+            </sop>
+          </condition>
+        </item>
       </transitions>
     </fsm>
-    <res class_id="34" tracking_level="1" version="0" object_id="_45">
+    <res class_id="34" tracking_level="1" version="0" object_id="_47">
       <dp_component_resource class_id="35" tracking_level="0" version="0">
         <count>1</count>
         <item_version>0</item_version>
@@ -883,11 +905,11 @@
             </item>
             <item>
               <first>FF</first>
-              <second>1495</second>
+              <second>1679</second>
             </item>
             <item>
               <first>LUT</first>
-              <second>2796</second>
+              <second>2848</second>
             </item>
           </second>
         </item>
@@ -983,7 +1005,7 @@
             <item_version>0</item_version>
             <item>
               <first>(0Size)</first>
-              <second>3</second>
+              <second>4</second>
             </item>
             <item>
               <first>(1Bits)</first>
@@ -991,11 +1013,11 @@
             </item>
             <item>
               <first>(2Count)</first>
-              <second>3</second>
+              <second>4</second>
             </item>
             <item>
               <first>LUT</first>
-              <second>14</second>
+              <second>20</second>
             </item>
           </second>
         </item>
@@ -1171,7 +1193,7 @@
             <item_version>0</item_version>
             <item>
               <first>(Bits)</first>
-              <second>2</second>
+              <second>3</second>
             </item>
             <item>
               <first>(Consts)</first>
@@ -1179,7 +1201,7 @@
             </item>
             <item>
               <first>FF</first>
-              <second>2</second>
+              <second>3</second>
             </item>
           </second>
         </item>
@@ -1241,7 +1263,7 @@
           </second>
         </item>
         <item>
-          <first>dstPtr_read_reg_102</first>
+          <first>dstPtr_read_reg_98</first>
           <second>
             <count>3</count>
             <item_version>0</item_version>
@@ -1279,7 +1301,7 @@
           </second>
         </item>
         <item>
-          <first>stride_read_reg_97</first>
+          <first>stride_read_reg_93</first>
           <second>
             <count>3</count>
             <item_version>0</item_version>
@@ -1298,7 +1320,7 @@
           </second>
         </item>
         <item>
-          <first>trunc_ln1565_reg_107</first>
+          <first>trunc_ln1565_reg_103</first>
           <second>
             <count>3</count>
             <item_version>0</item_version>
@@ -1394,14 +1416,14 @@
       <item>
         <first>16</first>
         <second>
-          <first>0</first>
+          <first>1</first>
           <second>1</second>
         </second>
       </item>
       <item>
         <first>17</first>
         <second>
-          <first>1</first>
+          <first>2</first>
           <second>0</second>
         </second>
       </item>
@@ -1413,7 +1435,7 @@
         <first>18</first>
         <second class_id="46" tracking_level="0" version="0">
           <first>0</first>
-          <second>1</second>
+          <second>2</second>
         </second>
       </item>
     </bblk_ent_exit>
@@ -1466,7 +1488,7 @@
         </second>
       </item>
       <item>
-        <first>87</first>
+        <first>84</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1478,7 +1500,7 @@
       <count>1</count>
       <item_version>0</item_version>
       <item class_id="52" tracking_level="0" version="0">
-        <first>trunc_ln1565_fu_87</first>
+        <first>trunc_ln1565_fu_84</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1547,7 +1569,7 @@
       <count>4</count>
       <item_version>0</item_version>
       <item>
-        <first>92</first>
+        <first>88</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1555,7 +1577,7 @@
         </second>
       </item>
       <item>
-        <first>97</first>
+        <first>93</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1563,7 +1585,7 @@
         </second>
       </item>
       <item>
-        <first>102</first>
+        <first>98</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1571,7 +1593,7 @@
         </second>
       </item>
       <item>
-        <first>107</first>
+        <first>103</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1583,7 +1605,7 @@
       <count>4</count>
       <item_version>0</item_version>
       <item>
-        <first>dstPtr_read_reg_102</first>
+        <first>dstPtr_read_reg_98</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1591,7 +1613,7 @@
         </second>
       </item>
       <item>
-        <first>p_read_1_reg_92</first>
+        <first>p_read_1_reg_88</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1599,7 +1621,7 @@
         </second>
       </item>
       <item>
-        <first>stride_read_reg_97</first>
+        <first>stride_read_reg_93</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1607,7 +1629,7 @@
         </second>
       </item>
       <item>
-        <first>trunc_ln1565_reg_107</first>
+        <first>trunc_ln1565_reg_103</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>

@@ -13,13 +13,13 @@
         <config_export format="xo" ipname="pp_pipeline_accel"/>
     </config>
     <targetInfo>
-        <TargetInfo value="xck26:-sfvc784:-2LVI-i"/>
+        <TargetInfo value="xck26:-sfvc784:-2LV-c"/>
     </targetInfo>
     <libraryList>
         <library value="xilinx/zynquplus/zynquplus" name="DefaultPlatform"/>
     </libraryList>
     <clockList>
-        <clock name="default" period="99.999001MHz" default="false"/>
+        <clock name="default" period="299.997000MHz" default="false"/>
     </clockList>
     <ExportDesign askAgain="true" evaluate="false" rtl="verilog" formatName="xo">
         <Format formatName="xo"/>

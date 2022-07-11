@@ -2574,7 +2574,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>fcd4737e</spirit:value>
+            <spirit:value>5912964b</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2593,7 +2593,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>2ba7291b</spirit:value>
+            <spirit:value>0e465399</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2612,7 +2612,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>feee2282</spirit:value>
+            <spirit:value>bb58c5b6</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2631,7 +2631,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>c9eeb956</spirit:value>
+            <spirit:value>2b2c8fdd</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -6909,15 +6909,15 @@
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_31ns_21ns_52_1_1.v</spirit:name>
+        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_31ns_21ns_52_2_1.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_32s_32s_32_1_1.v</spirit:name>
+        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_32s_32s_32_2_1.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_48ns_42s_74_1_1.v</spirit:name>
+        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_48ns_42s_74_5_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -7459,17 +7459,17 @@
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_31ns_21ns_52_1_1.v</spirit:name>
+        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_31ns_21ns_52_2_1.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_32s_32s_32_1_1.v</spirit:name>
+        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_32s_32s_32_2_1.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_48ns_42s_74_1_1.v</spirit:name>
+        <spirit:name>hdl/verilog/pp_pipeline_accel_mul_48ns_42s_74_5_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -7954,15 +7954,15 @@
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_31ns_21ns_52_1_1.vhd</spirit:name>
+        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_31ns_21ns_52_2_1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_32s_32s_32_1_1.vhd</spirit:name>
+        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_32s_32s_32_2_1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_48ns_42s_74_1_1.vhd</spirit:name>
+        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_48ns_42s_74_5_0.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -8064,7 +8064,7 @@
       <spirit:file>
         <spirit:name>hdl/vhdl/pp_pipeline_accel.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_705d5072</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_f8b9e395</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -8490,17 +8490,17 @@
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_31ns_21ns_52_1_1.vhd</spirit:name>
+        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_31ns_21ns_52_2_1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_32s_32s_32_1_1.vhd</spirit:name>
+        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_32s_32s_32_2_1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_48ns_42s_74_1_1.vhd</spirit:name>
+        <spirit:name>hdl/vhdl/pp_pipeline_accel_mul_48ns_42s_74_5_0.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -9156,7 +9156,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>clk_period</spirit:name>
-      <spirit:value spirit:id="PARAM_VALUE.clk_period" spirit:order="50">10</spirit:value>
+      <spirit:value spirit:id="PARAM_VALUE.clk_period" spirit:order="50">3.333</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>machine</spirit:name>
@@ -9168,7 +9168,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>latency</spirit:name>
-      <spirit:value spirit:id="PARAM_VALUE.latency" spirit:order="53">8313849</spirit:value>
+      <spirit:value spirit:id="PARAM_VALUE.latency" spirit:order="53">8320332</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>II</spirit:name>
@@ -9185,8 +9185,8 @@
       </xilinx:taxonomies>
       <xilinx:displayName>Pp_pipeline_accel</xilinx:displayName>
       <xilinx:definitionSource>HLS</xilinx:definitionSource>
-      <xilinx:coreRevision>2112567225</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2022-06-27T07:46:27Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>2112570556</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2022-06-29T15:16:49Z</xilinx:coreCreationDateTime>
       <xilinx:sdxKernelAttributes>
         <xilinx:sdx_kernel>true</xilinx:sdx_kernel>
         <xilinx:sdx_kernel_type>hls</xilinx:sdx_kernel_type>
@@ -9197,10 +9197,10 @@
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="7f9f726c"/>
       <xilinx:checksum xilinx:scope="addressSpaces" xilinx:value="868a7122"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="7a10ba9a"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="08066d6a"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="599a7b41"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="a5ef77c8"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="174fa9e0"/>
-      <xilinx:checksum xilinx:scope="parameters" xilinx:value="eb7c1a4f"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="68a1acef"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>
 </spirit:component>

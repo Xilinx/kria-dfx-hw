@@ -33,10 +33,12 @@ module pp_pipeline_accel_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_s (
         width
 );
 
-parameter    ap_ST_fsm_state1 = 4'd1;
-parameter    ap_ST_fsm_state2 = 4'd2;
-parameter    ap_ST_fsm_state3 = 4'd4;
-parameter    ap_ST_fsm_state4 = 4'd8;
+parameter    ap_ST_fsm_state1 = 6'd1;
+parameter    ap_ST_fsm_state2 = 6'd2;
+parameter    ap_ST_fsm_state3 = 6'd4;
+parameter    ap_ST_fsm_state4 = 6'd8;
+parameter    ap_ST_fsm_state5 = 6'd16;
+parameter    ap_ST_fsm_state6 = 6'd32;
 
 input   ap_clk;
 input   ap_rst;
@@ -69,7 +71,7 @@ reg imgInput_y_data81_read;
 reg imgInput_uv_data82_read;
 reg rgb_mat_data83_write;
 
-(* fsm_encoding = "none" *) reg   [3:0] ap_CS_fsm;
+(* fsm_encoding = "none" *) reg   [5:0] ap_CS_fsm;
 wire    ap_CS_fsm_state1;
 wire   [0:0] empty_fu_125_p1;
 reg   [0:0] empty_reg_191;
@@ -86,10 +88,10 @@ wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_do
 wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_idle;
 wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_ready;
 wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_imgInput_y_data81_read;
-wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvStream_read;
 wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_imgInput_uv_data82_read;
 wire   [15:0] grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvStream_din;
 wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvStream_write;
+wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvStream_read;
 wire   [23:0] grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_rgb_mat_data83_din;
 wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_rgb_mat_data83_write;
 wire   [15:0] grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvPacked_V_1_out_o;
@@ -100,9 +102,10 @@ wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu
 wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu_119_ap_ready;
 wire    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu_119_uvStream_read;
 reg   [0:0] evenBlock_reg_78;
-wire    ap_CS_fsm_state3;
+wire    ap_CS_fsm_state4;
 reg   [0:0] evenRow_reg_90;
 reg    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_start_reg;
+wire    ap_CS_fsm_state3;
 wire   [15:0] uvStream_dout;
 wire    uvStream_empty_n;
 reg    uvStream_read;
@@ -110,20 +113,23 @@ wire    uvStream_full_n;
 reg    uvStream_write;
 reg   [15:0] uvPacked_V_fu_54;
 reg    grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu_119_ap_start_reg;
-wire    ap_CS_fsm_state4;
+wire    ap_CS_fsm_state5;
+wire    ap_CS_fsm_state6;
 reg   [15:0] i_fu_58;
 wire   [15:0] i_7_fu_146_p2;
-reg    ap_block_state4_on_subcall_done;
-reg   [3:0] ap_NS_fsm;
+reg    ap_block_state6_on_subcall_done;
+reg   [5:0] ap_NS_fsm;
 reg    ap_ST_fsm_state1_blk;
 wire    ap_ST_fsm_state2_blk;
-reg    ap_ST_fsm_state3_blk;
+wire    ap_ST_fsm_state3_blk;
 reg    ap_ST_fsm_state4_blk;
+wire    ap_ST_fsm_state5_blk;
+reg    ap_ST_fsm_state6_blk;
 wire    ap_ce_reg;
 
 // power-on initialization
 initial begin
-#0 ap_CS_fsm = 4'd1;
+#0 ap_CS_fsm = 6'd1;
 #0 grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_start_reg = 1'b0;
 #0 grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu_119_ap_start_reg = 1'b0;
 end
@@ -140,9 +146,6 @@ pp_pipeline_accel_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop grp_Ke
     .imgInput_y_data81_fifo_cap(2'd0),
     .imgInput_y_data81_empty_n(imgInput_y_data81_empty_n),
     .imgInput_y_data81_read(grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_imgInput_y_data81_read),
-    .uvStream_dout(uvStream_dout),
-    .uvStream_empty_n(uvStream_empty_n),
-    .uvStream_read(grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvStream_read),
     .imgInput_uv_data82_dout(imgInput_uv_data82_dout),
     .imgInput_uv_data82_num_data_valid(2'd0),
     .imgInput_uv_data82_fifo_cap(2'd0),
@@ -151,6 +154,9 @@ pp_pipeline_accel_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop grp_Ke
     .uvStream_din(grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvStream_din),
     .uvStream_full_n(uvStream_full_n),
     .uvStream_write(grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvStream_write),
+    .uvStream_dout(uvStream_dout),
+    .uvStream_empty_n(uvStream_empty_n),
+    .uvStream_read(grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvStream_read),
     .rgb_mat_data83_din(grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_rgb_mat_data83_din),
     .rgb_mat_data83_num_data_valid(2'd0),
     .rgb_mat_data83_fifo_cap(2'd0),
@@ -202,7 +208,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_start_reg <= 1'b0;
     end else begin
-        if (((icmp_ln4194_fu_141_p2 == 1'd0) & (1'b1 == ap_CS_fsm_state2))) begin
+        if ((1'b1 == ap_CS_fsm_state3)) begin
             grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_start_reg <= 1'b1;
         end else if ((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_ready == 1'b1)) begin
             grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_start_reg <= 1'b0;
@@ -214,7 +220,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu_119_ap_start_reg <= 1'b0;
     end else begin
-        if (((icmp_ln4194_fu_141_p2 == 1'd1) & (empty_reg_191 == 1'd1) & (1'b1 == ap_CS_fsm_state2))) begin
+        if ((1'b1 == ap_CS_fsm_state5)) begin
             grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu_119_ap_start_reg <= 1'b1;
         end else if ((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu_119_ap_ready == 1'b1)) begin
             grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu_119_ap_start_reg <= 1'b0;
@@ -223,23 +229,23 @@ always @ (posedge ap_clk) begin
 end
 
 always @ (posedge ap_clk) begin
-    if (((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state3))) begin
+    if (((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state4))) begin
         evenBlock_reg_78 <= evenBlock_3_reg_209;
-    end else if (((ap_start == 1'b1) & (1'b1 == ap_CS_fsm_state1))) begin
+    end else if (((1'b1 == ap_CS_fsm_state1) & (ap_start == 1'b1))) begin
         evenBlock_reg_78 <= 1'd1;
     end
 end
 
 always @ (posedge ap_clk) begin
-    if (((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state3))) begin
+    if (((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state4))) begin
         evenRow_reg_90 <= evenRow_1_reg_214;
-    end else if (((ap_start == 1'b1) & (1'b1 == ap_CS_fsm_state1))) begin
+    end else if (((1'b1 == ap_CS_fsm_state1) & (ap_start == 1'b1))) begin
         evenRow_reg_90 <= 1'd1;
     end
 end
 
 always @ (posedge ap_clk) begin
-    if (((ap_start == 1'b1) & (1'b1 == ap_CS_fsm_state1))) begin
+    if (((1'b1 == ap_CS_fsm_state1) & (ap_start == 1'b1))) begin
         i_fu_58 <= 16'd0;
     end else if (((icmp_ln4194_fu_141_p2 == 1'd0) & (1'b1 == ap_CS_fsm_state2))) begin
         i_fu_58 <= i_7_fu_146_p2;
@@ -261,7 +267,7 @@ always @ (posedge ap_clk) begin
 end
 
 always @ (posedge ap_clk) begin
-    if (((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvPacked_V_1_out_o_ap_vld == 1'b1) & (1'b1 == ap_CS_fsm_state3))) begin
+    if (((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvPacked_V_1_out_o_ap_vld == 1'b1) & (1'b1 == ap_CS_fsm_state4))) begin
         uvPacked_V_fu_54 <= grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvPacked_V_1_out_o;
     end
 end
@@ -276,24 +282,28 @@ end
 
 assign ap_ST_fsm_state2_blk = 1'b0;
 
-always @ (*) begin
-    if ((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_done == 1'b0)) begin
-        ap_ST_fsm_state3_blk = 1'b1;
-    end else begin
-        ap_ST_fsm_state3_blk = 1'b0;
-    end
-end
+assign ap_ST_fsm_state3_blk = 1'b0;
 
 always @ (*) begin
-    if ((1'b1 == ap_block_state4_on_subcall_done)) begin
+    if ((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_done == 1'b0)) begin
         ap_ST_fsm_state4_blk = 1'b1;
     end else begin
         ap_ST_fsm_state4_blk = 1'b0;
     end
 end
 
+assign ap_ST_fsm_state5_blk = 1'b0;
+
 always @ (*) begin
-    if ((((1'b1 == ap_CS_fsm_state4) & (1'b0 == ap_block_state4_on_subcall_done)) | ((ap_start == 1'b0) & (1'b1 == ap_CS_fsm_state1)))) begin
+    if ((1'b1 == ap_block_state6_on_subcall_done)) begin
+        ap_ST_fsm_state6_blk = 1'b1;
+    end else begin
+        ap_ST_fsm_state6_blk = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if ((((1'b1 == ap_CS_fsm_state1) & (ap_start == 1'b0)) | ((1'b1 == ap_CS_fsm_state6) & (1'b0 == ap_block_state6_on_subcall_done)))) begin
         ap_done = 1'b1;
     end else begin
         ap_done = 1'b0;
@@ -301,7 +311,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((ap_start == 1'b0) & (1'b1 == ap_CS_fsm_state1))) begin
+    if (((1'b1 == ap_CS_fsm_state1) & (ap_start == 1'b0))) begin
         ap_idle = 1'b1;
     end else begin
         ap_idle = 1'b0;
@@ -309,7 +319,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((1'b1 == ap_CS_fsm_state4) & (1'b0 == ap_block_state4_on_subcall_done))) begin
+    if (((1'b1 == ap_CS_fsm_state6) & (1'b0 == ap_block_state6_on_subcall_done))) begin
         ap_ready = 1'b1;
     end else begin
         ap_ready = 1'b0;
@@ -317,7 +327,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state3)) begin
+    if ((1'b1 == ap_CS_fsm_state4)) begin
         imgInput_uv_data82_read = grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_imgInput_uv_data82_read;
     end else begin
         imgInput_uv_data82_read = 1'b0;
@@ -325,7 +335,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state3)) begin
+    if ((1'b1 == ap_CS_fsm_state4)) begin
         imgInput_y_data81_read = grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_imgInput_y_data81_read;
     end else begin
         imgInput_y_data81_read = 1'b0;
@@ -333,7 +343,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state3)) begin
+    if ((1'b1 == ap_CS_fsm_state4)) begin
         rgb_mat_data83_write = grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_rgb_mat_data83_write;
     end else begin
         rgb_mat_data83_write = 1'b0;
@@ -341,9 +351,9 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((empty_reg_191 == 1'd1) & (1'b1 == ap_CS_fsm_state4))) begin
+    if (((empty_reg_191 == 1'd1) & (1'b1 == ap_CS_fsm_state6))) begin
         uvStream_read = grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu_119_uvStream_read;
-    end else if ((1'b1 == ap_CS_fsm_state3)) begin
+    end else if ((1'b1 == ap_CS_fsm_state4)) begin
         uvStream_read = grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvStream_read;
     end else begin
         uvStream_read = 1'b0;
@@ -351,7 +361,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state3)) begin
+    if ((1'b1 == ap_CS_fsm_state4)) begin
         uvStream_write = grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_uvStream_write;
     end else begin
         uvStream_write = 1'b0;
@@ -361,31 +371,39 @@ end
 always @ (*) begin
     case (ap_CS_fsm)
         ap_ST_fsm_state1 : begin
-            if (((ap_start == 1'b1) & (1'b1 == ap_CS_fsm_state1))) begin
+            if (((1'b1 == ap_CS_fsm_state1) & (ap_start == 1'b1))) begin
                 ap_NS_fsm = ap_ST_fsm_state2;
             end else begin
                 ap_NS_fsm = ap_ST_fsm_state1;
             end
         end
         ap_ST_fsm_state2 : begin
-            if (((icmp_ln4194_fu_141_p2 == 1'd1) & (1'b1 == ap_CS_fsm_state2))) begin
-                ap_NS_fsm = ap_ST_fsm_state4;
+            if (((icmp_ln4194_fu_141_p2 == 1'd1) & (empty_reg_191 == 1'd0) & (1'b1 == ap_CS_fsm_state2))) begin
+                ap_NS_fsm = ap_ST_fsm_state6;
+            end else if (((icmp_ln4194_fu_141_p2 == 1'd1) & (empty_reg_191 == 1'd1) & (1'b1 == ap_CS_fsm_state2))) begin
+                ap_NS_fsm = ap_ST_fsm_state5;
             end else begin
                 ap_NS_fsm = ap_ST_fsm_state3;
             end
         end
         ap_ST_fsm_state3 : begin
-            if (((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state3))) begin
-                ap_NS_fsm = ap_ST_fsm_state2;
-            end else begin
-                ap_NS_fsm = ap_ST_fsm_state3;
-            end
+            ap_NS_fsm = ap_ST_fsm_state4;
         end
         ap_ST_fsm_state4 : begin
-            if (((1'b1 == ap_CS_fsm_state4) & (1'b0 == ap_block_state4_on_subcall_done))) begin
-                ap_NS_fsm = ap_ST_fsm_state1;
+            if (((grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_ColLoop_fu_102_ap_done == 1'b1) & (1'b1 == ap_CS_fsm_state4))) begin
+                ap_NS_fsm = ap_ST_fsm_state2;
             end else begin
                 ap_NS_fsm = ap_ST_fsm_state4;
+            end
+        end
+        ap_ST_fsm_state5 : begin
+            ap_NS_fsm = ap_ST_fsm_state6;
+        end
+        ap_ST_fsm_state6 : begin
+            if (((1'b1 == ap_CS_fsm_state6) & (1'b0 == ap_block_state6_on_subcall_done))) begin
+                ap_NS_fsm = ap_ST_fsm_state1;
+            end else begin
+                ap_NS_fsm = ap_ST_fsm_state6;
             end
         end
         default : begin
@@ -402,8 +420,12 @@ assign ap_CS_fsm_state3 = ap_CS_fsm[32'd2];
 
 assign ap_CS_fsm_state4 = ap_CS_fsm[32'd3];
 
+assign ap_CS_fsm_state5 = ap_CS_fsm[32'd4];
+
+assign ap_CS_fsm_state6 = ap_CS_fsm[32'd5];
+
 always @ (*) begin
-    ap_block_state4_on_subcall_done = ((empty_reg_191 == 1'd1) & (grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu_119_ap_done == 1'b0));
+    ap_block_state6_on_subcall_done = ((empty_reg_191 == 1'd1) & (grp_KernNv122bgr_0_6_9_2160_3840_1_1_1_5_9_Pipeline_VITIS_LOOP_4244_1_fu_119_ap_done == 1'b0));
 end
 
 assign empty_214_fu_129_p1 = width[0:0];
