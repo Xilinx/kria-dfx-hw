@@ -40,7 +40,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # block design container source references:
-# AES128, AES192, FFT_4channel, FIR_compiler, DPU, pp_pipeline
+# AES128, AES192, DPU_512, FFT_4channel, FIR_compiler, pp_pipeline
 
 # Please add the sources before sourcing this Tcl script.
 
@@ -154,7 +154,6 @@ xilinx.com:ip:xlconcat:2.1\
 xilinx.com:ip:xlslice:1.0\
 xilinx.com:ip:zynq_ultra_ps_e:3.4\
 xilinx.com:ip:vcu:1.2\
-xilinx.com:ip:axi_gpio:2.0\
 xilinx.com:ip:proc_sys_reset:5.0\
 xilinx.com:ip:util_ds_buf:2.2\
 xilinx.com:ip:sync:1.0\
@@ -188,7 +187,7 @@ xilinx.com:ip:util_vector_logic:2.0\
 ##################################################################
 set bCheckSources 1
 set list_bdc_active "FIR_compiler"
-set list_bdc_dfx "AES128, AES192, FFT_4channel, DPU_512, pp_pipeline"
+set list_bdc_dfx "AES128, AES192, DPU_512, FFT_4channel, pp_pipeline"
 
 array set map_bdc_missing {}
 set map_bdc_missing(ACTIVE) ""
@@ -199,9 +198,9 @@ if { $bCheckSources == 1 } {
    set list_check_srcs "\ 
 AES128 \
 AES192 \
+DPU_512 \
 FFT_4channel \
 FIR_compiler \
-DPU_512 \ 
 pp_pipeline \
 "
 
@@ -313,7 +312,7 @@ proc create_hier_cell_shim_rp1 { parentCell nameHier } {
   set dfx_decoupler [ create_bd_cell -type ip -vlnv xilinx.com:ip:dfx_decoupler:1.0 dfx_decoupler ]
   set_property -dict [ list \
    CONFIG.ALL_PARAMS {\
-     INTF {config {ID 0 VLNV xilinx.com:interface:aximm_rtl:1.0 PROTOCOL axi4lite\
+     INTF {config {ID 0 VLNV xilinx.com:interface:aximm_rtl:1.0 PROTOCOL AXI4LITE\
 SIGNALS {ARVALID {PRESENT 1 WIDTH 1} ARREADY {PRESENT 1 WIDTH 1} AWVALID\
 {PRESENT 1 WIDTH 1} AWREADY {PRESENT 1 WIDTH 1} BVALID {PRESENT 1 WIDTH 1}\
 BREADY {PRESENT 1 WIDTH 1} RVALID {PRESENT 1 WIDTH 1} RREADY {PRESENT 1\
@@ -326,10 +325,10 @@ ARADDR {PRESENT 1 WIDTH 32} ARLEN {PRESENT 0 WIDTH 8} ARSIZE {PRESENT 0\
 WIDTH 3} ARBURST {PRESENT 0 WIDTH 2} ARLOCK {PRESENT 0 WIDTH 1} ARCACHE\
 {PRESENT 0 WIDTH 4} ARPROT {PRESENT 1 WIDTH 3} RDATA {PRESENT 1 WIDTH 32}\
 RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 0 WIDTH 1} AWID {PRESENT 0 WIDTH\
-0} AWREGION {PRESENT 1 WIDTH 4} AWQOS {PRESENT 1 WIDTH 4} AWUSER {PRESENT 0\
+0} AWREGION {PRESENT 0 WIDTH 4} AWQOS {PRESENT 0 WIDTH 4} AWUSER {PRESENT 0\
 WIDTH 0} WID {PRESENT 0 WIDTH 0} WUSER {PRESENT 0 WIDTH 0} BID {PRESENT 0\
 WIDTH 0} BUSER {PRESENT 0 WIDTH 0} ARID {PRESENT 0 WIDTH 0} ARREGION\
-{PRESENT 1 WIDTH 4} ARQOS {PRESENT 1 WIDTH 4} ARUSER {PRESENT 0 WIDTH 0}\
+{PRESENT 0 WIDTH 4} ARQOS {PRESENT 0 WIDTH 4} ARUSER {PRESENT 0 WIDTH 0}\
 RID {PRESENT 0 WIDTH 0} RUSER {PRESENT 0 WIDTH 0}} MODE slave} data {ID 1\
 VLNV xilinx.com:interface:aximm_rtl:1.0 SIGNALS {ARVALID {PRESENT 1 WIDTH\
 1} ARREADY {PRESENT 1 WIDTH 1} AWVALID {PRESENT 1 WIDTH 1} AWREADY {PRESENT\
@@ -352,12 +351,12 @@ RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH\
 SIGNALS {INTERRUPT {PRESENT 1 WIDTH 4}}} n {ID 2 VLNV\
 xilinx.com:signal:reset_rtl:1.0 MODE slave SIGNALS {RST {PRESENT 1 WIDTH\
 1}}}}\
-     IPI_PROP_COUNT {7}\
+     IPI_PROP_COUNT {8}\
      ALWAYS_HAVE_AXI_CLK {1}\
    } \
    CONFIG.GUI_INTERFACE_NAME {config} \
    CONFIG.GUI_INTERFACE_PROTOCOL {axi4lite} \
-   CONFIG.GUI_INTERFACE_REGISTER {0} \
+   CONFIG.GUI_INTERFACE_REGISTER {false} \
    CONFIG.GUI_SELECT_INTERFACE {0} \
    CONFIG.GUI_SELECT_MODE {slave} \
    CONFIG.GUI_SELECT_VLNV {xilinx.com:interface:aximm_rtl:1.0} \
@@ -493,7 +492,7 @@ proc create_hier_cell_shim_rp0 { parentCell nameHier } {
   set dfx_decoupler [ create_bd_cell -type ip -vlnv xilinx.com:ip:dfx_decoupler:1.0 dfx_decoupler ]
   set_property -dict [ list \
    CONFIG.ALL_PARAMS {\
-     INTF {config {ID 0 VLNV xilinx.com:interface:aximm_rtl:1.0 PROTOCOL axi4lite\
+     INTF {config {ID 0 VLNV xilinx.com:interface:aximm_rtl:1.0 PROTOCOL AXI4LITE\
 SIGNALS {ARVALID {PRESENT 1 WIDTH 1} ARREADY {PRESENT 1 WIDTH 1} AWVALID\
 {PRESENT 1 WIDTH 1} AWREADY {PRESENT 1 WIDTH 1} BVALID {PRESENT 1 WIDTH 1}\
 BREADY {PRESENT 1 WIDTH 1} RVALID {PRESENT 1 WIDTH 1} RREADY {PRESENT 1\
@@ -506,10 +505,10 @@ ARADDR {PRESENT 1 WIDTH 32} ARLEN {PRESENT 0 WIDTH 8} ARSIZE {PRESENT 0\
 WIDTH 3} ARBURST {PRESENT 0 WIDTH 2} ARLOCK {PRESENT 0 WIDTH 1} ARCACHE\
 {PRESENT 0 WIDTH 4} ARPROT {PRESENT 1 WIDTH 3} RDATA {PRESENT 1 WIDTH 32}\
 RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 0 WIDTH 1} AWID {PRESENT 0 WIDTH\
-0} AWREGION {PRESENT 1 WIDTH 4} AWQOS {PRESENT 1 WIDTH 4} AWUSER {PRESENT 0\
+0} AWREGION {PRESENT 0 WIDTH 4} AWQOS {PRESENT 0 WIDTH 4} AWUSER {PRESENT 0\
 WIDTH 0} WID {PRESENT 0 WIDTH 0} WUSER {PRESENT 0 WIDTH 0} BID {PRESENT 0\
 WIDTH 0} BUSER {PRESENT 0 WIDTH 0} ARID {PRESENT 0 WIDTH 0} ARREGION\
-{PRESENT 1 WIDTH 4} ARQOS {PRESENT 1 WIDTH 4} ARUSER {PRESENT 0 WIDTH 0}\
+{PRESENT 0 WIDTH 4} ARQOS {PRESENT 0 WIDTH 4} ARUSER {PRESENT 0 WIDTH 0}\
 RID {PRESENT 0 WIDTH 0} RUSER {PRESENT 0 WIDTH 0}} MODE slave} data {ID 1\
 VLNV xilinx.com:interface:aximm_rtl:1.0 SIGNALS {ARVALID {PRESENT 1 WIDTH\
 1} ARREADY {PRESENT 1 WIDTH 1} AWVALID {PRESENT 1 WIDTH 1} AWREADY {PRESENT\
@@ -532,12 +531,12 @@ RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH\
 SIGNALS {INTERRUPT {PRESENT 1 WIDTH 4}}} n {ID 2 VLNV\
 xilinx.com:signal:reset_rtl:1.0 MODE slave SIGNALS {RST {PRESENT 1 WIDTH\
 1}}}}\
-     IPI_PROP_COUNT {7}\
+     IPI_PROP_COUNT {8}\
      ALWAYS_HAVE_AXI_CLK {1}\
    } \
    CONFIG.GUI_INTERFACE_NAME {config} \
    CONFIG.GUI_INTERFACE_PROTOCOL {axi4lite} \
-   CONFIG.GUI_INTERFACE_REGISTER {0} \
+   CONFIG.GUI_INTERFACE_REGISTER {false} \
    CONFIG.GUI_SELECT_INTERFACE {0} \
    CONFIG.GUI_SELECT_MODE {slave} \
    CONFIG.GUI_SELECT_VLNV {xilinx.com:interface:aximm_rtl:1.0} \
@@ -795,8 +794,6 @@ proc create_hier_cell_clk_reset_gen { parentCell nameHier } {
   current_bd_instance $hier_obj
 
   # Create interface pins
-  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S_AXI
-
 
   # Create pins
   create_bd_pin -dir O -from 0 -to 0 ShellClkLocked
@@ -821,14 +818,6 @@ proc create_hier_cell_clk_reset_gen { parentCell nameHier } {
   create_bd_pin -dir I -from 0 -to 0 slot1_clken
   create_bd_pin -dir I -type rst slot1_resetn
   create_bd_pin -dir O vcu_clk
-  create_bd_pin -dir O -from 0 -to 0 vcu_resetn
-
-  # Create instance: axi_gpio_vcu_reset, and set properties
-  set axi_gpio_vcu_reset [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 axi_gpio_vcu_reset ]
-  set_property -dict [ list \
-   CONFIG.C_ALL_OUTPUTS {1} \
-   CONFIG.C_GPIO_WIDTH {1} \
- ] $axi_gpio_vcu_reset
 
   # Create instance: proc_sys_reset_rp0_clk, and set properties
   set proc_sys_reset_rp0_clk [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_rp0_clk ]
@@ -860,11 +849,7 @@ proc create_hier_cell_clk_reset_gen { parentCell nameHier } {
   # Create instance: xlconstant_vcc, and set properties
   set xlconstant_vcc [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_vcc ]
 
-  # Create interface connections
-  connect_bd_intf_net -intf_net Conn1 [get_bd_intf_pins S_AXI] [get_bd_intf_pins axi_gpio_vcu_reset/S_AXI]
-
   # Create port connections
-  connect_bd_net -net axi_gpio_vcu_reset_gpio_io_o [get_bd_pins vcu_resetn] [get_bd_pins axi_gpio_vcu_reset/gpio_io_o]
   connect_bd_net -net clk_wiz_rp0_rp0_clk [get_bd_pins pl_clk2] [get_bd_pins proc_sys_reset_rp0_clk/slowest_sync_clk] [get_bd_pins rp0_clk_bufgce/BUFGCE_I] [get_bd_pins rp0_clken_sync/clk]
   connect_bd_net -net clk_wiz_rp1_rp1_clk [get_bd_pins pl_clk3] [get_bd_pins proc_sys_reset_rp1_clk/slowest_sync_clk] [get_bd_pins rp1_clk_bufgce/BUFGCE_I] [get_bd_pins rp1_clken_sync/clk]
   connect_bd_net -net data_in_1 [get_bd_pins slot0_clken] [get_bd_pins rp0_clken_sync/data_in]
@@ -875,14 +860,14 @@ proc create_hier_cell_clk_reset_gen { parentCell nameHier } {
   connect_bd_net -net proc_sys_reset_rp0_clk_interconnect_aresetn [get_bd_pins rp0_interconnect_aresetn] [get_bd_pins proc_sys_reset_rp0_clk/interconnect_aresetn]
   connect_bd_net -net proc_sys_reset_rp1_clk_interconnect_aresetn [get_bd_pins rp1_interconnect_aresetn] [get_bd_pins proc_sys_reset_rp1_clk/interconnect_aresetn]
   connect_bd_net -net proc_sys_reset_static_clk_interconnect_aresetn [get_bd_pins shell_interconnect_aresetn] [get_bd_pins proc_sys_reset_static_clk/interconnect_aresetn]
-  connect_bd_net -net proc_sys_reset_static_clk_peripheral_aresetn [get_bd_pins shell_peripheral_aresetn] [get_bd_pins axi_gpio_vcu_reset/s_axi_aresetn] [get_bd_pins proc_sys_reset_static_clk/peripheral_aresetn]
+  connect_bd_net -net proc_sys_reset_static_clk_peripheral_aresetn [get_bd_pins shell_peripheral_aresetn] [get_bd_pins proc_sys_reset_static_clk/peripheral_aresetn]
   connect_bd_net -net rp0_clk_bufgce_BUFGCE_O [get_bd_pins rp0_gated_clk] [get_bd_pins rp0_clk_bufgce/BUFGCE_O]
   connect_bd_net -net rp0_clken_sync_data_out [get_bd_pins rp0_decouple_n] [get_bd_pins rp0_clk_bufgce/BUFGCE_CE] [get_bd_pins rp0_clken_sync/data_out]
   connect_bd_net -net rp1_clk_bufgce_BUFGCE_O [get_bd_pins rp1_gated_clk] [get_bd_pins rp1_clk_bufgce/BUFGCE_O]
   connect_bd_net -net rp1_clken_sync_data_out [get_bd_pins rp1_decouple_n] [get_bd_pins rp1_clk_bufgce/BUFGCE_CE] [get_bd_pins rp1_clken_sync/data_out]
   connect_bd_net -net slot1_clken [get_bd_pins slot1_clken] [get_bd_pins rp1_clken_sync/data_in]
   connect_bd_net -net xlconstant_vcc_dout [get_bd_pins ShellClkLocked] [get_bd_pins rp0ClkLocked] [get_bd_pins rp1ClkLocked] [get_bd_pins xlconstant_vcc/dout]
-  connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0 [get_bd_pins pl_clk0] [get_bd_pins shell_clk] [get_bd_pins axi_gpio_vcu_reset/s_axi_aclk] [get_bd_pins proc_sys_reset_static_clk/slowest_sync_clk]
+  connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0 [get_bd_pins pl_clk0] [get_bd_pins shell_clk] [get_bd_pins proc_sys_reset_static_clk/slowest_sync_clk]
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -1065,7 +1050,7 @@ proc create_hier_cell_static_shell { parentCell nameHier } {
   set smartconnect_config [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_config ]
   set_property -dict [ list \
    CONFIG.NUM_CLKS {2} \
-   CONFIG.NUM_MI {3} \
+   CONFIG.NUM_MI {2} \
    CONFIG.NUM_SI {1} \
  ] $smartconnect_config
 
@@ -2686,9 +2671,8 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   connect_bd_intf_net -intf_net shim_rp0_M_AXI [get_bd_intf_pins shim_rp0/s_data_axi] [get_bd_intf_pins smartconnect_rp_data/S00_AXI]
   connect_bd_intf_net -intf_net shim_rp1_M_AXI [get_bd_intf_pins shim_rp1/s_data_axi] [get_bd_intf_pins smartconnect_rp_data/S01_AXI]
   connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins dfx_slot_manager/s_axi] [get_bd_intf_pins smartconnect_config/M00_AXI]
-  connect_bd_intf_net -intf_net smartconnect_0_M01_AXI [get_bd_intf_pins clk_reset_gen/S_AXI] [get_bd_intf_pins smartconnect_config/M01_AXI]
-  connect_bd_intf_net -intf_net smartconnect_0_M02_AXI [get_bd_intf_pins VCU/S_AXI_LITE] [get_bd_intf_pins smartconnect_config/M02_AXI]
   connect_bd_intf_net -intf_net smartconnect_1_M00_AXI [get_bd_intf_pins smartconnect_rp_data/M00_AXI] [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HPC0_FPD]
+  connect_bd_intf_net -intf_net smartconnect_config_M01_AXI [get_bd_intf_pins VCU/S_AXI_LITE] [get_bd_intf_pins smartconnect_config/M01_AXI]
   connect_bd_intf_net -intf_net smartconnect_rm_cfg_M00_AXI [get_bd_intf_pins shim_rp0/s_config_axi] [get_bd_intf_pins smartconnect_rp_cfg/M00_AXI]
   connect_bd_intf_net -intf_net smartconnect_rm_cfg_M01_AXI [get_bd_intf_pins shim_rp1/s_config_axi] [get_bd_intf_pins smartconnect_rp_cfg/M01_AXI]
   connect_bd_intf_net -intf_net vcu_0_M_AXI_MCU [get_bd_intf_pins VCU/M_AXI_MCU] [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HP3_FPD]
@@ -2834,31 +2818,30 @@ proc create_root_design { parentCell } {
   assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces RP_1/rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP0/HPC0_QSPI] -force
   assign_bd_address -offset 0x80000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/zynq_ultra_ps_e_0/Data] [get_bd_addr_segs RP_0/AccelConfig_0/s_axi_ctrl/reg0] -force
   assign_bd_address -offset 0x82000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/zynq_ultra_ps_e_0/Data] [get_bd_addr_segs RP_1/AccelConfig_0/s_axi_ctrl/reg0] -force
-  assign_bd_address -offset 0xA0110000 -range 0x00010000 -target_address_space [get_bd_addr_spaces static_shell/zynq_ultra_ps_e_0/Data] [get_bd_addr_segs static_shell/clk_reset_gen/axi_gpio_vcu_reset/S_AXI/Reg] -force
   assign_bd_address -offset 0x81000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/zynq_ultra_ps_e_0/Data] [get_bd_addr_segs RP_0/rm_comm_box_0/s_axi_control/reg0] -force
   assign_bd_address -offset 0x83000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/zynq_ultra_ps_e_0/Data] [get_bd_addr_segs RP_1/rm_comm_box_0/s_axi_control/reg0] -force
   assign_bd_address -offset 0xA0100000 -range 0x00010000 -target_address_space [get_bd_addr_spaces static_shell/zynq_ultra_ps_e_0/Data] [get_bd_addr_segs static_shell/dfx_slot_manager/siha_manager_0/s_axi/reg0] -force
   assign_bd_address -offset 0xA0000000 -range 0x00100000 -target_address_space [get_bd_addr_spaces static_shell/zynq_ultra_ps_e_0/Data] [get_bd_addr_segs static_shell/VCU/vcu_0/S_AXI_LITE/Reg] -force
-  assign_bd_address -offset 0x000800000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_HIGH] -force
-  assign_bd_address -offset 0x000800000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_HIGH] -force
-  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_LOW] -force
-  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_LOW] -force
-  assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM] -force
-  assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM] -force
-  assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_QSPI] -force
-  assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_QSPI] -force
-  assign_bd_address -offset 0x000800000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_HIGH] -force
-  assign_bd_address -offset 0x000800000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_HIGH] -force
-  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_LOW] -force
-  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_LOW] -force
-  assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_LPS_OCM] -force
-  assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_LPS_OCM] -force
-  assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_QSPI] -force
-  assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_QSPI] -force
   assign_bd_address -offset 0x000800000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/Code] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP5/HP3_DDR_HIGH] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/Code] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP5/HP3_DDR_LOW] -force
   assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/Code] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP5/HP3_LPS_OCM] -force
   assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/Code] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP5/HP3_QSPI] -force
+  assign_bd_address -offset 0x000800000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_HIGH] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_LOW] -force
+  assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_LPS_OCM] -force
+  assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_QSPI] -force
+  assign_bd_address -offset 0x000800000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_HIGH] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_LOW] -force
+  assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_LPS_OCM] -force
+  assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/DecData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP3/HP1_QSPI] -force
+  assign_bd_address -offset 0x000800000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_HIGH] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_LOW] -force
+  assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM] -force
+  assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData0] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_QSPI] -force
+  assign_bd_address -offset 0x000800000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_HIGH] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_LOW] -force
+  assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM] -force
+  assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces static_shell/VCU/vcu_0/EncData1] [get_bd_addr_segs static_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_QSPI] -force
 
 
   # Restore current instance
@@ -2902,4 +2885,4 @@ wait_on_run child_3_impl_1
 wait_on_run child_4_impl_1
 wait_on_run child_5_impl_1
 open_run impl_1
-write_hw_platform -fixed -include_bit -force -file ./project_1/opendfx_shell_wrapper.xsa 
+write_hw_platform -fixed -include_bit -force -file ./project_1/opendfx_shell_wrapper.xsa
