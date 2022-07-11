@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xd:acceleratorMap xmlns:xd="http://www.xilinx.com/xidane" xd:functionName="pp_pipeline_accel" xd:componentRef="pp_pipeline_accel" xd:initiationInterval="x" xd:clockPeriod="3.333" xd:sequential="true" xd:hostMachine="64" xd:reset="control">
+  <xd:controlReg xd:name="control" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:type="generic_axi_lite" xd:offset="0x0"/>
+  <xd:arg xd:name="*(img_inp_y)" xd:originalName="img_inp_y" xd:direction="inout" xd:interfaceRef="m_axi_gmem1" xd:busTypeRef="aximm" xd:dataWidth="64" xd:bufferDirection="in"/>
+  <xd:arg xd:name="img_inp_y" xd:originalName="img_inp_y" xd:direction="in" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:offset="0x10" xd:dataWidth="32" xd:aximmInterfaceRef="m_axi_gmem1"/>
+  <xd:arg xd:name="*(img_inp_uv)" xd:originalName="img_inp_uv" xd:direction="inout" xd:interfaceRef="m_axi_gmem2" xd:busTypeRef="aximm" xd:dataWidth="64" xd:bufferDirection="in"/>
+  <xd:arg xd:name="img_inp_uv" xd:originalName="img_inp_uv" xd:direction="in" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:offset="0x1C" xd:dataWidth="32" xd:aximmInterfaceRef="m_axi_gmem2"/>
+  <xd:arg xd:name="*(img_out)" xd:originalName="img_out" xd:direction="inout" xd:interfaceRef="m_axi_gmem3" xd:busTypeRef="aximm" xd:dataWidth="64" xd:bufferDirection="out"/>
+  <xd:arg xd:name="img_out" xd:originalName="img_out" xd:direction="in" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:offset="0x28" xd:dataWidth="32" xd:aximmInterfaceRef="m_axi_gmem3"/>
+  <xd:arg xd:name="*(params)" xd:originalName="params" xd:direction="inout" xd:interfaceRef="m_axi_gmem4" xd:busTypeRef="aximm" xd:dataWidth="64" xd:bufferDirection="in"/>
+  <xd:arg xd:name="params" xd:originalName="params" xd:direction="in" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:offset="0x34" xd:dataWidth="32" xd:aximmInterfaceRef="m_axi_gmem4"/>
+  <xd:arg xd:name="in_img_width" xd:originalName="in_img_width" xd:direction="in" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:offset="0x40" xd:handshakeRef="ap_none" xd:dataWidth="32"/>
+  <xd:arg xd:name="in_img_height" xd:originalName="in_img_height" xd:direction="in" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:offset="0x48" xd:handshakeRef="ap_none" xd:dataWidth="32"/>
+  <xd:arg xd:name="in_img_linestride" xd:originalName="in_img_linestride" xd:direction="in" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:offset="0x50" xd:handshakeRef="ap_none" xd:dataWidth="32"/>
+  <xd:arg xd:name="out_img_width" xd:originalName="out_img_width" xd:direction="in" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:offset="0x58" xd:handshakeRef="ap_none" xd:dataWidth="32"/>
+  <xd:arg xd:name="out_img_height" xd:originalName="out_img_height" xd:direction="in" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:offset="0x60" xd:handshakeRef="ap_none" xd:dataWidth="32"/>
+  <xd:arg xd:name="out_img_linestride" xd:originalName="out_img_linestride" xd:direction="in" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:offset="0x68" xd:handshakeRef="ap_none" xd:dataWidth="32"/>
+  <xd:latencyEstimates xd:best-case="8320332" xd:worst-case="8381134" xd:average-case="8322254"/>
+  <xd:resourceEstimates xd:LUT="28218" xd:FF="19877" xd:BRAM="0" xd:DSP="35"/>
+</xd:acceleratorMap>
