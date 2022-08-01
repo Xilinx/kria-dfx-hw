@@ -88,7 +88,7 @@ proc cr_bd_AES192 { parentCell designName} {
 
   set S_AXI_CTRL [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S_AXI_CTRL ]
   set_property -dict [ list \
-   CONFIG.ADDR_WIDTH {40} \
+   CONFIG.ADDR_WIDTH {32} \
    CONFIG.ARUSER_WIDTH {0} \
    CONFIG.AWUSER_WIDTH {0} \
    CONFIG.BUSER_WIDTH {0} \
