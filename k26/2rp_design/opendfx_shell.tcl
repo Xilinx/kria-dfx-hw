@@ -351,7 +351,7 @@ RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH\
 SIGNALS {INTERRUPT {PRESENT 1 WIDTH 4}}} n {ID 2 VLNV\
 xilinx.com:signal:reset_rtl:1.0 MODE slave SIGNALS {RST {PRESENT 1 WIDTH\
 1}}}}\
-     IPI_PROP_COUNT {8}\
+     IPI_PROP_COUNT {9}\
      ALWAYS_HAVE_AXI_CLK {1}\
    } \
    CONFIG.GUI_INTERFACE_NAME {config} \
@@ -531,7 +531,7 @@ RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH\
 SIGNALS {INTERRUPT {PRESENT 1 WIDTH 4}}} n {ID 2 VLNV\
 xilinx.com:signal:reset_rtl:1.0 MODE slave SIGNALS {RST {PRESENT 1 WIDTH\
 1}}}}\
-     IPI_PROP_COUNT {8}\
+     IPI_PROP_COUNT {9}\
      ALWAYS_HAVE_AXI_CLK {1}\
    } \
    CONFIG.GUI_INTERFACE_NAME {config} \
@@ -1071,7 +1071,7 @@ proc create_hier_cell_static_shell { parentCell nameHier } {
   # Create instance: xlconcat_interrupt, and set properties
   set xlconcat_interrupt [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_interrupt ]
   set_property -dict [ list \
-   CONFIG.NUM_PORTS {3} \
+   CONFIG.NUM_PORTS {2} \
  ] $xlconcat_interrupt
 
   # Create instance: xlslice_0, and set properties
@@ -2612,7 +2612,7 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
    CONFIG.PSU__USE__GDMA {0} \
    CONFIG.PSU__USE__IRQ {0} \
    CONFIG.PSU__USE__IRQ0 {1} \
-   CONFIG.PSU__USE__IRQ1 {0} \
+   CONFIG.PSU__USE__IRQ1 {1} \
    CONFIG.PSU__USE__M_AXI_GP0 {1} \
    CONFIG.PSU__USE__M_AXI_GP1 {0} \
    CONFIG.PSU__USE__M_AXI_GP2 {1} \
@@ -2680,6 +2680,7 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   connect_bd_intf_net -intf_net zynq_ultra_ps_e_0_M_AXI_HPM0_LPD [get_bd_intf_pins smartconnect_rp_cfg/S00_AXI] [get_bd_intf_pins zynq_ultra_ps_e_0/M_AXI_HPM0_LPD]
 
   # Create port connections
+  connect_bd_net -net VCU_vcu_host_interrupt [get_bd_pins VCU/vcu_host_interrupt] [get_bd_pins zynq_ultra_ps_e_0/pl_ps_irq0]
   connect_bd_net -net aresetn_1 [get_bd_pins VCU/aresetn] [get_bd_pins clk_reset_gen/shell_interconnect_aresetn] [get_bd_pins inter_rm_buffer/resetn] [get_bd_pins shim_rp0/shell_resetn] [get_bd_pins shim_rp1/shell_resetn] [get_bd_pins smartconnect_config/aresetn] [get_bd_pins smartconnect_rp_cfg/aresetn] [get_bd_pins smartconnect_rp_data/aresetn]
   connect_bd_net -net clk_reset_gen_ShellClkLocked [get_bd_pins clk_reset_gen/ShellClkLocked] [get_bd_pins dfx_slot_manager/shellClkLocked]
   connect_bd_net -net clk_reset_gen_rp0ClkLocked [get_bd_pins clk_reset_gen/rp0ClkLocked] [get_bd_pins dfx_slot_manager/rp0ClkLocked]
@@ -2709,8 +2710,7 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   connect_bd_net -net siha_manager_0_slot0_resetn [get_bd_pins clk_reset_gen/slot0_resetn] [get_bd_pins dfx_slot_manager/slot0_resetn]
   connect_bd_net -net siha_manager_0_slot1_clken [get_bd_pins clk_reset_gen/slot1_clken] [get_bd_pins dfx_slot_manager/slot1_clken]
   connect_bd_net -net siha_manager_0_slot1_resetn [get_bd_pins clk_reset_gen/slot1_resetn] [get_bd_pins dfx_slot_manager/slot1_resetn]
-  connect_bd_net -net vcu_0_vcu_host_interrupt [get_bd_pins VCU/vcu_host_interrupt] [get_bd_pins xlconcat_interrupt/In2]
-  connect_bd_net -net xlconcat_0_dout [get_bd_pins xlconcat_interrupt/dout] [get_bd_pins zynq_ultra_ps_e_0/pl_ps_irq0]
+  connect_bd_net -net xlconcat_interrupt_dout [get_bd_pins xlconcat_interrupt/dout] [get_bd_pins zynq_ultra_ps_e_0/pl_ps_irq1]
   connect_bd_net -net xlslice_0_Dout [get_bd_pins VCU/vcu_resetn] [get_bd_pins xlslice_0/Dout]
   connect_bd_net -net zynq_ultra_ps_e_0_emio_gpio_o [get_bd_pins xlslice_0/Din] [get_bd_pins zynq_ultra_ps_e_0/emio_gpio_o]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0 [get_bd_pins clk_reset_gen/pl_clk0] [get_bd_pins zynq_ultra_ps_e_0/pl_clk0]
