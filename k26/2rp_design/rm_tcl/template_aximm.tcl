@@ -138,11 +138,11 @@ proc cr_bd_template_aximm { parentCell designName} {
   set_property HDL_ATTRIBUTE.LOCKED {TRUE} [get_bd_intf_ports M_AXI_GMEM]
 
   set S_AXI_CTRL [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 -portmaps { \
-   ARADDR { physical_name S_AXI_CTRL_araddr direction I left 39 right 0 } \
+   ARADDR { physical_name S_AXI_CTRL_araddr direction I left 31 right 0 } \
    ARPROT { physical_name S_AXI_CTRL_arprot direction I left 2 right 0 } \
    ARREADY { physical_name S_AXI_CTRL_arready direction O } \
    ARVALID { physical_name S_AXI_CTRL_arvalid direction I } \
-   AWADDR { physical_name S_AXI_CTRL_awaddr direction I left 39 right 0 } \
+   AWADDR { physical_name S_AXI_CTRL_awaddr direction I left 31 right 0 } \
    AWPROT { physical_name S_AXI_CTRL_awprot direction I left 2 right 0 } \
    AWREADY { physical_name S_AXI_CTRL_awready direction O } \
    AWVALID { physical_name S_AXI_CTRL_awvalid direction I } \
