@@ -150,7 +150,6 @@ set bCheckIPs 1
 if { $bCheckIPs == 1 } {
    set list_check_ips "\ 
 xilinx.com:ip:smartconnect:1.0\
-xilinx.com:ip:xlconcat:2.1\
 xilinx.com:ip:xlslice:1.0\
 xilinx.com:ip:zynq_ultra_ps_e:3.4\
 xilinx.com:ip:vcu:1.2\
@@ -350,7 +349,7 @@ RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH\
 SIGNALS {INTERRUPT {PRESENT 1 WIDTH 4}}} n {ID 2 VLNV\
 xilinx.com:signal:reset_rtl:1.0 MODE slave SIGNALS {RST {PRESENT 1 WIDTH\
 1}}}}\
-     IPI_PROP_COUNT {8}\
+     IPI_PROP_COUNT {9}\
      ALWAYS_HAVE_AXI_CLK {1}\
    } \
    CONFIG.GUI_INTERFACE_NAME {config} \
@@ -736,7 +735,6 @@ proc create_hier_cell_static_shell { parentCell nameHier } {
   create_bd_pin -dir O -from 0 -to 0 -type clk rp0_clk
   create_bd_pin -dir I -from 3 -to 0 rp0_interrupt
   create_bd_pin -dir O -from 0 -to 0 rp0_resetn
-  create_bd_pin -dir O -from 0 -to 0 -type clk rp1_clk
 
   # Create instance: VCU
   create_hier_cell_VCU $hier_obj VCU
@@ -772,12 +770,6 @@ proc create_hier_cell_static_shell { parentCell nameHier } {
    CONFIG.NUM_MI {1} \
    CONFIG.NUM_SI {1} \
  ] $smartconnect_rp_data
-
-  # Create instance: xlconcat_interrupt, and set properties
-  set xlconcat_interrupt [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_interrupt ]
-  set_property -dict [ list \
-   CONFIG.NUM_PORTS {2} \
- ] $xlconcat_interrupt
 
   # Create instance: xlslice_0, and set properties
   set xlslice_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 xlslice_0 ]
@@ -1570,7 +1562,7 @@ sclk_out#miso_mo1#mo2#mo3#mosi_mi0#n_ss_out#sclk_out#gpio0[7]#gpio0[8]#n_ss_out[
    CONFIG.PSU__CRL_APB__PL2_REF_CTRL__FREQMHZ {250} \
    CONFIG.PSU__CRL_APB__PL2_REF_CTRL__SRCSEL {RPLL} \
    CONFIG.PSU__CRL_APB__PL3_REF_CTRL__ACT_FREQMHZ {249.997498} \
-   CONFIG.PSU__CRL_APB__PL3_REF_CTRL__DIVISOR0 {6} \
+   CONFIG.PSU__CRL_APB__PL3_REF_CTRL__DIVISOR0 {4} \
    CONFIG.PSU__CRL_APB__PL3_REF_CTRL__DIVISOR1 {1} \
    CONFIG.PSU__CRL_APB__PL3_REF_CTRL__FREQMHZ {100} \
    CONFIG.PSU__CRL_APB__PL3_REF_CTRL__SRCSEL {RPLL} \
@@ -2317,7 +2309,7 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
    CONFIG.PSU__USE__GDMA {0} \
    CONFIG.PSU__USE__IRQ {0} \
    CONFIG.PSU__USE__IRQ0 {1} \
-   CONFIG.PSU__USE__IRQ1 {0} \
+   CONFIG.PSU__USE__IRQ1 {1} \
    CONFIG.PSU__USE__M_AXI_GP0 {1} \
    CONFIG.PSU__USE__M_AXI_GP1 {0} \
    CONFIG.PSU__USE__M_AXI_GP2 {1} \
@@ -2379,7 +2371,7 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   connect_bd_intf_net -intf_net zynq_ultra_ps_e_0_M_AXI_HPM0_LPD [get_bd_intf_pins smartconnect_rp_cfg/S00_AXI] [get_bd_intf_pins zynq_ultra_ps_e_0/M_AXI_HPM0_LPD]
 
   # Create port connections
-  connect_bd_net -net VCU_vcu_host_interrupt [get_bd_pins VCU/vcu_host_interrupt] [get_bd_pins xlconcat_interrupt/In1]
+  connect_bd_net -net VCU_vcu_host_interrupt [get_bd_pins VCU/vcu_host_interrupt] [get_bd_pins zynq_ultra_ps_e_0/pl_ps_irq0]
   connect_bd_net -net aresetn_1 [get_bd_pins VCU/aresetn] [get_bd_pins clk_reset_gen/shell_interconnect_aresetn] [get_bd_pins shim_rp0/shell_resetn] [get_bd_pins smartconnect_config/aresetn] [get_bd_pins smartconnect_rp_cfg/aresetn] [get_bd_pins smartconnect_rp_data/aresetn]
   connect_bd_net -net clk_reset_gen_ShellClkLocked [get_bd_pins clk_reset_gen/ShellClkLocked] [get_bd_pins dfx_slot_manager/shellClkLocked]
   connect_bd_net -net clk_reset_gen_rp0ClkLocked [get_bd_pins clk_reset_gen/rp0ClkLocked] [get_bd_pins dfx_slot_manager/rp0ClkLocked]
@@ -2391,13 +2383,12 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   connect_bd_net -net clk_reset_gen_shell_peripheral_aresetn [get_bd_pins clk_reset_gen/shell_peripheral_aresetn] [get_bd_pins dfx_slot_manager/resetn]
   connect_bd_net -net clk_wiz_0_shell_clk [get_bd_pins VCU/aclk] [get_bd_pins clk_reset_gen/shell_clk] [get_bd_pins dfx_slot_manager/clk] [get_bd_pins shim_rp0/shell_clk] [get_bd_pins smartconnect_config/aclk] [get_bd_pins smartconnect_rp_cfg/aclk] [get_bd_pins smartconnect_rp_data/aclk] [get_bd_pins zynq_ultra_ps_e_0/maxihpm0_fpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/maxihpm0_lpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/saxihp0_fpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/saxihp1_fpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/saxihp3_fpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/saxihpc0_fpd_aclk]
   connect_bd_net -net dfx_decoupler_0_rp_n_RST [get_bd_pins rp0_resetn] [get_bd_pins shim_rp0/rp_resetn]
-  connect_bd_net -net dfx_decoupler_0_s_sig_INTERRUPT [get_bd_pins shim_rp0/s_sig_INTERRUPT] [get_bd_pins xlconcat_interrupt/In0]
   connect_bd_net -net interrupt0_1 [get_bd_pins rp0_interrupt] [get_bd_pins shim_rp0/rp_sig_interrupt]
   connect_bd_net -net pl_clk1_1 [get_bd_pins clk_reset_gen/pl_clk1] [get_bd_pins zynq_ultra_ps_e_0/pl_clk1]
   connect_bd_net -net shim_rp0_decouple_status [get_bd_pins dfx_slot_manager/decouple_status_rp0] [get_bd_pins shim_rp0/decouple_status]
+  connect_bd_net -net shim_rp0_s_sig_INTERRUPT [get_bd_pins shim_rp0/s_sig_INTERRUPT] [get_bd_pins zynq_ultra_ps_e_0/pl_ps_irq1]
   connect_bd_net -net siha_manager_0_slot0_clken [get_bd_pins clk_reset_gen/slot0_clken] [get_bd_pins dfx_slot_manager/slot0_clken]
   connect_bd_net -net siha_manager_0_slot0_resetn [get_bd_pins clk_reset_gen/slot0_resetn] [get_bd_pins dfx_slot_manager/slot0_resetn]
-  connect_bd_net -net xlconcat_0_dout [get_bd_pins xlconcat_interrupt/dout] [get_bd_pins zynq_ultra_ps_e_0/pl_ps_irq0]
   connect_bd_net -net xlslice_0_Dout [get_bd_pins VCU/vcu_resetn] [get_bd_pins xlslice_0/Dout]
   connect_bd_net -net zynq_ultra_ps_e_0_emio_gpio_o [get_bd_pins xlslice_0/Din] [get_bd_pins zynq_ultra_ps_e_0/emio_gpio_o]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0 [get_bd_pins clk_reset_gen/pl_clk0] [get_bd_pins zynq_ultra_ps_e_0/pl_clk0]
@@ -2505,7 +2496,7 @@ proc create_root_design { parentCell } {
   # Restore current instance
   current_bd_instance $oldCurInst
 
-#  validate_bd_design
+  validate_bd_design
   save_bd_design
 }
 # End of create_root_design()
