@@ -230,7 +230,7 @@ proc cr_bd_pp_pipeline { parentCell designName} {
  ] $resetn
 
   # Create instance: pp_pipeline_accel_0, and set properties
-  set pp_pipeline_accel_0 [ create_bd_cell -type ip -vlnv xilinx.com:hls:pp_pipeline_accel:1.0 pp_pipeline_accel_0 ]
+  set pp_pipeline_accel_0 [ create_bd_cell -type ip -vlnv xilinx.com:hls:pp_pipeline_accel:1.0 pp_pipeline_accel_1 ]
 
   # Create instance: proc_sys_reset_0, and set properties
   set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
@@ -267,35 +267,35 @@ proc cr_bd_pp_pipeline { parentCell designName} {
 
   # Create interface connections
   connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins smartconnect_1/S00_AXI]
-  connect_bd_intf_net -intf_net pp_pipeline_accel_0_m_axi_gmem1 [get_bd_intf_pins pp_pipeline_accel_0/m_axi_gmem1] [get_bd_intf_pins smartconnect_0/S00_AXI]
-  connect_bd_intf_net -intf_net pp_pipeline_accel_0_m_axi_gmem2 [get_bd_intf_pins pp_pipeline_accel_0/m_axi_gmem2] [get_bd_intf_pins smartconnect_0/S01_AXI]
-  connect_bd_intf_net -intf_net pp_pipeline_accel_0_m_axi_gmem3 [get_bd_intf_pins pp_pipeline_accel_0/m_axi_gmem3] [get_bd_intf_pins smartconnect_0/S02_AXI]
-  connect_bd_intf_net -intf_net pp_pipeline_accel_0_m_axi_gmem4 [get_bd_intf_pins pp_pipeline_accel_0/m_axi_gmem4] [get_bd_intf_pins smartconnect_0/S03_AXI]
+  connect_bd_intf_net -intf_net pp_pipeline_accel_1_m_axi_gmem1 [get_bd_intf_pins pp_pipeline_accel_1/m_axi_gmem1] [get_bd_intf_pins smartconnect_0/S00_AXI]
+  connect_bd_intf_net -intf_net pp_pipeline_accel_1_m_axi_gmem2 [get_bd_intf_pins pp_pipeline_accel_1/m_axi_gmem2] [get_bd_intf_pins smartconnect_0/S01_AXI]
+  connect_bd_intf_net -intf_net pp_pipeline_accel_1_m_axi_gmem3 [get_bd_intf_pins pp_pipeline_accel_1/m_axi_gmem3] [get_bd_intf_pins smartconnect_0/S02_AXI]
+  connect_bd_intf_net -intf_net pp_pipeline_accel_1_m_axi_gmem4 [get_bd_intf_pins pp_pipeline_accel_1/m_axi_gmem4] [get_bd_intf_pins smartconnect_0/S03_AXI]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
   connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_accel] [get_bd_intf_pins smartconnect_0/M00_AXI]
-  connect_bd_intf_net -intf_net smartconnect_1_M00_AXI [get_bd_intf_pins pp_pipeline_accel_0/s_axi_control] [get_bd_intf_pins smartconnect_1/M00_AXI]
+  connect_bd_intf_net -intf_net smartconnect_1_M00_AXI [get_bd_intf_pins pp_pipeline_accel_1/s_axi_control] [get_bd_intf_pins smartconnect_1/M00_AXI]
 
   # Create port connections
-  connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins pp_pipeline_accel_0/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins smartconnect_1/aclk]
-  connect_bd_net -net pp_pipeline_accel_0_interrupt [get_bd_pins pp_pipeline_accel_0/interrupt] [get_bd_pins xlconcat_0/In0]
+  connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins pp_pipeline_accel_1/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins smartconnect_1/aclk]
+  connect_bd_net -net pp_pipeline_accel_1_interrupt [get_bd_pins pp_pipeline_accel_1/interrupt] [get_bd_pins xlconcat_0/In0]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn] [get_bd_pins smartconnect_1/aresetn]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins pp_pipeline_accel_0/ap_rst_n] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins pp_pipeline_accel_1/ap_rst_n] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
   connect_bd_net -net resetn_1 [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
   connect_bd_net -net xlconcat_0_dout [get_bd_ports interrupt] [get_bd_pins xlconcat_0/dout]
   connect_bd_net -net xlconstant_1_dout [get_bd_pins xlconcat_0/In1] [get_bd_pins xlconcat_0/In2] [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_1/dout]
 
   # Create address segments
-  assign_bd_address -offset 0x0002000000000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_0/Data_m_axi_gmem1] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -offset 0x0002000000000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_0/Data_m_axi_gmem2] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -offset 0x0002000000000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_0/Data_m_axi_gmem3] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -offset 0x0002000000000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_0/Data_m_axi_gmem4] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -offset 0x80000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs pp_pipeline_accel_0/s_axi_control/Reg] -force
+  assign_bd_address -offset 0x0002000000000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_1/Data_m_axi_gmem1] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -offset 0x0002000000000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_1/Data_m_axi_gmem2] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -offset 0x0002000000000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_1/Data_m_axi_gmem3] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -offset 0x0002000000000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_1/Data_m_axi_gmem4] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -offset 0x80000000 -range 0x00010000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs pp_pipeline_accel_1/s_axi_control/Reg] -force
 
   # Exclude Address Segments
-  exclude_bd_addr_seg -offset 0x00000000 -range 0x0002000000000000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_0/Data_m_axi_gmem1] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0]
-  exclude_bd_addr_seg -offset 0x00000000 -range 0x0002000000000000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_0/Data_m_axi_gmem2] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0]
-  exclude_bd_addr_seg -offset 0x00000000 -range 0x0002000000000000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_0/Data_m_axi_gmem3] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0]
-  exclude_bd_addr_seg -offset 0x00000000 -range 0x0002000000000000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_0/Data_m_axi_gmem4] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0]
+  exclude_bd_addr_seg -offset 0x00000000 -range 0x0002000000000000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_1/Data_m_axi_gmem1] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0]
+  exclude_bd_addr_seg -offset 0x00000000 -range 0x0002000000000000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_1/Data_m_axi_gmem2] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0]
+  exclude_bd_addr_seg -offset 0x00000000 -range 0x0002000000000000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_1/Data_m_axi_gmem3] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0]
+  exclude_bd_addr_seg -offset 0x00000000 -range 0x0002000000000000 -target_address_space [get_bd_addr_spaces pp_pipeline_accel_1/Data_m_axi_gmem4] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0]
 
   # Restore current instance
   current_bd_instance $oldCurInst
