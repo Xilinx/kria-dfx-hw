@@ -209,7 +209,6 @@ proc cr_bd_DPU_512 { parentCell designName} {
   assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces DPUCZDX8G_1/M_AXI_HP0] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
   assign_bd_address -offset 0x008000000000 -range 0x008000000000 -target_address_space [get_bd_addr_spaces DPUCZDX8G_1/M_AXI_HP0] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0] -force
   assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces DPUCZDX8G_1/M_AXI_HP2] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -offset 0x008000000000 -range 0x008000000000 -target_address_space [get_bd_addr_spaces DPUCZDX8G_1/M_AXI_HP2] [get_bd_addr_segs rm_comm_box_0/s_axi_accel/reg0] -force
   assign_bd_address -offset 0x80000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs DPUCZDX8G_1/S_AXI_CONTROL/reg0] -force
 
   set_property USAGE memory [get_bd_addr_segs M_AXI_GMEM/Reg]
