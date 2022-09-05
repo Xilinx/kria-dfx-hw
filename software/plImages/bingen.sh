@@ -8,10 +8,14 @@ rms=(opendfx_shell_i_RP_0_AES128_inst_0_partial
 	opendfx_shell_i_RP_0_AES192_inst_0_partial 
 	opendfx_shell_i_RP_0_FFT_4channel_inst_0_partial 
 	opendfx_shell_i_RP_0_FIR_compiler_inst_0_partial 
+	opendfx_shell_i_RP_0_DPU_512_inst_0_partial 
+	opendfx_shell_i_RP_0_pp_pipeline_inst_0_partial 
 	opendfx_shell_i_RP_1_AES128_inst_1_partial 
 	opendfx_shell_i_RP_1_AES192_inst_1_partial 
 	opendfx_shell_i_RP_1_FFT_4channel_inst_1_partial 
-	opendfx_shell_i_RP_1_FIR_compiler_inst_1_partial)
+	opendfx_shell_i_RP_1_FIR_compiler_inst_1_partial
+	opendfx_shell_i_RP_1_DPU_512_inst_1_partial 
+	opendfx_shell_i_RP_1_pp_pipeline_inst_1_partial)
  
 bingen(){
 ${Bootgen} -image ${1}.bif  -arch zynqmp -process_bitstream bin
