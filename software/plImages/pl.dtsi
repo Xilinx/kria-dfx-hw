@@ -142,6 +142,10 @@
 				compatible = "xlnx,SIHA-Manager-1.1","generic-uio";
 				reg = <0x0 0xa0100000 0x0 0x10000>;
 			};
+			zyxclmm_drm {
+				compatible = "xlnx,zocl";
+				status = "okay";
+			};
 		};
 	};
 };
