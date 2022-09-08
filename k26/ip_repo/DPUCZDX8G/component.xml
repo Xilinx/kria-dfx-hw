@@ -3603,7 +3603,7 @@
     <spirit:fileSet>
       <spirit:name>xilinx_anylanguagesynthesis_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>/everest/siv_bkup/deekshad/dpu/DPUCZDX8G/prj/Vitis/dpu_conf.vh</spirit:name>
+        <spirit:name>src/dpu_conf.vh</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
         <spirit:isIncludeFile>true</spirit:isIncludeFile>
       </spirit:file>
@@ -3660,7 +3660,7 @@
     <spirit:fileSet>
       <spirit:name>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>/everest/siv_bkup/deekshad/dpu/DPUCZDX8G/prj/Vitis/dpu_conf.vh</spirit:name>
+        <spirit:name>src/dpu_conf.vh</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
         <spirit:isIncludeFile>true</spirit:isIncludeFile>
       </spirit:file>
