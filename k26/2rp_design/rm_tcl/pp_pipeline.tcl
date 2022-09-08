@@ -172,7 +172,7 @@ proc cr_bd_pp_pipeline { parentCell designName} {
    } \
   S_AXI_CTRL ]
   set_property -dict [ list \
-   CONFIG.ADDR_WIDTH {40} \
+   CONFIG.ADDR_WIDTH {32} \
    CONFIG.ARUSER_WIDTH {0} \
    CONFIG.AWUSER_WIDTH {0} \
    CONFIG.BUSER_WIDTH {0} \
