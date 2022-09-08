@@ -73,48 +73,7 @@ proc cr_bd_pp_pipeline { parentCell designName} {
 
 
   # Create interface ports
-  set M_AXI_GMEM [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 -portmaps { \
-   ARADDR { physical_name M_AXI_GMEM_araddr direction O left 48 right 0 } \
-   ARBURST { physical_name M_AXI_GMEM_arburst direction O left 1 right 0 } \
-   ARCACHE { physical_name M_AXI_GMEM_arcache direction O left 3 right 0 } \
-   ARID { physical_name M_AXI_GMEM_arid direction O left 7 right 0 } \
-   ARLEN { physical_name M_AXI_GMEM_arlen direction O left 7 right 0 } \
-   ARLOCK { physical_name M_AXI_GMEM_arlock direction O left 1 right 0 } \
-   ARPROT { physical_name M_AXI_GMEM_arprot direction O left 2 right 0 } \
-   ARQOS { physical_name M_AXI_GMEM_arqos direction O left 3 right 0 } \
-   ARREADY { physical_name M_AXI_GMEM_arready direction I } \
-   ARREGION { physical_name M_AXI_GMEM_arregion direction O left 3 right 0 } \
-   ARSIZE { physical_name M_AXI_GMEM_arsize direction O left 2 right 0 } \
-   ARVALID { physical_name M_AXI_GMEM_arvalid direction O } \
-   AWADDR { physical_name M_AXI_GMEM_awaddr direction O left 48 right 0 } \
-   AWBURST { physical_name M_AXI_GMEM_awburst direction O left 1 right 0 } \
-   AWCACHE { physical_name M_AXI_GMEM_awcache direction O left 3 right 0 } \
-   AWID { physical_name M_AXI_GMEM_awid direction O left 7 right 0 } \
-   AWLEN { physical_name M_AXI_GMEM_awlen direction O left 7 right 0 } \
-   AWLOCK { physical_name M_AXI_GMEM_awlock direction O left 1 right 0 } \
-   AWPROT { physical_name M_AXI_GMEM_awprot direction O left 2 right 0 } \
-   AWQOS { physical_name M_AXI_GMEM_awqos direction O left 3 right 0 } \
-   AWREADY { physical_name M_AXI_GMEM_awready direction I } \
-   AWREGION { physical_name M_AXI_GMEM_awregion direction O left 3 right 0 } \
-   AWSIZE { physical_name M_AXI_GMEM_awsize direction O left 2 right 0 } \
-   AWVALID { physical_name M_AXI_GMEM_awvalid direction O } \
-   BID { physical_name M_AXI_GMEM_bid direction I left 7 right 0 } \
-   BREADY { physical_name M_AXI_GMEM_bready direction O } \
-   BRESP { physical_name M_AXI_GMEM_bresp direction I left 1 right 0 } \
-   BVALID { physical_name M_AXI_GMEM_bvalid direction I } \
-   RDATA { physical_name M_AXI_GMEM_rdata direction I left 127 right 0 } \
-   RID { physical_name M_AXI_GMEM_rid direction I left 7 right 0 } \
-   RLAST { physical_name M_AXI_GMEM_rlast direction I } \
-   RREADY { physical_name M_AXI_GMEM_rready direction O } \
-   RRESP { physical_name M_AXI_GMEM_rresp direction I left 1 right 0 } \
-   RVALID { physical_name M_AXI_GMEM_rvalid direction I } \
-   WDATA { physical_name M_AXI_GMEM_wdata direction O left 127 right 0 } \
-   WLAST { physical_name M_AXI_GMEM_wlast direction O } \
-   WREADY { physical_name M_AXI_GMEM_wready direction I } \
-   WSTRB { physical_name M_AXI_GMEM_wstrb direction O left 15 right 0 } \
-   WVALID { physical_name M_AXI_GMEM_wvalid direction O } \
-   } \
-  M_AXI_GMEM ]
+  set M_AXI_GMEM [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 M_AXI_GMEM ]
   set_property -dict [ list \
    CONFIG.ADDR_WIDTH {49} \
    CONFIG.ARUSER_WIDTH {0} \
@@ -149,28 +108,7 @@ proc cr_bd_pp_pipeline { parentCell designName} {
    ] $M_AXI_GMEM
   set_property HDL_ATTRIBUTE.LOCKED {TRUE} [get_bd_intf_ports M_AXI_GMEM]
 
-  set S_AXI_CTRL [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 -portmaps { \
-   ARADDR { physical_name S_AXI_CTRL_araddr direction I left 31 right 0 } \
-   ARPROT { physical_name S_AXI_CTRL_arprot direction I left 2 right 0 } \
-   ARREADY { physical_name S_AXI_CTRL_arready direction O } \
-   ARVALID { physical_name S_AXI_CTRL_arvalid direction I } \
-   AWADDR { physical_name S_AXI_CTRL_awaddr direction I left 31 right 0 } \
-   AWPROT { physical_name S_AXI_CTRL_awprot direction I left 2 right 0 } \
-   AWREADY { physical_name S_AXI_CTRL_awready direction O } \
-   AWVALID { physical_name S_AXI_CTRL_awvalid direction I } \
-   BREADY { physical_name S_AXI_CTRL_bready direction I } \
-   BRESP { physical_name S_AXI_CTRL_bresp direction O left 1 right 0 } \
-   BVALID { physical_name S_AXI_CTRL_bvalid direction O } \
-   RDATA { physical_name S_AXI_CTRL_rdata direction O left 31 right 0 } \
-   RREADY { physical_name S_AXI_CTRL_rready direction I } \
-   RRESP { physical_name S_AXI_CTRL_rresp direction O left 1 right 0 } \
-   RVALID { physical_name S_AXI_CTRL_rvalid direction O } \
-   WDATA { physical_name S_AXI_CTRL_wdata direction I left 31 right 0 } \
-   WREADY { physical_name S_AXI_CTRL_wready direction O } \
-   WSTRB { physical_name S_AXI_CTRL_wstrb direction I left 3 right 0 } \
-   WVALID { physical_name S_AXI_CTRL_wvalid direction I } \
-   } \
-  S_AXI_CTRL ]
+  set S_AXI_CTRL [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S_AXI_CTRL ]
   set_property -dict [ list \
    CONFIG.ADDR_WIDTH {32} \
    CONFIG.ARUSER_WIDTH {0} \
