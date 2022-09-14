@@ -2763,8 +2763,8 @@ proc create_root_design { parentCell } {
   # Create instance: RP_0, and set properties
   set RP_0 [ create_bd_cell -type container -reference AES128 RP_0 ]
   set_property -dict [ list \
-   CONFIG.ACTIVE_SIM_BD {FIR_compiler.bd} \
-   CONFIG.ACTIVE_SYNTH_BD {FIR_compiler.bd} \
+   CONFIG.ACTIVE_SIM_BD {AES128.bd} \
+   CONFIG.ACTIVE_SYNTH_BD {AES128.bd} \
    CONFIG.ENABLE_DFX {true} \
    CONFIG.LIST_SIM_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
    CONFIG.LIST_SYNTH_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
@@ -2776,8 +2776,8 @@ proc create_root_design { parentCell } {
   # Create instance: RP_1, and set properties
   set RP_1 [ create_bd_cell -type container -reference AES128 RP_1 ]
   set_property -dict [ list \
-   CONFIG.ACTIVE_SIM_BD {FIR_compiler.bd} \
-   CONFIG.ACTIVE_SYNTH_BD {FIR_compiler.bd} \
+   CONFIG.ACTIVE_SIM_BD {AES128.bd} \
+   CONFIG.ACTIVE_SYNTH_BD {AES128.bd} \
    CONFIG.ENABLE_DFX {true} \
    CONFIG.LIST_SIM_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
    CONFIG.LIST_SYNTH_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
