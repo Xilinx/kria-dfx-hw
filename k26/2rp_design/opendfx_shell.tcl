@@ -2761,26 +2761,26 @@ proc create_root_design { parentCell } {
   # Create ports
 
   # Create instance: RP_0, and set properties
-  set RP_0 [ create_bd_cell -type container -reference FIR_compiler RP_0 ]
+  set RP_0 [ create_bd_cell -type container -reference AES128 RP_0 ]
   set_property -dict [ list \
    CONFIG.ACTIVE_SIM_BD {FIR_compiler.bd} \
    CONFIG.ACTIVE_SYNTH_BD {FIR_compiler.bd} \
    CONFIG.ENABLE_DFX {true} \
-   CONFIG.LIST_SIM_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
-   CONFIG.LIST_SYNTH_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
+   CONFIG.LIST_SIM_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
+   CONFIG.LIST_SYNTH_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
    CONFIG.LOCK_PROPAGATE {true} \
  ] $RP_0
   set_property APERTURES {{0x0 2G} {0xC000_0000 512M} {0xFF00_0000 16M} {0x2_0000_0000 1G} {0x2_8000_0000 1G} {0x8_0000_0000 32G}} [get_bd_intf_pins /RP_0/M_AXI_GMEM]
   set_property APERTURES {{0x8000_0000 32M}} [get_bd_intf_pins /RP_0/S_AXI_CTRL]
 
   # Create instance: RP_1, and set properties
-  set RP_1 [ create_bd_cell -type container -reference FIR_compiler RP_1 ]
+  set RP_1 [ create_bd_cell -type container -reference AES128 RP_1 ]
   set_property -dict [ list \
    CONFIG.ACTIVE_SIM_BD {FIR_compiler.bd} \
    CONFIG.ACTIVE_SYNTH_BD {FIR_compiler.bd} \
    CONFIG.ENABLE_DFX {true} \
-   CONFIG.LIST_SIM_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
-   CONFIG.LIST_SYNTH_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
+   CONFIG.LIST_SIM_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
+   CONFIG.LIST_SYNTH_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
    CONFIG.LOCK_PROPAGATE {true} \
  ] $RP_1
   set_property APERTURES {{0x0 2G} {0xC000_0000 512M} {0xFF00_0000 16M} {0x2_0000_0000 1G} {0x2_8000_0000 1G} {0x8_0000_0000 32G}} [get_bd_intf_pins /RP_1/M_AXI_GMEM]
