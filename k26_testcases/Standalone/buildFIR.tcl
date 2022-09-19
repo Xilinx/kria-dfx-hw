@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 set XSA "opendfx_shell_wrapper"
 set XSA_PATH "../../k26/2rp_design/project_1"
 set SRC "./FIR"

@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 #Update the path for variable VITIS_PATH in environment.tcl
 connect
 source ${VITIS_PATH}/2022.1/scripts/vitis/util/zynqmp_utils.tcl

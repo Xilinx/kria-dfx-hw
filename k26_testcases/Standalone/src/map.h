@@ -1,3 +1,5 @@
+// Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+// SPDX-License-Identifier: MIT
 #include "xparameters.h"
 
 #define TIMERCLK XPAR_PSU_TTC_0_TTC_CLK_FREQ_HZ

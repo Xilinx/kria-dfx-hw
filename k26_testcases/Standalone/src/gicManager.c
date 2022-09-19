@@ -1,3 +1,5 @@
+// Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+// SPDX-License-Identifier: MIT
 #include "xscugic.h"
 
 #define INTC_DEVICE_ID		XPAR_SCUGIC_0_DEVICE_ID

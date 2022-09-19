@@ -1,3 +1,5 @@
+// Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+// SPDX-License-Identifier: MIT
 extern int gicConfig(Xil_ExceptionHandler DeviceInterruptHandler, void *data);
 
 extern int configDMSlots(u64 rm0_base, u64 rm1_base);

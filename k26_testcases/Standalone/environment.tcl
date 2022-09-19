@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 #Vitis Path should point to the zynqmp_utils.tcl file - ${VITIS_PATH}/2022.1/scripts/vitis/util/zynqmp_utils.tcl
 variable VITIS_PATH "/proj/xbuilds/2022.1_weekly_latest/installs/lin64/Vitis" 
 #Add vitis tools path to zynqmp_utils.tcl" 
