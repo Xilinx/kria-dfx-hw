@@ -1,3 +1,5 @@
+-- Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+-- SPDX-License-Identifier: MIT
 
 library IEEE;
 use IEEE.std_logic_1164.all;
