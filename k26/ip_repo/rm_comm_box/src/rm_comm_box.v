@@ -1,3 +1,5 @@
+// Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+// SPDX-License-Identifier: MIT
 `timescale 1 ns / 1 ps
 module rm_comm_box #(parameter USE_BUILT_IN_DMA = 1)
 (

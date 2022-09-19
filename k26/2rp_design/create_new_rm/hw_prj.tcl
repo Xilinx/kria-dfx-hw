@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 set flag [file exists "./project_1/project_1.xpr"]
 if { $flag } {
    open_project ./project_1/project_1.xpr

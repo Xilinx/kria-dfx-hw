@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 set_clock_groups -asynchronous \
 -group [get_clocks -of [get_pins opendfx_shell_i/static_shell/zynq_ultra_ps_e_0/inst/buffer_pl_clk_0.PL_CLK_0_BUFG/O]] \
 -group [get_clocks -of [get_pins opendfx_shell_i/static_shell/zynq_ultra_ps_e_0/inst/buffer_pl_clk_1.PL_CLK_1_BUFG/O]] \

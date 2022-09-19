@@ -1,3 +1,5 @@
+// Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+// SPDX-License-Identifier: MIT
    
     parameter PROC_NUM = 30;
     parameter ST_IDLE = 3'b000;

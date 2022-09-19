@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 # Parsing options
 set options [dict create {*}$argv]
 set HW_XSA [dict get $options HW_XSA]

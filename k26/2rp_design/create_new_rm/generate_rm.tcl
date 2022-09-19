@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 ##Creation of Abstract shell per RP
 #open_checkpoint /everest/siv_bkup/vijc/git_repo/kria_dfx_hw/jul11/k26/abstract_shell/opendfx_shell_wrapper_routed.dcp
 #write_abstract_shell -force -cell opendfx_shell_i/RP_0 ./abstract_shell_RP_0.dcp

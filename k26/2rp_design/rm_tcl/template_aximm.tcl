@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 # Proc to create BD template_aximm
 proc cr_bd_template_aximm { parentCell designName} {
 

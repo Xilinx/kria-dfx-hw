@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 
 # Loading additional proc with user specified bodies to compute parameter values.
 source [file join [file dirname [file dirname [info script]]] gui/AccelConfig_v1_0.gtcl]

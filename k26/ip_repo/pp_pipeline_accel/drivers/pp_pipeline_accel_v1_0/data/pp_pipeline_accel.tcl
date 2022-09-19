@@ -1,7 +1,6 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 # ==============================================================
-# Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.1 (64-bit)
-# Tool Version Limit: 2022.04
-# Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 # ==============================================================
 proc generate {drv_handle} {
     xdefine_include_file $drv_handle "xparameters.h" "XPp_pipeline_accel" \

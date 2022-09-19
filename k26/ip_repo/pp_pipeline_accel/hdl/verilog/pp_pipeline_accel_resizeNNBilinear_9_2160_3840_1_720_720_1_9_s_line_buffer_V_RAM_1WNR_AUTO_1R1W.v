@@ -1,7 +1,6 @@
+// Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+// SPDX-License-Identifier: MIT
 // ==============================================================
-// Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.1 (64-bit)
-// Tool Version Limit: 2022.04
-// Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 // ==============================================================
 `timescale 1 ns / 1 ps
 module pp_pipeline_accel_resizeNNBilinear_9_2160_3840_1_720_720_1_9_s_line_buffer_V_RAM_1WNR_AUTO_1R1W (address0, ce0, d0, we0, q0, address1, ce1, q1,  reset, clk);

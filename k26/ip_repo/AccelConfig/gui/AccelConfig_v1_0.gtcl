@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 # This file is automatically written.  Do not modify.
 proc gen_USERPARAMETER_NUM_SCALAR_PORTS_ENABLEMENT {PARSE_AXIS_TID } {expr $PARSE_AXIS_TID == true}
 proc gen_USERPARAMETER_SCALAR1_WIDTH_ENABLEMENT {NUM_SCALAR_PORTS } {expr $NUM_SCALAR_PORTS > 0}

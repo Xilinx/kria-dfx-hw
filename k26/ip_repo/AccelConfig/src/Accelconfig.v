@@ -1,3 +1,5 @@
+// Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+// SPDX-License-Identifier: MIT
 `timescale 1 ns / 1 ps
 
 `define NON_NEG_MSb(a) (((a) > 0) ? ((a)-1) : 0)
