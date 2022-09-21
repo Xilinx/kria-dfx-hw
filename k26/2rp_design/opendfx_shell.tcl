@@ -198,11 +198,11 @@ set map_bdc_missing(BDC) ""
 
 if { $bCheckSources == 1 } {
    set list_check_srcs "\ 
-AES128 \
 AES192 \
-DPU_512 \
+AES128 \
 FFT_4channel \
 FIR_compiler \
+DPU_512 \
 pp_pipeline \
 "
 
@@ -2763,10 +2763,10 @@ proc create_root_design { parentCell } {
   # Create ports
 
   # Create instance: RP_0, and set properties
-  set RP_0 [ create_bd_cell -type container -reference AES128 RP_0 ]
+  set RP_0 [ create_bd_cell -type container -reference AES192 RP_0 ]
   set_property -dict [ list \
-   CONFIG.ACTIVE_SIM_BD {AES128.bd} \
-   CONFIG.ACTIVE_SYNTH_BD {AES128.bd} \
+   CONFIG.ACTIVE_SIM_BD {AES192.bd} \
+   CONFIG.ACTIVE_SYNTH_BD {AES192.bd} \
    CONFIG.ENABLE_DFX {true} \
    CONFIG.LIST_SIM_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
    CONFIG.LIST_SYNTH_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
@@ -2776,10 +2776,10 @@ proc create_root_design { parentCell } {
   set_property APERTURES {{0x8000_0000 32M}} [get_bd_intf_pins /RP_0/S_AXI_CTRL]
 
   # Create instance: RP_1, and set properties
-  set RP_1 [ create_bd_cell -type container -reference AES128 RP_1 ]
+  set RP_1 [ create_bd_cell -type container -reference AES192 RP_1 ]
   set_property -dict [ list \
-   CONFIG.ACTIVE_SIM_BD {AES128.bd} \
-   CONFIG.ACTIVE_SYNTH_BD {AES128.bd} \
+   CONFIG.ACTIVE_SIM_BD {AES192.bd} \
+   CONFIG.ACTIVE_SYNTH_BD {AES192.bd} \
    CONFIG.ENABLE_DFX {true} \
    CONFIG.LIST_SIM_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
    CONFIG.LIST_SYNTH_BD {AES128.bd:FIR_compiler.bd:FFT_4channel.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
@@ -2878,8 +2878,10 @@ setup_pr_configurations
 create_pr_configuration -name config_7 -partitions { }  -greyboxes [list opendfx_shell_i/RP_0 opendfx_shell_i/RP_1 ]
 create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_7
 
-launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 child_4_impl_1 child_5_impl_1 -to_step write_bitstream -jobs 16
+launch_runs impl_1 -to_step write_bitstream -jobs 16
 wait_on_run impl_1
+write_hw_platform -fixed -include_bit -force -file ./project_1/opendfx_shell_wrapper.xsa
+launch_runs child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 child_4_impl_1 child_5_impl_1 -to_step write_bitstream -jobs 16
 wait_on_run child_0_impl_1
 wait_on_run child_1_impl_1
 wait_on_run child_2_impl_1
@@ -2887,4 +2889,3 @@ wait_on_run child_3_impl_1
 wait_on_run child_4_impl_1
 wait_on_run child_5_impl_1
 open_run impl_1
-write_hw_platform -fixed -include_bit -force -file ./project_1/opendfx_shell_wrapper.xsa
