@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 # Proc to create BD AES192
 proc cr_bd_AES192 { parentCell designName } {
 

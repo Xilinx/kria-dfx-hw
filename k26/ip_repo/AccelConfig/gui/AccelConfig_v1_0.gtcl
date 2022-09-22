@@ -1,3 +1,6 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
+
 # This file is automatically written.  Do not modify.
 proc gen_USERPARAMETER_NUM_SCALAR_PORTS_ENABLEMENT {EN_TID1_OUTPUT TID1_OUTPUT } {expr $EN_TID1_OUTPUT == true && $TID1_OUTPUT == 2}
 proc gen_USERPARAMETER_SCALAR1_WIDTH_ENABLEMENT {NUM_SCALAR_PORTS } {expr $NUM_SCALAR_PORTS > 0}

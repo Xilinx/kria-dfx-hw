@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 # Proc to create BD pp_pipeline
 proc cr_bd_pp_pipeline { parentCell designName } {
 

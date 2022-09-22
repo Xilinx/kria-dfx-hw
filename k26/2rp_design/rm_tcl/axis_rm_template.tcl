@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 # Proc to create BD
 proc cr_bd_axis_rm { parentCell designName rpName } {
 

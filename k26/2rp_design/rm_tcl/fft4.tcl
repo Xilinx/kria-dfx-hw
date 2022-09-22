@@ -1,3 +1,5 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
 # Proc to create BD FFT_4channel
 proc cr_bd_FFT_4channel { parentCell designName } {
 
