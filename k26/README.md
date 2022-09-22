@@ -9,7 +9,9 @@ ip_repo folder contains all the user IP's required to build the design.
 ```
 # 1. HW Build 
 
-Please find the detailed steps- https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/edit/main/k26/2rp_design/README.md 
+Please find the detailed steps-
+Design with one reconfigurable partition 1rp design- https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/README.md
+Design with two reconfigurable partitions 2rp design-  https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/edit/main/k26/2rp_design/README.md 
 
 # 2. K26 2RP Firmware Build for dfx-mgr
 
