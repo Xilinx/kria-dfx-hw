@@ -17,13 +17,7 @@ Execute step 1 before running step 2.
 
 Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/software/plImages/README.md 
 
-# 3. Linux App Build & Test
-
-Execute step 1 and 2 before running step 3. 
-
-Please find the detailed steps- https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/k26_testcases/linux/README.md
-
-# 4. HW Standalone App Build & Test 
+# 3. HW Standalone App Build & Test 
 
 Execute step 1 before running step 4. 
 
