@@ -1,26 +1,7 @@
 // Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
 // SPDX-License-Identifier: MIT
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: Deeksha
-// 
-// Create Date: 08/04/2020 02:12:57 AM
-// Design Name: 
-// Module Name: axis_accel_sel
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
+`timescale 1ns / 1ps
 
 module axis_accel_sel(
 input USE_ENC,
@@ -52,7 +33,17 @@ output out_V_TVALID,
 input out_V_TREADY,
 
 output ap_start_enc, ap_start_dec,
-input ap_done_enc, ap_done_dec
+input ap_done_enc, ap_done_dec,
+input ap_idle_enc,
+input ap_idle_dec,
+output wire ap_idle,
+
+
+input ap_ready_enc,
+input ap_ready_dec,
+output wire ap_ready
+
+
 );
 
 assign out_V_TDATA = USE_ENC ? out_V_enc_TDATA : out_V_dec_TDATA;
@@ -73,5 +64,10 @@ assign in_V_dec_TDATA = in_V_TDATA;
 assign in_V_enc_TDATA = in_V_TDATA;
 
 assign out_V_TDATA = USE_ENC ? out_V_enc_TDATA : out_V_dec_TDATA;
+
+assign ap_idle = USE_ENC ? ap_idle_enc : ap_idle_dec;
+
+assign ap_ready = USE_ENC ? ap_ready_enc : ap_ready_dec;
+
 
 endmodule

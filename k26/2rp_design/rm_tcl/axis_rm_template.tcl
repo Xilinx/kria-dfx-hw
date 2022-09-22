@@ -1,9 +1,8 @@
-# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
-# SPDX-License-Identifier: MIT
-# Proc to create BD demo_axis2
+# Proc to create BD
 proc cr_bd_axis_rm { parentCell designName rpName } {
 
   # CHANGE DESIGN NAME HERE
+  set design_name ""
   append design_name $designName "_" $rpName
 
   common::send_gid_msg -ssname BD::TCL -id 2010 -severity "INFO" "Currently there is no design <$design_name> in project, so creating one..."
@@ -135,9 +134,12 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
   # Create instance: AccelConfig_0, and set properties
   set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig:1.0 AccelConfig_0 ]
   set_property -dict [ list \
-   CONFIG.HAS_TID2_AXIS_OUTPUT {false} \
+   CONFIG.EN_AP_CTRL_HS {false} \
+   CONFIG.EN_TID1_OUTPUT {true} \
+   CONFIG.EN_TID2_AXIS_OUTPUT {false} \
    CONFIG.NUM_SCALAR_PORTS {1} \
-   CONFIG.SCALAR1_WIDTH {128} \
+   CONFIG.SCALAR1_WIDTH {64} \
+   CONFIG.TID1_OUTPUT {2} \
  ] $AccelConfig_0
 
   # Create instance: Accel_placeholder, and set properties
@@ -152,7 +154,7 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
   # Create instance: smartconnect_0, and set properties
   set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
   set_property -dict [ list \
-   CONFIG.NUM_MI {2} \
+   CONFIG.NUM_MI {1} \
    CONFIG.NUM_SI {1} \
  ] $smartconnect_0
 
@@ -162,12 +164,6 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
    CONFIG.NUM_PORTS {4} \
  ] $xlconcat_0
 
-  # Create instance: xlconstant_0, and set properties
-  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
-  set_property -dict [ list \
-   CONFIG.CONST_VAL {0} \
- ] $xlconstant_0
-
   # Create instance: xlconstant_1, and set properties
   set xlconstant_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_1 ]
   set_property -dict [ list \
@@ -175,16 +171,14 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
  ] $xlconstant_1
 
   # Create interface connections
-  connect_bd_intf_net -intf_net AccelConfig_0_tid0_axis [get_bd_intf_pins AccelConfig_0/tid0_axis] [get_bd_intf_pins Accel_placeholder/S_AXIS]
+  connect_bd_intf_net -intf_net AccelConfig_1_tid0_axis [get_bd_intf_pins AccelConfig_0/tid0_axis] [get_bd_intf_pins Accel_placeholder/S_AXIS]
   connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins smartconnect_0/S00_AXI]
   connect_bd_intf_net -intf_net axis_data_fifo_0_M_AXIS [get_bd_intf_pins Accel_placeholder/M_AXIS] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
   connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/axis_in] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
-  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi_ctrl] [get_bd_intf_pins smartconnect_0/M00_AXI]
-  connect_bd_intf_net -intf_net smartconnect_0_M01_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M01_AXI]
+  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M00_AXI]
 
   # Create port connections
-  connect_bd_net -net AccelConfig_0_AccelStart [get_bd_pins AccelConfig_0/AccelStart] [get_bd_pins xlconcat_0/In0]
   connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins Accel_placeholder/s_axis_aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AccelConfig_0/resetn] [get_bd_pins Accel_placeholder/s_axis_aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
@@ -192,19 +186,17 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
   connect_bd_net -net rm_comm_box_0_interrupt_mm2s [get_bd_pins rm_comm_box_0/interrupt_mm2s] [get_bd_pins xlconcat_0/In2]
   connect_bd_net -net rm_comm_box_0_interrupt_s2mm [get_bd_pins rm_comm_box_0/interrupt_s2mm] [get_bd_pins xlconcat_0/In1]
   connect_bd_net -net xlconcat_0_dout [get_bd_ports interrupt] [get_bd_pins xlconcat_0/dout]
-  connect_bd_net -net xlconstant_0_dout [get_bd_pins AccelConfig_0/AccelIdle] [get_bd_pins AccelConfig_0/AccelReady] [get_bd_pins xlconstant_0/dout]
-  connect_bd_net -net xlconstant_1_dout [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_1/dout]
+  connect_bd_net -net xlconstant_1_dout [get_bd_pins xlconcat_0/In0] [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_1/dout]
 
   # Create address segments
   assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
   if { $rpName eq "RP_0"} {
-    assign_bd_address -offset 0x80000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi_ctrl/reg0] -force
     assign_bd_address -offset 0x81000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
   } 
   if { $rpName eq "RP_1"} {
-    assign_bd_address -offset 0x82000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi_ctrl/reg0] -force
-    assign_bd_address -offset 0x83000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
+    assign_bd_address -offset 0x82000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
   }
+
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -213,4 +205,4 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
   save_bd_design
   close_bd_design $design_name 
 }
-# End of cr_bd_new_axis_rm()
+# End of cr_bd_axis_demo1_RP_0()

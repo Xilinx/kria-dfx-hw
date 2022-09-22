@@ -7,165 +7,46 @@ source [file join [file dirname [file dirname [info script]]] gui/AccelConfig_v1
 # Definitional proc to organize widgets for parameters.
 proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "Component_Name"
-  #Adding Page
-  ipgui::add_page $IPINST -name "Page 0"
-
-  ipgui::add_param $IPINST -name "HAS_AP_CTRL_HS"
-  ipgui::add_param $IPINST -name "PARSE_AXIS_TID"
-  ipgui::add_param $IPINST -name "NUM_SCALAR_PORTS"
-  ipgui::add_param $IPINST -name "SCALAR1_WIDTH"
-  ipgui::add_param $IPINST -name "SCALAR2_WIDTH"
-  ipgui::add_param $IPINST -name "SCALAR3_WIDTH"
-  ipgui::add_param $IPINST -name "SCALAR4_WIDTH"
-  ipgui::add_param $IPINST -name "SCALAR5_WIDTH"
-  ipgui::add_param $IPINST -name "SCALAR6_WIDTH"
-  ipgui::add_param $IPINST -name "SCALAR7_WIDTH"
-  ipgui::add_param $IPINST -name "SCALAR8_WIDTH"
-  ipgui::add_param $IPINST -name "HAS_TID1_AXIS_OUTPUT"
-  ipgui::add_param $IPINST -name "HAS_TID2_AXIS_OUTPUT"
-  ipgui::add_param $IPINST -name "HAS_TID3_AXIS_OUTPUT"
-  ipgui::add_param $IPINST -name "HAS_TID4_AXIS_OUTPUT"
-  ipgui::add_param $IPINST -name "HAS_TID5_AXIS_OUTPUT"
-  ipgui::add_param $IPINST -name "HAS_TID6_AXIS_OUTPUT"
-  ipgui::add_param $IPINST -name "HAS_TID7_AXIS_OUTPUT"
+  ipgui::add_param $IPINST -name "EN_AP_CTRL_HS"
+  ipgui::add_param $IPINST -name "EN_TID1_OUTPUT"
+  set TID1_OUTPUT [ipgui::add_param $IPINST -name "TID1_OUTPUT" -widget comboBox]
+  set_property tooltip {1- AXIS 2-Scalar} ${TID1_OUTPUT}
+  set NUM_SCALAR_PORTS [ipgui::add_param $IPINST -name "NUM_SCALAR_PORTS"]
+  set_property tooltip {Num of Scalar Ports. Width of each enabled scalar port should be multiple of 32} ${NUM_SCALAR_PORTS}
+  set SCALAR1_WIDTH [ipgui::add_param $IPINST -name "SCALAR1_WIDTH"]
+  set_property tooltip {Scalar1 Width. Width should be a multiple of 32.} ${SCALAR1_WIDTH}
+  set SCALAR2_WIDTH [ipgui::add_param $IPINST -name "SCALAR2_WIDTH"]
+  set_property tooltip {Scalar2 Width. Width should be a multiple of 32.} ${SCALAR2_WIDTH}
+  set SCALAR3_WIDTH [ipgui::add_param $IPINST -name "SCALAR3_WIDTH"]
+  set_property tooltip {Scalar3 Width. Width should be a multiple of 32.} ${SCALAR3_WIDTH}
+  set SCALAR4_WIDTH [ipgui::add_param $IPINST -name "SCALAR4_WIDTH"]
+  set_property tooltip {Scalar4 Width. Width should be a multiple of 32.} ${SCALAR4_WIDTH}
+  set SCALAR5_WIDTH [ipgui::add_param $IPINST -name "SCALAR5_WIDTH"]
+  set_property tooltip {Scalar5 Width. Width should be a multiple of 32.} ${SCALAR5_WIDTH}
+  set SCALAR6_WIDTH [ipgui::add_param $IPINST -name "SCALAR6_WIDTH"]
+  set_property tooltip {Scalar6 Width. Width should be a multiple of 32.} ${SCALAR6_WIDTH}
+  set SCALAR7_WIDTH [ipgui::add_param $IPINST -name "SCALAR7_WIDTH"]
+  set_property tooltip {Scalar7 Width. Width should be a multiple of 32.} ${SCALAR7_WIDTH}
+  set SCALAR8_WIDTH [ipgui::add_param $IPINST -name "SCALAR8_WIDTH"]
+  set_property tooltip {Scalar8 Width. Width should be a multiple of 32.} ${SCALAR8_WIDTH}
+  ipgui::add_param $IPINST -name "EN_TID2_AXIS_OUTPUT"
+  ipgui::add_param $IPINST -name "EN_TID3_AXIS_OUTPUT"
+  ipgui::add_param $IPINST -name "EN_TID4_AXIS_OUTPUT"
+  ipgui::add_param $IPINST -name "EN_TID5_AXIS_OUTPUT"
+  ipgui::add_param $IPINST -name "EN_TID6_AXIS_OUTPUT"
+  ipgui::add_param $IPINST -name "EN_TID7_AXIS_OUTPUT"
 
 }
 
-proc update_PARAM_VALUE.HAS_TID1_AXIS_OUTPUT { PARAM_VALUE.HAS_TID1_AXIS_OUTPUT PARAM_VALUE.PARSE_AXIS_TID PARAM_VALUE.NUM_SCALAR_PORTS } {
-	# Procedure called to update HAS_TID1_AXIS_OUTPUT when any of the dependent parameters in the arguments change
-	
-	set HAS_TID1_AXIS_OUTPUT ${PARAM_VALUE.HAS_TID1_AXIS_OUTPUT}
-	set PARSE_AXIS_TID ${PARAM_VALUE.PARSE_AXIS_TID}
-	set NUM_SCALAR_PORTS ${PARAM_VALUE.NUM_SCALAR_PORTS}
-	set values(PARSE_AXIS_TID) [get_property value $PARSE_AXIS_TID]
-	set values(NUM_SCALAR_PORTS) [get_property value $NUM_SCALAR_PORTS]
-	if { [gen_USERPARAMETER_HAS_TID1_AXIS_OUTPUT_ENABLEMENT $values(PARSE_AXIS_TID) $values(NUM_SCALAR_PORTS)] } {
-		set_property enabled true $HAS_TID1_AXIS_OUTPUT
-	} else {
-		set_property enabled false $HAS_TID1_AXIS_OUTPUT
-	}
-}
-
-proc validate_PARAM_VALUE.HAS_TID1_AXIS_OUTPUT { PARAM_VALUE.HAS_TID1_AXIS_OUTPUT } {
-	# Procedure called to validate HAS_TID1_AXIS_OUTPUT
-	return true
-}
-
-proc update_PARAM_VALUE.HAS_TID2_AXIS_OUTPUT { PARAM_VALUE.HAS_TID2_AXIS_OUTPUT PARAM_VALUE.PARSE_AXIS_TID } {
-	# Procedure called to update HAS_TID2_AXIS_OUTPUT when any of the dependent parameters in the arguments change
-	
-	set HAS_TID2_AXIS_OUTPUT ${PARAM_VALUE.HAS_TID2_AXIS_OUTPUT}
-	set PARSE_AXIS_TID ${PARAM_VALUE.PARSE_AXIS_TID}
-	set values(PARSE_AXIS_TID) [get_property value $PARSE_AXIS_TID]
-	if { [gen_USERPARAMETER_HAS_TID2_AXIS_OUTPUT_ENABLEMENT $values(PARSE_AXIS_TID)] } {
-		set_property enabled true $HAS_TID2_AXIS_OUTPUT
-	} else {
-		set_property enabled false $HAS_TID2_AXIS_OUTPUT
-	}
-}
-
-proc validate_PARAM_VALUE.HAS_TID2_AXIS_OUTPUT { PARAM_VALUE.HAS_TID2_AXIS_OUTPUT } {
-	# Procedure called to validate HAS_TID2_AXIS_OUTPUT
-	return true
-}
-
-proc update_PARAM_VALUE.HAS_TID3_AXIS_OUTPUT { PARAM_VALUE.HAS_TID3_AXIS_OUTPUT PARAM_VALUE.PARSE_AXIS_TID } {
-	# Procedure called to update HAS_TID3_AXIS_OUTPUT when any of the dependent parameters in the arguments change
-	
-	set HAS_TID3_AXIS_OUTPUT ${PARAM_VALUE.HAS_TID3_AXIS_OUTPUT}
-	set PARSE_AXIS_TID ${PARAM_VALUE.PARSE_AXIS_TID}
-	set values(PARSE_AXIS_TID) [get_property value $PARSE_AXIS_TID]
-	if { [gen_USERPARAMETER_HAS_TID3_AXIS_OUTPUT_ENABLEMENT $values(PARSE_AXIS_TID)] } {
-		set_property enabled true $HAS_TID3_AXIS_OUTPUT
-	} else {
-		set_property enabled false $HAS_TID3_AXIS_OUTPUT
-	}
-}
-
-proc validate_PARAM_VALUE.HAS_TID3_AXIS_OUTPUT { PARAM_VALUE.HAS_TID3_AXIS_OUTPUT } {
-	# Procedure called to validate HAS_TID3_AXIS_OUTPUT
-	return true
-}
-
-proc update_PARAM_VALUE.HAS_TID4_AXIS_OUTPUT { PARAM_VALUE.HAS_TID4_AXIS_OUTPUT PARAM_VALUE.PARSE_AXIS_TID } {
-	# Procedure called to update HAS_TID4_AXIS_OUTPUT when any of the dependent parameters in the arguments change
-	
-	set HAS_TID4_AXIS_OUTPUT ${PARAM_VALUE.HAS_TID4_AXIS_OUTPUT}
-	set PARSE_AXIS_TID ${PARAM_VALUE.PARSE_AXIS_TID}
-	set values(PARSE_AXIS_TID) [get_property value $PARSE_AXIS_TID]
-	if { [gen_USERPARAMETER_HAS_TID4_AXIS_OUTPUT_ENABLEMENT $values(PARSE_AXIS_TID)] } {
-		set_property enabled true $HAS_TID4_AXIS_OUTPUT
-	} else {
-		set_property enabled false $HAS_TID4_AXIS_OUTPUT
-	}
-}
-
-proc validate_PARAM_VALUE.HAS_TID4_AXIS_OUTPUT { PARAM_VALUE.HAS_TID4_AXIS_OUTPUT } {
-	# Procedure called to validate HAS_TID4_AXIS_OUTPUT
-	return true
-}
-
-proc update_PARAM_VALUE.HAS_TID5_AXIS_OUTPUT { PARAM_VALUE.HAS_TID5_AXIS_OUTPUT PARAM_VALUE.PARSE_AXIS_TID } {
-	# Procedure called to update HAS_TID5_AXIS_OUTPUT when any of the dependent parameters in the arguments change
-	
-	set HAS_TID5_AXIS_OUTPUT ${PARAM_VALUE.HAS_TID5_AXIS_OUTPUT}
-	set PARSE_AXIS_TID ${PARAM_VALUE.PARSE_AXIS_TID}
-	set values(PARSE_AXIS_TID) [get_property value $PARSE_AXIS_TID]
-	if { [gen_USERPARAMETER_HAS_TID5_AXIS_OUTPUT_ENABLEMENT $values(PARSE_AXIS_TID)] } {
-		set_property enabled true $HAS_TID5_AXIS_OUTPUT
-	} else {
-		set_property enabled false $HAS_TID5_AXIS_OUTPUT
-	}
-}
-
-proc validate_PARAM_VALUE.HAS_TID5_AXIS_OUTPUT { PARAM_VALUE.HAS_TID5_AXIS_OUTPUT } {
-	# Procedure called to validate HAS_TID5_AXIS_OUTPUT
-	return true
-}
-
-proc update_PARAM_VALUE.HAS_TID6_AXIS_OUTPUT { PARAM_VALUE.HAS_TID6_AXIS_OUTPUT PARAM_VALUE.PARSE_AXIS_TID } {
-	# Procedure called to update HAS_TID6_AXIS_OUTPUT when any of the dependent parameters in the arguments change
-	
-	set HAS_TID6_AXIS_OUTPUT ${PARAM_VALUE.HAS_TID6_AXIS_OUTPUT}
-	set PARSE_AXIS_TID ${PARAM_VALUE.PARSE_AXIS_TID}
-	set values(PARSE_AXIS_TID) [get_property value $PARSE_AXIS_TID]
-	if { [gen_USERPARAMETER_HAS_TID6_AXIS_OUTPUT_ENABLEMENT $values(PARSE_AXIS_TID)] } {
-		set_property enabled true $HAS_TID6_AXIS_OUTPUT
-	} else {
-		set_property enabled false $HAS_TID6_AXIS_OUTPUT
-	}
-}
-
-proc validate_PARAM_VALUE.HAS_TID6_AXIS_OUTPUT { PARAM_VALUE.HAS_TID6_AXIS_OUTPUT } {
-	# Procedure called to validate HAS_TID6_AXIS_OUTPUT
-	return true
-}
-
-proc update_PARAM_VALUE.HAS_TID7_AXIS_OUTPUT { PARAM_VALUE.HAS_TID7_AXIS_OUTPUT PARAM_VALUE.PARSE_AXIS_TID } {
-	# Procedure called to update HAS_TID7_AXIS_OUTPUT when any of the dependent parameters in the arguments change
-	
-	set HAS_TID7_AXIS_OUTPUT ${PARAM_VALUE.HAS_TID7_AXIS_OUTPUT}
-	set PARSE_AXIS_TID ${PARAM_VALUE.PARSE_AXIS_TID}
-	set values(PARSE_AXIS_TID) [get_property value $PARSE_AXIS_TID]
-	if { [gen_USERPARAMETER_HAS_TID7_AXIS_OUTPUT_ENABLEMENT $values(PARSE_AXIS_TID)] } {
-		set_property enabled true $HAS_TID7_AXIS_OUTPUT
-	} else {
-		set_property enabled false $HAS_TID7_AXIS_OUTPUT
-	}
-}
-
-proc validate_PARAM_VALUE.HAS_TID7_AXIS_OUTPUT { PARAM_VALUE.HAS_TID7_AXIS_OUTPUT } {
-	# Procedure called to validate HAS_TID7_AXIS_OUTPUT
-	return true
-}
-
-proc update_PARAM_VALUE.NUM_SCALAR_PORTS { PARAM_VALUE.NUM_SCALAR_PORTS PARAM_VALUE.PARSE_AXIS_TID } {
+proc update_PARAM_VALUE.NUM_SCALAR_PORTS { PARAM_VALUE.NUM_SCALAR_PORTS PARAM_VALUE.EN_TID1_OUTPUT PARAM_VALUE.TID1_OUTPUT } {
 	# Procedure called to update NUM_SCALAR_PORTS when any of the dependent parameters in the arguments change
 	
 	set NUM_SCALAR_PORTS ${PARAM_VALUE.NUM_SCALAR_PORTS}
-	set PARSE_AXIS_TID ${PARAM_VALUE.PARSE_AXIS_TID}
-	set values(PARSE_AXIS_TID) [get_property value $PARSE_AXIS_TID]
-	if { [gen_USERPARAMETER_NUM_SCALAR_PORTS_ENABLEMENT $values(PARSE_AXIS_TID)] } {
+	set EN_TID1_OUTPUT ${PARAM_VALUE.EN_TID1_OUTPUT}
+	set TID1_OUTPUT ${PARAM_VALUE.TID1_OUTPUT}
+	set values(EN_TID1_OUTPUT) [get_property value $EN_TID1_OUTPUT]
+	set values(TID1_OUTPUT) [get_property value $TID1_OUTPUT]
+	if { [gen_USERPARAMETER_NUM_SCALAR_PORTS_ENABLEMENT $values(EN_TID1_OUTPUT) $values(TID1_OUTPUT)] } {
 		set_property enabled true $NUM_SCALAR_PORTS
 	} else {
 		set_property enabled false $NUM_SCALAR_PORTS
@@ -329,34 +210,96 @@ proc validate_PARAM_VALUE.SCALAR8_WIDTH { PARAM_VALUE.SCALAR8_WIDTH } {
 	return true
 }
 
-proc update_PARAM_VALUE.HAS_AP_CTRL_HS { PARAM_VALUE.HAS_AP_CTRL_HS } {
-	# Procedure called to update HAS_AP_CTRL_HS when any of the dependent parameters in the arguments change
+proc update_PARAM_VALUE.TID1_OUTPUT { PARAM_VALUE.TID1_OUTPUT PARAM_VALUE.EN_TID1_OUTPUT } {
+	# Procedure called to update TID1_OUTPUT when any of the dependent parameters in the arguments change
+	
+	set TID1_OUTPUT ${PARAM_VALUE.TID1_OUTPUT}
+	set EN_TID1_OUTPUT ${PARAM_VALUE.EN_TID1_OUTPUT}
+	set values(EN_TID1_OUTPUT) [get_property value $EN_TID1_OUTPUT]
+	if { [gen_USERPARAMETER_TID1_OUTPUT_ENABLEMENT $values(EN_TID1_OUTPUT)] } {
+		set_property enabled true $TID1_OUTPUT
+	} else {
+		set_property enabled false $TID1_OUTPUT
+	}
 }
 
-proc validate_PARAM_VALUE.HAS_AP_CTRL_HS { PARAM_VALUE.HAS_AP_CTRL_HS } {
-	# Procedure called to validate HAS_AP_CTRL_HS
+proc validate_PARAM_VALUE.TID1_OUTPUT { PARAM_VALUE.TID1_OUTPUT } {
+	# Procedure called to validate TID1_OUTPUT
 	return true
 }
 
-proc update_PARAM_VALUE.PARSE_AXIS_TID { PARAM_VALUE.PARSE_AXIS_TID } {
-	# Procedure called to update PARSE_AXIS_TID when any of the dependent parameters in the arguments change
+proc update_PARAM_VALUE.EN_AP_CTRL_HS { PARAM_VALUE.EN_AP_CTRL_HS } {
+	# Procedure called to update EN_AP_CTRL_HS when any of the dependent parameters in the arguments change
 }
 
-proc validate_PARAM_VALUE.PARSE_AXIS_TID { PARAM_VALUE.PARSE_AXIS_TID } {
-	# Procedure called to validate PARSE_AXIS_TID
+proc validate_PARAM_VALUE.EN_AP_CTRL_HS { PARAM_VALUE.EN_AP_CTRL_HS } {
+	# Procedure called to validate EN_AP_CTRL_HS
 	return true
 }
 
-
-proc update_MODELPARAM_VALUE.HAS_AP_CTRL_HS { MODELPARAM_VALUE.HAS_AP_CTRL_HS PARAM_VALUE.HAS_AP_CTRL_HS } {
-	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
-	set_property value [get_property value ${PARAM_VALUE.HAS_AP_CTRL_HS}] ${MODELPARAM_VALUE.HAS_AP_CTRL_HS}
+proc update_PARAM_VALUE.EN_TID1_OUTPUT { PARAM_VALUE.EN_TID1_OUTPUT } {
+	# Procedure called to update EN_TID1_OUTPUT when any of the dependent parameters in the arguments change
 }
 
-proc update_MODELPARAM_VALUE.PARSE_AXIS_TID { MODELPARAM_VALUE.PARSE_AXIS_TID PARAM_VALUE.PARSE_AXIS_TID } {
-	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
-	set_property value [get_property value ${PARAM_VALUE.PARSE_AXIS_TID}] ${MODELPARAM_VALUE.PARSE_AXIS_TID}
+proc validate_PARAM_VALUE.EN_TID1_OUTPUT { PARAM_VALUE.EN_TID1_OUTPUT } {
+	# Procedure called to validate EN_TID1_OUTPUT
+	return true
 }
+
+proc update_PARAM_VALUE.EN_TID2_AXIS_OUTPUT { PARAM_VALUE.EN_TID2_AXIS_OUTPUT } {
+	# Procedure called to update EN_TID2_AXIS_OUTPUT when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.EN_TID2_AXIS_OUTPUT { PARAM_VALUE.EN_TID2_AXIS_OUTPUT } {
+	# Procedure called to validate EN_TID2_AXIS_OUTPUT
+	return true
+}
+
+proc update_PARAM_VALUE.EN_TID3_AXIS_OUTPUT { PARAM_VALUE.EN_TID3_AXIS_OUTPUT } {
+	# Procedure called to update EN_TID3_AXIS_OUTPUT when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.EN_TID3_AXIS_OUTPUT { PARAM_VALUE.EN_TID3_AXIS_OUTPUT } {
+	# Procedure called to validate EN_TID3_AXIS_OUTPUT
+	return true
+}
+
+proc update_PARAM_VALUE.EN_TID4_AXIS_OUTPUT { PARAM_VALUE.EN_TID4_AXIS_OUTPUT } {
+	# Procedure called to update EN_TID4_AXIS_OUTPUT when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.EN_TID4_AXIS_OUTPUT { PARAM_VALUE.EN_TID4_AXIS_OUTPUT } {
+	# Procedure called to validate EN_TID4_AXIS_OUTPUT
+	return true
+}
+
+proc update_PARAM_VALUE.EN_TID5_AXIS_OUTPUT { PARAM_VALUE.EN_TID5_AXIS_OUTPUT } {
+	# Procedure called to update EN_TID5_AXIS_OUTPUT when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.EN_TID5_AXIS_OUTPUT { PARAM_VALUE.EN_TID5_AXIS_OUTPUT } {
+	# Procedure called to validate EN_TID5_AXIS_OUTPUT
+	return true
+}
+
+proc update_PARAM_VALUE.EN_TID6_AXIS_OUTPUT { PARAM_VALUE.EN_TID6_AXIS_OUTPUT } {
+	# Procedure called to update EN_TID6_AXIS_OUTPUT when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.EN_TID6_AXIS_OUTPUT { PARAM_VALUE.EN_TID6_AXIS_OUTPUT } {
+	# Procedure called to validate EN_TID6_AXIS_OUTPUT
+	return true
+}
+
+proc update_PARAM_VALUE.EN_TID7_AXIS_OUTPUT { PARAM_VALUE.EN_TID7_AXIS_OUTPUT } {
+	# Procedure called to update EN_TID7_AXIS_OUTPUT when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.EN_TID7_AXIS_OUTPUT { PARAM_VALUE.EN_TID7_AXIS_OUTPUT } {
+	# Procedure called to validate EN_TID7_AXIS_OUTPUT
+	return true
+}
+
 
 proc update_MODELPARAM_VALUE.NUM_SCALAR_PORTS { MODELPARAM_VALUE.NUM_SCALAR_PORTS PARAM_VALUE.NUM_SCALAR_PORTS } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
@@ -403,38 +346,48 @@ proc update_MODELPARAM_VALUE.SCALAR8_WIDTH { MODELPARAM_VALUE.SCALAR8_WIDTH PARA
 	set_property value [get_property value ${PARAM_VALUE.SCALAR8_WIDTH}] ${MODELPARAM_VALUE.SCALAR8_WIDTH}
 }
 
-proc update_MODELPARAM_VALUE.HAS_TID1_AXIS_OUTPUT { MODELPARAM_VALUE.HAS_TID1_AXIS_OUTPUT PARAM_VALUE.HAS_TID1_AXIS_OUTPUT } {
+proc update_MODELPARAM_VALUE.EN_AP_CTRL_HS { MODELPARAM_VALUE.EN_AP_CTRL_HS PARAM_VALUE.EN_AP_CTRL_HS } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
-	set_property value [get_property value ${PARAM_VALUE.HAS_TID1_AXIS_OUTPUT}] ${MODELPARAM_VALUE.HAS_TID1_AXIS_OUTPUT}
+	set_property value [get_property value ${PARAM_VALUE.EN_AP_CTRL_HS}] ${MODELPARAM_VALUE.EN_AP_CTRL_HS}
 }
 
-proc update_MODELPARAM_VALUE.HAS_TID2_AXIS_OUTPUT { MODELPARAM_VALUE.HAS_TID2_AXIS_OUTPUT PARAM_VALUE.HAS_TID2_AXIS_OUTPUT } {
+proc update_MODELPARAM_VALUE.EN_TID2_AXIS_OUTPUT { MODELPARAM_VALUE.EN_TID2_AXIS_OUTPUT PARAM_VALUE.EN_TID2_AXIS_OUTPUT } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
-	set_property value [get_property value ${PARAM_VALUE.HAS_TID2_AXIS_OUTPUT}] ${MODELPARAM_VALUE.HAS_TID2_AXIS_OUTPUT}
+	set_property value [get_property value ${PARAM_VALUE.EN_TID2_AXIS_OUTPUT}] ${MODELPARAM_VALUE.EN_TID2_AXIS_OUTPUT}
 }
 
-proc update_MODELPARAM_VALUE.HAS_TID3_AXIS_OUTPUT { MODELPARAM_VALUE.HAS_TID3_AXIS_OUTPUT PARAM_VALUE.HAS_TID3_AXIS_OUTPUT } {
+proc update_MODELPARAM_VALUE.EN_TID3_AXIS_OUTPUT { MODELPARAM_VALUE.EN_TID3_AXIS_OUTPUT PARAM_VALUE.EN_TID3_AXIS_OUTPUT } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
-	set_property value [get_property value ${PARAM_VALUE.HAS_TID3_AXIS_OUTPUT}] ${MODELPARAM_VALUE.HAS_TID3_AXIS_OUTPUT}
+	set_property value [get_property value ${PARAM_VALUE.EN_TID3_AXIS_OUTPUT}] ${MODELPARAM_VALUE.EN_TID3_AXIS_OUTPUT}
 }
 
-proc update_MODELPARAM_VALUE.HAS_TID4_AXIS_OUTPUT { MODELPARAM_VALUE.HAS_TID4_AXIS_OUTPUT PARAM_VALUE.HAS_TID4_AXIS_OUTPUT } {
+proc update_MODELPARAM_VALUE.EN_TID4_AXIS_OUTPUT { MODELPARAM_VALUE.EN_TID4_AXIS_OUTPUT PARAM_VALUE.EN_TID4_AXIS_OUTPUT } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
-	set_property value [get_property value ${PARAM_VALUE.HAS_TID4_AXIS_OUTPUT}] ${MODELPARAM_VALUE.HAS_TID4_AXIS_OUTPUT}
+	set_property value [get_property value ${PARAM_VALUE.EN_TID4_AXIS_OUTPUT}] ${MODELPARAM_VALUE.EN_TID4_AXIS_OUTPUT}
 }
 
-proc update_MODELPARAM_VALUE.HAS_TID5_AXIS_OUTPUT { MODELPARAM_VALUE.HAS_TID5_AXIS_OUTPUT PARAM_VALUE.HAS_TID5_AXIS_OUTPUT } {
+proc update_MODELPARAM_VALUE.EN_TID5_AXIS_OUTPUT { MODELPARAM_VALUE.EN_TID5_AXIS_OUTPUT PARAM_VALUE.EN_TID5_AXIS_OUTPUT } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
-	set_property value [get_property value ${PARAM_VALUE.HAS_TID5_AXIS_OUTPUT}] ${MODELPARAM_VALUE.HAS_TID5_AXIS_OUTPUT}
+	set_property value [get_property value ${PARAM_VALUE.EN_TID5_AXIS_OUTPUT}] ${MODELPARAM_VALUE.EN_TID5_AXIS_OUTPUT}
 }
 
-proc update_MODELPARAM_VALUE.HAS_TID6_AXIS_OUTPUT { MODELPARAM_VALUE.HAS_TID6_AXIS_OUTPUT PARAM_VALUE.HAS_TID6_AXIS_OUTPUT } {
+proc update_MODELPARAM_VALUE.EN_TID6_AXIS_OUTPUT { MODELPARAM_VALUE.EN_TID6_AXIS_OUTPUT PARAM_VALUE.EN_TID6_AXIS_OUTPUT } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
-	set_property value [get_property value ${PARAM_VALUE.HAS_TID6_AXIS_OUTPUT}] ${MODELPARAM_VALUE.HAS_TID6_AXIS_OUTPUT}
+	set_property value [get_property value ${PARAM_VALUE.EN_TID6_AXIS_OUTPUT}] ${MODELPARAM_VALUE.EN_TID6_AXIS_OUTPUT}
 }
 
-proc update_MODELPARAM_VALUE.HAS_TID7_AXIS_OUTPUT { MODELPARAM_VALUE.HAS_TID7_AXIS_OUTPUT PARAM_VALUE.HAS_TID7_AXIS_OUTPUT } {
+proc update_MODELPARAM_VALUE.EN_TID7_AXIS_OUTPUT { MODELPARAM_VALUE.EN_TID7_AXIS_OUTPUT PARAM_VALUE.EN_TID7_AXIS_OUTPUT } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
-	set_property value [get_property value ${PARAM_VALUE.HAS_TID7_AXIS_OUTPUT}] ${MODELPARAM_VALUE.HAS_TID7_AXIS_OUTPUT}
+	set_property value [get_property value ${PARAM_VALUE.EN_TID7_AXIS_OUTPUT}] ${MODELPARAM_VALUE.EN_TID7_AXIS_OUTPUT}
+}
+
+proc update_MODELPARAM_VALUE.EN_TID1_OUTPUT { MODELPARAM_VALUE.EN_TID1_OUTPUT PARAM_VALUE.EN_TID1_OUTPUT } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.EN_TID1_OUTPUT}] ${MODELPARAM_VALUE.EN_TID1_OUTPUT}
+}
+
+proc update_MODELPARAM_VALUE.TID1_OUTPUT { MODELPARAM_VALUE.TID1_OUTPUT PARAM_VALUE.TID1_OUTPUT } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.TID1_OUTPUT}] ${MODELPARAM_VALUE.TID1_OUTPUT}
 }
 

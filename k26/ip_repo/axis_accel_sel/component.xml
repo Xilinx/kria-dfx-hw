@@ -234,7 +234,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>b8548b9e</spirit:value>
+            <spirit:value>1554fb7b</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -250,7 +250,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>b8548b9e</spirit:value>
+            <spirit:value>1554fb7b</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -664,6 +664,84 @@
           </spirit:wireTypeDefs>
         </spirit:wire>
       </spirit:port>
+      <spirit:port>
+        <spirit:name>ap_idle_enc</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ap_idle_dec</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ap_idle</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ap_ready_enc</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ap_ready_dec</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ap_ready</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>wire</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
     </spirit:ports>
   </spirit:model>
   <spirit:fileSets>
@@ -672,7 +750,7 @@
       <spirit:file>
         <spirit:name>src/axis_accel_sel.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_b8548b9e</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_1554fb7b</spirit:userFileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
@@ -696,7 +774,7 @@
     <spirit:fileSet>
       <spirit:name>xilinx_utilityxitfiles_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../bd/bd.tcl</spirit:name>
+        <spirit:name>bd/bd.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
       </spirit:file>
     </spirit:fileSet>
@@ -741,8 +819,8 @@
       </xilinx:taxonomies>
       <xilinx:displayName>axis_accel_sel_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>3</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2020-08-04T09:29:15Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>4</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2022-09-14T14:19:58Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@452dcdf2_ARCHIVE_LOCATION">/group/siv_proto3/work/everest/deekshad/openacap/zu/zcu104/accel_select_ip/ip</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@6c529ab0_ARCHIVE_LOCATION">/group/siv_proto3/work/everest/deekshad/openacap/zu/zcu104/accel_select_ip/ip</xilinx:tag>
@@ -776,10 +854,10 @@
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
-      <xilinx:xilinxVersion>2020.1</xilinx:xilinxVersion>
+      <xilinx:xilinxVersion>2022.1</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="c15ea0c1"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="0508773f"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="9e6c1c13"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="5c73cb62"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="93697087"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="dcfd592f"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>

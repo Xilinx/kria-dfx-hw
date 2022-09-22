@@ -1,7 +1,5 @@
-# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
-# SPDX-License-Identifier: MIT
 # Proc to create BD AES192
-proc cr_bd_AES192 { parentCell designName} {
+proc cr_bd_AES192 { parentCell designName } {
 
   # CHANGE DESIGN NAME HERE
   set design_name $designName
@@ -138,15 +136,12 @@ proc cr_bd_AES192 { parentCell designName} {
   # Create instance: AccelConfig_0, and set properties
   set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig:1.0 AccelConfig_0 ]
   set_property -dict [ list \
-   CONFIG.HAS_TID2_AXIS_OUTPUT {false} \
-   CONFIG.HAS_TID3_AXIS_OUTPUT {false} \
-   CONFIG.HAS_TID4_AXIS_OUTPUT {false} \
-   CONFIG.HAS_TID5_AXIS_OUTPUT {false} \
-   CONFIG.HAS_TID6_AXIS_OUTPUT {false} \
-   CONFIG.HAS_TID7_AXIS_OUTPUT {false} \
+   CONFIG.EN_TID1_OUTPUT {true} \
+   CONFIG.EN_TID2_AXIS_OUTPUT {false} \
    CONFIG.NUM_SCALAR_PORTS {2} \
    CONFIG.SCALAR1_WIDTH {192} \
    CONFIG.SCALAR2_WIDTH {32} \
+   CONFIG.TID1_OUTPUT {2} \
  ] $AccelConfig_0
 
   # Create instance: axis_accel_sel_0, and set properties
@@ -171,12 +166,6 @@ proc cr_bd_AES192 { parentCell designName} {
    CONFIG.NUM_PORTS {4} \
  ] $xlconcat_0
 
-  # Create instance: xlconstant_0, and set properties
-  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
-  set_property -dict [ list \
-   CONFIG.CONST_VAL {0} \
- ] $xlconstant_0
-
   # Create instance: xlconstant_1, and set properties
   set xlconstant_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_1 ]
   set_property -dict [ list \
@@ -198,12 +187,18 @@ proc cr_bd_AES192 { parentCell designName} {
 
   # Create port connections
   connect_bd_net -net AES192_Dec_0_ap_done [get_bd_pins AES192_Dec_0/ap_done] [get_bd_pins axis_accel_sel_0/ap_done_dec]
+  connect_bd_net -net AES192_Dec_0_ap_idle [get_bd_pins AES192_Dec_0/ap_idle] [get_bd_pins axis_accel_sel_0/ap_idle_dec]
+  connect_bd_net -net AES192_Dec_0_ap_ready [get_bd_pins AES192_Dec_0/ap_ready] [get_bd_pins axis_accel_sel_0/ap_ready_dec]
   connect_bd_net -net AES192_Enc_0_ap_done [get_bd_pins AES192_Enc_0/ap_done] [get_bd_pins axis_accel_sel_0/ap_done_enc]
-  connect_bd_net -net AccelConfig_0_AccelStart [get_bd_pins AccelConfig_0/AccelStart] [get_bd_pins axis_accel_sel_0/ap_start]
+  connect_bd_net -net AES192_Enc_0_ap_idle [get_bd_pins AES192_Enc_0/ap_idle] [get_bd_pins axis_accel_sel_0/ap_idle_enc]
+  connect_bd_net -net AES192_Enc_0_ap_ready [get_bd_pins AES192_Enc_0/ap_ready] [get_bd_pins axis_accel_sel_0/ap_ready_enc]
+  connect_bd_net -net AccelConfig_0_ap_start [get_bd_pins AccelConfig_0/ap_start] [get_bd_pins axis_accel_sel_0/ap_start]
   connect_bd_net -net AccelConfig_0_config_port1_tdata [get_bd_pins AES192_Dec_0/key] [get_bd_pins AES192_Enc_0/key] [get_bd_pins AccelConfig_0/scalar1]
   connect_bd_net -net AccelConfig_0_interrupt [get_bd_pins AccelConfig_0/interrupt] [get_bd_pins xlconcat_0/In0]
   connect_bd_net -net AccelConfig_0_scalar2 [get_bd_pins AccelConfig_0/scalar2] [get_bd_pins axis_accel_sel_0/USE_ENC]
-  connect_bd_net -net axis_accel_sel_0_ap_done [get_bd_pins AccelConfig_0/AccelDone] [get_bd_pins axis_accel_sel_0/ap_done]
+  connect_bd_net -net axis_accel_sel_0_ap_done [get_bd_pins AccelConfig_0/ap_done] [get_bd_pins axis_accel_sel_0/ap_done]
+  connect_bd_net -net axis_accel_sel_0_ap_idle [get_bd_pins AccelConfig_0/ap_idle] [get_bd_pins axis_accel_sel_0/ap_idle]
+  connect_bd_net -net axis_accel_sel_0_ap_ready [get_bd_pins AccelConfig_0/ap_ready] [get_bd_pins axis_accel_sel_0/ap_ready]
   connect_bd_net -net axis_accel_sel_0_ap_start_dec [get_bd_pins AES192_Dec_0/ap_start] [get_bd_pins axis_accel_sel_0/ap_start_dec]
   connect_bd_net -net axis_accel_sel_0_ap_start_enc [get_bd_pins AES192_Enc_0/ap_start] [get_bd_pins axis_accel_sel_0/ap_start_enc]
   connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins AES192_Dec_0/ap_clk] [get_bd_pins AES192_Enc_0/ap_clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins axis_accel_sel_0/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
@@ -213,7 +208,6 @@ proc cr_bd_AES192 { parentCell designName} {
   connect_bd_net -net rm_comm_box_0_interrupt_s2mm [get_bd_pins rm_comm_box_0/interrupt_s2mm] [get_bd_pins xlconcat_0/In1]
   connect_bd_net -net static_shell_rp0_resetn [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
   connect_bd_net -net xlconcat_0_dout [get_bd_ports interrupt] [get_bd_pins xlconcat_0/dout]
-  connect_bd_net -net xlconstant_0_dout [get_bd_pins AccelConfig_0/AccelIdle] [get_bd_pins AccelConfig_0/AccelReady] [get_bd_pins xlconstant_0/dout]
   connect_bd_net -net xlconstant_1_dout [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_1/dout]
 
   # Create address segments

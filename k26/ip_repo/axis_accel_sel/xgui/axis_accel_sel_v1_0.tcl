@@ -1,5 +1,6 @@
 # Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+
 # Definitional proc to organize widgets for parameters.
 proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "Component_Name"
