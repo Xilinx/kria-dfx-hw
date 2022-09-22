@@ -16,12 +16,3 @@ Directory structure of k26_testcases-
 	* README.md- Instructions to build and test the elf
         * build<RM_NAME>.tcl - Vitis script to build RM_NAME application elf.
  	* test<RM_NAME> - Script containing xsdb commands to run the RM_NAME application on the target board. 
-
-* Linux
-	* AES128- Application code to run AES128 accelerator.
-	* AES192- Application code to run AES192 accelerator.
-	* FFT- Application code to run FFT accelerator.
-	* FIR- Application code to run FIR accelerator.
-	* README.md- Instructions to build and test the elf
-	* build<RM_NAME>.tcl - Vitis script to build RM_NAME application elf.
-	
