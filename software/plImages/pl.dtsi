@@ -78,33 +78,28 @@
 			RP_0_AccelConfig_0: AccelConfig@80000000 {
 				/* This is a place holder node for a custom IP, user may need to update the entries */
 				clock-names = "clk";
-				clocks = <&misc_clk_0>;
+				clocks = <&zynqmp_clk 73>;
 				compatible = "xlnx,AccelConfig-1.0", "generic-uio";
 				reg = <0x0 0x80000000 0x0 0x1000000>;
-			};
-			misc_clk_0: misc_clk_0 {
-				#clock-cells = <0>;
-				clock-frequency = <249997498>;
-				compatible = "fixed-clock";
 			};
 			RP_0_rm_comm_box_0: rm_comm_box@81000000 {
 				/* This is a place holder node for a custom IP, user may need to update the entries */
 				clock-names = "clk";
-				clocks = <&misc_clk_0>;
+				clocks = <&zynqmp_clk 73>;
 				compatible = "xlnx,rm-comm-box-1.0", "generic-uio";
 				reg = <0x0 0x81000000 0x0 0x1000000>;
 			};
 			RP_1_AccelConfig_0: AccelConfig@82000000 {
 				/* This is a place holder node for a custom IP, user may need to update the entries */
 				clock-names = "clk";
-				clocks = <&misc_clk_0>;
+				clocks = <&zynqmp_clk 74>;
 				compatible = "xlnx,AccelConfig-1.0", "generic-uio";
 				reg = <0x0 0x82000000 0x0 0x1000000>;
 			};
 			RP_1_rm_comm_box_0: rm_comm_box@83000000 {
 				/* This is a place holder node for a custom IP, user may need to update the entries */
 				clock-names = "clk";
-				clocks = <&misc_clk_0>;
+				clocks = <&zynqmp_clk 74>;
 				compatible = "xlnx,rm-comm-box-1.0", "generic-uio";
 				reg = <0x0 0x83000000 0x0 0x1000000>;
 			};
