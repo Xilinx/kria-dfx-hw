@@ -188,8 +188,8 @@ xilinx.com:ip:util_vector_logic:2.0\
 # CHECK Block Design Container Sources
 ##################################################################
 set bCheckSources 1
-set list_bdc_active "FIR_compiler"
-set list_bdc_dfx "AES128, AES192, DPU_512, FFT_4channel, pp_pipeline"
+set list_bdc_active "AES192"
+set list_bdc_dfx "AES128, FIR_compiler, DPU_512, FFT_4channel, pp_pipeline"
 
 array set map_bdc_missing {}
 set map_bdc_missing(ACTIVE) ""
