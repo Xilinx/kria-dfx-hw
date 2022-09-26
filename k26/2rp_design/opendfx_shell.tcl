@@ -53,8 +53,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 set list_projs [get_projects -quiet]
 if { $list_projs eq "" } {
    create_project project_1 project_1 -part xck26-sfvc784-2LV-c -force
-   exec cp -rf ../ip_repo/ ./
-   set repoPath {./ip_repo} 
+   set repoPath {./../ip_repo} 
    set_property ip_repo_paths $repoPath  [current_project]
    update_ip_catalog
    set_param bd.enableDFX 1

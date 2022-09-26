@@ -1,6 +1,7 @@
 # Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
-# Proc to create BD
+
+# Proc to create BD add_sub_RP_0
 proc cr_bd_axis_rm { parentCell designName rpName } {
 
   # CHANGE DESIGN NAME HERE
@@ -19,7 +20,7 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
   if { $bCheckIPs == 1 } {
      set list_check_ips "\ 
   user.org:user:AccelConfig:1.0\
-  xilinx.com:ip:axis_data_fifo:2.0\
+  xilinx.com:hls:add_sub:1.0\
   xilinx.com:ip:proc_sys_reset:5.0\
   user.org:user:rm_comm_box:1.0\
   xilinx.com:ip:smartconnect:1.0\
@@ -77,7 +78,48 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
 
 
   # Create interface ports
-  set M_AXI_GMEM [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 M_AXI_GMEM ]
+  set M_AXI_GMEM [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 -portmaps { \
+   ARADDR { physical_name M_AXI_GMEM_araddr direction O left 48 right 0 } \
+   ARBURST { physical_name M_AXI_GMEM_arburst direction O left 1 right 0 } \
+   ARCACHE { physical_name M_AXI_GMEM_arcache direction O left 3 right 0 } \
+   ARID { physical_name M_AXI_GMEM_arid direction O left 7 right 0 } \
+   ARLEN { physical_name M_AXI_GMEM_arlen direction O left 7 right 0 } \
+   ARLOCK { physical_name M_AXI_GMEM_arlock direction O left 1 right 0 } \
+   ARPROT { physical_name M_AXI_GMEM_arprot direction O left 2 right 0 } \
+   ARQOS { physical_name M_AXI_GMEM_arqos direction O left 3 right 0 } \
+   ARREADY { physical_name M_AXI_GMEM_arready direction I } \
+   ARREGION { physical_name M_AXI_GMEM_arregion direction O left 3 right 0 } \
+   ARSIZE { physical_name M_AXI_GMEM_arsize direction O left 2 right 0 } \
+   ARVALID { physical_name M_AXI_GMEM_arvalid direction O } \
+   AWADDR { physical_name M_AXI_GMEM_awaddr direction O left 48 right 0 } \
+   AWBURST { physical_name M_AXI_GMEM_awburst direction O left 1 right 0 } \
+   AWCACHE { physical_name M_AXI_GMEM_awcache direction O left 3 right 0 } \
+   AWID { physical_name M_AXI_GMEM_awid direction O left 7 right 0 } \
+   AWLEN { physical_name M_AXI_GMEM_awlen direction O left 7 right 0 } \
+   AWLOCK { physical_name M_AXI_GMEM_awlock direction O left 1 right 0 } \
+   AWPROT { physical_name M_AXI_GMEM_awprot direction O left 2 right 0 } \
+   AWQOS { physical_name M_AXI_GMEM_awqos direction O left 3 right 0 } \
+   AWREADY { physical_name M_AXI_GMEM_awready direction I } \
+   AWREGION { physical_name M_AXI_GMEM_awregion direction O left 3 right 0 } \
+   AWSIZE { physical_name M_AXI_GMEM_awsize direction O left 2 right 0 } \
+   AWVALID { physical_name M_AXI_GMEM_awvalid direction O } \
+   BID { physical_name M_AXI_GMEM_bid direction I left 7 right 0 } \
+   BREADY { physical_name M_AXI_GMEM_bready direction O } \
+   BRESP { physical_name M_AXI_GMEM_bresp direction I left 1 right 0 } \
+   BVALID { physical_name M_AXI_GMEM_bvalid direction I } \
+   RDATA { physical_name M_AXI_GMEM_rdata direction I left 127 right 0 } \
+   RID { physical_name M_AXI_GMEM_rid direction I left 7 right 0 } \
+   RLAST { physical_name M_AXI_GMEM_rlast direction I } \
+   RREADY { physical_name M_AXI_GMEM_rready direction O } \
+   RRESP { physical_name M_AXI_GMEM_rresp direction I left 1 right 0 } \
+   RVALID { physical_name M_AXI_GMEM_rvalid direction I } \
+   WDATA { physical_name M_AXI_GMEM_wdata direction O left 127 right 0 } \
+   WLAST { physical_name M_AXI_GMEM_wlast direction O } \
+   WREADY { physical_name M_AXI_GMEM_wready direction I } \
+   WSTRB { physical_name M_AXI_GMEM_wstrb direction O left 15 right 0 } \
+   WVALID { physical_name M_AXI_GMEM_wvalid direction O } \
+   } \
+  M_AXI_GMEM ]
   set_property -dict [ list \
    CONFIG.ADDR_WIDTH {49} \
    CONFIG.DATA_WIDTH {128} \
@@ -87,7 +129,28 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
    CONFIG.PROTOCOL {AXI4} \
    ] $M_AXI_GMEM
 
-  set S_AXI_CTRL [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S_AXI_CTRL ]
+  set S_AXI_CTRL [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 -portmaps { \
+   ARADDR { physical_name S_AXI_CTRL_araddr direction I left 31 right 0 } \
+   ARPROT { physical_name S_AXI_CTRL_arprot direction I left 2 right 0 } \
+   ARREADY { physical_name S_AXI_CTRL_arready direction O } \
+   ARVALID { physical_name S_AXI_CTRL_arvalid direction I } \
+   AWADDR { physical_name S_AXI_CTRL_awaddr direction I left 31 right 0 } \
+   AWPROT { physical_name S_AXI_CTRL_awprot direction I left 2 right 0 } \
+   AWREADY { physical_name S_AXI_CTRL_awready direction O } \
+   AWVALID { physical_name S_AXI_CTRL_awvalid direction I } \
+   BREADY { physical_name S_AXI_CTRL_bready direction I } \
+   BRESP { physical_name S_AXI_CTRL_bresp direction O left 1 right 0 } \
+   BVALID { physical_name S_AXI_CTRL_bvalid direction O } \
+   RDATA { physical_name S_AXI_CTRL_rdata direction O left 31 right 0 } \
+   RREADY { physical_name S_AXI_CTRL_rready direction I } \
+   RRESP { physical_name S_AXI_CTRL_rresp direction O left 1 right 0 } \
+   RVALID { physical_name S_AXI_CTRL_rvalid direction O } \
+   WDATA { physical_name S_AXI_CTRL_wdata direction I left 31 right 0 } \
+   WREADY { physical_name S_AXI_CTRL_wready direction O } \
+   WSTRB { physical_name S_AXI_CTRL_wstrb direction I left 3 right 0 } \
+   WVALID { physical_name S_AXI_CTRL_wvalid direction I } \
+   } \
+  S_AXI_CTRL ]
   set_property -dict [ list \
    CONFIG.ADDR_WIDTH {32} \
    CONFIG.ARUSER_WIDTH {0} \
@@ -136,16 +199,16 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
   # Create instance: AccelConfig_0, and set properties
   set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig:1.0 AccelConfig_0 ]
   set_property -dict [ list \
-   CONFIG.EN_AP_CTRL_HS {false} \
+   CONFIG.EN_AP_CTRL_HS {true} \
    CONFIG.EN_TID1_OUTPUT {true} \
-   CONFIG.EN_TID2_AXIS_OUTPUT {false} \
+   CONFIG.EN_TID2_AXIS_OUTPUT {true} \
    CONFIG.NUM_SCALAR_PORTS {1} \
-   CONFIG.SCALAR1_WIDTH {64} \
+   CONFIG.SCALAR1_WIDTH {32} \
    CONFIG.TID1_OUTPUT {2} \
  ] $AccelConfig_0
 
-  # Create instance: Accel_placeholder, and set properties
-  set Accel_placeholder [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 Accel_placeholder ]
+  # Create instance: accel_0, and set properties
+  set accel_0 [ create_bd_cell -type ip -vlnv xilinx.com:hls:add_sub:1.0 accel_0 ]
 
   # Create instance: proc_sys_reset_0, and set properties
   set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
@@ -156,7 +219,7 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
   # Create instance: smartconnect_0, and set properties
   set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
   set_property -dict [ list \
-   CONFIG.NUM_MI {1} \
+   CONFIG.NUM_MI {2} \
    CONFIG.NUM_SI {1} \
  ] $smartconnect_0
 
@@ -173,32 +236,41 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
  ] $xlconstant_1
 
   # Create interface connections
-  connect_bd_intf_net -intf_net AccelConfig_1_tid0_axis [get_bd_intf_pins AccelConfig_0/tid0_axis] [get_bd_intf_pins Accel_placeholder/S_AXIS]
+  connect_bd_intf_net -intf_net AccelConfig_0_tid0_axis [get_bd_intf_pins AccelConfig_0/tid0_axis] [get_bd_intf_pins accel_0/axis_in1]
+  connect_bd_intf_net -intf_net AccelConfig_0_tid2_axis [get_bd_intf_pins AccelConfig_0/tid2_axis] [get_bd_intf_pins accel_0/axis_in2]
   connect_bd_intf_net -intf_net S_AXI_CTRL_1 [get_bd_intf_ports S_AXI_CTRL] [get_bd_intf_pins smartconnect_0/S00_AXI]
-  connect_bd_intf_net -intf_net axis_data_fifo_0_M_AXIS [get_bd_intf_pins Accel_placeholder/M_AXIS] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
+  connect_bd_intf_net -intf_net add_sub_0_axis_out [get_bd_intf_pins accel_0/axis_out] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
   connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/axis_in] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
-  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M00_AXI]
+  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi_ctrl] [get_bd_intf_pins smartconnect_0/M00_AXI]
+  connect_bd_intf_net -intf_net smartconnect_0_M01_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M01_AXI]
 
   # Create port connections
-  connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins Accel_placeholder/s_axis_aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
+  connect_bd_net -net AccelConfig_0_ap_start [get_bd_pins AccelConfig_0/ap_start] [get_bd_pins accel_0/ap_start]
+  connect_bd_net -net AccelConfig_0_interrupt [get_bd_pins AccelConfig_0/interrupt] [get_bd_pins xlconcat_0/In0]
+  connect_bd_net -net AccelConfig_0_scalar1 [get_bd_pins AccelConfig_0/scalar1] [get_bd_pins accel_0/op]
+  connect_bd_net -net add_sub_0_ap_done [get_bd_pins AccelConfig_0/ap_done] [get_bd_pins accel_0/ap_done]
+  connect_bd_net -net add_sub_0_ap_idle [get_bd_pins AccelConfig_0/ap_idle] [get_bd_pins accel_0/ap_idle]
+  connect_bd_net -net add_sub_0_ap_ready [get_bd_pins AccelConfig_0/ap_ready] [get_bd_pins accel_0/ap_ready]
+  connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins accel_0/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AccelConfig_0/resetn] [get_bd_pins Accel_placeholder/s_axis_aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AccelConfig_0/resetn] [get_bd_pins accel_0/ap_rst_n] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
   connect_bd_net -net resetn_1 [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
   connect_bd_net -net rm_comm_box_0_interrupt_mm2s [get_bd_pins rm_comm_box_0/interrupt_mm2s] [get_bd_pins xlconcat_0/In2]
   connect_bd_net -net rm_comm_box_0_interrupt_s2mm [get_bd_pins rm_comm_box_0/interrupt_s2mm] [get_bd_pins xlconcat_0/In1]
   connect_bd_net -net xlconcat_0_dout [get_bd_ports interrupt] [get_bd_pins xlconcat_0/dout]
-  connect_bd_net -net xlconstant_1_dout [get_bd_pins xlconcat_0/In0] [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_1/dout]
+  connect_bd_net -net xlconstant_1_dout [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_1/dout]
 
   # Create address segments
   assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  if { $rpName eq "RP_0"} {
-    assign_bd_address -offset 0x81000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
-  } 
-  if { $rpName eq "RP_1"} {
-    assign_bd_address -offset 0x82000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
-  }
-
+if { $rpName eq "RP_0"} {
+  assign_bd_address -offset 0x80000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi_ctrl/reg0] -force
+  assign_bd_address -offset 0x81000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
+}
+if { $rpName eq "RP_1"} {
+  assign_bd_address -offset 0x82000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi_ctrl/reg0] -force
+  assign_bd_address -offset 0x83000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
+}
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -207,4 +279,4 @@ proc cr_bd_axis_rm { parentCell designName rpName } {
   save_bd_design
   close_bd_design $design_name 
 }
-# End of cr_bd_axis_demo1_RP_0()
+# End of cr_bd_add_sub_RP_0()
