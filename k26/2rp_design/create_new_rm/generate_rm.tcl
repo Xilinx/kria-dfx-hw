@@ -23,7 +23,7 @@ proc generate_rm { arg1 { arg2 RP_0 }} {
     set rmBit ""
     append rmName $designName "_" $targetRP
     append rmDCP $designName "_" $targetRP ".dcp"
-    append rmBit $designName "_" $targetRP ".bit"
+    append rmBit "opendfx_shell_i_" $targetRP "_" $designName "_partial.bit"
     append abs_shell "abstract_shell_" $targetRP ".dcp"
 
   set x opendfx_shell_i/${targetRP}
