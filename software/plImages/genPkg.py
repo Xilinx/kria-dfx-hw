@@ -1,3 +1,6 @@
+# Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
+
 #!/usr/bin/python3
 import os
 import json
