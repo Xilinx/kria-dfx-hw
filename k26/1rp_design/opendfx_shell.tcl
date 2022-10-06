@@ -53,8 +53,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 set list_projs [get_projects -quiet]
 if { $list_projs eq "" } {
    create_project project_1 project_1 -part xck26-sfvc784-2LV-c -force
-   exec cp -rf ../ip_repo/ ./
-   set repoPath {./ip_repo} 
+   set repoPath {../ip_repo} 
    set_property ip_repo_paths $repoPath  [current_project]
    update_ip_catalog
    set_param bd.enableDFX 1
@@ -186,8 +185,8 @@ xilinx.com:ip:util_vector_logic:2.0\
 # CHECK Block Design Container Sources
 ##################################################################
 set bCheckSources 1
-set list_bdc_active "FIR_compiler"
-set list_bdc_dfx "AES128, AES192, DPU_512, FFT_4channel, pp_pipeline"
+set list_bdc_active "AES192"
+set list_bdc_dfx "AES128, FIR_compiler, DPU_512, FFT_4channel, pp_pipeline"
 
 array set map_bdc_missing {}
 set map_bdc_missing(ACTIVE) ""
@@ -2440,13 +2439,13 @@ proc create_root_design { parentCell } {
   # Create ports
 
   # Create instance: RP_0, and set properties
-  set RP_0 [ create_bd_cell -type container -reference FIR_compiler RP_0 ]
+  set RP_0 [ create_bd_cell -type container -reference AES192 RP_0 ]
   set_property -dict [ list \
-   CONFIG.ACTIVE_SIM_BD {FIR_compiler.bd} \
-   CONFIG.ACTIVE_SYNTH_BD {FIR_compiler.bd} \
+   CONFIG.ACTIVE_SIM_BD {AES192.bd} \
+   CONFIG.ACTIVE_SYNTH_BD {AES192.bd} \
    CONFIG.ENABLE_DFX {true} \
-   CONFIG.LIST_SIM_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
-   CONFIG.LIST_SYNTH_BD {FIR_compiler.bd:FFT_4channel.bd:AES128.bd:AES192.bd:DPU_512.bd:pp_pipeline.bd} \
+   CONFIG.LIST_SIM_BD {AES192.bd:FIR_compiler.bd:FFT_4channel.bd:AES128.bd:DPU_512.bd:pp_pipeline.bd} \
+   CONFIG.LIST_SYNTH_BD {AES192.bd:FIR_compiler.bd:FFT_4channel.bd:AES128.bd:DPU_512.bd:pp_pipeline.bd} \
    CONFIG.LOCK_PROPAGATE {true} \
  ] $RP_0
   set_property APERTURES {{0x0 2G} {0xC000_0000 512M} {0xFF00_0000 16M} {0x2_0000_0000 1G} {0x2_8000_0000 1G} {0x8_0000_0000 32G}} [get_bd_intf_pins /RP_0/M_AXI_GMEM]
@@ -2527,8 +2526,10 @@ setup_pr_configurations
 create_pr_configuration -name config_7 -partitions { }  -greyboxes [list opendfx_shell_i/RP_0 ]
 create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} -pr_config config_7
 
-launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 child_4_impl_1 child_5_impl_1 -to_step write_bitstream -jobs 16
+launch_runs impl_1 -to_step write_bitstream -jobs 16
 wait_on_run impl_1
+write_hw_platform -fixed -include_bit -force -file ./project_1/opendfx_shell_wrapper.xsa 
+launch_runs child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 child_4_impl_1 child_5_impl_1 -to_step write_bitstream -jobs 16
 wait_on_run child_0_impl_1
 wait_on_run child_1_impl_1
 wait_on_run child_2_impl_1
@@ -2536,4 +2537,3 @@ wait_on_run child_3_impl_1
 wait_on_run child_4_impl_1
 wait_on_run child_5_impl_1
 open_run impl_1
-write_hw_platform -fixed -include_bit -force -file ./project_1/opendfx_shell_wrapper.xsa 

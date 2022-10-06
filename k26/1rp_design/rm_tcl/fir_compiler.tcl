@@ -1,7 +1,7 @@
 # Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 # Proc to create BD FIR_compiler
-proc cr_bd_FIR_compiler { parentCell designName} {
+proc cr_bd_FIR_compiler { parentCell designName } {
 
   # CHANGE DESIGN NAME HERE
   set design_name $designName
@@ -184,7 +184,7 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
 
   set S_AXI_CTRL [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S_AXI_CTRL ]
   set_property -dict [ list \
-   CONFIG.ADDR_WIDTH {40} \
+   CONFIG.ADDR_WIDTH {32} \
    CONFIG.ARUSER_WIDTH {0} \
    CONFIG.AWUSER_WIDTH {0} \
    CONFIG.BUSER_WIDTH {0} \
@@ -223,11 +223,10 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   # Create instance: AccelConfig_0, and set properties
   set AccelConfig_0 [ create_bd_cell -type ip -vlnv user.org:user:AccelConfig:1.0 AccelConfig_0 ]
   set_property -dict [ list \
-   CONFIG.HAS_AP_CTRL_HS {false} \
-   CONFIG.HAS_TID1_AXIS_OUTPUT {true} \
-   CONFIG.HAS_TID3_AXIS_OUTPUT {true} \
-   CONFIG.NUM_SCALAR_PORTS {0} \
-   CONFIG.SCALAR1_WIDTH {0} \
+   CONFIG.EN_AP_CTRL_HS {false} \
+   CONFIG.EN_TID1_OUTPUT {true} \
+   CONFIG.EN_TID2_AXIS_OUTPUT {true} \
+   CONFIG.EN_TID3_AXIS_OUTPUT {true} \
  ] $AccelConfig_0
 
   # Create instance: axis_dwidth_converter_0, and set properties
@@ -273,7 +272,7 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   # Create instance: smartconnect_0, and set properties
   set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
   set_property -dict [ list \
-   CONFIG.NUM_MI {2} \
+   CONFIG.NUM_MI {1} \
    CONFIG.NUM_SI {1} \
  ] $smartconnect_0
 
@@ -303,12 +302,10 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   connect_bd_intf_net -intf_net outputbits_selector_0_m00_axis [get_bd_intf_pins outputbits_selector_0/m00_axis] [get_bd_intf_pins rm_comm_box_0/s2mm_axis]
   connect_bd_intf_net -intf_net rm_comm_box_0_m_axi_gmem [get_bd_intf_ports M_AXI_GMEM] [get_bd_intf_pins rm_comm_box_0/m_axi_gmem]
   connect_bd_intf_net -intf_net rm_comm_box_0_mm2s_axis [get_bd_intf_pins AccelConfig_0/axis_in] [get_bd_intf_pins rm_comm_box_0/mm2s_axis]
-  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins AccelConfig_0/s_axi_ctrl] [get_bd_intf_pins smartconnect_0/M00_AXI]
-  connect_bd_intf_net -intf_net smartconnect_0_M01_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M01_AXI]
+  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins rm_comm_box_0/s_axi_control] [get_bd_intf_pins smartconnect_0/M00_AXI]
 
   # Create port connections
-  connect_bd_net -net AccelConfig_0_interrupt [get_bd_pins AccelConfig_0/interrupt] [get_bd_pins xlconcat_0/In0]
-  connect_bd_net -net AccelConfig_0_tid0_axis_tdata [get_bd_pins AccelConfig_0/tid0_axis_tdata] [get_bd_pins tdata_instripe/Din]
+  connect_bd_net -net Din_1 [get_bd_pins AccelConfig_0/tid0_axis_tdata] [get_bd_pins tdata_instripe/Din]
   connect_bd_net -net clk_4 [get_bd_ports clk] [get_bd_pins AccelConfig_0/clk] [get_bd_pins axis_dwidth_converter_0/aclk] [get_bd_pins fir_compiler_0/aclk] [get_bd_pins outputbits_selector_0/aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins rm_comm_box_0/clk] [get_bd_pins smartconnect_0/aclk]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins AccelConfig_0/resetn] [get_bd_pins axis_dwidth_converter_0/aresetn] [get_bd_pins fir_compiler_0/aresetn] [get_bd_pins outputbits_selector_0/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rm_comm_box_0/resetn]
@@ -320,8 +317,7 @@ proc create_hier_cell_tdata_instripe { parentCell nameHier } {
   connect_bd_net -net xlconstant_0_dout [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_0/dout]
 
   # Create address segments
-  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -offset 0x80000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs AccelConfig_0/s_axi_ctrl/reg0] -force
+  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces rm_comm_box_0/m_axi_gmem] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
   assign_bd_address -offset 0x81000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs rm_comm_box_0/s_axi_control/reg0] -force
 
   set_property USAGE memory [get_bd_addr_segs M_AXI_GMEM/Reg]
