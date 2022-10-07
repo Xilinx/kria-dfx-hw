@@ -27,11 +27,24 @@ The repository structure is outlined below.
 		* test_<RM_NAME>.tcl - Script to test the RM_NAME application on the target board.
 		* Directories with accelerator name. Contains the application code specific to the accelerator.
 
-* software - Contains step to generate firmware required by dfx-mgr
-	* plImages
-		* Makefile - Make file uses bingen.sh, genOverlay.sh and genPkg.py files
-		* bingen.sh - Copies bit files from hw build and generates bin files
-		* genOverlay.sh - Generates pl.dtbo file. 
-		* genPkg.py - Generates firmware
-		* pl.dtsi - DTSI file for given hw design
-		* shell.json - Json file for dfx design 
+```
+# 1. HW Build 
+
+Please find the detailed steps-
+
+ 1rp design- https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/README.md
+
+ 2rp design-  https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/edit/main/k26/2rp_design/README.md 
+
+# 2. K26 2RP Firmware Build for dfx-mgr
+
+Execute step 1 before running step 2. 
+
+Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/software/plImages/README.md 
+
+# 3. HW Standalone App Build & Test 
+
+Execute step 1 before running step 4. 
+
+Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/k26_testcases/Standalone/README.md ![image](https://media.gitenterprise.xilinx.com/user/1120/files/1d63c71c-8df6-48c1-989a-b96dcfad2a87)
+```
