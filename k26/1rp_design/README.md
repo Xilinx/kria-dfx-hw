@@ -16,6 +16,8 @@ cd kria_dfx_hw/k26/1rp_design
 ```
 	
 - The build script, opendfx_shell.tcl, uses 16 parallel jobs to run implementation. On the following lines, increase or decrease the number of parallel jobs as desired. The Vivado default setting is 1 job.
+
+
           https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/opendfx_shell.tcl#L2529
 	  
           https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/opendfx_shell.tcl#L2532
