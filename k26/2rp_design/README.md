@@ -20,7 +20,7 @@ cd kria_dfx_hw/k26/2rp_design
  https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2883
 
 
-# Hardware build steps
+# Building the Hardware Design
 User can build the hardware files either in CLI mode or GUI mode.
 
 ## Build steps in CLI mode:
@@ -31,10 +31,14 @@ bash
 cd kria_dfx_hw/k26/2rp_design
 make all
 ```
-After the build is finished, the terminal will have "Platform build complete" print. 
+After the build is finished, the terminal will display the message "Platform build complete". 
 
 ## Build steps in GUI mode:
-* Navigate to the directory 2rp_design, launch vivado, in Vivado tcl console run the following command
+* Navigate to the directory 2rp_design
+```
+cd kria_dfx_hw/k26/2rp_design
+```
+* Launch vivado. In Vivado tcl console, run the following command
 ```
 source ./opendfx_shell.tcl
 ```
