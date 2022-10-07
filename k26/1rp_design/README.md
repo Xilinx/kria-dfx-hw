@@ -1,21 +1,23 @@
-## Pre-requisite to build Vivado project and platform 
+# Pre-requisite to build Vivado project and platform 
 
-- Source vivado 2022.1 tool settings.
+- Vivado build -  2022.1
 - Add the following line to Vivado_init.tcl before launching Vivado. Refer UG894 for more information on Vivado_init.tcl.
 ```
+vim ~/.Xilinx/Vivado/Vivado_init.tcl
 set_param bd.gen_bda_file 1
 ```
 
-- Clone the git repository to local sandbox.
+# Steps to build 1 RP Hardware Design
+
+- Clone the kria-dfx-hw git repository
 ```
 git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
 ```
 	
-- If needed, update the following line in opendfx_shell.tcl according to your job queue setting.
-```
-vi kria_dfx_hw/k26/1rp_design/opendfx_shell.tcl
-launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16
-```
+- The build script, opendfx_shell.tcl, uses 16 parallel jobs to run implementation. On the following lines, increase or decrease the number of parallel jobs as desired. The Vivado default setting is 1 job.
+          https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/opendfx_shell.tcl#L2529
+          https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/opendfx_shell.tcl#L2532
+
 
 User can build the hardware files either in CLI mode or GUI mode.
 
