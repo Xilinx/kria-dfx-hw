@@ -1,6 +1,6 @@
 # kria_dfx_hw
 
-This repository contains Kria DFX Reference Designs. It shows how to run OpenDFX accelerators on SOM platforms.
+This repository contains Kria DFX Reference Designs. It shows how to run accelerators on SOM platforms.
 
 The repository structure is outlined below. 
 
