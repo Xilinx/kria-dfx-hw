@@ -12,7 +12,7 @@ set_param bd.gen_bda_file 1
 git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
 ```
 	
-- If needed, update the following lines in opendfx_shell.tcl according to your job queue settings.
+- The build script, opendfx_shell.tcl, uses 16 parallel jobs to run implementation. The user can either increase or decrease the number of parallel jobs. The Vivado default setting is 1 job.
  
  https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2880
  
