@@ -1,9 +1,9 @@
 # DFX Reference Design on Kria
 
-This repository contains Vivado DFX Reference Designs on Kria. The repository structure is outlined below. 
+This repository contains DFX example designs on Kria. The repository structure is outlined below. 
 
-* k26 - KRIA hardware platform
-	* 2rp_design - Top level directory containing Vivado HW design for 2 slot DFX design.
+* k26 - Hardware platform supported. Both KV260 and KR260 are supported.
+	* 2rp_design - Top level directory containing Vivado HW design files for 2 slot DFX design.
 		* rm_tcl - Directory contains tcl files for the accelerator modules("RMs") built against the base shell.
 		* xdc - Directory contains design constraints
 			* physical_constraints.xdc
@@ -14,7 +14,7 @@ This repository contains Vivado DFX Reference Designs on Kria. The repository st
 			* Adds RM BDs to BDCs
 			* Creates DFx configurations.
 			* Generates bitfiles for the base shell and the accelerators.
-	* 1rp_design - Top level directory containing Vivado HW design for 1 slot DFX design.
+	* 1rp_design - Top level directory containing Vivado HW design files for 1 slot DFX design.
 		* rm_tcl - Directory contains tcl files for the accelerator modules("RMs") built against the base shell.
 		* xdc - Directory contains design constraints
 			* physical_constraints.xdc
