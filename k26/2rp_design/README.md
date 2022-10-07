@@ -23,7 +23,7 @@ cd kria_dfx_hw/k26/2rp_design
 
 User can build the hardware files either in CLI mode or GUI mode.
 
-## 1. CLI:
+## Build steps in CLI mode:
 Navigate to the 2rp_design directory and run the Makefile in a bash shell.
 
 ```bash
@@ -32,18 +32,22 @@ make all
 ```
 After the build is finished, the terminal will have "Platform build complete" print. 
 
-## 2. GUI:
-Navigate to the directory 2rp_design, launch vivado, in vivado's tcl console source opendfx_shell.tcl
+## Build steps in GUI mode:
+* Navigate to the directory 2rp_design, launch vivado, in Vivado tcl console run the following command
 ```
-Launch vivado 
 source ./opendfx_shell.tcl
 ```
 Wait till all design runs finish in Vivado.
 
+## Verify output products
+* The build steps should create base bitstream, RM partials and XSA file.
+* Inspect the following sub-directories under project_1/project_1.runs directory to verify that bitfiles are generated. There should be 3 bit files in each sub-directory 
+    * impl_1
+    * child_0_impl_1
+    * child_1_impl_1
+    * child_2_impl_1
+    * child_3_impl_1
+    * child_4_impl_1
+    * child_5_impl_1
 
-This will create base bitstream and RM partials and XSA file.
-Under project_1/project_1.runs directory, 
-check the following directories that bit files are created. 
-impl_1, child_*_impl_1 to check that bit files are generated.
-
-Under project_1 directory, check that XSA file is created.
+* Inspect the directory project_1 to verify that XSA file is generated.
