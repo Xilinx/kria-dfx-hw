@@ -27,7 +27,6 @@ The repository structure is outlined below.
 		* test_<RM_NAME>.tcl - Script to test the RM_NAME application on the target board.
 		* Directories with accelerator name. Contains the application code specific to the accelerator.
 
-```
 # 1. HW Build 
 
 Please find the detailed steps-
@@ -47,4 +46,3 @@ Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/
 Execute step 1 before running step 4. 
 
 Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/k26_testcases/Standalone/README.md ![image](https://media.gitenterprise.xilinx.com/user/1120/files/1d63c71c-8df6-48c1-989a-b96dcfad2a87)
-```
