@@ -1,8 +1,9 @@
 ## Pre-requisite to build Vivado project and platform 
 
-- Source vivado 2022.1 tool settings.
+- Vivado build - 2022.1
 - Add the following line to Vivado_init.tcl before launching Vivado. Refer refer-ug894 for more information on Vivado_init.tcl.
 ```
+vim ~/.Xilinx/Vivado/Vivado_init.tcl
 set_param bd.gen_bda_file 1
 ```
 
@@ -11,7 +12,9 @@ set_param bd.gen_bda_file 1
 git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
 ```
 	
-- If needed, update the following line in opendfx_shell.tcl according to your job queue setting.
+- If needed, update the following lines in opendfx_shell.tcl according to your job queue settings.
+ https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2880
+ https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2880
 ```
 cd kria_dfx_hw/k26/2rp_design
 launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16
