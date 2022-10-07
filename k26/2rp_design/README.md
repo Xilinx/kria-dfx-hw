@@ -1,4 +1,4 @@
-## Pre-requisite to build Vivado project and platform 
+# Pre-requisite to build Vivado project and platform 
 
 - Vivado build - 2022.1
 - Add the following line to Vivado_init.tcl before launching Vivado. Refer refer-ug894 for more information on Vivado_init.tcl.
@@ -10,6 +10,7 @@ set_param bd.gen_bda_file 1
 - Clone the kria-dfx-hw git repository and navigate to the directory 2rp_design
 ```
 git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
+cd kria_dfx_hw/k26/2rp_design
 ```
 	
 - The build script, opendfx_shell.tcl, uses 16 parallel jobs to run implementation. The user can either increase or decrease the number of parallel jobs. The Vivado default setting is 1 job.
@@ -17,16 +18,16 @@ git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
  https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2880
  
  https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2883
-```
-cd kria_dfx_hw/k26/2rp_design
-```
 
+
+# Hardware build steps
 User can build the hardware files either in CLI mode or GUI mode.
 
 ## Build steps in CLI mode:
-Navigate to the 2rp_design directory and run the Makefile in a bash shell.
+Open a bash shell, navigate to the 2rp_design directory and run the Makefile.
 
-```bash
+```
+bash
 cd kria_dfx_hw/k26/2rp_design
 make all
 ```
