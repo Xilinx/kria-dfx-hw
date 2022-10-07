@@ -7,7 +7,7 @@ vim ~/.Xilinx/Vivado/Vivado_init.tcl
 set_param bd.gen_bda_file 1
 ```
 
-- Clone the git repository to local sandbox.
+- Clone the kria-dfx-hw git repository and navigate to the directory 2rp_design
 ```
 git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
 ```
