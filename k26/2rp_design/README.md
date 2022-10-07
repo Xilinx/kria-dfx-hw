@@ -19,7 +19,6 @@ git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
  https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2883
 ```
 cd kria_dfx_hw/k26/2rp_design
-launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16
 ```
 
 User can build the hardware files either in CLI mode or GUI mode.
