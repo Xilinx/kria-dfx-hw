@@ -13,8 +13,10 @@ git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
 ```
 	
 - If needed, update the following lines in opendfx_shell.tcl according to your job queue settings.
+ 
  https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2880
- https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2880
+ 
+ https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2883
 ```
 cd kria_dfx_hw/k26/2rp_design
 launch_runs impl_1 child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16
