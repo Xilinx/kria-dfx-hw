@@ -40,6 +40,7 @@ rm -rf *.bin *.bif *.bit *.xsa
 cp ../../k26/2rp_design/project_1/${shell}.xsa ./
 cp ../../k26/2rp_design/project_1/project_1.runs/impl_1/${shell}.bit ./
 cp ../../k26/2rp_design/project_1/project_1.runs/*impl_1/*partial.bit ./
+cp ../../k26/2rp_design/create_new_rm/output_files/*.bit ./
 bifgen ${shell}
 bingen ${shell}
 
