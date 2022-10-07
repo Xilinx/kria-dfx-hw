@@ -46,4 +46,4 @@ Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/
 
 Execute step 1 before running step 4. 
 
-Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/k26_testcases/Standalone/README.md ![image](https://media.gitenterprise.xilinx.com/user/1120/files/1d63c71c-8df6-48c1-989a-b96dcfad2a87)
+Please find the detailed steps-https://gitenterprise.xilinx.com/SOM/kria_dfx_hw/blob/main/k26_testcases/Standalone/README.md ![image]
