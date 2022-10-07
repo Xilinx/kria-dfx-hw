@@ -30,9 +30,10 @@ User can build the hardware files either in CLI mode or GUI mode.
 ## Build steps in CLI mode:
 Open a bash shell, navigate to the 1rp_design directory and run the Makefile.
 
-```bash
-cd kria_dfx_hw/k26/1rp_design
-make all
+```
+	bash
+	cd kria_dfx_hw/k26/1rp_design
+	make all
 ```
 After the build is finished, the terminal will display the message "Platform build complete". 
 
@@ -40,13 +41,13 @@ After the build is finished, the terminal will display the message "Platform bui
 ## Build steps in GUI mode:
 * Navigate to the directory 1rp_design.
 ```
-cd kria_dfx_hw/k26/1rp_design
+	cd kria_dfx_hw/k26/1rp_design
 ```
 
 
 * Launch vivado. In Vivado tcl console, run the following command
 ```
-source ./opendfx_shell.tcl
+	source ./opendfx_shell.tcl
 ```
 Wait till all design runs finish in Vivado.
 
