@@ -38,3 +38,12 @@ Navigate to the directory 2rp_design, launch vivado, in vivado's tcl console sou
 Launch vivado 
 source ./opendfx_shell.tcl
 ```
+Wait till all design runs finish in Vivado.
+
+
+This will create base bitstream and RM partials and XSA file.
+Under project_1/project_1.runs directory, 
+check the following directories that bit files are created. 
+impl_1, child_*_impl_1 to check that bit files are generated.
+
+Under project_1 directory, check that XSA file is created.
