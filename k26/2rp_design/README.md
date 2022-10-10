@@ -9,7 +9,7 @@
 
 - Clone the kria-dfx-hw git repository and navigate to the directory 2rp_design
 ```
-	git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
+	git clone https://gitenterprise.xilinx.com/SOM/kria-dfx-hw.git
 	cd kria_dfx_hw/k26/2rp_design
 ```
 	
