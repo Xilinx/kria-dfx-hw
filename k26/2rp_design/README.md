@@ -1,6 +1,7 @@
 # Pre-requisite to build Vivado project and platform 
 
 - Vivado build - 2022.1
+- Linux environment to build the design.
 - Add the following line to Vivado_init.tcl before launching Vivado. Refer refer-ug894 for more information on Vivado_init.tcl.
 ```
 	vim ~/.Xilinx/Vivado/Vivado_init.tcl
