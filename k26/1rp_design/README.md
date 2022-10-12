@@ -12,17 +12,16 @@ set_param bd.gen_bda_file 1
 
 - Clone the kria-dfx-hw git repository and navigate to the directory 1rp_design
 ```
-git clone git@gitenterprise.xilinx.com:SOM/kria_dfx_hw.git kria_dfx_hw
-cd kria_dfx_hw/k26/1rp_design
+git clone https://gitenterprise.xilinx.com/SOM/kria-dfx-hw.git
+cd kria-dfx-hw/k26/1rp_design
 ```
 	
-- The build script, opendfx_shell.tcl, uses 16 parallel jobs to run implementation. On the following lines, increase or decrease the number of parallel jobs as desired. The Vivado default setting is 1 job.
+- The build script, opendfx_shell.tcl, uses 16 parallel jobs to run implementation. On the following lines, increase or decrease the number of parallel jobs as desired according to their choice. The Vivado default setting is 1 job.
 
-
-          https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/opendfx_shell.tcl#L2529
-	  
-          https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/opendfx_shell.tcl#L2532
-
+```
+https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/opendfx_shell.tcl#L2529
+https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/opendfx_shell.tcl#L2532
+```
 
 
 # Building the Hardware Design
@@ -32,23 +31,15 @@ User can build the hardware files either in CLI mode or GUI mode.
 Open a bash shell, navigate to the 1rp_design directory and run the Makefile.
 
 ```
-	bash
-	cd kria_dfx_hw/k26/1rp_design
-	make all
+make all
 ```
 After the build is finished, the terminal will display the message "Platform build complete". 
 
 
 ## Build steps in GUI mode:
-* Navigate to the directory 1rp_design.
-```
-	cd kria_dfx_hw/k26/1rp_design
-```
-
-
 * Launch vivado. In Vivado tcl console, run the following command
 ```
-	source ./opendfx_shell.tcl
+source ./opendfx_shell.tcl
 ```
 Wait till all design runs finish in Vivado.
 
