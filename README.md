@@ -39,7 +39,7 @@ This repository contains DFX example designs on Kria. The repository structure i
 
 Refer to the links mentioned below for detailed steps to build the hardware designs.
 
- * 1rp design - https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/README.md
+ * 1rp design - [Steps](https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/1rp_design/README.md) to build the 1RP design.
 
- * 2rp design - https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/README.md
+ * 2rp design - [Steps](https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/README.md) to build the 2RP design.
 
