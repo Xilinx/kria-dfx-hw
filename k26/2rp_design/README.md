@@ -1,4 +1,7 @@
-# Pre-requisite to build Vivado project and platform 
+# Introduction
+This document provides steps to build DFX example design on Kria.
+
+## Pre-requisite to build Vivado project and platform 
 
 - Vivado build - 2022.1
 - Linux environment to build the design.
@@ -21,10 +24,10 @@ https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendf
 https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2883
 ```
 
-# Building the Hardware Design
+## Building the Hardware Design
 User can build the hardware files either in CLI mode or GUI mode.
 
-## Build steps in CLI mode:
+### Build steps in CLI mode:
 Open a bash shell, navigate to the 2rp_design directory and run the Makefile.
 
 ```
@@ -32,14 +35,14 @@ make all
 ```
 After the build is finished, the terminal will display the message "Platform build complete". 
 
-## Build steps in GUI mode:
+### Build steps in GUI mode:
 Launch vivado. In Vivado tcl console, run the following command
 ```
 source ./opendfx_shell.tcl
 ```
 Wait till all design runs finish in Vivado.
 
-## Verify output products
+### Verify output products
 * The build steps should create base bitstream, RM partials and XSA file.
 * Inspect the following sub-directories under project_1/project_1.runs directory to verify that bitfiles are generated. There should be 3 bit files in each sub-directory 
     * impl_1
