@@ -53,7 +53,5 @@ Wait till all design runs finish in Vivado.
     * child_1_impl_1
     * child_2_impl_1
     * child_3_impl_1
-    * child_4_impl_1
-    * child_5_impl_1
 
 * Inspect the directory project_1 to verify that XSA file is generated.
