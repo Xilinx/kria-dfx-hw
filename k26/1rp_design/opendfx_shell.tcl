@@ -2523,11 +2523,9 @@ create_run child_0_impl_1 -parent_run impl_1 -flow {Vivado Implementation 2022} 
 launch_runs impl_1 -to_step write_bitstream -jobs 16
 wait_on_run impl_1
 write_hw_platform -fixed -include_bit -force -file ./project_1/opendfx_shell_wrapper.xsa 
-launch_runs child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 child_4_impl_1 child_5_impl_1 -to_step write_bitstream -jobs 16
+launch_runs child_0_impl_1 child_1_impl_1 child_2_impl_1 child_3_impl_1 -to_step write_bitstream -jobs 16
 wait_on_run child_0_impl_1
 wait_on_run child_1_impl_1
 wait_on_run child_2_impl_1
 wait_on_run child_3_impl_1
-wait_on_run child_4_impl_1
-wait_on_run child_5_impl_1
 open_run impl_1
