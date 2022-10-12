@@ -33,7 +33,7 @@ make all
 After the build is finished, the terminal will display the message "Platform build complete". 
 
 ## Build steps in GUI mode:
-* Launch vivado. In Vivado tcl console, run the following command
+Launch vivado. In Vivado tcl console, run the following command
 ```
 source ./opendfx_shell.tcl
 ```
