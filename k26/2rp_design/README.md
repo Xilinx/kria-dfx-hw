@@ -13,15 +13,15 @@ set_param bd.gen_bda_file 1
 
 - Clone the kria-dfx-hw git repository and navigate to the directory 2rp_design
 ```
-git clone https://gitenterprise.xilinx.com/SOM/kria-dfx-hw.git
+git clone https://github.com/Xilinx/kria-dfx-hw.git
 cd kria-dfx-hw/k26/2rp_design
 ```
 	
 - The build script, opendfx_shell.tcl, uses 16 parallel jobs to run implementation. The user can either increase or decrease the number of parallel jobs according to their choice. The Vivado default setting is 1 job.
 
 ```
-https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2880
-https://gitenterprise.xilinx.com/SOM/kria-dfx-hw/blob/main/k26/2rp_design/opendfx_shell.tcl#L2883
+https://github.com/Xilinx/kria-dfx-hw/blob/xlnx_rel_v2022.1/k26/2rp_design/opendfx_shell.tcl#L2880
+https://github.com/Xilinx/kria-dfx-hw/blob/xlnx_rel_v2022.1/k26/2rp_design/opendfx_shell.tcl#L2883
 ```
 
 ## Building the Hardware Design
