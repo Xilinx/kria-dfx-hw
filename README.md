@@ -35,11 +35,5 @@ This repository contains DFX example designs on Kria. The repository structure i
 		* test_<RM_NAME>.tcl - Script to test the RM_NAME application on the target board.
 		* Directories with accelerator name. Contains the application code specific to the accelerator.
 
-# Steps to Build Hardware
 
-Refer to the links mentioned below for detailed steps to build the hardware designs.
-
- * 1rp design - [Steps](./k26/1rp_design/README.md) to build the 1RP design.
-
- * 2rp design - [Steps](./k26/2rp_design/README.md) to build the 2RP design.
 
