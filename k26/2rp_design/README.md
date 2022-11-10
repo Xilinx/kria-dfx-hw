@@ -17,12 +17,8 @@ git clone https://github.com/Xilinx/kria-dfx-hw.git
 cd kria-dfx-hw/k26/2rp_design
 ```
 	
-- The build script, opendfx_shell.tcl, uses 16 parallel jobs to run implementation. The user can either increase or decrease the number of parallel jobs according to their choice. The Vivado default setting is 1 job.
+- The build script, opendfx_shell.tcl, uses 16 parallel jobs to run implementation. The user can modify the number of parallel jobs by editing lines 2880 and 2883 in opendfx_shell.tcl. The Vivado default setting is 1 job. 
 
-```
-https://github.com/Xilinx/kria-dfx-hw/blob/xlnx_rel_v2022.1/k26/2rp_design/opendfx_shell.tcl#L2880
-https://github.com/Xilinx/kria-dfx-hw/blob/xlnx_rel_v2022.1/k26/2rp_design/opendfx_shell.tcl#L2883
-```
 
 ## Building the Hardware Design
 User can build the hardware files either in CLI mode or GUI mode.
