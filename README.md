@@ -14,6 +14,9 @@ This repository contains DFX example designs on Kria. The repository structure i
 			* Adds RM BDs to BDCs
 			* Creates DFx configurations.
 			* Generates bitfiles for the base shell and the accelerators.
+		* create_new_rm - Scripts to create new reconfigurable module for the 2RP design.
+			* abstract_shells - Contains the abstract shells for slots RP_0 and RP_1.
+			* generate_rm.tcl - Script to generate partial bitfiles for new accelerators.
 	* 1rp_design - Top level directory containing Vivado HW design files for 1 slot DFX design.
 		* rm_tcl - Directory contains tcl files for the accelerator modules("RMs") built against the base shell.
 		* xdc - Directory contains design constraints
