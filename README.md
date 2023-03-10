@@ -52,7 +52,7 @@ The AMD-Xilinx Dynamic Function eXchange (DFX) is a technology that enables an i
 
 ## Try DFX Application
 
-Detailed documentation and how to try this applcation is well documented [here](https://xilinx.github.io/kria-apps-docs/dfx/build/html/docs/DFX_Landing_Page.html#getting-started-with-pre-built-dfx-examples-for-kr260-and-kv260). Please go through the [DFX documentation page](https://xilinx.github.io/kria-apps-docs/dfx/build/html/docs/DFX_Landing_Page.html#) for more details.
+Detailed documentation and how to try this applcation is documented [here](https://xilinx.github.io/kria-apps-docs/dfx/build/html/docs/DFX_Landing_Page.html#getting-started-with-pre-built-dfx-examples-for-kr260-and-kv260). Please go through the [DFX documentation page](https://xilinx.github.io/kria-apps-docs/dfx/build/html/docs/DFX_Landing_Page.html#) for more details.
 
 
 
