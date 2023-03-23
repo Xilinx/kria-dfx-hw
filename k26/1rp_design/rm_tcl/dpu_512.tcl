@@ -1,7 +1,7 @@
 # Copyright (C) 2022, Advanced Micro Devices, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 # Proc to create BD DPU_512
-proc cr_bd_DPU_512 { parentCell designName } {
+proc cr_bd_DPU_512 { parentCell designName} {
 
   # CHANGE DESIGN NAME HERE
   set design_name $designName
@@ -120,6 +120,9 @@ proc cr_bd_DPU_512 { parentCell designName } {
 
   # Create ports
   set clk [ create_bd_port -dir I -type clk -freq_hz 249997498 clk ]
+  set_property -dict [ list \
+   CONFIG.ASSOCIATED_BUSIF {S_AXI_CTRL:M_AXI_GMEM} \
+ ] $clk
   set interrupt [ create_bd_port -dir O -from 3 -to 0 -type intr interrupt ]
   set resetn [ create_bd_port -dir I -type rst resetn ]
 
@@ -133,16 +136,17 @@ proc cr_bd_DPU_512 { parentCell designName } {
    CONFIG.CLKOUT1_JITTER {78.198} \
    CONFIG.CLKOUT1_PHASE_ERROR {85.929} \
    CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {500} \
-   CONFIG.CLKOUT2_JITTER {101.475} \
-   CONFIG.CLKOUT2_PHASE_ERROR {77.836} \
-   CONFIG.CLKOUT2_USED {false} \
+   CONFIG.CLKOUT2_JITTER {89.529} \
+   CONFIG.CLKOUT2_PHASE_ERROR {85.929} \
+   CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {250} \
+   CONFIG.CLKOUT2_USED {true} \
    CONFIG.MMCM_CLKFBOUT_MULT_F {4.000} \
    CONFIG.MMCM_CLKIN1_PERIOD {4.000} \
    CONFIG.MMCM_CLKIN2_PERIOD {10.0} \
    CONFIG.MMCM_CLKOUT0_DIVIDE_F {2.000} \
-   CONFIG.MMCM_CLKOUT1_DIVIDE {1} \
+   CONFIG.MMCM_CLKOUT1_DIVIDE {4} \
    CONFIG.MMCM_DIVCLK_DIVIDE {1} \
-   CONFIG.NUM_OUT_CLKS {1} \
+   CONFIG.NUM_OUT_CLKS {2} \
    CONFIG.USE_LOCKED {false} \
    CONFIG.USE_RESET {false} \
  ] $clk_wiz_0
@@ -153,9 +157,13 @@ proc cr_bd_DPU_512 { parentCell designName } {
   # Create instance: proc_sys_reset_1, and set properties
   set proc_sys_reset_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_1 ]
 
+  # Create instance: proc_sys_reset_2, and set properties
+  set proc_sys_reset_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_2 ]
+
   # Create instance: smartconnect_0, and set properties
   set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
   set_property -dict [ list \
+   CONFIG.NUM_CLKS {2} \
    CONFIG.NUM_SI {3} \
  ] $smartconnect_0
 
@@ -188,23 +196,23 @@ proc cr_bd_DPU_512 { parentCell designName } {
 
   # Create port connections
   connect_bd_net -net DPUCZDX8G_1_interrupt [get_bd_pins DPUCZDX8G_1/interrupt] [get_bd_pins xlconcat_0/In0]
-  connect_bd_net -net clk_2 [get_bd_ports clk] [get_bd_pins DPUCZDX8G_1/aclk] [get_bd_pins clk_wiz_0/clk_in1] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins smartconnect_1/aclk] [get_bd_pins smartconnect_1/aclk1]
+  connect_bd_net -net clk_2 [get_bd_ports clk] [get_bd_pins clk_wiz_0/clk_in1] [get_bd_pins proc_sys_reset_2/slowest_sync_clk] [get_bd_pins smartconnect_0/aclk1] [get_bd_pins smartconnect_1/aclk]
   connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins DPUCZDX8G_1/ap_clk_2] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins proc_sys_reset_1/slowest_sync_clk]
-  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn] [get_bd_pins smartconnect_1/aresetn]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins DPUCZDX8G_1/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins proc_sys_reset_1/ext_reset_in]
+  connect_bd_net -net clk_wiz_0_clk_out2 [get_bd_pins DPUCZDX8G_1/aclk] [get_bd_pins clk_wiz_0/clk_out2] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins smartconnect_1/aclk1]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins DPUCZDX8G_1/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
   connect_bd_net -net proc_sys_reset_1_peripheral_aresetn [get_bd_pins DPUCZDX8G_1/ap_rst_n_2] [get_bd_pins proc_sys_reset_1/peripheral_aresetn]
-  connect_bd_net -net static_shell_rp0_resetn [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in]
+  connect_bd_net -net proc_sys_reset_2_interconnect_aresetn [get_bd_pins proc_sys_reset_2/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn] [get_bd_pins smartconnect_1/aresetn]
+  connect_bd_net -net static_shell_rp0_resetn [get_bd_ports resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins proc_sys_reset_1/ext_reset_in] [get_bd_pins proc_sys_reset_2/ext_reset_in]
   connect_bd_net -net xlconcat_0_dout [get_bd_ports interrupt] [get_bd_pins xlconcat_0/dout]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins xlconcat_0/In1] [get_bd_pins xlconcat_0/In2] [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconstant_0/dout]
 
   # Create address segments
-  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces DPUCZDX8G_1/M_AXI_GP0] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces DPUCZDX8G_1/M_AXI_HP0] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
-  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces DPUCZDX8G_1/M_AXI_HP2] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces DPUCZDX8G_1/M_AXI_GP0] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces DPUCZDX8G_1/M_AXI_HP0] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
+  assign_bd_address -external -dict [list offset 0x00000000 range 0x80000000 offset 0x000200000000 range 0x40000000 offset 0x000280000000 range 0x40000000 offset 0x000800000000 range 0x000800000000 offset 0xC0000000 range 0x20000000 offset 0xFF000000 range 0x01000000] -target_address_space [get_bd_addr_spaces DPUCZDX8G_1/M_AXI_HP2] [get_bd_addr_segs M_AXI_GMEM/Reg] -force
   assign_bd_address -offset 0x80000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces S_AXI_CTRL] [get_bd_addr_segs DPUCZDX8G_1/S_AXI_CONTROL/reg0] -force
 
   set_property USAGE memory [get_bd_addr_segs M_AXI_GMEM/Reg]
-
 
   # Restore current instance
   current_bd_instance $oldCurInst
